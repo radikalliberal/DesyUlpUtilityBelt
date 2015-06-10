@@ -1,0 +1,227 @@
+.TH "H:/sze/Eagle6/ulp/Ulp-Service/libsearch.ulp" 3 "Mit Jun 3 2015" "Desy Eagle Bauteil-Datenbank Service Programme" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+H:/sze/Eagle6/ulp/Ulp-Service/libsearch.ulp \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'Libdesy\&.lib'\fP
+.br
+
+.SS "Funktionen"
+
+.in +1c
+.ti -1c
+.RI "\fBfor\fP (\fBk\fP;\fBk\fP< \fBAnzahlLibs\fP;\fBk\fP++)"
+.br
+.ti -1c
+.RI "\fBoutput\fP ('C:/Users/scholzj/Desktop/\fBBauteile\fP','wt')"
+.br
+.ti -1c
+.RI "\fBDebug\fP (\fBint2str\fP(\fBbts\fP))"
+.br
+.ti -1c
+.RI "\fBdlgDialog\fP ('')"
+.br
+.in -1c
+.SS "Variablen"
+
+.in +1c
+.ti -1c
+.RI "int \fBi\fP = 0"
+.br
+.ti -1c
+.RI "int \fBk\fP = 0"
+.br
+.ti -1c
+.RI "int \fBselector1\fP"
+.br
+.ti -1c
+.RI "int \fBselector2\fP"
+.br
+.ti -1c
+.RI "int \fBbts\fP"
+.br
+.ti -1c
+.RI "int \fBAnzahlLibs\fP = fileglob(\fBLIBS\fP,\fBLIB6_PATH\fP+'/*\&.lbr')"
+.br
+.ti -1c
+.RI "string \fBout\fP"
+.br
+.ti -1c
+.RI "string \fBLIBS\fP []"
+.br
+.ti -1c
+.RI "string \fBoutAttArr\fP []"
+.br
+.ti -1c
+.RI "string \fBoutElemArr\fP []"
+.br
+.ti -1c
+.RI "string \fBtemp\fP []"
+.br
+.ti -1c
+.RI "string \fBBtTable\fP []"
+.br
+.ti -1c
+.RI "string \fBDevTable\fP []"
+.br
+.ti -1c
+.RI "string \fBtemp1\fP []"
+.br
+.ti -1c
+.RI "string \fBtemp2\fP []"
+.br
+.ti -1c
+.RI "string \fBtemp3\fP []"
+.br
+.ti -1c
+.RI "string \fBtemp4\fP []"
+.br
+.ti -1c
+.RI "string \fBHerstellerNummer\fP []"
+.br
+.ti -1c
+.RI "string \fBVal\fP []"
+.br
+.ti -1c
+.RI "string \fBBeschreibung\fP []"
+.br
+.ti -1c
+.RI "string \fBPackage\fP []"
+.br
+.ti -1c
+.RI "string \fBHersteller\fP []"
+.br
+.ti -1c
+.RI "string \fBVorzug\fP []"
+.br
+.ti -1c
+.RI "string \fBOrderbaseNummer\fP []"
+.br
+.ti -1c
+.RI "string \fBLIB6_PATH\fP = '//win\&.desy\&.de/group/sze/public/Eagle_6+/lbr'"
+.br
+.in -1c
+.SH "Dokumentation der Funktionen"
+.PP 
+.SS "Debug (\fBint2str\fP(\fBbts\fP))"
+
+.SS "dlgDialog ('')"
+
+.PP
+Definiert in Zeile 56 der Datei libsearch\&.ulp\&.
+.SS "for ()"
+
+.PP
+Definiert in Zeile 13 der Datei libsearch\&.ulp\&.
+.SS "output ('C:/Users/scholzj/Desktop/\fBBauteile\fP', 'wt')"
+
+.PP
+Definiert in Zeile 46 der Datei libsearch\&.ulp\&.
+.SH "Variablen-Dokumentation"
+.PP 
+.SS "AnzahlLibs = fileglob(\fBLIBS\fP,\fBLIB6_PATH\fP+'/*\&.lbr')"
+
+.PP
+Definiert in Zeile 4 der Datei libsearch\&.ulp\&.
+.SS "string Beschreibung[]"
+
+.PP
+Definiert in Zeile 7 der Datei libsearch\&.ulp\&.
+.SS "int bts"
+
+.PP
+Definiert in Zeile 3 der Datei libsearch\&.ulp\&.
+.SS "string BtTable[]"
+
+.PP
+Definiert in Zeile 6 der Datei libsearch\&.ulp\&.
+.SS "string DevTable[]"
+
+.PP
+Definiert in Zeile 6 der Datei libsearch\&.ulp\&.
+.SS "string Hersteller[]"
+
+.PP
+Definiert in Zeile 7 der Datei libsearch\&.ulp\&.
+.SS "string HerstellerNummer[]"
+
+.PP
+Definiert in Zeile 7 der Datei libsearch\&.ulp\&.
+.SS "int i = 0"
+
+.PP
+Definiert in Zeile 2 der Datei libsearch\&.ulp\&.
+.SS "int k = 0"
+
+.PP
+Definiert in Zeile 2 der Datei libsearch\&.ulp\&.
+.SS "string LIB6_PATH = '//win\&.desy\&.de/group/sze/public/Eagle_6+/lbr'"
+
+.PP
+Definiert in Zeile 8 der Datei libsearch\&.ulp\&.
+.SS "string LIBS[]"
+
+.PP
+Definiert in Zeile 5 der Datei libsearch\&.ulp\&.
+.SS "string OrderbaseNummer[]"
+
+.PP
+Definiert in Zeile 7 der Datei libsearch\&.ulp\&.
+.SS "string out"
+
+.PP
+Definiert in Zeile 5 der Datei libsearch\&.ulp\&.
+.SS "string outAttArr[]"
+
+.PP
+Definiert in Zeile 6 der Datei libsearch\&.ulp\&.
+.SS "string outElemArr[]"
+
+.PP
+Definiert in Zeile 6 der Datei libsearch\&.ulp\&.
+.SS "string Package[]"
+
+.PP
+Definiert in Zeile 7 der Datei libsearch\&.ulp\&.
+.SS "int selector1"
+
+.PP
+Definiert in Zeile 3 der Datei libsearch\&.ulp\&.
+.SS "int selector2"
+
+.PP
+Definiert in Zeile 3 der Datei libsearch\&.ulp\&.
+.SS "string temp[]"
+
+.PP
+Definiert in Zeile 6 der Datei libsearch\&.ulp\&.
+.SS "string temp1[]"
+
+.PP
+Definiert in Zeile 6 der Datei libsearch\&.ulp\&.
+.SS "string temp2[]"
+
+.PP
+Definiert in Zeile 6 der Datei libsearch\&.ulp\&.
+.SS "string temp3[]"
+
+.PP
+Definiert in Zeile 6 der Datei libsearch\&.ulp\&.
+.SS "string temp4[]"
+
+.PP
+Definiert in Zeile 6 der Datei libsearch\&.ulp\&.
+.SS "string Val[]"
+
+.PP
+Definiert in Zeile 7 der Datei libsearch\&.ulp\&.
+.SS "string Vorzug[]"
+
+.PP
+Definiert in Zeile 7 der Datei libsearch\&.ulp\&.
+.SH "Autor"
+.PP 
+Automatisch erzeugt von Doxygen für Desy Eagle Bauteil-Datenbank Service Programme aus dem Quellcode\&.

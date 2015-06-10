@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>Desy Eagle Bauteil-Datenbank Service Programme: H:/sze/Eagle6/ulp/Ulp-Service/ex.c Quellcode</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Desy Eagle Bauteil-Datenbank Service Programme
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Klassen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('ex_8c_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">H:/sze/Eagle6/ulp/Ulp-Service/ex.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ex_8c.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_libdesy_8lib.html">Libdesy.lib</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="ex_8c.html#ae747ecefe0a8b1f1678fbf27beca17ed">   11</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#ace47333a73f430572c0a88ef37c016ac">tempStrArr1</a>[],<a class="code" href="ex_8c.html#ae747ecefe0a8b1f1678fbf27beca17ed">tempStrArr2</a>[],<a class="code" href="ex_8c.html#a92031faa8b6be9bafd0fcc7bf1f22bb2">tempStr1</a>,<a class="code" href="ex_8c.html#a9143525c52788805a93de55749a1c99d">tempstr2</a>,<a class="code" href="ex_8c.html#a5e4f8a98a00b3d3b91b24e9ce15d31ff">LibList</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="ex_8c.html#a8da6d6b33b7597f02434fedca1781cbc">   12</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a8da6d6b33b7597f02434fedca1781cbc">Counter</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<a class="code" href="ex_8c.html#a4f2ae9692dcb1785ee65c9b83dffd83c">fileglob</a>(<a class="code" href="ex_8c.html#ace47333a73f430572c0a88ef37c016ac">tempStrArr1</a>,<span class="stringliteral">&quot;N:/public/Eagle_6+/lbr/*.lbr&quot;</span>);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<a class="code" href="ex_8c.html#a5e4f8a98a00b3d3b91b24e9ce15d31ff">LibList</a> = strjoin(<a class="code" href="ex_8c.html#ace47333a73f430572c0a88ef37c016ac">tempStrArr1</a>,<span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="ex_8c.html#ae529cfd688d748de42fa805b2c306253">   15</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#ae529cfd688d748de42fa805b2c306253">index</a>[]; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="ex_8c.html#a401e942526aac47cef94f478182486e7">   16</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a401e942526aac47cef94f478182486e7">position</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="ex_8c.html#a2d524de6e72f33e2cffb9bed0a05cbc7">   17</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#a2d524de6e72f33e2cffb9bed0a05cbc7">out</a>[];</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="ex_8c.html#af793855284d36c1b154929e9737ad5eb">   18</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#a619ea3d31ff34b29c397408d7a72e2aa">Pac_Sort_Arr</a>[], <a class="code" href="ex_8c.html#af793855284d36c1b154929e9737ad5eb">Val_Sort_Arr</a>[], <a class="code" href="ex_8c.html#a9658b6387aed3b22f25a8be98530d385">Pac_Sort</a>, <a class="code" href="ex_8c.html#a4a476a4ca9399cdb40f332c3f4f194f5">Val_Sort</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="ex_8c.html#a773ea3bd03d30f9371dda8ee12a97b3a">   19</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#a6ba91b18d0979e207105d660a2010d8d">HerstellerNummer</a>[], <a class="code" href="ex_8c.html#a088204f20433deace071409889b5aba1">Val</a>[], <a class="code" href="ex_8c.html#a0165df64e95135bade509c58bdb353f1">Beschreibung</a>[], <a class="code" href="ex_8c.html#a36b57fe679881487796855a589fbfb85">Package</a>[], <a class="code" href="ex_8c.html#a03dd05fe151d0e9f9edf96078bc234d4">Hersteller</a>[], <a class="code" href="ex_8c.html#a773ea3bd03d30f9371dda8ee12a97b3a">Vorzug</a>[],<a class="code" href="ex_8c.html#a57ba39a1335c8ae9ef4eb8314d51160e">OrderbaseNummer</a>[],<a class="code" href="ex_8c.html#add6cc63e92e68ae325b1ecb08776c9b9">DeviceName</a>[],<a class="code" href="ex_8c.html#aadcab157eddcbfbc94bcde5363c32934">Prefix</a>[];</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="ex_8c.html#a311864faf2c7fc626c2d9c62f7af98ee">fileread</a>(<a class="code" href="ex_8c.html#a9658b6387aed3b22f25a8be98530d385">Pac_Sort</a>,<span class="stringliteral">&quot;N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Package_sortiert.csv&quot;</span>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="ex_8c.html#a82a1393e9fe80f33f56eeeb9b8d2195c">   22</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a82a1393e9fe80f33f56eeeb9b8d2195c">Bauteile</a> = <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(<a class="code" href="ex_8c.html#a619ea3d31ff34b29c397408d7a72e2aa">Pac_Sort_Arr</a>, <a class="code" href="ex_8c.html#a9658b6387aed3b22f25a8be98530d385">Pac_Sort</a>,<span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<a class="code" href="ex_8c.html#a311864faf2c7fc626c2d9c62f7af98ee">fileread</a>(<a class="code" href="ex_8c.html#a4a476a4ca9399cdb40f332c3f4f194f5">Val_Sort</a>,<span class="stringliteral">&quot;N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Val_sortiert.csv&quot;</span>);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(<a class="code" href="ex_8c.html#af793855284d36c1b154929e9737ad5eb">Val_Sort_Arr</a>, <a class="code" href="ex_8c.html#a4a476a4ca9399cdb40f332c3f4f194f5">Val_Sort</a>,<span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="ex_8c.html#add96f686d5ed9719cabc7c3134fea1de">   59</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#add96f686d5ed9719cabc7c3134fea1de">real2str</a>(real value) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">string</span> returnval;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="layer-change_8ulp.html#a7505e749f23041ae4cf0115c6f33f4da">sprintf</a>(returnval,<span class="stringliteral">&quot;%f&quot;</span>,value);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> returnval;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="ex_8c.html#af42346d5e4cb2b5ba2208adc44464398">   67</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#af42346d5e4cb2b5ba2208adc44464398">PAC</a> = 1;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="ex_8c.html#a9d0755616c25d32c802e0786308b8fba">   68</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a9d0755616c25d32c802e0786308b8fba">VAL</a> = 0;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="ex_8c.html#ae5c6c522b45bea7503caaebd0e215bce">   70</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#ae5c6c522b45bea7503caaebd0e215bce">BTSearch</a>(<span class="keywordtype">string</span> searchString, <span class="keywordtype">int</span> SORTING) {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="ex_8c.html#ae529cfd688d748de42fa805b2c306253">index</a>, lastindex, iteration, upper, Wildcard, length;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    lastindex = 0;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">string</span> <a class="code" href="libsearch_8ulp.html#a2f8d954bdd72eba003a9802a6248de83">temp</a>[], <a class="code" href="read_database_8ulp.html#a7faaad15c15b6161b10321f263c460a3">tempstr</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    index = int (<a class="code" href="ex_8c.html#a82a1393e9fe80f33f56eeeb9b8d2195c">Bauteile</a> / 2);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">string</span> db_entry;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span>(strxstr(searchString,<span class="stringliteral">&quot;\\*&quot;</span>) &gt; -1) </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        searchString = strsub(searchString,0,strlen(searchString)-1);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    length = strlen(searchString);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">while</span>(index != lastindex ) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        iteration++;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        SORTING ? <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(temp,<a class="code" href="ex_8c.html#a619ea3d31ff34b29c397408d7a72e2aa">Pac_Sort_Arr</a>[index],<span class="charliteral">&#39;;&#39;</span>) : <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(temp,<a class="code" href="ex_8c.html#af793855284d36c1b154929e9737ad5eb">Val_Sort_Arr</a>[index],<span class="charliteral">&#39;;&#39;</span>); </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        lastindex = <a class="code" href="ex_8c.html#ae529cfd688d748de42fa805b2c306253">index</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="comment">//Debug(&quot;searchString:&quot; + searchString +&quot;\nVergleichsstring: &quot; + temp[0]+ &quot;\niteration: &quot; + int2str(iteration)+ &quot;\nindex : &quot; + int2str(index)+&quot;\nCompare :&quot; + int2str(strCmp(searchString,temp[0])));</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        db_entry = strsub(temp[0],<a class="code" href="_libdesy_8lib.html#aac4fa8c481d4f1b3cf43b93b2165b1b4">START</a>,length);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="comment">//Debug(db_entry);</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">switch</span> (CompareStr(db_entry,searchString)) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">case</span>  1:  index -= int(<a class="code" href="ex_8c.html#a82a1393e9fe80f33f56eeeb9b8d2195c">Bauteile</a> / (2 * pow(2,iteration)));</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="keywordflow">case</span>  0:  upper = <a class="code" href="ex_8c.html#ae529cfd688d748de42fa805b2c306253">index</a>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                                <span class="keywordflow">while</span>(db_entry == searchString) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                                    SORTING ? <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(temp,<a class="code" href="ex_8c.html#a619ea3d31ff34b29c397408d7a72e2aa">Pac_Sort_Arr</a>[--upper],<span class="charliteral">&#39;;&#39;</span>) : <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(temp,<a class="code" href="ex_8c.html#af793855284d36c1b154929e9737ad5eb">Val_Sort_Arr</a>[--upper],<span class="charliteral">&#39;;&#39;</span>); </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                    db_entry = strsub(temp[0],<a class="code" href="_libdesy_8lib.html#aac4fa8c481d4f1b3cf43b93b2165b1b4">START</a>,length);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                                    <span class="comment">//Debug(&quot;db_entry:&quot;+db_entry+&quot;\nindex:&quot;+int2str(index)+&quot;\n&quot;+&quot;lastindex:&quot;+int2str(lastindex)+&quot;\n&quot;);</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                                }   <span class="comment">//Debug(&quot;Pac_Sort_Arr[upper--]:&quot;+Pac_Sort_Arr[upper--]+&quot;Pac_Sort_Arr[index]:&quot;+Pac_Sort_Arr[index]+&quot;\nupper--&quot;);</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                                <span class="keywordflow">return</span> upper+1;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordflow">case</span> -1:    index += int(<a class="code" href="ex_8c.html#a82a1393e9fe80f33f56eeeb9b8d2195c">Bauteile</a> / (2 * pow(2,iteration)));</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">//Debug(&quot;db_entry:&quot;+db_entry+&quot;\nindex:&quot;+int2str(index)+&quot;\n&quot;+&quot;lastindex:&quot;+int2str(lastindex)+&quot;\n&quot;);</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">/* </span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="ex_8c.html#abf112b617933352e6ea9f00864bc16a4">  112</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#abf112b617933352e6ea9f00864bc16a4">refinedSearch</a>(<span class="keywordtype">string</span> searchString, <span class="keywordtype">string</span> Subject) {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">//P.name, P.device.name , P.device.package.name, P.value, P.device.prefix, P.device.library, ist in Bib 6 ?, changed ? </span></div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="ex_8c.html#aa91492c222928815209aa6f685876271">  118</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#aa91492c222928815209aa6f685876271">PartDataValueNames</a>[] = {<span class="stringliteral">&quot;P.name&quot;</span>, <span class="stringliteral">&quot;P.device.name&quot;</span> , </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="stringliteral">&quot;P.device.package.name&quot;</span>,<span class="stringliteral">&quot;P.value&quot;</span>,<span class="stringliteral">&quot;P.device.prefix&quot;</span>,<span class="stringliteral">&quot;P.device.library&quot;</span>,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="stringliteral">&quot;Hersteller&quot;</span>,<span class="stringliteral">&quot;HerstellerNummer&quot;</span>,<span class="stringliteral">&quot;Vorzug&quot;</span>,<span class="stringliteral">&quot;Beschreibung&quot;</span>,<span class="stringliteral">&quot;Datenblatt&quot;</span>,<span class="stringliteral">&quot;OrderbaseNummer&quot;</span>};</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">/* Benutzte indizes für Bauteile*/</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">  123</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a> = 0;</div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="ex_8c.html#a6fe0f5b0418b2132d12ac49aa4081291">  124</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a6fe0f5b0418b2132d12ac49aa4081291">DEVICE_NAME</a> = 1;</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="ex_8c.html#a2d0a92f7c80ad7c1fae87f79bbaa300f">  125</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a2d0a92f7c80ad7c1fae87f79bbaa300f">PACKAGE</a> = 2;</div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="ex_8c.html#ad822e380cd5270d0a2aa33a677dde305">  126</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#ad822e380cd5270d0a2aa33a677dde305">VALUE</a> = 3;</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="ex_8c.html#a12efc69ea4176b0f4db6e857cb7f0756">  127</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a12efc69ea4176b0f4db6e857cb7f0756">PREFIX</a> = 4;</div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="ex_8c.html#a24327f241c43e49fd9913294c6d7ddb3">  128</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a24327f241c43e49fd9913294c6d7ddb3">LIBRARY</a> = 5;</div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="ex_8c.html#af1d4fe1dc2c108fc8a59c5b3b90252a3">  129</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#af1d4fe1dc2c108fc8a59c5b3b90252a3">HERSTELLER</a> = 6;</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="ex_8c.html#ab14fde5d8767bd16f5b91ed81d0d462d">  130</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#ab14fde5d8767bd16f5b91ed81d0d462d">HERSTELLERNR</a> = 7;</div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="ex_8c.html#ab66e65ec79f498320544459cd478986a">  131</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#ab66e65ec79f498320544459cd478986a">VORZUG</a> = 8;</div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="ex_8c.html#ae410fcb7dc0f5e163526a9c617a825de">  132</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#ae410fcb7dc0f5e163526a9c617a825de">BESCHREIBUNG</a> = 9;</div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="ex_8c.html#aaeb2c4795b541d0c2dd2b787afb421f2">  133</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#aaeb2c4795b541d0c2dd2b787afb421f2">DATENBLATT</a> = 10;</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="ex_8c.html#a7cdee93856dbfbbf6b1351c9525f6cb0">  134</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a7cdee93856dbfbbf6b1351c9525f6cb0">ORDERBASE_NUMMER</a> = 11;</div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="ex_8c.html#a3389481e9b966a29fb48e172a5942ddd">  135</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a3389481e9b966a29fb48e172a5942ddd">CHANGE_MODE</a> = 12;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">/* weitere Konstanten für bessere Lesbarkeit*/</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="ex_8c.html#a1f05af292fb59094556c3ff72b55e848">  139</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#a1f05af292fb59094556c3ff72b55e848">S_TRUE</a> = <span class="stringliteral">&quot;x&quot;</span>;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="comment">//exchangePart()</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="ex_8c.html#a01030b244f6352425e8de676f9d43288">  141</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a01030b244f6352425e8de676f9d43288">COMPLETE</a> = 0;</div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="ex_8c.html#a13a376a84d960a74f079d8654d95ac1c">  142</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a13a376a84d960a74f079d8654d95ac1c">ATTR_SYM</a> = 1;</div>
+<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="ex_8c.html#a70ca181c5a9a77b7c4f1499f2fc6af3e">  143</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a70ca181c5a9a77b7c4f1499f2fc6af3e">PACK_ONLY</a> = 2;</div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="ex_8c.html#af88c30c8d185a3f210472a96e11566bd">  144</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#af88c30c8d185a3f210472a96e11566bd">ATTR_ONLY</a> = 3;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">  146</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<span class="keywordtype">string</span> FullPartString, <span class="keywordtype">int</span> pos) {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordtype">string</span> tempoarray[];</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(tempoarray,FullPartString,<span class="charliteral">&#39;\t&#39;</span>);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordflow">return</span> tempoarray[pos];</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="ex_8c.html#ab03810066546e171a6a7c77464b0fc2c">  152</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#ab03810066546e171a6a7c77464b0fc2c">setPartVal</a>(<span class="keywordtype">string</span> FullPartString, <span class="keywordtype">int</span> pos, <span class="keywordtype">string</span> newVal) {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordtype">string</span> tempoarray[], newFullPartString;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="editnext-dev-sym-pac_8ulp.html#a76f11d9a0a47b94f72c2d0e77fb32240">n</a> = <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(tempoarray,FullPartString,<span class="charliteral">&#39;\t&#39;</span>);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> = 0; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> &lt; <a class="code" href="editnext-dev-sym-pac_8ulp.html#a76f11d9a0a47b94f72c2d0e77fb32240">n</a>; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>++) {    </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        newFullPartString += (<a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> == pos) ? newVal : tempoarray[<a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>];</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        newFullPartString += (<a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> &lt; n-1) ? <span class="stringliteral">&quot;\t&quot;</span> : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    }</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordflow">return</span> newFullPartString;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="ex_8c.html#a7c0dbd82f8a7792c2dcc1514c7cc9ea5">  162</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#a7c0dbd82f8a7792c2dcc1514c7cc9ea5">exchangePart</a>(<span class="keywordtype">string</span> Schematics_Part, <span class="keywordtype">string</span> Bibliothek_Part, <span class="keywordtype">int</span> mode) {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordtype">string</span> returnval;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">switch</span>(mode) {</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordflow">case</span> 0 <span class="comment">/* COMPLETE */</span>:  {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                            returnval = <a class="code" href="ex_8c.html#ab03810066546e171a6a7c77464b0fc2c">setPartVal</a>( Bibliothek_Part,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                                                                            <a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a>,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                                                                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Schematics_Part,<a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a>));</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                            returnval = <a class="code" href="ex_8c.html#ab03810066546e171a6a7c77464b0fc2c">setPartVal</a>( returnval,</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                                                                            <a class="code" href="ex_8c.html#a3389481e9b966a29fb48e172a5942ddd">CHANGE_MODE</a>,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                                                                            <a class="code" href="_libdesy_8lib.html#aabffd2ab08d259550d4750cfa9c249dc">int2str</a>(<a class="code" href="ex_8c.html#a01030b244f6352425e8de676f9d43288">COMPLETE</a>));</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                        }   </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="keywordflow">case</span> 1 <span class="comment">/* ATTR_SYM */</span>:  {</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                                returnval = <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Schematics_Part,<a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                                <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Bibliothek_Part,<a class="code" href="ex_8c.html#a6fe0f5b0418b2132d12ac49aa4081291">DEVICE_NAME</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                                <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Schematics_Part,<a class="code" href="ex_8c.html#a2d0a92f7c80ad7c1fae87f79bbaa300f">PACKAGE</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                                <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Bibliothek_Part,<a class="code" href="ex_8c.html#ad822e380cd5270d0a2aa33a677dde305">VALUE</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                                <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Bibliothek_Part,<a class="code" href="ex_8c.html#a12efc69ea4176b0f4db6e857cb7f0756">PREFIX</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                                <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Schematics_Part,<a class="code" href="ex_8c.html#a24327f241c43e49fd9913294c6d7ddb3">LIBRARY</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                                <span class="stringliteral">&quot;x&quot;</span> + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                                <span class="stringliteral">&quot;x&quot;</span> + <span class="stringliteral">&quot;\t&quot;</span>;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                        }   </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">case</span> 2 <span class="comment">/* PACK_ONLY */</span>: {</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                            returnval = <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Schematics_Part,<a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Bibliothek_Part,<a class="code" href="ex_8c.html#a6fe0f5b0418b2132d12ac49aa4081291">DEVICE_NAME</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Schematics_Part,<a class="code" href="ex_8c.html#a2d0a92f7c80ad7c1fae87f79bbaa300f">PACKAGE</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Bibliothek_Part,<a class="code" href="ex_8c.html#ad822e380cd5270d0a2aa33a677dde305">VALUE</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Bibliothek_Part,<a class="code" href="ex_8c.html#a12efc69ea4176b0f4db6e857cb7f0756">PREFIX</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Schematics_Part,<a class="code" href="ex_8c.html#a24327f241c43e49fd9913294c6d7ddb3">LIBRARY</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                            <span class="stringliteral">&quot;x&quot;</span> + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                            <span class="stringliteral">&quot;x&quot;</span> + <span class="stringliteral">&quot;\t&quot;</span>;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                        }   </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keywordflow">case</span> 3 <span class="comment">/* ATTR_ONLY */</span>: {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                            returnval = <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Schematics_Part,<a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Bibliothek_Part,<a class="code" href="ex_8c.html#a6fe0f5b0418b2132d12ac49aa4081291">DEVICE_NAME</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Schematics_Part,<a class="code" href="ex_8c.html#a2d0a92f7c80ad7c1fae87f79bbaa300f">PACKAGE</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Bibliothek_Part,<a class="code" href="ex_8c.html#ad822e380cd5270d0a2aa33a677dde305">VALUE</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Bibliothek_Part,<a class="code" href="ex_8c.html#a12efc69ea4176b0f4db6e857cb7f0756">PREFIX</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                            <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(Schematics_Part,<a class="code" href="ex_8c.html#a24327f241c43e49fd9913294c6d7ddb3">LIBRARY</a>) + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                            <span class="stringliteral">&quot;x&quot;</span> + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                            <span class="stringliteral">&quot;x&quot;</span> + <span class="stringliteral">&quot;\t&quot;</span> ;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;                        }   </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    }</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">return</span> returnval;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;}</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">  212</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[];</div>
+<div class="line"><a name="l00213"></a><span class="lineno"><a class="line" href="ex_8c.html#a37c09d8cf4416763821a9df9c26e53e0">  213</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#a37c09d8cf4416763821a9df9c26e53e0">PartDataRecovery</a>[];</div>
+<div class="line"><a name="l00214"></a><span class="lineno"><a class="line" href="ex_8c.html#a92a0e91aab3e1ff3d8857072adcd7c32">  214</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex_8c.html#a92a0e91aab3e1ff3d8857072adcd7c32">NoOfParts</a>;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;</div>
+<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="ex_8c.html#a47d2d84792b1656dd5e93a65568957d8">  216</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ex_8c.html#a47d2d84792b1656dd5e93a65568957d8">getPartData</a>(){</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;status(<span class="stringliteral">&quot;getPartData()&quot;</span>);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordtype">string</span> att[]={<span class="stringliteral">&quot;DATENBANKOB-NR&quot;</span>,</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                                <span class="stringliteral">&quot;HERSTELLER_NAME&quot;</span>,</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                                <span class="stringliteral">&quot;HERSTELLER_NR&quot;</span>,</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                                <span class="stringliteral">&quot;VAL&quot;</span>,</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                                <span class="stringliteral">&quot;ZE-VORZUG&quot;</span>};</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordflow">if</span>(schematic){</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        schematic(S){</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            S.parts(P) {</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                <span class="keywordtype">string</span> attVal[];    </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                P.attributes(A) {</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> = 0; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> &lt; 5; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>++)</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                        <span class="keywordflow">if</span>(A.name == att[<a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>]) attVal[<a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>] = A.value;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                }</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                <span class="keywordtype">string</span> PackageName = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                <span class="keywordflow">if</span>(P.device.package)  PackageName = P.device.package.name;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                <a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[<a class="code" href="ex_8c.html#a92a0e91aab3e1ff3d8857072adcd7c32">NoOfParts</a>] = P.name + <span class="stringliteral">&quot;\t&quot;</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                                                            + P.device.name + <span class="stringliteral">&quot;\t&quot;</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                                                            + PackageName + <span class="stringliteral">&quot;\t&quot;</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                                                            + P.value + <span class="stringliteral">&quot;\t&quot;</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                                                            + P.device.prefix + <span class="stringliteral">&quot;\t&quot;</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                                                            + P.device.library + <span class="stringliteral">&quot;\t&quot;</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                                                            + attVal[1] + <span class="stringliteral">&quot;\t&quot;</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                                                            + attVal[2] + <span class="stringliteral">&quot;\t&quot;</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                                                            + attVal[4] + <span class="stringliteral">&quot;\t&quot;</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                                                            + <a class="code" href="_libdesy_8lib.html#a1c6d3c551ecc3ad23677a26a4fc28fda">TrimWhiteSpace</a>(<a class="code" href="_libdesy_8lib.html#a152e859e285dc572355bf99d375eeb61">str_replace</a>(<a class="code" href="_libdesy_8lib.html#a2fd71140ea5241c20d59c939c655627e">CutSubstring</a>(P.device.description,<span class="stringliteral">&quot;[^\\n]{9,}\\n&quot;</span>,0),<span class="stringliteral">&quot;((&amp;lt;)|&lt;)/?[^\\n;&lt;&gt;]*((&amp;gt;)|&gt;)&quot;</span>,<span class="stringliteral">&quot;&quot;</span>,0,1)) + <span class="stringliteral">&quot;\t&quot;</span>        <span class="comment">//Beschreibung</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                                                            + <a class="code" href="_libdesy_8lib.html#a2fd71140ea5241c20d59c939c655627e">CutSubstring</a>(P.device.description,<span class="stringliteral">&quot;((&amp;lt;)|&lt;)a\\shref\\s=\\s\&quot;file:\\\\[^\\n]*\\.pdf\&quot;&gt;[^\\n]*((&amp;lt;)|&lt;)/a&gt;&quot;</span>,0) + <span class="stringliteral">&quot;\t&quot;</span>        <span class="comment">//Datenblatt</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                                                            + attVal[0] + <span class="stringliteral">&quot;\t&quot;</span>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                <a class="code" href="ex_8c.html#a37c09d8cf4416763821a9df9c26e53e0">PartDataRecovery</a>[<a class="code" href="ex_8c.html#a92a0e91aab3e1ff3d8857072adcd7c32">NoOfParts</a>] = <a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[<a class="code" href="ex_8c.html#a92a0e91aab3e1ff3d8857072adcd7c32">NoOfParts</a>];</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                <span class="comment">/* Debug(PartDataRecovery[NoOfParts] + &quot;\n&quot; +</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">                            PartData[NoOfParts]  + &quot;\n&quot; +</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">                            int2str(NoOfParts)); */</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                <a class="code" href="ex_8c.html#a92a0e91aab3e1ff3d8857072adcd7c32">NoOfParts</a>++;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        }</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    }</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;}</div>
+<div class="line"><a name="l00255"></a><span class="lineno"><a class="line" href="ex_8c.html#a93f65ab8b9782fa77c6d9909a31259c8">  255</a></span>&#160;<span class="keywordtype">string</span> <a class="code" href="ex_8c.html#a93f65ab8b9782fa77c6d9909a31259c8">createTable</a>(<span class="keywordtype">string</span> sb, <span class="keywordtype">int</span> SEARCH, <span class="keywordtype">int</span> PartNr) {</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; status(<span class="stringliteral">&quot;createTable()&quot;</span>);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; <span class="keywordtype">string</span> liste;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; <span class="keywordtype">string</span> Zeile;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; <span class="keywordtype">string</span> t[],<a class="code" href="libsearch_8ulp.html#a2f8d954bdd72eba003a9802a6248de83">temp</a>[],<a class="code" href="read_database_8ulp.html#a7faaad15c15b6161b10321f263c460a3">tempstr</a>;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordflow">if</span>((<a class="code" href="ex_8c.html#a401e942526aac47cef94f478182486e7">position</a> = <a class="code" href="ex_8c.html#ae5c6c522b45bea7503caaebd0e215bce">BTSearch</a>(sb,SEARCH)) &lt; 0) {</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <a class="code" href="bom_8ulp.html#a037d9c41c2eb91966f712cb2269ae172">Debug</a>(<span class="stringliteral">&quot;Kein Fund für &quot;</span>+<a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],<a class="code" href="ex_8c.html#a6fe0f5b0418b2132d12ac49aa4081291">DEVICE_NAME</a>)+<span class="stringliteral">&quot;;&quot;</span>+<a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],<a class="code" href="ex_8c.html#a2d0a92f7c80ad7c1fae87f79bbaa300f">PACKAGE</a>));</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <span class="keywordflow">if</span>(strxstr(sb,<span class="stringliteral">&quot;\\*&quot;</span>) &gt; -1) sb = strsub(sb,0,strlen(sb)-1);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keywordtype">int</span> Auswahl,Zeilen;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        SEARCH ? <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(temp,<a class="code" href="ex_8c.html#a619ea3d31ff34b29c397408d7a72e2aa">Pac_Sort_Arr</a>[<a class="code" href="ex_8c.html#a401e942526aac47cef94f478182486e7">position</a>],<span class="charliteral">&#39;;&#39;</span>) : <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(temp,<a class="code" href="ex_8c.html#af793855284d36c1b154929e9737ad5eb">Val_Sort_Arr</a>[position],<span class="charliteral">&#39;;&#39;</span>);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <span class="keywordflow">while</span>(strsub(temp[0],0,strlen(sb)) == sb) {</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            tempstr = SEARCH ? <a class="code" href="ex_8c.html#a619ea3d31ff34b29c397408d7a72e2aa">Pac_Sort_Arr</a>[position++] : <a class="code" href="ex_8c.html#af793855284d36c1b154929e9737ad5eb">Val_Sort_Arr</a>[position++];     </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(t,tempstr,<span class="charliteral">&#39;;&#39;</span>);</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> = 0; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> &lt; 12 ; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>++){</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                <span class="comment">//Debug(t[i]);</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            }</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordtype">string</span> pacOrval = SEARCH ? t[0] + <span class="stringliteral">&quot;\t&quot;</span> + t[1] : t[1] + <span class="stringliteral">&quot;\t&quot;</span> + t[0];</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            liste += <span class="stringliteral">&quot;\t&quot;</span> + t[2] + <span class="stringliteral">&quot;\t&quot;</span> + pacOrval + <span class="stringliteral">&quot;\t&quot;</span> +</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                            t[8] + <span class="stringliteral">&quot;\t&quot;</span> + t[10] + <span class="stringliteral">&quot;\t&quot;</span> + t[4] + <span class="stringliteral">&quot;\t&quot;</span> + t[5]  + <span class="stringliteral">&quot;\t&quot;</span> + t[6] + <span class="stringliteral">&quot;\t&quot;</span> + </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                            t[7] + <span class="stringliteral">&quot;\t&quot;</span> + t[9] + <span class="stringliteral">&quot;\t&quot;</span> + t[3] + <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(temp,SEARCH ? <a class="code" href="ex_8c.html#a619ea3d31ff34b29c397408d7a72e2aa">Pac_Sort_Arr</a>[position] : <a class="code" href="ex_8c.html#af793855284d36c1b154929e9737ad5eb">Val_Sort_Arr</a>[position],<span class="charliteral">&#39;;&#39;</span>);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        }</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordflow">return</span> liste;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;}</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        </div>
+<div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="ex_8c.html#a005756a3de9c56f60d7697b8ccc8a1a2">  283</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ex_8c.html#a005756a3de9c56f60d7697b8ccc8a1a2">Vorschlaege</a>(<span class="keywordtype">int</span> PartNr) {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;status(<span class="stringliteral">&quot;Vorschlaege()&quot;</span>);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keywordtype">string</span> Suchbegriff_Package,Suchbegriff_Bezeichnung; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordtype">string</span> liste[];</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordtype">string</span> PartAttributes[];</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordtype">string</span> Bauteil_attribute;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keywordtype">string</span> <a class="code" href="libsearch_8ulp.html#a2f8d954bdd72eba003a9802a6248de83">temp</a>[];</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="keywordtype">int</span> Auswahl;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="keywordflow">if</span>(strlen(<a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],<a class="code" href="ex_8c.html#a2d0a92f7c80ad7c1fae87f79bbaa300f">PACKAGE</a>)) &gt; 0) { <span class="comment">//gibt es ein Package für das Device ? (gilt nicht für Versorgungsspannung)</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],<a class="code" href="ex_8c.html#a12efc69ea4176b0f4db6e857cb7f0756">PREFIX</a>) == <span class="stringliteral">&quot;R&quot;</span>) {</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            Suchbegriff_Package = <span class="stringliteral">&quot;RES*&quot;</span>;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],<a class="code" href="ex_8c.html#a12efc69ea4176b0f4db6e857cb7f0756">PREFIX</a>) == <span class="stringliteral">&quot;C&quot;</span>) {</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            Suchbegriff_Package = <span class="stringliteral">&quot;CAPC*&quot;</span>;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            Suchbegriff_Package = <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],<a class="code" href="ex_8c.html#a2d0a92f7c80ad7c1fae87f79bbaa300f">PACKAGE</a>);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        }</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <a class="code" href="libsearch_8ulp.html#abc5e2c5bfe828c9bd28ed667f19cf117">dlgDialog</a>(<span class="stringliteral">&quot;Mögliche Bauteile für &quot;</span> + <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],<a class="code" href="ex_8c.html#a6fe0f5b0418b2132d12ac49aa4081291">DEVICE_NAME</a>) ) {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            <span class="comment">//dlgLabel(&quot;Name:&quot; + getPartVal(PartData[PartNr],DEVICE_NAME) + &quot;\nPackage: &quot; + getPartVal(PartData[PartNr],S_S_PACKAGE) + &quot;\nPREFIX:&quot; + getPartVal(PartData[PartNr],PREFIX));</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            dlgHBoxLayout{</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                dlgVBoxLayout{</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                    dlgLabel(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> = <a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a>; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> &lt;= <a class="code" href="ex_8c.html#a7cdee93856dbfbbf6b1351c9525f6cb0">ORDERBASE_NUMMER</a>; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>++)  </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                        dlgLabel(<span class="stringliteral">&quot;&lt;font size=\&quot;5\&quot;&gt;&quot;</span>+ <a class="code" href="ex_8c.html#aa91492c222928815209aa6f685876271">PartDataValueNames</a>[<a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>]);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                }</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                dlgVBoxLayout{</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                    dlgLabel(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> = <a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a>; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> &lt;= <a class="code" href="ex_8c.html#a7cdee93856dbfbbf6b1351c9525f6cb0">ORDERBASE_NUMMER</a>; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>++)  </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                        dlgLabel(<span class="stringliteral">&quot;&lt;font size=\&quot;5\&quot;&gt; : &quot;</span>);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                }</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                dlgVBoxLayout{</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                    dlgLabel(<span class="stringliteral">&quot;&lt;font size=\&quot;5\&quot;&gt;Orginal&quot;</span>);</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> = <a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a>; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> &lt;= <a class="code" href="ex_8c.html#a7cdee93856dbfbbf6b1351c9525f6cb0">ORDERBASE_NUMMER</a>; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>++)  </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                        dlgLabel(<span class="stringliteral">&quot;&lt;font size=\&quot;5\&quot; color=\&quot;#8A2908\&quot;&gt;&quot;</span> + <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a37c09d8cf4416763821a9df9c26e53e0">PartDataRecovery</a>[PartNr],<a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>));</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                }</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                <span class="keywordflow">if</span>(<a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],<a class="code" href="ex_8c.html#a7cdee93856dbfbbf6b1351c9525f6cb0">ORDERBASE_NUMMER</a>) == <a class="code" href="ex_8c.html#a1f05af292fb59094556c3ff72b55e848">S_TRUE</a>)</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                    dlgVBoxLayout{</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                        dlgLabel(<span class="stringliteral">&quot;neue Daten&quot;</span>);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> = <a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a>; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> &lt;= <a class="code" href="ex_8c.html#a7cdee93856dbfbbf6b1351c9525f6cb0">ORDERBASE_NUMMER</a>; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>++)  </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                            dlgLabel(<span class="stringliteral">&quot;&lt;font size=\&quot;5\&quot; color=\&quot;#8A2908\&quot;&gt;&quot;</span> + <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],<a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>));</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                    }</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                dlgStretch(1);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                dlgVBoxLayout{</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                    dlgHBoxLayout{</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                        dlgLabel(<span class="stringliteral">&quot;Package&quot;</span>);</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                        dlgStringEdit(Suchbegriff_Package);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                    }</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                    dlgHBoxLayout{</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                        dlgLabel(<span class="stringliteral">&quot;Bezeichnung&quot;</span>);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                        dlgStringEdit(Suchbegriff_Bezeichnung);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                    }</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                    dlgPushButton(<span class="stringliteral">&quot;suchen&quot;</span>)  {</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                        <span class="keywordflow">if</span>(Suchbegriff_Package == <span class="stringliteral">&quot;&quot;</span>){</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                            <span class="keywordflow">if</span>(Suchbegriff_Bezeichnung == <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                                <a class="code" href="_l_p-_daten_8ulp.html#a9a9b6799eeeaeb061d7aa5bed52bf99b">dlgMessageBox</a>(<span class="stringliteral">&quot;Es wurde kein Suchbegriff angegeben&quot;</span>);</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                                <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(liste,<a class="code" href="ex_8c.html#a93f65ab8b9782fa77c6d9909a31259c8">createTable</a>(Suchbegriff_Bezeichnung,<a class="code" href="ex_8c.html#a9d0755616c25d32c802e0786308b8fba">VAL</a>,PartNr),<span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                            }</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                            <span class="keywordflow">if</span>(Suchbegriff_Bezeichnung == <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                                <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(liste,<a class="code" href="ex_8c.html#a93f65ab8b9782fa77c6d9909a31259c8">createTable</a>(Suchbegriff_Package,<a class="code" href="ex_8c.html#af42346d5e4cb2b5ba2208adc44464398">PAC</a>,PartNr),<span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                                <span class="keywordtype">int</span> foundBt = 0;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                                <span class="keywordtype">int</span> <a class="code" href="editnext-dev-sym-pac_8ulp.html#a76f11d9a0a47b94f72c2d0e77fb32240">n</a> = <a class="code" href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a>(temp,<a class="code" href="ex_8c.html#a93f65ab8b9782fa77c6d9909a31259c8">createTable</a>(Suchbegriff_Bezeichnung,<a class="code" href="ex_8c.html#a9d0755616c25d32c802e0786308b8fba">VAL</a>,PartNr),<span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> <a class="code" href="_libdesy_8lib.html#ab66ed8e0098c0a86b458672a55a9cca9">k</a> = 0; <a class="code" href="_libdesy_8lib.html#ab66ed8e0098c0a86b458672a55a9cca9">k</a> &lt; <a class="code" href="editnext-dev-sym-pac_8ulp.html#a76f11d9a0a47b94f72c2d0e77fb32240">n</a>; <a class="code" href="_libdesy_8lib.html#ab66ed8e0098c0a86b458672a55a9cca9">k</a>++) {</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                                    <span class="keywordflow">if</span>(strxstr(temp[<a class="code" href="_libdesy_8lib.html#ab66ed8e0098c0a86b458672a55a9cca9">k</a>],Suchbegriff_Package) &gt;= 0) </div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                                        liste[foundBt++] = temp[<a class="code" href="_libdesy_8lib.html#ab66ed8e0098c0a86b458672a55a9cca9">k</a>];</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                                        <span class="comment">//liste muss noch einmal geleert werden</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                                }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                            }</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                        }   </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                        dlgRedisplay();</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                    }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            }</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            dlgListView(<span class="stringliteral">&quot;PART_NAME&quot;</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                                    <span class="stringliteral">&quot;\tDEVICE_NAME&quot;</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                                    <span class="stringliteral">&quot;\tPACKAGE&quot;</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                                    <span class="stringliteral">&quot;\tVALUE&quot;</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                                    <span class="stringliteral">&quot;\tPREFIX&quot;</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                                    <span class="stringliteral">&quot;\tLIBRARY&quot;</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;                                    <span class="stringliteral">&quot;\tHERSTELLER&quot;</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                                    <span class="stringliteral">&quot;\tHERSTELLERNR&quot;</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;                                    <span class="stringliteral">&quot;\tVORZUG&quot;</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                                    <span class="stringliteral">&quot;\tBESCHREIBUNG&quot;</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;                                    <span class="stringliteral">&quot;\tDATENBLATT&quot;</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                                    <span class="stringliteral">&quot;\tORDERBASE_NUMMER&quot;</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                                    ,liste</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                                    ,Auswahl) {</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                <a class="code" href="libsearch_8ulp.html#abc5e2c5bfe828c9bd28ed667f19cf117">dlgDialog</a>(<span class="stringliteral">&quot;&quot;</span>){</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                    dlgLabel(<a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(liste[Auswahl],<a class="code" href="ex_8c.html#af1d4fe1dc2c108fc8a59c5b3b90252a3">HERSTELLER</a>) + <span class="stringliteral">&quot; - &quot;</span> + <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(liste[Auswahl],<a class="code" href="ex_8c.html#ab14fde5d8767bd16f5b91ed81d0d462d">HERSTELLERNR</a>));</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                    dlgPushButton(<span class="stringliteral">&quot;Datenblatt einsehen&quot;</span>) </div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                        system(<span class="stringliteral">&quot;cmd /c \&quot;//&quot;</span>+<a class="code" href="_libdesy_8lib.html#a152e859e285dc572355bf99d375eeb61">str_replace</a>(<a class="code" href="_libdesy_8lib.html#a2fd71140ea5241c20d59c939c655627e">CutSubstring</a>(<a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(liste[Auswahl],9),<span class="stringliteral">&quot;elma[^\&quot;]*&quot;</span>,0),<span class="stringliteral">&quot;\\\\&quot;</span>,<span class="stringliteral">&quot;/&quot;</span>,<a class="code" href="_libdesy_8lib.html#aac4fa8c481d4f1b3cf43b93b2165b1b4">START</a>,<a class="code" href="_libdesy_8lib.html#ad5ddb2044ab034a83c0735668b613a8b">REPEAT</a>)+<span class="stringliteral">&quot;\&quot;&quot;</span>);</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                    dlgPushButton(<span class="stringliteral">&quot;+&amp;Bauteil gegen neues austauschen&quot;</span>) {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                    <span class="comment">//Replace Befehl -&gt; replace C6 &#39;BC817&#39;@&#39;ZE SMD Vorzugsliste&#39;</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                        <a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr] = <a class="code" href="ex_8c.html#a7c0dbd82f8a7792c2dcc1514c7cc9ea5">exchangePart</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],liste[Auswahl],<a class="code" href="ex_8c.html#a01030b244f6352425e8de676f9d43288">COMPLETE</a>);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                        Bauteil_attribute = <a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr] ;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                        dlgAccept();</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                    }</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                <span class="comment">/*  dlgPushButton(&quot;+&amp;Attribute und Symbol austauschen, Package erhalten&quot;) {</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">                        PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl]);</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">                        Bauteil_attribute = PartData[PartNr] ;</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">                        dlgAccept();</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">                    } */</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            <span class="comment">/*      dlgPushButton(&quot;+&amp;Footprint austauschen&quot;) {</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">                    //Package Befehl -&gt; package C6 </span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">                        PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl]);</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">                        Bauteil_attribute = PartData[PartNr] ;</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">                        dlgAccept();</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">                    } */</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                    dlgPushButton(<span class="stringliteral">&quot;+&amp;Attribute austauschen (Platzhalter erhalten)&quot;</span>) {</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                        <a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr] = <a class="code" href="ex_8c.html#a7c0dbd82f8a7792c2dcc1514c7cc9ea5">exchangePart</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr],liste[Auswahl],<a class="code" href="ex_8c.html#af88c30c8d185a3f210472a96e11566bd">ATTR_ONLY</a>);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                        Bauteil_attribute = <a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[PartNr] ;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;                        dlgAccept();</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;                    }</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;                    dlgPushButton(<span class="stringliteral">&quot;-&amp;Abbrechen&quot;</span>) dlgReject();</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;                };</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;                dlgRedisplay();</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;                    </div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;            }</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            dlgHBoxLayout{</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                dlgPushButton(<span class="stringliteral">&quot;&amp;Redisplay&quot;</span>) dlgRedisplay();</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;                dlgPushButton(<span class="stringliteral">&quot;+&amp;OK&quot;</span>) dlgAccept();</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;                dlgPushButton(<span class="stringliteral">&quot;-&amp;Cancel&quot;</span>) <a class="code" href="delete_8ulp.html#adf5c804dfce7a70e36dda02995fad481">exit</a>(0);</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            }</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        };      </div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;        </div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;        <a class="code" href="bom_8ulp.html#a037d9c41c2eb91966f712cb2269ae172">Debug</a>(<span class="stringliteral">&quot;Das Bauteil hat kein Package..&quot;</span>);</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    }</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;}</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;</div>
+<div class="line"><a name="l00420"></a><span class="lineno"><a class="line" href="ex_8c.html#ab98dbf196398d8aeaa4ac97f87ae54a1">  420</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ex_8c.html#ab98dbf196398d8aeaa4ac97f87ae54a1">MainMenu</a>() {</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;status(<span class="stringliteral">&quot;MainMenu()&quot;</span>);</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordtype">int</span> MainAuswahl;</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    <a class="code" href="libsearch_8ulp.html#abc5e2c5bfe828c9bd28ed667f19cf117">dlgDialog</a>(<span class="stringliteral">&quot;Liste der verwendeten Bauteile&quot;</span>) {</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;        dlgListView(<span class="stringliteral">&quot;PART_NAME&quot;</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;                                    <span class="stringliteral">&quot;\tDEVICE_NAME&quot;</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;                                    <span class="stringliteral">&quot;\tPACKAGE&quot;</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;                                    <span class="stringliteral">&quot;\tVALUE&quot;</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                                    <span class="stringliteral">&quot;\tPREFIX&quot;</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;                                    <span class="stringliteral">&quot;\tLIBRARY&quot;</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;                                    <span class="stringliteral">&quot;\tHERSTELLER&quot;</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;                                    <span class="stringliteral">&quot;\tHERSTELLERNR&quot;</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;                                    <span class="stringliteral">&quot;\tVORZUG&quot;</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;                                    <span class="stringliteral">&quot;\tBESCHREIBUNG&quot;</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;                                    <span class="stringliteral">&quot;\tDATENBLATT&quot;</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;                                    <span class="stringliteral">&quot;\tORDERBASE_NUMMER&quot;</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                                    ,<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                                    ,MainAuswahl)</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;            <a class="code" href="ex_8c.html#a005756a3de9c56f60d7697b8ccc8a1a2">Vorschlaege</a>(MainAuswahl);</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        dlgHBoxLayout{</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;            dlgPushButton(<span class="stringliteral">&quot;&amp;OK&quot;</span>) dlgAccept();</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;            dlgPushButton(<span class="stringliteral">&quot;&amp;Cancel&quot;</span>) <a class="code" href="delete_8ulp.html#adf5c804dfce7a70e36dda02995fad481">exit</a>(0);</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        }</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    };</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;}</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;</div>
+<div class="line"><a name="l00448"></a><span class="lineno"><a class="line" href="ex_8c.html#a61e5747955dc080ddfb4fccd3ad3f346">  448</a></span>&#160;<span class="keywordflow">if</span>(schematic) {</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    <span class="keywordtype">string</span> <a class="code" href="delete_8ulp.html#a90e155eddac72ef87020b85a704d97be">cmd</a>;</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <a class="code" href="ex_8c.html#a47d2d84792b1656dd5e93a65568957d8">getPartData</a>();</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    <a class="code" href="ex_8c.html#ab98dbf196398d8aeaa4ac97f87ae54a1">MainMenu</a>();</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> = 0; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a> &lt; <a class="code" href="ex_8c.html#a92a0e91aab3e1ff3d8857072adcd7c32">NoOfParts</a>; <a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>++) {</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[<a class="code" href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a>],<a class="code" href="ex_8c.html#a3389481e9b966a29fb48e172a5942ddd">CHANGE_MODE</a>) == <a class="code" href="_libdesy_8lib.html#aabffd2ab08d259550d4750cfa9c249dc">int2str</a>(<a class="code" href="ex_8c.html#a01030b244f6352425e8de676f9d43288">COMPLETE</a>) )</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;            cmd +=  <span class="stringliteral">&quot;REPLACE &quot;</span> + <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[i],<a class="code" href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a>) + <span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;                            + <a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[i],<a class="code" href="ex_8c.html#a6fe0f5b0418b2132d12ac49aa4081291">DEVICE_NAME</a>) + <span class="stringliteral">&quot;&#39;@&#39;&quot;</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;                            + filesetext(<a class="code" href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a>(<a class="code" href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a>[i],<a class="code" href="ex_8c.html#a24327f241c43e49fd9913294c6d7ddb3">LIBRARY</a>),<span class="stringliteral">&quot;&quot;</span>) + <span class="stringliteral">&quot;&#39;&quot;</span>;</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;    }</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    <a class="code" href="delete_8ulp.html#adf5c804dfce7a70e36dda02995fad481">exit</a>(cmd);</div>
+<div class="line"><a name="l00461"></a><span class="lineno"><a class="line" href="ex_8c.html#a0544c3fe466e421738dae463968b70ba">  461</a></span>&#160;} <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    <a class="code" href="delete_8ulp.html#adf5c804dfce7a70e36dda02995fad481">exit</a>(0);</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;}</div>
+<div class="ttc" id="ex_8c_html_a6fe0f5b0418b2132d12ac49aa4081291"><div class="ttname"><a href="ex_8c.html#a6fe0f5b0418b2132d12ac49aa4081291">DEVICE_NAME</a></div><div class="ttdeci">int DEVICE_NAME</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00124">ex.c:124</a></div></div>
+<div class="ttc" id="ex_8c_html_af42346d5e4cb2b5ba2208adc44464398"><div class="ttname"><a href="ex_8c.html#af42346d5e4cb2b5ba2208adc44464398">PAC</a></div><div class="ttdeci">int PAC</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00067">ex.c:67</a></div></div>
+<div class="ttc" id="ex_8c_html_a619ea3d31ff34b29c397408d7a72e2aa"><div class="ttname"><a href="ex_8c.html#a619ea3d31ff34b29c397408d7a72e2aa">Pac_Sort_Arr</a></div><div class="ttdeci">string Pac_Sort_Arr[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00018">ex.c:18</a></div></div>
+<div class="ttc" id="ex_8c_html_a9d0755616c25d32c802e0786308b8fba"><div class="ttname"><a href="ex_8c.html#a9d0755616c25d32c802e0786308b8fba">VAL</a></div><div class="ttdeci">int VAL</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00068">ex.c:68</a></div></div>
+<div class="ttc" id="layer-change_8ulp_html_a7505e749f23041ae4cf0115c6f33f4da"><div class="ttname"><a href="layer-change_8ulp.html#a7505e749f23041ae4cf0115c6f33f4da">sprintf</a></div><div class="ttdeci">sprintf(temp,&quot;Grid MM 0.635 1 alt mm 0.3175 ; \n&quot;)</div></div>
+<div class="ttc" id="ex_8c_html_a1f05af292fb59094556c3ff72b55e848"><div class="ttname"><a href="ex_8c.html#a1f05af292fb59094556c3ff72b55e848">S_TRUE</a></div><div class="ttdeci">string S_TRUE</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00139">ex.c:139</a></div></div>
+<div class="ttc" id="_libdesy_8lib_html_aac4fa8c481d4f1b3cf43b93b2165b1b4"><div class="ttname"><a href="_libdesy_8lib.html#aac4fa8c481d4f1b3cf43b93b2165b1b4">START</a></div><div class="ttdeci">int START</div><div class="ttdef"><b>Definition:</b> <a href="_libdesy_8lib_source.html#l00090">Libdesy.lib:90</a></div></div>
+<div class="ttc" id="ex_8c_html_a4a476a4ca9399cdb40f332c3f4f194f5"><div class="ttname"><a href="ex_8c.html#a4a476a4ca9399cdb40f332c3f4f194f5">Val_Sort</a></div><div class="ttdeci">string Val_Sort</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00018">ex.c:18</a></div></div>
+<div class="ttc" id="ex_8c_html_ab66e65ec79f498320544459cd478986a"><div class="ttname"><a href="ex_8c.html#ab66e65ec79f498320544459cd478986a">VORZUG</a></div><div class="ttdeci">int VORZUG</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00131">ex.c:131</a></div></div>
+<div class="ttc" id="_libdesy_8lib_html_a152e859e285dc572355bf99d375eeb61"><div class="ttname"><a href="_libdesy_8lib.html#a152e859e285dc572355bf99d375eeb61">str_replace</a></div><div class="ttdeci">string str_replace(string subject, string regex, string replace, int initialOffset, int Wiederholungen)</div><div class="ttdef"><b>Definition:</b> <a href="_libdesy_8lib_source.html#l00094">Libdesy.lib:94</a></div></div>
+<div class="ttc" id="ex_8c_html_a401e942526aac47cef94f478182486e7"><div class="ttname"><a href="ex_8c.html#a401e942526aac47cef94f478182486e7">position</a></div><div class="ttdeci">int position</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00016">ex.c:16</a></div></div>
+<div class="ttc" id="ex_8c_html_ae410fcb7dc0f5e163526a9c617a825de"><div class="ttname"><a href="ex_8c.html#ae410fcb7dc0f5e163526a9c617a825de">BESCHREIBUNG</a></div><div class="ttdeci">int BESCHREIBUNG</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00132">ex.c:132</a></div></div>
+<div class="ttc" id="ex_8c_html_af793855284d36c1b154929e9737ad5eb"><div class="ttname"><a href="ex_8c.html#af793855284d36c1b154929e9737ad5eb">Val_Sort_Arr</a></div><div class="ttdeci">string Val_Sort_Arr[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00018">ex.c:18</a></div></div>
+<div class="ttc" id="ex_8c_html_a37c09d8cf4416763821a9df9c26e53e0"><div class="ttname"><a href="ex_8c.html#a37c09d8cf4416763821a9df9c26e53e0">PartDataRecovery</a></div><div class="ttdeci">string PartDataRecovery[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00213">ex.c:213</a></div></div>
+<div class="ttc" id="ex_8c_html_ad822e380cd5270d0a2aa33a677dde305"><div class="ttname"><a href="ex_8c.html#ad822e380cd5270d0a2aa33a677dde305">VALUE</a></div><div class="ttdeci">int VALUE</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00126">ex.c:126</a></div></div>
+<div class="ttc" id="ex_8c_html_a82a1393e9fe80f33f56eeeb9b8d2195c"><div class="ttname"><a href="ex_8c.html#a82a1393e9fe80f33f56eeeb9b8d2195c">Bauteile</a></div><div class="ttdeci">int Bauteile</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00022">ex.c:22</a></div></div>
+<div class="ttc" id="_libdesy_8lib_html_a1c6d3c551ecc3ad23677a26a4fc28fda"><div class="ttname"><a href="_libdesy_8lib.html#a1c6d3c551ecc3ad23677a26a4fc28fda">TrimWhiteSpace</a></div><div class="ttdeci">string TrimWhiteSpace(string s)</div><div class="ttdef"><b>Definition:</b> <a href="_libdesy_8lib_source.html#l00034">Libdesy.lib:34</a></div></div>
+<div class="ttc" id="ex_8c_html_a3389481e9b966a29fb48e172a5942ddd"><div class="ttname"><a href="ex_8c.html#a3389481e9b966a29fb48e172a5942ddd">CHANGE_MODE</a></div><div class="ttdeci">int CHANGE_MODE</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00135">ex.c:135</a></div></div>
+<div class="ttc" id="ex_8c_html_a773ea3bd03d30f9371dda8ee12a97b3a"><div class="ttname"><a href="ex_8c.html#a773ea3bd03d30f9371dda8ee12a97b3a">Vorzug</a></div><div class="ttdeci">string Vorzug[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00019">ex.c:19</a></div></div>
+<div class="ttc" id="ex_8c_html_a4f2ae9692dcb1785ee65c9b83dffd83c"><div class="ttname"><a href="ex_8c.html#a4f2ae9692dcb1785ee65c9b83dffd83c">fileglob</a></div><div class="ttdeci">fileglob(tempStrArr1,&quot;N:/public/Eagle_6+/lbr/*.lbr&quot;)</div></div>
+<div class="ttc" id="ex_8c_html_a13a376a84d960a74f079d8654d95ac1c"><div class="ttname"><a href="ex_8c.html#a13a376a84d960a74f079d8654d95ac1c">ATTR_SYM</a></div><div class="ttdeci">int ATTR_SYM</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00142">ex.c:142</a></div></div>
+<div class="ttc" id="libsearch_8ulp_html_a2f8d954bdd72eba003a9802a6248de83"><div class="ttname"><a href="libsearch_8ulp.html#a2f8d954bdd72eba003a9802a6248de83">temp</a></div><div class="ttdeci">string temp[]</div><div class="ttdef"><b>Definition:</b> <a href="libsearch_8ulp_source.html#l00006">libsearch.ulp:6</a></div></div>
+<div class="ttc" id="ex_8c_html_a92a0e91aab3e1ff3d8857072adcd7c32"><div class="ttname"><a href="ex_8c.html#a92a0e91aab3e1ff3d8857072adcd7c32">NoOfParts</a></div><div class="ttdeci">int NoOfParts</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00214">ex.c:214</a></div></div>
+<div class="ttc" id="ex_8c_html_aaeb2c4795b541d0c2dd2b787afb421f2"><div class="ttname"><a href="ex_8c.html#aaeb2c4795b541d0c2dd2b787afb421f2">DATENBLATT</a></div><div class="ttdeci">int DATENBLATT</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00133">ex.c:133</a></div></div>
+<div class="ttc" id="ex_8c_html_a2d524de6e72f33e2cffb9bed0a05cbc7"><div class="ttname"><a href="ex_8c.html#a2d524de6e72f33e2cffb9bed0a05cbc7">out</a></div><div class="ttdeci">string out[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00017">ex.c:17</a></div></div>
+<div class="ttc" id="ex_8c_html_a6ba91b18d0979e207105d660a2010d8d"><div class="ttname"><a href="ex_8c.html#a6ba91b18d0979e207105d660a2010d8d">HerstellerNummer</a></div><div class="ttdeci">string HerstellerNummer[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00019">ex.c:19</a></div></div>
+<div class="ttc" id="ex_8c_html_af1d4fe1dc2c108fc8a59c5b3b90252a3"><div class="ttname"><a href="ex_8c.html#af1d4fe1dc2c108fc8a59c5b3b90252a3">HERSTELLER</a></div><div class="ttdeci">int HERSTELLER</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00129">ex.c:129</a></div></div>
+<div class="ttc" id="ex_8c_html_ace47333a73f430572c0a88ef37c016ac"><div class="ttname"><a href="ex_8c.html#ace47333a73f430572c0a88ef37c016ac">tempStrArr1</a></div><div class="ttdeci">string tempStrArr1[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00011">ex.c:11</a></div></div>
+<div class="ttc" id="ex_8c_html_ae529cfd688d748de42fa805b2c306253"><div class="ttname"><a href="ex_8c.html#ae529cfd688d748de42fa805b2c306253">index</a></div><div class="ttdeci">int index[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00015">ex.c:15</a></div></div>
+<div class="ttc" id="ex_8c_html_a311864faf2c7fc626c2d9c62f7af98ee"><div class="ttname"><a href="ex_8c.html#a311864faf2c7fc626c2d9c62f7af98ee">fileread</a></div><div class="ttdeci">fileread(Pac_Sort,&quot;N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Package_sortiert.csv&quot;)</div></div>
+<div class="ttc" id="ex_8c_html_a9658b6387aed3b22f25a8be98530d385"><div class="ttname"><a href="ex_8c.html#a9658b6387aed3b22f25a8be98530d385">Pac_Sort</a></div><div class="ttdeci">string Pac_Sort</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00018">ex.c:18</a></div></div>
+<div class="ttc" id="_l_p-_daten_8ulp_html_a9a9b6799eeeaeb061d7aa5bed52bf99b"><div class="ttname"><a href="_l_p-_daten_8ulp.html#a9a9b6799eeeaeb061d7aa5bed52bf99b">dlgMessageBox</a></div><div class="ttdeci">else dlgMessageBox(tr(&quot;Please start from board editor !&quot;))</div></div>
+<div class="ttc" id="ex_8c_html_ab03810066546e171a6a7c77464b0fc2c"><div class="ttname"><a href="ex_8c.html#ab03810066546e171a6a7c77464b0fc2c">setPartVal</a></div><div class="ttdeci">string setPartVal(string FullPartString, int pos, string newVal)</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00152">ex.c:152</a></div></div>
+<div class="ttc" id="ex_8c_html_aadcab157eddcbfbc94bcde5363c32934"><div class="ttname"><a href="ex_8c.html#aadcab157eddcbfbc94bcde5363c32934">Prefix</a></div><div class="ttdeci">string Prefix[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00019">ex.c:19</a></div></div>
+<div class="ttc" id="ex_8c_html_a92031faa8b6be9bafd0fcc7bf1f22bb2"><div class="ttname"><a href="ex_8c.html#a92031faa8b6be9bafd0fcc7bf1f22bb2">tempStr1</a></div><div class="ttdeci">string tempStr1</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00011">ex.c:11</a></div></div>
+<div class="ttc" id="_libdesy_8lib_html_a2fd71140ea5241c20d59c939c655627e"><div class="ttname"><a href="_libdesy_8lib.html#a2fd71140ea5241c20d59c939c655627e">CutSubstring</a></div><div class="ttdeci">string CutSubstring(string longString, string regex, int offset)</div><div class="ttdef"><b>Definition:</b> <a href="_libdesy_8lib_source.html#l00024">Libdesy.lib:24</a></div></div>
+<div class="ttc" id="ex_8c_html_a36b57fe679881487796855a589fbfb85"><div class="ttname"><a href="ex_8c.html#a36b57fe679881487796855a589fbfb85">Package</a></div><div class="ttdeci">string Package[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00019">ex.c:19</a></div></div>
+<div class="ttc" id="ex_8c_html_ae5c6c522b45bea7503caaebd0e215bce"><div class="ttname"><a href="ex_8c.html#ae5c6c522b45bea7503caaebd0e215bce">BTSearch</a></div><div class="ttdeci">int BTSearch(string searchString, int SORTING)</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00070">ex.c:70</a></div></div>
+<div class="ttc" id="ex_8c_html_a47d2d84792b1656dd5e93a65568957d8"><div class="ttname"><a href="ex_8c.html#a47d2d84792b1656dd5e93a65568957d8">getPartData</a></div><div class="ttdeci">void getPartData()</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00216">ex.c:216</a></div></div>
+<div class="ttc" id="ex_8c_html_a5e4f8a98a00b3d3b91b24e9ce15d31ff"><div class="ttname"><a href="ex_8c.html#a5e4f8a98a00b3d3b91b24e9ce15d31ff">LibList</a></div><div class="ttdeci">string LibList</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00011">ex.c:11</a></div></div>
+<div class="ttc" id="ex_8c_html_a7c0dbd82f8a7792c2dcc1514c7cc9ea5"><div class="ttname"><a href="ex_8c.html#a7c0dbd82f8a7792c2dcc1514c7cc9ea5">exchangePart</a></div><div class="ttdeci">string exchangePart(string Schematics_Part, string Bibliothek_Part, int mode)</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00162">ex.c:162</a></div></div>
+<div class="ttc" id="delete_8ulp_html_a90e155eddac72ef87020b85a704d97be"><div class="ttname"><a href="delete_8ulp.html#a90e155eddac72ef87020b85a704d97be">cmd</a></div><div class="ttdeci">string cmd</div><div class="ttdef"><b>Definition:</b> <a href="delete_8ulp_source.html#l00006">delete.ulp:6</a></div></div>
+<div class="ttc" id="_libdesy_8lib_html_aabffd2ab08d259550d4750cfa9c249dc"><div class="ttname"><a href="_libdesy_8lib.html#aabffd2ab08d259550d4750cfa9c249dc">int2str</a></div><div class="ttdeci">string int2str(int number)</div><div class="ttdef"><b>Definition:</b> <a href="_libdesy_8lib_source.html#l00006">Libdesy.lib:6</a></div></div>
+<div class="ttc" id="ex_8c_html_a8da6d6b33b7597f02434fedca1781cbc"><div class="ttname"><a href="ex_8c.html#a8da6d6b33b7597f02434fedca1781cbc">Counter</a></div><div class="ttdeci">int Counter</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00012">ex.c:12</a></div></div>
+<div class="ttc" id="ex_8c_html_a2d0a92f7c80ad7c1fae87f79bbaa300f"><div class="ttname"><a href="ex_8c.html#a2d0a92f7c80ad7c1fae87f79bbaa300f">PACKAGE</a></div><div class="ttdeci">int PACKAGE</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00125">ex.c:125</a></div></div>
+<div class="ttc" id="ex_8c_html_abf112b617933352e6ea9f00864bc16a4"><div class="ttname"><a href="ex_8c.html#abf112b617933352e6ea9f00864bc16a4">refinedSearch</a></div><div class="ttdeci">string refinedSearch(string searchString, string Subject)</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00112">ex.c:112</a></div></div>
+<div class="ttc" id="ex_8c_html_a005756a3de9c56f60d7697b8ccc8a1a2"><div class="ttname"><a href="ex_8c.html#a005756a3de9c56f60d7697b8ccc8a1a2">Vorschlaege</a></div><div class="ttdeci">void Vorschlaege(int PartNr)</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00283">ex.c:283</a></div></div>
+<div class="ttc" id="ex_8c_html_a12efc69ea4176b0f4db6e857cb7f0756"><div class="ttname"><a href="ex_8c.html#a12efc69ea4176b0f4db6e857cb7f0756">PREFIX</a></div><div class="ttdeci">int PREFIX</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00127">ex.c:127</a></div></div>
+<div class="ttc" id="_libdesy_8lib_html_ad5ddb2044ab034a83c0735668b613a8b"><div class="ttname"><a href="_libdesy_8lib.html#ad5ddb2044ab034a83c0735668b613a8b">REPEAT</a></div><div class="ttdeci">int REPEAT</div><div class="ttdef"><b>Definition:</b> <a href="_libdesy_8lib_source.html#l00091">Libdesy.lib:91</a></div></div>
+<div class="ttc" id="ex_8c_html_ae747ecefe0a8b1f1678fbf27beca17ed"><div class="ttname"><a href="ex_8c.html#ae747ecefe0a8b1f1678fbf27beca17ed">tempStrArr2</a></div><div class="ttdeci">string tempStrArr2[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00011">ex.c:11</a></div></div>
+<div class="ttc" id="delete_8ulp_html_adf5c804dfce7a70e36dda02995fad481"><div class="ttname"><a href="delete_8ulp.html#adf5c804dfce7a70e36dda02995fad481">exit</a></div><div class="ttdeci">exit(0)</div></div>
+<div class="ttc" id="editnext-dev-sym-pac_8ulp_html_a76f11d9a0a47b94f72c2d0e77fb32240"><div class="ttname"><a href="editnext-dev-sym-pac_8ulp.html#a76f11d9a0a47b94f72c2d0e77fb32240">n</a></div><div class="ttdeci">int n</div><div class="ttdef"><b>Definition:</b> <a href="editnext-dev-sym-pac_8ulp_source.html#l00019">editnext-dev-sym-pac.ulp:19</a></div></div>
+<div class="ttc" id="ex_8c_html_add6cc63e92e68ae325b1ecb08776c9b9"><div class="ttname"><a href="ex_8c.html#add6cc63e92e68ae325b1ecb08776c9b9">DeviceName</a></div><div class="ttdeci">string DeviceName[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00019">ex.c:19</a></div></div>
+<div class="ttc" id="ex_8c_html_a20b95608e9793b5cac8103d5881fe983"><div class="ttname"><a href="ex_8c.html#a20b95608e9793b5cac8103d5881fe983">PART_NAME</a></div><div class="ttdeci">int PART_NAME</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00123">ex.c:123</a></div></div>
+<div class="ttc" id="libsearch_8ulp_html_abc5e2c5bfe828c9bd28ed667f19cf117"><div class="ttname"><a href="libsearch_8ulp.html#abc5e2c5bfe828c9bd28ed667f19cf117">dlgDialog</a></div><div class="ttdeci">dlgDialog(&quot;&quot;)</div><div class="ttdef"><b>Definition:</b> <a href="libsearch_8ulp_source.html#l00056">libsearch.ulp:56</a></div></div>
+<div class="ttc" id="ex_8c_html_a0165df64e95135bade509c58bdb353f1"><div class="ttname"><a href="ex_8c.html#a0165df64e95135bade509c58bdb353f1">Beschreibung</a></div><div class="ttdeci">string Beschreibung[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00019">ex.c:19</a></div></div>
+<div class="ttc" id="bom_8ulp_html_a037d9c41c2eb91966f712cb2269ae172"><div class="ttname"><a href="bom_8ulp.html#a037d9c41c2eb91966f712cb2269ae172">Debug</a></div><div class="ttdeci">Debug(AllLib6)</div></div>
+<div class="ttc" id="ex_8c_html_a03dd05fe151d0e9f9edf96078bc234d4"><div class="ttname"><a href="ex_8c.html#a03dd05fe151d0e9f9edf96078bc234d4">Hersteller</a></div><div class="ttdeci">string Hersteller[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00019">ex.c:19</a></div></div>
+<div class="ttc" id="ex_8c_html_a93f65ab8b9782fa77c6d9909a31259c8"><div class="ttname"><a href="ex_8c.html#a93f65ab8b9782fa77c6d9909a31259c8">createTable</a></div><div class="ttdeci">string createTable(string sb, int SEARCH, int PartNr)</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00255">ex.c:255</a></div></div>
+<div class="ttc" id="ex_8c_html_a933c82c776fcedba424d05f5a5bd9346"><div class="ttname"><a href="ex_8c.html#a933c82c776fcedba424d05f5a5bd9346">strsplit</a></div><div class="ttdeci">strsplit(Val_Sort_Arr, Val_Sort,'\n')</div></div>
+<div class="ttc" id="_libdesy_8lib_html"><div class="ttname"><a href="_libdesy_8lib.html">Libdesy.lib</a></div></div>
+<div class="ttc" id="ex_8c_html_add96f686d5ed9719cabc7c3134fea1de"><div class="ttname"><a href="ex_8c.html#add96f686d5ed9719cabc7c3134fea1de">real2str</a></div><div class="ttdeci">string real2str(real value)</div><div class="ttdoc">Example showing how to document a function with Doxygen. </div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00059">ex.c:59</a></div></div>
+<div class="ttc" id="ex_8c_html_a57ba39a1335c8ae9ef4eb8314d51160e"><div class="ttname"><a href="ex_8c.html#a57ba39a1335c8ae9ef4eb8314d51160e">OrderbaseNummer</a></div><div class="ttdeci">string OrderbaseNummer[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00019">ex.c:19</a></div></div>
+<div class="ttc" id="ex_8c_html_a7cdee93856dbfbbf6b1351c9525f6cb0"><div class="ttname"><a href="ex_8c.html#a7cdee93856dbfbbf6b1351c9525f6cb0">ORDERBASE_NUMMER</a></div><div class="ttdeci">int ORDERBASE_NUMMER</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00134">ex.c:134</a></div></div>
+<div class="ttc" id="ex_8c_html_a73ff9d2da91fa45853c1dea18eb324f2"><div class="ttname"><a href="ex_8c.html#a73ff9d2da91fa45853c1dea18eb324f2">PartData</a></div><div class="ttdeci">string PartData[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00212">ex.c:212</a></div></div>
+<div class="ttc" id="read_database_8ulp_html_a7faaad15c15b6161b10321f263c460a3"><div class="ttname"><a href="read_database_8ulp.html#a7faaad15c15b6161b10321f263c460a3">tempstr</a></div><div class="ttdeci">numeric string tempstr</div><div class="ttdef"><b>Definition:</b> <a href="read_database_8ulp_source.html#l00002">readDatabase.ulp:2</a></div></div>
+<div class="ttc" id="ex_8c_html_a70ca181c5a9a77b7c4f1499f2fc6af3e"><div class="ttname"><a href="ex_8c.html#a70ca181c5a9a77b7c4f1499f2fc6af3e">PACK_ONLY</a></div><div class="ttdeci">int PACK_ONLY</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00143">ex.c:143</a></div></div>
+<div class="ttc" id="ex_8c_html_a01030b244f6352425e8de676f9d43288"><div class="ttname"><a href="ex_8c.html#a01030b244f6352425e8de676f9d43288">COMPLETE</a></div><div class="ttdeci">int COMPLETE</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00141">ex.c:141</a></div></div>
+<div class="ttc" id="ex_8c_html_a034e0e67b07ac51a39b8fb684448d388"><div class="ttname"><a href="ex_8c.html#a034e0e67b07ac51a39b8fb684448d388">getPartVal</a></div><div class="ttdeci">string getPartVal(string FullPartString, int pos)</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00146">ex.c:146</a></div></div>
+<div class="ttc" id="libsearch_8ulp_html_acb559820d9ca11295b4500f179ef6392"><div class="ttname"><a href="libsearch_8ulp.html#acb559820d9ca11295b4500f179ef6392">i</a></div><div class="ttdeci">int i</div><div class="ttdef"><b>Definition:</b> <a href="libsearch_8ulp_source.html#l00002">libsearch.ulp:2</a></div></div>
+<div class="ttc" id="ex_8c_html_a088204f20433deace071409889b5aba1"><div class="ttname"><a href="ex_8c.html#a088204f20433deace071409889b5aba1">Val</a></div><div class="ttdeci">string Val[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00019">ex.c:19</a></div></div>
+<div class="ttc" id="ex_8c_html_a9143525c52788805a93de55749a1c99d"><div class="ttname"><a href="ex_8c.html#a9143525c52788805a93de55749a1c99d">tempstr2</a></div><div class="ttdeci">string tempstr2</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00011">ex.c:11</a></div></div>
+<div class="ttc" id="ex_8c_html_aa91492c222928815209aa6f685876271"><div class="ttname"><a href="ex_8c.html#aa91492c222928815209aa6f685876271">PartDataValueNames</a></div><div class="ttdeci">string PartDataValueNames[]</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00118">ex.c:118</a></div></div>
+<div class="ttc" id="ex_8c_html_a24327f241c43e49fd9913294c6d7ddb3"><div class="ttname"><a href="ex_8c.html#a24327f241c43e49fd9913294c6d7ddb3">LIBRARY</a></div><div class="ttdeci">int LIBRARY</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00128">ex.c:128</a></div></div>
+<div class="ttc" id="ex_8c_html_af88c30c8d185a3f210472a96e11566bd"><div class="ttname"><a href="ex_8c.html#af88c30c8d185a3f210472a96e11566bd">ATTR_ONLY</a></div><div class="ttdeci">int ATTR_ONLY</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00144">ex.c:144</a></div></div>
+<div class="ttc" id="ex_8c_html_ab14fde5d8767bd16f5b91ed81d0d462d"><div class="ttname"><a href="ex_8c.html#ab14fde5d8767bd16f5b91ed81d0d462d">HERSTELLERNR</a></div><div class="ttdeci">int HERSTELLERNR</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00130">ex.c:130</a></div></div>
+<div class="ttc" id="_libdesy_8lib_html_ab66ed8e0098c0a86b458672a55a9cca9"><div class="ttname"><a href="_libdesy_8lib.html#ab66ed8e0098c0a86b458672a55a9cca9">k</a></div><div class="ttdeci">int k</div><div class="ttdoc">Brief. </div><div class="ttdef"><b>Definition:</b> <a href="_libdesy_8lib_source.html#l00061">Libdesy.lib:61</a></div></div>
+<div class="ttc" id="ex_8c_html_ab98dbf196398d8aeaa4ac97f87ae54a1"><div class="ttname"><a href="ex_8c.html#ab98dbf196398d8aeaa4ac97f87ae54a1">MainMenu</a></div><div class="ttdeci">void MainMenu()</div><div class="ttdef"><b>Definition:</b> <a href="ex_8c_source.html#l00420">ex.c:420</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="ex_8c.html">ex.c</a></li>
+    <li class="footer">Erzeugt am Mit Jun 3 2015 11:54:09 für Desy Eagle Bauteil-Datenbank Service Programme von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

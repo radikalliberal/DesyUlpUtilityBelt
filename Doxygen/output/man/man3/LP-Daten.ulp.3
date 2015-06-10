@@ -1,0 +1,682 @@
+.TH "H:/sze/Eagle6/ulp/Ulp-Service/LP-Daten.ulp" 3 "Mit Jun 3 2015" "Desy Eagle Bauteil-Datenbank Service Programme" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+H:/sze/Eagle6/ulp/Ulp-Service/LP-Daten.ulp \- Dies ist eine Abwandelung der \fBBOM\&.ulp\fP von Cadsoft, Leiterplatten- Spezifikationen werden in eine PDF-Vorlage eingetragen\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Aufzählungen"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBfalse\fP = 0, \fBtrue\fP = 1 }"
+.br
+.in -1c
+.SS "Funktionen"
+
+.in +1c
+.ti -1c
+.RI "\fBsprintf\fP (\fBDatum\fP,'%d\&.%d\&.%d', t2day(time()), t2month(time())+1, t2year(time()))"
+.br
+.ti -1c
+.RI "\fBif\fP (DlgLang!='de') DlgLang"
+.br
+.ti -1c
+.RI "string \fBtr\fP (string s)"
+.br
+.ti -1c
+.RI "string \fBGetTargetURL\fP ()"
+.br
+.ti -1c
+.RI "string \fBI2Str\fP (int \fBi\fP)"
+.br
+.ti -1c
+.RI "string \fBB2Str\fP (int b)"
+.br
+.ti -1c
+.RI "string \fBLItem\fP (string txt)"
+.br
+.ti -1c
+.RI "string \fBBold\fP (string txt)"
+.br
+.ti -1c
+.RI "string \fBU2MmStr\fP (int \fBi\fP)"
+.br
+.ti -1c
+.RI "string \fBU2InStr\fP (int \fBi\fP)"
+.br
+.ti -1c
+.RI "string \fBU2OzStr\fP (int \fBi\fP)"
+.br
+.ti -1c
+.RI "string \fBU2PrefUStrExt\fP (int \fBi\fP)"
+.br
+.ti -1c
+.RI "int \fBStr2U\fP (string s)"
+.br
+.ti -1c
+.RI "int \fBWithin\fP (int val, int l, int u)"
+.br
+.ti -1c
+.RI "int \fBValidBBox\fP ()"
+.br
+.ti -1c
+.RI "void \fBUpdateBBoxBox\fP (int xmin, int ymin, int xmax, int ymax)"
+.br
+.ti -1c
+.RI "void \fBUpdateBBoxWire\fP (UL_WIRE W, int layer)"
+.br
+.ti -1c
+.RI "void \fBUpdateBBoxCircle\fP (UL_CIRCLE C, int layer)"
+.br
+.ti -1c
+.RI "void \fBUpdateBBox\fP (int layer, int el_origin)"
+.br
+.ti -1c
+.RI "void \fBoutputFile\fP ()"
+.br
+.ti -1c
+.RI "void \fBGetDruParams\fP ()"
+.br
+.ti -1c
+.RI "void \fBiniFilelesen\fP ()"
+.br
+.ti -1c
+.RI "void \fBCalcMinTraceWidth\fP ()"
+.br
+.ti -1c
+.RI "void \fBDebug\fP (string msg)"
+.br
+.ti -1c
+.RI "void \fBAnzahlBohrduchmesser\fP (real durchmesser)"
+.br
+.ti -1c
+.RI "void \fBCheckHoles\fP ()"
+.br
+.ti -1c
+.RI "void \fBGetPCBParams\fP ()"
+.br
+.ti -1c
+.RI "string \fBMakeParamSendString\fP ()"
+.br
+.ti -1c
+.RI "int \fBDialog\fP ()"
+.br
+.ti -1c
+.RI "\fBfor\fP (int \fBi\fP=1;\fBi\fP<=argc;++\fBi\fP)"
+.br
+.ti -1c
+.RI "\fBif\fP (\fBboard\fP)"
+.br
+.ti -1c
+.RI "\fBelse\fP \fBdlgMessageBox\fP (\fBtr\fP('Please start from \fBboard\fP editor !'))"
+.br
+.in -1c
+.SS "Variablen"
+
+.in +1c
+.ti -1c
+.RI "< p > Get a quote \fBfor\fP manufacturing your PCB< br > \fBde\fP"
+.br
+.ti -1c
+.RI "int \fBDbg\fP = 1"
+.br
+.ti -1c
+.RI "string \fBDbgFile\fP"
+.br
+.ti -1c
+.RI "string \fBDbgMsg\fP"
+.br
+.ti -1c
+.RI "string \fBdebugkram\fP"
+.br
+.ti -1c
+.RI "string \fBDatum\fP"
+.br
+.ti -1c
+.RI "string \fBWarnings\fP"
+.br
+.ti -1c
+.RI "int \fBUseless\fP"
+.br
+.ti -1c
+.RI "int \fBExport\fP = 1"
+.br
+.ti -1c
+.RI "string \fBDruFile\fP"
+.br
+.ti -1c
+.RI "int \fBUFactor\fP = (EAGLE_VERSION < 6 && EAGLE_RELEASE < 12) ? 1 : 32"
+.br
+.ti -1c
+.RI "int \fBPrefUnit\fP"
+.br
+.ti -1c
+.RI "string \fBBoardName\fP"
+.br
+.ti -1c
+.RI "int \fBNrLayers\fP"
+.br
+.ti -1c
+.RI "int \fBCopperThicknessOutside\fP = INT_MAX"
+.br
+.ti -1c
+.RI "int \fBCopperThicknessInside\fP = INT_MAX"
+.br
+.ti -1c
+.RI "int \fBMaterialThickness\fP"
+.br
+.ti -1c
+.RI "int \fBMinTraceWidth\fP = INT_MAX"
+.br
+.ti -1c
+.RI "int \fBMinHoleSize\fP = INT_MAX"
+.br
+.ti -1c
+.RI "string \fBSolderSides\fP"
+.br
+.ti -1c
+.RI "string \fBSilkScreenSides\fP"
+.br
+.ti -1c
+.RI "int \fBNrBlindBuriedTypes\fP"
+.br
+.ti -1c
+.RI "int \fBNrburiedVia\fP"
+.br
+.ti -1c
+.RI "int \fBNrblindVia\fP"
+.br
+.ti -1c
+.RI "int \fBMinPitch\fP = INT_MAX"
+.br
+.ti -1c
+.RI "int \fBNrSmdPadsTop\fP"
+.br
+.ti -1c
+.RI "int \fBNrSmdPadsBottom\fP"
+.br
+.ti -1c
+.RI "int \fBBohrungen\fP"
+.br
+.ti -1c
+.RI "int \fBBohrdurchmesser\fP"
+.br
+.ti -1c
+.RI "real \fBdrillDiameters\fP []"
+.br
+.ti -1c
+.RI "string \fBloetstop\fP"
+.br
+.ti -1c
+.RI "string \fBstringplace\fP"
+.br
+.ti -1c
+.RI "int \fBNrPackages\fP"
+.br
+.ti -1c
+.RI "int \fBNrThruHoles\fP"
+.br
+.ti -1c
+.RI "int \fBNrBGAs\fP"
+.br
+.ti -1c
+.RI "int \fBNrQFNs\fP"
+.br
+.ti -1c
+.RI "int \fBNrFinePitchs\fP"
+.br
+.ti -1c
+.RI "int \fBNrOtherSMDs\fP"
+.br
+.ti -1c
+.RI "int \fBHasSMDBothSides\fP"
+.br
+.ti -1c
+.RI "string \fBengineer\fP"
+.br
+.ti -1c
+.RI "string \fBgeprueft\fP"
+.br
+.ti -1c
+.RI "string \fBfreigegeben\fP"
+.br
+.ti -1c
+.RI "string \fBAnforderer\fP"
+.br
+.ti -1c
+.RI "string \fBGruppe\fP"
+.br
+.ti -1c
+.RI "string \fBWA_Nummer\fP"
+.br
+.ti -1c
+.RI "string \fBDescription1\fP"
+.br
+.ti -1c
+.RI "string \fBfileName\fP"
+.br
+.ti -1c
+.RI "string \fBPROJEKT_PFAD\fP"
+.br
+.ti -1c
+.RI "int \fBconfig_nicht_vorhanden\fP"
+.br
+.ti -1c
+.RI "real \fBXMin\fP = REAL_MAX"
+.br
+.ti -1c
+.RI "real \fBXMax\fP = -REAL_MAX"
+.br
+.ti -1c
+.RI "real \fBYMin\fP = REAL_MAX"
+.br
+.ti -1c
+.RI "real \fBYMax\fP = -REAL_MAX"
+.br
+.ti -1c
+.RI "string \fBDictionary\fP []"
+.br
+.ti -1c
+.RI "string \fBDlgLang\fP = language()"
+.br
+.ti -1c
+.RI "int \fBLangIdx\fP = strstr(\fBDictionary\fP[0], \fBDlgLang\fP) / 3"
+.br
+.ti -1c
+.RI "string \fBUnknown\fP = \fBtr\fP('undefined')"
+.br
+.ti -1c
+.RI "string \fBprozent\fP ='%'"
+.br
+.in -1c
+.SH "Ausführliche Beschreibung"
+.PP 
+Dies ist eine Abwandelung der \fBBOM\&.ulp\fP von Cadsoft, Leiterplatten- Spezifikationen werden in eine PDF-Vorlage eingetragen\&. 
+
+
+.PP
+\fBAutor:\fP
+.RS 4
+cadsoft\&.de , weiter bearbeitet von Jan Scholz 
+.RE
+.PP
+
+.PP
+Definiert in Datei \fBLP-Daten\&.ulp\fP\&.
+.SH "Dokumentation der Aufzählungstypen"
+.PP 
+.SS "anonymous enum"
+
+.PP
+\fBAufzählungswerte\fP
+.in +1c
+.TP
+\fB\fIfalse \fP\fP
+.TP
+\fB\fItrue \fP\fP
+.PP
+Definiert in Zeile 22 der Datei LP-Daten\&.ulp\&.
+.SH "Dokumentation der Funktionen"
+.PP 
+.SS "void AnzahlBohrduchmesser (real durchmesser)"
+
+.PP
+Definiert in Zeile 491 der Datei LP-Daten\&.ulp\&.
+.SS "string B2Str (int b)"
+
+.PP
+Definiert in Zeile 225 der Datei LP-Daten\&.ulp\&.
+.SS "string Bold (string txt)"
+
+.PP
+Definiert in Zeile 229 der Datei LP-Daten\&.ulp\&.
+.SS "void CalcMinTraceWidth ()"
+
+.PP
+Definiert in Zeile 473 der Datei LP-Daten\&.ulp\&.
+.SS "void CheckHoles ()"
+
+.PP
+Definiert in Zeile 508 der Datei LP-Daten\&.ulp\&.
+.SS "void Debug (string msg)"
+
+.PP
+Definiert in Zeile 483 der Datei LP-Daten\&.ulp\&.
+.SS "int Dialog ()"
+
+.PP
+Definiert in Zeile 724 der Datei LP-Daten\&.ulp\&.
+.SS "\fBelse\fP dlgMessageBox (\fBtr\fP('Please start from \fBboard\fP editor !'))"
+
+.SS "for (int i = \fC1; \fBi\fP <= argc; ++\fBi\fP\fP)"
+
+.PP
+Definiert in Zeile 800 der Datei LP-Daten\&.ulp\&.
+.SS "void GetDruParams ()"
+
+.PP
+Definiert in Zeile 396 der Datei LP-Daten\&.ulp\&.
+.SS "void GetPCBParams ()"
+
+.PP
+Definiert in Zeile 555 der Datei LP-Daten\&.ulp\&.
+.SS "string GetTargetURL ()"
+
+.PP
+Definiert in Zeile 219 der Datei LP-Daten\&.ulp\&.
+.SS "string I2Str (int i)"
+
+.PP
+Definiert in Zeile 224 der Datei LP-Daten\&.ulp\&.
+.SS "if (DlgLang! = \fC'de'\fP)"
+
+.SS "if (\fBboard\fP)"
+
+.PP
+Definiert in Zeile 804 der Datei LP-Daten\&.ulp\&.
+.SS "void iniFilelesen ()"
+
+.PP
+Definiert in Zeile 445 der Datei LP-Daten\&.ulp\&.
+.SS "string LItem (string txt)"
+
+.PP
+Definiert in Zeile 228 der Datei LP-Daten\&.ulp\&.
+.SS "string MakeParamSendString ()"
+
+.PP
+Definiert in Zeile 678 der Datei LP-Daten\&.ulp\&.
+.SS "void outputFile ()"
+
+.PP
+Definiert in Zeile 308 der Datei LP-Daten\&.ulp\&.
+.SS "sprintf (\fBDatum\fP, '%d\&.%d\&.%d', t2day(time()), t2month(time())+ 1, t2year(time()))"
+
+.SS "int Str2U (string s)"
+
+.PP
+Definiert in Zeile 238 der Datei LP-Daten\&.ulp\&.
+.SS "string tr (string s)"
+
+.PP
+Definiert in Zeile 210 der Datei LP-Daten\&.ulp\&.
+.SS "string U2InStr (int i)"
+
+.PP
+Definiert in Zeile 233 der Datei LP-Daten\&.ulp\&.
+.SS "string U2MmStr (int i)"
+
+.PP
+Definiert in Zeile 232 der Datei LP-Daten\&.ulp\&.
+.SS "string U2OzStr (int i)"
+
+.PP
+Definiert in Zeile 234 der Datei LP-Daten\&.ulp\&.
+.SS "string U2PrefUStrExt (int i)"
+
+.PP
+Definiert in Zeile 236 der Datei LP-Daten\&.ulp\&.
+.SS "void UpdateBBox (int layer, int el_origin)"
+
+.PP
+Definiert in Zeile 294 der Datei LP-Daten\&.ulp\&.
+.SS "void UpdateBBoxBox (int xmin, int ymin, int xmax, int ymax)"
+
+.PP
+Definiert in Zeile 262 der Datei LP-Daten\&.ulp\&.
+.SS "void UpdateBBoxCircle (UL_CIRCLE C, int layer)"
+
+.PP
+Definiert in Zeile 287 der Datei LP-Daten\&.ulp\&.
+.SS "void UpdateBBoxWire (UL_WIRE W, int layer)"
+
+.PP
+Definiert in Zeile 269 der Datei LP-Daten\&.ulp\&.
+.SS "int ValidBBox ()"
+
+.PP
+Definiert in Zeile 254 der Datei LP-Daten\&.ulp\&.
+.SS "int Within (int val, int l, int u)"
+
+.PP
+Definiert in Zeile 252 der Datei LP-Daten\&.ulp\&.
+.SH "Variablen-Dokumentation"
+.PP 
+.SS "string Anforderer"
+
+.PP
+Definiert in Zeile 80 der Datei LP-Daten\&.ulp\&.
+.SS "string BoardName"
+
+.PP
+Definiert in Zeile 46 der Datei LP-Daten\&.ulp\&.
+.SS "int Bohrdurchmesser"
+
+.PP
+Definiert in Zeile 62 der Datei LP-Daten\&.ulp\&.
+.SS "int Bohrungen"
+
+.PP
+Definiert in Zeile 61 der Datei LP-Daten\&.ulp\&.
+.SS "int config_nicht_vorhanden"
+
+.PP
+Definiert in Zeile 87 der Datei LP-Daten\&.ulp\&.
+.SS "int CopperThicknessInside = INT_MAX"
+
+.PP
+Definiert in Zeile 49 der Datei LP-Daten\&.ulp\&.
+.SS "int CopperThicknessOutside = INT_MAX"
+
+.PP
+Definiert in Zeile 48 der Datei LP-Daten\&.ulp\&.
+.SS "string Datum"
+
+.PP
+Definiert in Zeile 30 der Datei LP-Daten\&.ulp\&.
+.SS "int Dbg = 1"
+
+.PP
+Definiert in Zeile 25 der Datei LP-Daten\&.ulp\&.
+.SS "string DbgFile"
+
+.PP
+Definiert in Zeile 26 der Datei LP-Daten\&.ulp\&.
+.SS "string DbgMsg"
+
+.PP
+Definiert in Zeile 27 der Datei LP-Daten\&.ulp\&.
+.SS "<p> Get a quote \fBfor\fP manufacturing your PCB<br> de"
+
+.PP
+Definiert in Zeile 11 der Datei LP-Daten\&.ulp\&.
+.SS "string debugkram"
+
+.PP
+Definiert in Zeile 28 der Datei LP-Daten\&.ulp\&.
+.SS "string Description1"
+
+.PP
+Definiert in Zeile 83 der Datei LP-Daten\&.ulp\&.
+.SS "string Dictionary[]"
+
+.PP
+Definiert in Zeile 94 der Datei LP-Daten\&.ulp\&.
+.SS "string DlgLang = language()"
+
+.PP
+Definiert in Zeile 205 der Datei LP-Daten\&.ulp\&.
+.SS "real drillDiameters[]"
+
+.PP
+Definiert in Zeile 63 der Datei LP-Daten\&.ulp\&.
+.SS "string DruFile"
+
+.PP
+Definiert in Zeile 39 der Datei LP-Daten\&.ulp\&.
+.SS "string engineer"
+
+.PP
+Definiert in Zeile 77 der Datei LP-Daten\&.ulp\&.
+.SS "int Export = 1"
+
+.PP
+Definiert in Zeile 38 der Datei LP-Daten\&.ulp\&.
+.SS "string fileName"
+
+.PP
+Definiert in Zeile 85 der Datei LP-Daten\&.ulp\&.
+.SS "string freigegeben"
+
+.PP
+Definiert in Zeile 79 der Datei LP-Daten\&.ulp\&.
+.SS "string geprueft"
+
+.PP
+Definiert in Zeile 78 der Datei LP-Daten\&.ulp\&.
+.SS "string Gruppe"
+
+.PP
+Definiert in Zeile 81 der Datei LP-Daten\&.ulp\&.
+.SS "int HasSMDBothSides"
+
+.PP
+Definiert in Zeile 74 der Datei LP-Daten\&.ulp\&.
+.SS "int LangIdx = strstr(\fBDictionary\fP[0], \fBDlgLang\fP) / 3"
+
+.PP
+Definiert in Zeile 207 der Datei LP-Daten\&.ulp\&.
+.SS "string loetstop"
+
+.PP
+Definiert in Zeile 64 der Datei LP-Daten\&.ulp\&.
+.SS "int MaterialThickness"
+
+.PP
+Definiert in Zeile 50 der Datei LP-Daten\&.ulp\&.
+.SS "int MinHoleSize = INT_MAX"
+
+.PP
+Definiert in Zeile 52 der Datei LP-Daten\&.ulp\&.
+.SS "int MinPitch = INT_MAX"
+
+.PP
+Definiert in Zeile 58 der Datei LP-Daten\&.ulp\&.
+.SS "int MinTraceWidth = INT_MAX"
+
+.PP
+Definiert in Zeile 51 der Datei LP-Daten\&.ulp\&.
+.SS "int NrBGAs"
+
+.PP
+Definiert in Zeile 70 der Datei LP-Daten\&.ulp\&.
+.SS "int NrBlindBuriedTypes"
+
+.PP
+Definiert in Zeile 55 der Datei LP-Daten\&.ulp\&.
+.SS "int NrblindVia"
+
+.PP
+Definiert in Zeile 57 der Datei LP-Daten\&.ulp\&.
+.SS "int NrburiedVia"
+
+.PP
+Definiert in Zeile 56 der Datei LP-Daten\&.ulp\&.
+.SS "int NrFinePitchs"
+
+.PP
+Definiert in Zeile 72 der Datei LP-Daten\&.ulp\&.
+.SS "int NrLayers"
+
+.PP
+Definiert in Zeile 47 der Datei LP-Daten\&.ulp\&.
+.SS "int NrOtherSMDs"
+
+.PP
+Definiert in Zeile 73 der Datei LP-Daten\&.ulp\&.
+.SS "int NrPackages"
+
+.PP
+Definiert in Zeile 68 der Datei LP-Daten\&.ulp\&.
+.SS "int NrQFNs"
+
+.PP
+Definiert in Zeile 71 der Datei LP-Daten\&.ulp\&.
+.SS "int NrSmdPadsBottom"
+
+.PP
+Definiert in Zeile 60 der Datei LP-Daten\&.ulp\&.
+.SS "int NrSmdPadsTop"
+
+.PP
+Definiert in Zeile 59 der Datei LP-Daten\&.ulp\&.
+.SS "int NrThruHoles"
+
+.PP
+Definiert in Zeile 69 der Datei LP-Daten\&.ulp\&.
+.SS "int PrefUnit"
+
+.PP
+Definiert in Zeile 43 der Datei LP-Daten\&.ulp\&.
+.SS "string PROJEKT_PFAD"
+
+.PP
+Definiert in Zeile 86 der Datei LP-Daten\&.ulp\&.
+.SS "string prozent ='%'"
+
+.PP
+Definiert in Zeile 306 der Datei LP-Daten\&.ulp\&.
+.SS "string SilkScreenSides"
+
+.PP
+Definiert in Zeile 54 der Datei LP-Daten\&.ulp\&.
+.SS "string SolderSides"
+
+.PP
+Definiert in Zeile 53 der Datei LP-Daten\&.ulp\&.
+.SS "string stringplace"
+
+.PP
+Definiert in Zeile 65 der Datei LP-Daten\&.ulp\&.
+.SS "int UFactor = (EAGLE_VERSION < 6 && EAGLE_RELEASE < 12) ? 1 : 32"
+
+.PP
+Definiert in Zeile 42 der Datei LP-Daten\&.ulp\&.
+.SS "string Unknown = \fBtr\fP('undefined')"
+
+.PP
+Definiert in Zeile 215 der Datei LP-Daten\&.ulp\&.
+.SS "int Useless"
+
+.PP
+Definiert in Zeile 35 der Datei LP-Daten\&.ulp\&.
+.SS "string WA_Nummer"
+
+.PP
+Definiert in Zeile 82 der Datei LP-Daten\&.ulp\&.
+.SS "string Warnings"
+
+.PP
+Definiert in Zeile 34 der Datei LP-Daten\&.ulp\&.
+.SS "real XMax = -REAL_MAX"
+
+.PP
+Definiert in Zeile 90 der Datei LP-Daten\&.ulp\&.
+.SS "real XMin = REAL_MAX"
+
+.PP
+Definiert in Zeile 90 der Datei LP-Daten\&.ulp\&.
+.SS "real YMax = -REAL_MAX"
+
+.PP
+Definiert in Zeile 90 der Datei LP-Daten\&.ulp\&.
+.SS "real YMin = REAL_MAX"
+
+.PP
+Definiert in Zeile 90 der Datei LP-Daten\&.ulp\&.
+.SH "Autor"
+.PP 
+Automatisch erzeugt von Doxygen für Desy Eagle Bauteil-Datenbank Service Programme aus dem Quellcode\&.

@@ -1,0 +1,118 @@
+/**
+ *  @file readlibs.ulp
+ *  @author Jan Scholz
+ *  @brief 	Mit dieser ULP werden die Bauteil Bibliotheken von Eagle eingelesen
+ *    			und in zwei Sortierungen in Dateien abgelegt. Einmal nach Package und
+ *   				einmal nach Val. Diese Ulp wird einmal pro Woche automatisch ausgeführt
+ */
+
+#usage "de: <b>Desy BauteilDatenbank</b>\n"
+"<p> Mit dieser ULP werden die Bauteil Bibliotheken von Eagle eingelesen"
+"    und in zwei Sortierungen in Dateien abgelegt. Einmal nach Package und"
+"    einmal nach Val. Diese Ulp wird einmal pro Woche automatisch ausgeführt"
+"</p>"
+"<author>Author:Jan Scholz (jan_scholz@gmx.net)</author>"
+#include "Libdesy.lib"
+int i = 0,k = 0;
+int selector1,selector2,bts;
+int AnzahlLibs;
+string out,LIBS[],rest;
+string Pac_Sort[],Val_Sort[];
+string tempstr;
+string outAttArr[],outElemArr[],temp[],temp1[],temp2[],temp3[],temp4[],temp5[];
+string HerstellerNummer[], Val[], Beschreibung[], Package[], Hersteller[], Vorzug[],OrderbaseNummer[],DeviceName[],Prefix[],Datenblatt1[],Datenblatt2[];
+string LIB6_PATH = "//win.desy.de/group/sze/public/Eagle_6+/lbr"; 
+
+/**
+ *  @brief setzt den Namen des Devices aus den Parametern zusammen, der Platzhalter "*"
+ *  im namen des Devicesets steht für die Technologie, das "?" steht für das Package. Wenn
+ *  keine Platzhalter vorhanden sind wird der Name nach dem Schema "DSName + Tech + Pac" 
+ *  erstellt 
+ *  
+ *  @param [in] DSName DeviceSetName
+ *  @param [in] Tech   Technologie
+ *  @param [in] Pac    Package
+ *  @return DeviceName
+ */
+string buildDeviceName(string DSName,string Tech, string Pac) {
+					
+		if(strxstr(DSName,"\\*") > 0) {
+			DSName = str_replace(DSName,"\\*",Tech,0,0);
+			Tech = "";
+		}
+		if(strxstr(DSName,"\\?") > 0) {
+			DSName = str_replace(DSName,"\\?",Pac,0,0);
+			Pac = "";
+		}
+
+	return DSName + Tech + Pac;
+}
+
+
+void main(){
+	AnzahlLibs = fileglob(LIBS,LIB6_PATH+"/*.lbr");
+	for(k; k < AnzahlLibs; k++) {
+		fileread(out,LIBS[k]);
+		if(strxstr(out,"eagle.*drawing.*library.*devicesets.*deviceset.*attribute.*value") < 0) continue;
+		int n = xmlelements(temp,out,"eagle/drawing/library/devicesets/deviceset");
+
+		for(int h = 0; h < n ; h++) {
+			Datenblatt1[h] = CutSubstring(xmlelement(temp[h],"deviceset/description"),"&lt;a\\shref\\s=\\s\"file:\\\\[^\\n]*\\.pdf\">[^\\n]*&lt;/a>",0);
+			Datenblatt1[h] = str_replace(Datenblatt1[h],"&lt;","<",START,REPEAT);
+			strsplit(temp1,xmlelement(temp[h],"deviceset/description"),'\n');
+			int l = xmlelements(temp2,temp[h],"deviceset/devices/device");
+			for(int g = 0; g < l; g++) {
+				int m = xmlelements(temp3,temp2[g],"device/technologies/technology");
+				int Gates = xmlelements(temp5,temp2[g],"device/connects/connect");
+				for(int j = 0; j < m; j++) {
+					int o = xmlelements(temp4,temp3[j],"technology/attribute");
+					if( o < 5) {
+					} else {
+						if( strxstr(temp4[0],"attribute") >= 0)
+							OrderbaseNummer[bts]    = xmlattribute(temp4[0],"attribute","value"); 
+						if( strxstr(temp4[1],"attribute") >= 0)
+							Hersteller[bts]         = xmlattribute(temp4[1],"attribute","value"); 
+						if( strxstr(temp4[2],"attribute") >= 0)
+							HerstellerNummer[bts]   = xmlattribute(temp4[2],"attribute","value");
+						if( strxstr(temp4[3],"attribute") >= 0)
+							Val[bts]                = xmlattribute(temp4[3],"attribute","value");
+						if( strxstr(temp4[4],"attribute") >= 0)
+							Vorzug[bts]             = xmlattribute(temp4[4],"attribute","value"); 
+							
+						Package[bts]            = xmlattribute(temp2[g],"device"   ,"package"); 
+						Beschreibung[bts]       = HtmlCharactersTauschen(str_replace(TrimWhiteSpace(str_replace(temp1[1],"((&lt;)|<)/?[^\\n;<>]*((&gt;)|>)","",0,1)),";","",0,1));
+						DeviceName[bts]					= buildDeviceName(
+																				xmlattribute(temp[h],"deviceset","name"),
+																				xmlattribute(temp3[j],"technology","name"),
+																				xmlattribute(temp2[g],"device"   ,"name")); 
+						
+						Prefix[bts] 						= xmlattribute(temp[h],"deviceset","prefix"); 
+						Datenblatt2[bts]				= HtmlCharactersTauschen(Datenblatt1[h]);
+						
+						rest = DeviceName[bts] + ";" + OrderbaseNummer[bts]  + ";" 
+								 + Hersteller[bts] + ";" + HerstellerNummer[bts] + ";" 
+								 + Vorzug[bts] 		 + ";" + Beschreibung[bts] 		 + ";" 
+								 + Prefix[bts] 		 + ";" + Datenblatt2[bts]      + ";"
+								 + LIBS[k] 				 + ";" + int2str(Gates);
+						
+						Pac_Sort[bts]	= Package[bts]+ ";" +	Val[bts] + ";" + rest;
+						Val_Sort[bts]	= Val[bts]    + ";" + Package[bts]+ ";" + rest;
+						bts++;
+					}
+				}
+			}
+		}
+	}
+	sort(bts,Pac_Sort);
+	sort(bts,Val_Sort);
+	output("N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Package_sortiert.csv","wt"){
+		for(i = 0; i < bts; i++) 
+			printf("%s\n",Pac_Sort[i]); 
+	}
+	output("N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Val_sortiert.csv","wt"){
+		for(i = 0; i < bts; i++) 
+			printf("%s\n",Val_Sort[i]); 
+	}
+	//exit("QUIT;");
+}
+

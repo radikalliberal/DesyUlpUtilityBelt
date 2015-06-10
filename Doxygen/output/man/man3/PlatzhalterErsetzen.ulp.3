@@ -1,0 +1,604 @@
+.TH "H:/sze/Eagle6/ulp/Ulp-Service/PlatzhalterErsetzen.ulp" 3 "Mit Jun 3 2015" "Desy Eagle Bauteil-Datenbank Service Programme" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+H:/sze/Eagle6/ulp/Ulp-Service/PlatzhalterErsetzen.ulp \- Durch dieses Programm wird das Ersetzen von alten Bauteilen der 4er Bibliothek von Eagle auf die neue 6er Bibliothek in älteren Platinen-Layouts vereinfacht\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'Libdesy\&.lib'\fP
+.br
+
+.SS "Funktionen"
+
+.in +1c
+.ti -1c
+.RI "int \fBevalChangeMode\fP (string cMode)"
+.br
+.ti -1c
+.RI "int \fBBTSearch\fP (string searchString, int SORTING)"
+.br
+.RI "\fIDie vorsortierten\&. \fP"
+.ti -1c
+.RI "string \fBrefinedSearch\fP (string searchString, string Subject)"
+.br
+.RI "\fIEin Suchergebnis wird noch einem zweiten Suchkriterium (Val) durchsucht\&. \fP"
+.ti -1c
+.RI "string \fBgetPartVal\fP (string FullPartString, int pos)"
+.br
+.ti -1c
+.RI "string \fBsetPartVal\fP (string FullPartString, int pos, string newVal)"
+.br
+.ti -1c
+.RI "string \fBexchangePart\fP (string Schematics_Part, string Bibliothek_Part, int mode)"
+.br
+.ti -1c
+.RI "void \fBgetPartData\fP ()"
+.br
+.ti -1c
+.RI "string \fBcreateTable\fP (string Bezeichnung, string \fBPackage\fP, int PartNr)"
+.br
+.ti -1c
+.RI "string \fBbuildPartDateSet\fP (int PartNr)"
+.br
+.ti -1c
+.RI "void \fBVorschlaege\fP (int PartNr)"
+.br
+.ti -1c
+.RI "string \fBbuildScript\fP ()"
+.br
+.RI "\fIDas auszuführende Script mit dem Bauteile ersetzt werden wird mit dieser Funktion erstellt\&. \fP"
+.ti -1c
+.RI "void \fBMainMenu\fP ()"
+.br
+.ti -1c
+.RI "void \fBmain\fP ()"
+.br
+.in -1c
+.SS "Variablen"
+
+.in +1c
+.ti -1c
+.RI "string \fBtempStrArr1\fP []"
+.br
+.ti -1c
+.RI "string \fBtempStrArr2\fP []"
+.br
+.ti -1c
+.RI "string \fBtempStr1\fP"
+.br
+.ti -1c
+.RI "string \fBtempstr2\fP"
+.br
+.ti -1c
+.RI "string \fBLibList\fP"
+.br
+.ti -1c
+.RI "int \fBCounter\fP"
+.br
+.ti -1c
+.RI "int \fBindex\fP []"
+.br
+.ti -1c
+.RI "int \fBposition\fP"
+.br
+.ti -1c
+.RI "string \fBout\fP []"
+.br
+.ti -1c
+.RI "string \fBPac_Sort_Arr\fP []"
+.br
+.ti -1c
+.RI "string \fBVal_Sort_Arr\fP []"
+.br
+.ti -1c
+.RI "string \fBPac_Sort\fP"
+.br
+.ti -1c
+.RI "string \fBVal_Sort\fP"
+.br
+.ti -1c
+.RI "string \fBHerstellerNummer\fP []"
+.br
+.ti -1c
+.RI "string \fBVal\fP []"
+.br
+.ti -1c
+.RI "string \fBBeschreibung\fP []"
+.br
+.ti -1c
+.RI "string \fBPackage\fP []"
+.br
+.ti -1c
+.RI "string \fBHersteller\fP []"
+.br
+.ti -1c
+.RI "string \fBVorzug\fP []"
+.br
+.ti -1c
+.RI "string \fBOrderbaseNummer\fP []"
+.br
+.ti -1c
+.RI "string \fBDeviceName\fP []"
+.br
+.ti -1c
+.RI "string \fBPrefix\fP []"
+.br
+.ti -1c
+.RI "int \fBBauteile\fP"
+.br
+.RI "\fIAnzahl Bauteile\&. \fP"
+.ti -1c
+.RI "int \fBVAL\fP = 0"
+.br
+.RI "\fISortier-Modus\&. \fP"
+.ti -1c
+.RI "int \fBPAC\fP = 1"
+.br
+.RI "\fISortier-Modus\&. \fP"
+.ti -1c
+.RI "int \fBVALPAC\fP = 2"
+.br
+.RI "\fISortier-Modus\&. \fP"
+.ti -1c
+.RI "string \fBPartDataValueNames\fP []"
+.br
+.ti -1c
+.RI "int \fBPART_NAME\fP = 0"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBDEVICE_NAME\fP = 1"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBPACKAGE\fP = 2"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBVALUE\fP = 3"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBPREFIX\fP = 4"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBLIBRARY\fP = 5"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBHERSTELLER\fP = 6"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBHERSTELLERNR\fP = 7"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBVORZUG\fP = 8"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBBESCHREIBUNG\fP = 9"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBDATENBLATT\fP = 10"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBORDERBASE_NUMMER\fP = 11"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBCHANGE_MODE\fP = 12"
+.br
+.RI "\fIindize für Bauteil-Attribut im Datensatz \fP"
+.ti -1c
+.RI "int \fBNONE\fP = 0"
+.br
+.RI "\fIKonstanten für bessere Lesbarkeit\&. \fP"
+.ti -1c
+.RI "int \fBCOMPLETE\fP = 1"
+.br
+.RI "\fIKonstanten für bessere Lesbarkeit\&. \fP"
+.ti -1c
+.RI "int \fBATTR_SYM\fP = 2"
+.br
+.RI "\fIKonstanten für bessere Lesbarkeit\&. \fP"
+.ti -1c
+.RI "int \fBPACK_ONLY\fP = 3"
+.br
+.RI "\fIKonstanten für bessere Lesbarkeit\&. \fP"
+.ti -1c
+.RI "int \fBATTR_ONLY\fP = 4"
+.br
+.RI "\fIKonstanten für bessere Lesbarkeit\&. \fP"
+.ti -1c
+.RI "string \fBPartData\fP []"
+.br
+.RI "\fIBauteil-Datensätzen aus Schaltplan\&. \fP"
+.ti -1c
+.RI "string \fBPartDataRecovery\fP []"
+.br
+.RI "\fIBauteil-Datensätzen aus Schaltplan\&. \fP"
+.ti -1c
+.RI "int \fBNoOfParts\fP"
+.br
+.RI "\fIBauteil-Datensätzen aus Schaltplan\&. \fP"
+.in -1c
+.SH "Ausführliche Beschreibung"
+.PP 
+Durch dieses Programm wird das Ersetzen von alten Bauteilen der 4er Bibliothek von Eagle auf die neue 6er Bibliothek in älteren Platinen-Layouts vereinfacht\&. 
+
+
+.PP
+Definiert in Datei \fBPlatzhalterErsetzen\&.ulp\fP\&.
+.SH "Dokumentation der Funktionen"
+.PP 
+.SS "int BTSearch (string searchString, int SORTING)"
+
+.PP
+Die vorsortierten\&. 
+.PP
+\fBParameter:\fP
+.RS 4
+\fIsearchString\fP Parameter_Description 
+.br
+\fISORTING\fP Parameter_Description 
+.RE
+.PP
+\fBRückgabe:\fP
+.RS 4
+Return_Description 
+.RE
+.PP
+\fBZu beachten:\fP
+.RS 4
+.RE
+.PP
+\fBWarnung:\fP
+.RS 4
+.RE
+.PP
+Details 
+.PP
+Definiert in Zeile 86 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string buildPartDateSet (int PartNr)"
+
+.PP
+Definiert in Zeile 322 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string buildScript ()"
+
+.PP
+Das auszuführende Script mit dem Bauteile ersetzt werden wird mit dieser Funktion erstellt\&. 
+.PP
+\fBRückgabe:\fP
+.RS 4
+das Script 
+.RE
+.PP
+
+.PP
+Definiert in Zeile 451 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string createTable (string Bezeichnung, string Package, int PartNr)"
+
+.PP
+Definiert in Zeile 269 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int evalChangeMode (string cMode)"
+
+.PP
+Definiert in Zeile 67 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string exchangePart (string Schematics_Part, string Bibliothek_Part, int mode)"
+
+.PP
+Definiert in Zeile 159 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "void getPartData ()"
+
+.PP
+Definiert in Zeile 228 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string getPartVal (string FullPartString, int pos)"
+
+.PP
+Definiert in Zeile 143 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "void main ()"
+
+.PP
+Definiert in Zeile 519 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "void MainMenu ()"
+
+.PP
+Definiert in Zeile 485 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string refinedSearch (string searchString, string Subject)"
+
+.PP
+Ein Suchergebnis wird noch einem zweiten Suchkriterium (Val) durchsucht\&. 
+.PP
+\fBParameter:\fP
+.RS 4
+\fIsearchString\fP Suchbegriff 
+.br
+\fISubject\fP Zu durchsuchender String (Liste von Bauteil-Datensätzen) 
+.RE
+.PP
+\fBRückgabe:\fP
+.RS 4
+Liste von Bauteil-Datensätzen die dem Suchkriterium genügen 
+.RE
+.PP
+
+.PP
+Definiert in Zeile 130 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string setPartVal (string FullPartString, int pos, string newVal)"
+
+.PP
+Definiert in Zeile 149 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "void Vorschlaege (int PartNr)"
+
+.PP
+Definiert in Zeile 338 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SH "Variablen-Dokumentation"
+.PP 
+.SS "int ATTR_ONLY = 4"
+
+.PP
+Konstanten für bessere Lesbarkeit\&. 
+.PP
+Definiert in Zeile 59 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int ATTR_SYM = 2"
+
+.PP
+Konstanten für bessere Lesbarkeit\&. 
+.PP
+Definiert in Zeile 57 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int Bauteile"
+
+.PP
+Anzahl Bauteile\&. 
+.PP
+Definiert in Zeile 18 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string Beschreibung[]"
+
+.PP
+Definiert in Zeile 17 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int BESCHREIBUNG = 9"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 48 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int CHANGE_MODE = 12"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 51 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int COMPLETE = 1"
+
+.PP
+Konstanten für bessere Lesbarkeit\&. 
+.PP
+Definiert in Zeile 56 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int Counter"
+
+.PP
+Definiert in Zeile 12 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int DATENBLATT = 10"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 49 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int DEVICE_NAME = 1"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 40 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string DeviceName[]"
+
+.PP
+Definiert in Zeile 17 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string Hersteller[]"
+
+.PP
+Definiert in Zeile 17 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int HERSTELLER = 6"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 45 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int HERSTELLERNR = 7"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 46 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string HerstellerNummer[]"
+
+.PP
+Definiert in Zeile 17 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int index[]"
+Some documentation for first\&. 
+.PP
+Definiert in Zeile 13 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string LibList"
+
+.PP
+Definiert in Zeile 11 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int LIBRARY = 5"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 44 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int NONE = 0"
+
+.PP
+Konstanten für bessere Lesbarkeit\&. 
+.PP
+Definiert in Zeile 55 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int NoOfParts"
+
+.PP
+Bauteil-Datensätzen aus Schaltplan\&. 
+.PP
+Definiert in Zeile 64 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int ORDERBASE_NUMMER = 11"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 50 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string OrderbaseNummer[]"
+
+.PP
+Definiert in Zeile 17 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string out[]"
+
+.PP
+Definiert in Zeile 15 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int PAC = 1"
+
+.PP
+Sortier-Modus\&. 
+.PP
+Definiert in Zeile 22 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string Pac_Sort"
+
+.PP
+Definiert in Zeile 16 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string Pac_Sort_Arr[]"
+
+.PP
+Definiert in Zeile 16 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int PACK_ONLY = 3"
+
+.PP
+Konstanten für bessere Lesbarkeit\&. 
+.PP
+Definiert in Zeile 58 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string Package[]"
+
+.PP
+Definiert in Zeile 17 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int PACKAGE = 2"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 41 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int PART_NAME = 0"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 39 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string PartData[]"
+
+.PP
+Bauteil-Datensätzen aus Schaltplan\&. 
+.PP
+Definiert in Zeile 62 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string PartDataRecovery[]"
+
+.PP
+Bauteil-Datensätzen aus Schaltplan\&. 
+.PP
+Definiert in Zeile 63 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string PartDataValueNames[]"
+\fBInitialisierung:\fP
+.PP
+.nf
+= {  "P\&.name", 
+                                                                "P\&.device\&.name", 
+                                                                "P\&.device\&.package\&.name",
+                                                                "P\&.value",
+                                                                "P\&.device\&.prefix",
+                                                                "P\&.device\&.library",
+                                                                "Hersteller",
+                                                                "HerstellerNummer",
+                                                                "Vorzug",
+                                                                "Beschreibung",
+                                                                "Datenblatt",
+                                                                "OrderbaseNummer",
+                                                                "ChangeMode"}
+.fi
+.PP
+Definiert in Zeile 25 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int position"
+
+.PP
+Definiert in Zeile 14 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string Prefix[]"
+
+.PP
+Definiert in Zeile 17 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int PREFIX = 4"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 43 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string tempStr1"
+
+.PP
+Definiert in Zeile 11 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string tempstr2"
+
+.PP
+Definiert in Zeile 11 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string tempStrArr1[]"
+
+.PP
+Definiert in Zeile 11 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string tempStrArr2[]"
+
+.PP
+Definiert in Zeile 11 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string Val[]"
+
+.PP
+Definiert in Zeile 17 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int VAL = 0"
+
+.PP
+Sortier-Modus\&. 
+.PP
+Definiert in Zeile 21 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string Val_Sort"
+
+.PP
+Definiert in Zeile 16 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string Val_Sort_Arr[]"
+
+.PP
+Definiert in Zeile 16 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int VALPAC = 2"
+
+.PP
+Sortier-Modus\&. 
+.PP
+Definiert in Zeile 23 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int VALUE = 3"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 42 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "string Vorzug[]"
+
+.PP
+Definiert in Zeile 17 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SS "int VORZUG = 8"
+
+.PP
+indize für Bauteil-Attribut im Datensatz 
+.PP
+Definiert in Zeile 47 der Datei PlatzhalterErsetzen\&.ulp\&.
+.SH "Autor"
+.PP 
+Automatisch erzeugt von Doxygen für Desy Eagle Bauteil-Datenbank Service Programme aus dem Quellcode\&.

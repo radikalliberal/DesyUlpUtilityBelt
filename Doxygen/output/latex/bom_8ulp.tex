@@ -1,0 +1,753 @@
+\hypertarget{bom_8ulp}{}\section{H\+:/sze/\+Eagle6/ulp/\+Ulp-\/\+Service/bom.ulp-\/\+Dateireferenz}
+\label{bom_8ulp}\index{H\+:/sze/\+Eagle6/ulp/\+Ulp-\/\+Service/bom.\+ulp@{H\+:/sze/\+Eagle6/ulp/\+Ulp-\/\+Service/bom.\+ulp}}
+
+
+Erzeugt eine Stückliste (Bill Of Material) eines Projekts in Excel, diese Einzelstückliste kann von der Gruppe Z\+E in Orderbase eingelesen werden.  
+
+
+{\ttfamily \#include \char`\"{}Libdesy.\+lib\char`\"{}}\\*
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+$<$ p $>$ Erzeugt eine \hyperlink{bom_8ulp_ac22615d76b8e399dd248c98b498fd6f0}{Stückliste} (Bill Of Material) eines \hyperlink{read_database_8ulp_a76f11d9a0a47b94f72c2d0e77fb32240}{Projekts.\textbackslash{}n}\char`\"{} \char`\"{}$<$ p $>$\char`\"{} \char`\"{}Eine Excel-\/Einzelteilstückliste kann erzeugt werden.$<$ br $>$\textbackslash{}\hyperlink{read_database_8ulp_a76f11d9a0a47b94f72c2d0e77fb32240}{n}\char`\"{} \char`\"{}Diese Excelliste enthält zusätzliche Informationen wie \hyperlink{test_8ulp_a03dd05fe151d0e9f9edf96078bc234d4}{z.\+B.\+Hersteller}
+\item 
+\hyperlink{bom_8ulp_a037d9c41c2eb91966f712cb2269ae172}{Debug} (\hyperlink{bom_8ulp_a50dee73f73f0902f6c035e550bf1ad3c}{All\+Lib6})
+\item 
+int \hyperlink{bom_8ulp_a86fcd313b99359fe147a3d51a3f141bd}{isquote} (char c)
+\item 
+string \hyperlink{bom_8ulp_a8911b982f3199b7289cfcabfd41eb10c}{Trim\+Quotes} (string s)
+\item 
+int \hyperlink{bom_8ulp_a98c5fb24e17cc7e4df2cf1c25897a490}{Is\+Known\+Device} (string devname)
+\item 
+int \hyperlink{bom_8ulp_ace0ed14cfac73915e13738ced4325edd}{Is\+Known\+Attribute} (string attrname)
+\item 
+void \hyperlink{bom_8ulp_a5155b4a449afb07c498f38fcc879cb9d}{ini\+Filelesen} ()
+\item 
+int \hyperlink{bom_8ulp_ac4bbb89d9194f6290ab2e235c7594ee0}{is\+Lib6} (string lib)
+\item 
+void \hyperlink{bom_8ulp_aad335cd4f31b4e286cbe4b5392dd7126}{Collect\+Part\+Data} (void)
+\item 
+string \hyperlink{bom_8ulp_ab85f19b78b26c55cc788d746eb5b5b5b}{Make\+List\+Header} (void)
+\item 
+string \hyperlink{bom_8ulp_a28596f37f9bae6eeb196f53c3d2278b5}{Make\+List\+Text} (void)
+\item 
+void \hyperlink{bom_8ulp_aafc2af1760a717175bc90b527d4133e5}{Save\+List} (void)
+\item 
+void \hyperlink{bom_8ulp_a8f4fc648dc7938d047d127805814ec98}{View\+List} (void)
+\item 
+void \hyperlink{bom_8ulp_aecaa48a1c2347b452d89b6e168ac4d5a}{Generate\+Part\+List} (void)
+\item 
+void \hyperlink{bom_8ulp_a2503be692be67c975c546902d459e4ce}{Generate\+Value\+List} (void)
+\item 
+void \hyperlink{bom_8ulp_abde5f88458216ec961d22e955c0aa0d5}{On\+List\+Type\+Change} ()
+\item 
+int \hyperlink{bom_8ulp_a37c92911d0ae2a220a84cb114c6e7409}{Export\+Orderbase\+X\+M\+L} ()
+\item 
+void \hyperlink{bom_8ulp_a0dee0bc13095fb8c9271b2ced7f184bd}{read\+Lib6} ()
+\item 
+int \hyperlink{bom_8ulp_aead4249333ece8e4aa63151e98919f4e}{App\+Dialog} ()
+\item 
+\hyperlink{bom_8ulp_a9106034e389d1f457801fc7ff188c023}{if} (!schematic)
+\end{DoxyCompactItemize}
+\subsection*{Variablen}
+\begin{DoxyCompactItemize}
+\item 
+$<$ p $>$ Erzeugt eine Herstellernummern$<$ br $>$ Die \hyperlink{_l_p-_daten_8ulp_a47d4dad2288e4e9d400c39dc34630b01}{Gruppe} D\+E\+S\+Y Z\+E kann die Excel Einzelstueckliste in Orderbase einlesen \hyperlink{read_database_8ulp_a76f11d9a0a47b94f72c2d0e77fb32240}{n}$<$ p $>$$<$ author $>$ \hyperlink{bom_8ulp_a7dac06bee1af56d0789d1cac5656a69a}{Author}
+\item 
+string \hyperlink{bom_8ulp_abf922ed4825a62eb9f0838b10265fc5b}{U\+L\+P\+\_\+\+P\+A\+T\+H} = \char`\"{}D\+:/Dropbox/Desy\+Bib/Ulp-\/Service\char`\"{}
+\item 
+string \hyperlink{bom_8ulp_a5b14b1eeb65e50d10a438760f173f2e9}{V\+O\+R\+L\+A\+G\+E\+\_\+\+P\+F\+A\+D} = \char`\"{}N\+:/public/Orderbase/Stücklistenexport Vorlage/Einzelteilstueckliste Vorlage.\+xltx\char`\"{}
+\item 
+string \hyperlink{bom_8ulp_a96dcbff778ab4d94b74cc4942d070162}{D\+B\+N\+R}
+\item 
+string \hyperlink{bom_8ulp_a61fcfd309e437276f500730e1bfa1074}{H\+S\+N\+R}
+\item 
+string \hyperlink{bom_8ulp_a76c4b2a7bb59b91514af25d07c1b8075}{H\+S}
+\item 
+string \hyperlink{bom_8ulp_a0722c36319aaa70ab8b91fc4743b1b99}{Z\+E\+V}
+\item 
+string \hyperlink{bom_8ulp_a646f3371d3767b31d185e665e471cd8c}{P\+R\+O\+J\+E\+K\+T\+\_\+\+P\+F\+A\+D}
+\item 
+string \hyperlink{bom_8ulp_a18a4ac3bd1cb918f565f779006ee77ba}{str\+Version} = \char`\"{}2.\+0\char`\"{}
+\item 
+string \hyperlink{bom_8ulp_aaa6babfc550269768d017226e5515586}{null\+Key} = \char`\"{}$\ast$\char`\"{}
+\item 
+string \hyperlink{bom_8ulp_a71f006e8d6ac2a5d94354155a0da69f8}{file\+Name}
+\item 
+string \hyperlink{bom_8ulp_a50dee73f73f0902f6c035e550bf1ad3c}{All\+Lib6}
+\item 
+int \hyperlink{bom_8ulp_a52faf0e7daa8d9d1bbbf02e52c9ec521}{n\+Part\+Count}
+\item 
+int \hyperlink{bom_8ulp_ac4dbacd07ed6fd2299214fe82e75344f}{List\+Type} = 0
+\item 
+int \hyperlink{bom_8ulp_aa63c48313853c05d2e5b345772063942}{Selected} = -\/1
+\item 
+int \hyperlink{bom_8ulp_a2a39c78e48bddaa1377bf2fbec799590}{Part\+Num\+Modified} = 0
+\item 
+int \hyperlink{bom_8ulp_ad9f0da9a6c5a32a87ed13eb28d5453a6}{Part\+Num\+Picked} = 0
+\item 
+int \hyperlink{bom_8ulp_a45e22d9db317238127f2a1d385e17c1c}{config\+\_\+nicht\+\_\+vorhanden} = 0
+\item 
+string \hyperlink{bom_8ulp_ab651eee79234101e84eed5bb2c5f9500}{Default\+File\+Name}
+\item 
+numeric string \hyperlink{bom_8ulp_a84500c4914a36b14d9bf801dacd2bd27}{Part\+Num} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_ac4cc860a9e71524e90eff241b475eee0}{Part\+Name} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_aa0f0748df59ef1a5e748ba8b0f41d3cd}{Part\+Val} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_a7ad4d91e419214c185366026054e1ee8}{Part\+Attr} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_a40b6e54b771e9907cd576cabac8f59c1}{Part\+Dev} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_ab38dccbbc14320a5df859acfea65a3e6}{Part\+Pkg} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_a4714c6a59c5bcd5682043afe0a20721c}{Part\+Desc} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_a6228403db921b2ffe35b1d6fcc5c2beb}{Part\+Description} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_a91c7af708be7031d4c7f7702147482a7}{Part\+D\+B\+N\+R} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_aae53009645b43fc7d8ea395c21848537}{Part\+H\+S} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_aab5d6a1ef82f71bd599529f5c7a4c496}{Part\+H\+S\+N\+R} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_a6076bc5f468469ec6838abe6933cb125}{Part\+Z\+E\+V\+O\+R\+Z\+U\+G} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_a2109cabfeb535fe6bff12bf1fb092acd}{Part\+Headline} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_af34f3cdce145b7088430ab4561161595}{Part\+Headline\+Ex} \mbox{[}$\,$\mbox{]}
+\item 
+int \hyperlink{bom_8ulp_aae665133b57441f92f2da44703a9ea57}{Part\+Sheet} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_ae670799ce8e4e5c10333c5ffd950f723}{Lines} \mbox{[}$\,$\mbox{]}
+\item 
+numeric string \hyperlink{bom_8ulp_ac1febc97d5c168ba555c840a75aa53c0}{Pick\+Part\+Num}
+\item 
+numeric string \hyperlink{bom_8ulp_a143703109bf0f522339429ad817b5c5c}{Pick\+Part\+Val}
+\item 
+numeric string \hyperlink{bom_8ulp_a1406270bbecf8f3f17c4ceb7ffaff638}{Pick\+Part\+Dev}
+\item 
+numeric string \hyperlink{bom_8ulp_ad06c90d84f184524f9d3746de4c1cc2a}{Pick\+Part\+D\+B\+N\+R}
+\item 
+numeric string \hyperlink{bom_8ulp_ac44e6ceaf40fadf3bd1fad3a25f3bba8}{Pick\+Part\+H\+S}
+\item 
+numeric string \hyperlink{bom_8ulp_acbcdc33dac2b006e723ac2ca032ad8f1}{Pick\+Part\+H\+S\+N\+R}
+\item 
+numeric string \hyperlink{bom_8ulp_a19ed50ff9a03f9fcec5a13995ab5d040}{Pick\+Part\+Z\+E\+V\+O\+R\+Z\+U\+G}
+\item 
+numeric string \hyperlink{bom_8ulp_ae0948a58f18dc3accd52842b985053e5}{Pick\+Part\+Desc}
+\item 
+string \hyperlink{bom_8ulp_a631ee32a616cc0d4795fdaeacb8a01a8}{engineer}
+\item 
+string \hyperlink{bom_8ulp_a285b7e5593b6948aedaaba97394ca9ac}{geprueft}
+\item 
+string \hyperlink{bom_8ulp_a06d333dc9622bc3a8b4e590022c75297}{freigegeben}
+\item 
+string \hyperlink{bom_8ulp_a59516eab445b28415bdf1d48fc65db95}{Anforderer}
+\item 
+string \hyperlink{bom_8ulp_a47d4dad2288e4e9d400c39dc34630b01}{Gruppe}
+\item 
+string \hyperlink{bom_8ulp_a190c864c13eed4946823ed73c1865058}{W\+A\+\_\+\+Nummer}
+\item 
+string \hyperlink{bom_8ulp_a64ec71ee637d23d7673aeb78fb756b69}{description1}
+\item 
+\hyperlink{bom_8ulp_a0544c3fe466e421738dae463968b70ba}{else}
+\item 
+int \hyperlink{bom_8ulp_a2b671bc2490402c9747f8ee3e399b13d}{rtn} = \hyperlink{bom_8ulp_aead4249333ece8e4aa63151e98919f4e}{App\+Dialog}()
+\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Erzeugt eine Stückliste (Bill Of Material) eines Projekts in Excel, diese Einzelstückliste kann von der Gruppe Z\+E in Orderbase eingelesen werden. 
+
+\begin{DoxyAuthor}{Autor}
+Jan Scholz 
+\end{DoxyAuthor}
+
+
+\subsection{Dokumentation der Funktionen}
+\hypertarget{bom_8ulp_aead4249333ece8e4aa63151e98919f4e}{}\index{bom.\+ulp@{bom.\+ulp}!App\+Dialog@{App\+Dialog}}
+\index{App\+Dialog@{App\+Dialog}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{App\+Dialog}]{\setlength{\rightskip}{0pt plus 5cm}int App\+Dialog (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_aead4249333ece8e4aa63151e98919f4e}
+
+
+Definiert in Zeile 484 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_aad335cd4f31b4e286cbe4b5392dd7126}{}\index{bom.\+ulp@{bom.\+ulp}!Collect\+Part\+Data@{Collect\+Part\+Data}}
+\index{Collect\+Part\+Data@{Collect\+Part\+Data}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Collect\+Part\+Data}]{\setlength{\rightskip}{0pt plus 5cm}Collect\+Part\+Data (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_aad335cd4f31b4e286cbe4b5392dd7126}
+
+
+Definiert in Zeile 170 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a037d9c41c2eb91966f712cb2269ae172}{}\index{bom.\+ulp@{bom.\+ulp}!Debug@{Debug}}
+\index{Debug@{Debug}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Debug}]{\setlength{\rightskip}{0pt plus 5cm}Debug (
+\begin{DoxyParamCaption}
+\item[{{\bf All\+Lib6}}]{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a037d9c41c2eb91966f712cb2269ae172}
+\hypertarget{bom_8ulp_a37c92911d0ae2a220a84cb114c6e7409}{}\index{bom.\+ulp@{bom.\+ulp}!Export\+Orderbase\+X\+M\+L@{Export\+Orderbase\+X\+M\+L}}
+\index{Export\+Orderbase\+X\+M\+L@{Export\+Orderbase\+X\+M\+L}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Export\+Orderbase\+X\+M\+L}]{\setlength{\rightskip}{0pt plus 5cm}int Export\+Orderbase\+X\+M\+L (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a37c92911d0ae2a220a84cb114c6e7409}
+
+
+Definiert in Zeile 407 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_aecaa48a1c2347b452d89b6e168ac4d5a}{}\index{bom.\+ulp@{bom.\+ulp}!Generate\+Part\+List@{Generate\+Part\+List}}
+\index{Generate\+Part\+List@{Generate\+Part\+List}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Generate\+Part\+List}]{\setlength{\rightskip}{0pt plus 5cm}Generate\+Part\+List (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_aecaa48a1c2347b452d89b6e168ac4d5a}
+
+
+Definiert in Zeile 340 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a2503be692be67c975c546902d459e4ce}{}\index{bom.\+ulp@{bom.\+ulp}!Generate\+Value\+List@{Generate\+Value\+List}}
+\index{Generate\+Value\+List@{Generate\+Value\+List}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Generate\+Value\+List}]{\setlength{\rightskip}{0pt plus 5cm}void Generate\+Value\+List (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a2503be692be67c975c546902d459e4ce}
+
+
+Definiert in Zeile 358 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a9106034e389d1f457801fc7ff188c023}{}\index{bom.\+ulp@{bom.\+ulp}!if@{if}}
+\index{if@{if}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{if}]{\setlength{\rightskip}{0pt plus 5cm}if (
+\begin{DoxyParamCaption}
+\item[{!}]{schematic}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a9106034e389d1f457801fc7ff188c023}
+
+
+Definiert in Zeile 528 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a5155b4a449afb07c498f38fcc879cb9d}{}\index{bom.\+ulp@{bom.\+ulp}!ini\+Filelesen@{ini\+Filelesen}}
+\index{ini\+Filelesen@{ini\+Filelesen}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{ini\+Filelesen}]{\setlength{\rightskip}{0pt plus 5cm}void ini\+Filelesen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a5155b4a449afb07c498f38fcc879cb9d}
+
+
+Definiert in Zeile 136 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ace0ed14cfac73915e13738ced4325edd}{}\index{bom.\+ulp@{bom.\+ulp}!Is\+Known\+Attribute@{Is\+Known\+Attribute}}
+\index{Is\+Known\+Attribute@{Is\+Known\+Attribute}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Is\+Known\+Attribute}]{\setlength{\rightskip}{0pt plus 5cm}int Is\+Known\+Attribute (
+\begin{DoxyParamCaption}
+\item[{string}]{attrname}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_ace0ed14cfac73915e13738ced4325edd}
+
+
+Definiert in Zeile 121 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a98c5fb24e17cc7e4df2cf1c25897a490}{}\index{bom.\+ulp@{bom.\+ulp}!Is\+Known\+Device@{Is\+Known\+Device}}
+\index{Is\+Known\+Device@{Is\+Known\+Device}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Is\+Known\+Device}]{\setlength{\rightskip}{0pt plus 5cm}int Is\+Known\+Device (
+\begin{DoxyParamCaption}
+\item[{string}]{devname}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a98c5fb24e17cc7e4df2cf1c25897a490}
+
+
+Definiert in Zeile 103 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ac4bbb89d9194f6290ab2e235c7594ee0}{}\index{bom.\+ulp@{bom.\+ulp}!is\+Lib6@{is\+Lib6}}
+\index{is\+Lib6@{is\+Lib6}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{is\+Lib6}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Lib6 (
+\begin{DoxyParamCaption}
+\item[{string}]{lib}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_ac4bbb89d9194f6290ab2e235c7594ee0}
+
+
+Definiert in Zeile 165 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a86fcd313b99359fe147a3d51a3f141bd}{}\index{bom.\+ulp@{bom.\+ulp}!isquote@{isquote}}
+\index{isquote@{isquote}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{isquote}]{\setlength{\rightskip}{0pt plus 5cm}int isquote (
+\begin{DoxyParamCaption}
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a86fcd313b99359fe147a3d51a3f141bd}
+
+
+Definiert in Zeile 89 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ab85f19b78b26c55cc788d746eb5b5b5b}{}\index{bom.\+ulp@{bom.\+ulp}!Make\+List\+Header@{Make\+List\+Header}}
+\index{Make\+List\+Header@{Make\+List\+Header}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Make\+List\+Header}]{\setlength{\rightskip}{0pt plus 5cm}string Make\+List\+Header (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_ab85f19b78b26c55cc788d746eb5b5b5b}
+
+
+Definiert in Zeile 264 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a28596f37f9bae6eeb196f53c3d2278b5}{}\index{bom.\+ulp@{bom.\+ulp}!Make\+List\+Text@{Make\+List\+Text}}
+\index{Make\+List\+Text@{Make\+List\+Text}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Make\+List\+Text}]{\setlength{\rightskip}{0pt plus 5cm}string Make\+List\+Text (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a28596f37f9bae6eeb196f53c3d2278b5}
+
+
+Definiert in Zeile 271 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_abde5f88458216ec961d22e955c0aa0d5}{}\index{bom.\+ulp@{bom.\+ulp}!On\+List\+Type\+Change@{On\+List\+Type\+Change}}
+\index{On\+List\+Type\+Change@{On\+List\+Type\+Change}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{On\+List\+Type\+Change}]{\setlength{\rightskip}{0pt plus 5cm}void On\+List\+Type\+Change (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_abde5f88458216ec961d22e955c0aa0d5}
+
+
+Definiert in Zeile 398 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a0dee0bc13095fb8c9271b2ced7f184bd}{}\index{bom.\+ulp@{bom.\+ulp}!read\+Lib6@{read\+Lib6}}
+\index{read\+Lib6@{read\+Lib6}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{read\+Lib6}]{\setlength{\rightskip}{0pt plus 5cm}read\+Lib6 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a0dee0bc13095fb8c9271b2ced7f184bd}
+
+
+Definiert in Zeile 478 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_aafc2af1760a717175bc90b527d4133e5}{}\index{bom.\+ulp@{bom.\+ulp}!Save\+List@{Save\+List}}
+\index{Save\+List@{Save\+List}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Save\+List}]{\setlength{\rightskip}{0pt plus 5cm}void Save\+List (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_aafc2af1760a717175bc90b527d4133e5}
+
+
+Definiert in Zeile 303 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ac22615d76b8e399dd248c98b498fd6f0}{}\index{bom.\+ulp@{bom.\+ulp}!Stückliste@{Stückliste}}
+\index{Stückliste@{Stückliste}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Stückliste}]{\setlength{\rightskip}{0pt plus 5cm}$<$p$>$ Erzeugt eine Stückliste (
+\begin{DoxyParamCaption}
+\item[{Bill Of}]{Material}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_ac22615d76b8e399dd248c98b498fd6f0}
+\hypertarget{bom_8ulp_a8911b982f3199b7289cfcabfd41eb10c}{}\index{bom.\+ulp@{bom.\+ulp}!Trim\+Quotes@{Trim\+Quotes}}
+\index{Trim\+Quotes@{Trim\+Quotes}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Trim\+Quotes}]{\setlength{\rightskip}{0pt plus 5cm}string Trim\+Quotes (
+\begin{DoxyParamCaption}
+\item[{string}]{s}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a8911b982f3199b7289cfcabfd41eb10c}
+
+
+Definiert in Zeile 94 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a8f4fc648dc7938d047d127805814ec98}{}\index{bom.\+ulp@{bom.\+ulp}!View\+List@{View\+List}}
+\index{View\+List@{View\+List}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{View\+List}]{\setlength{\rightskip}{0pt plus 5cm}void View\+List (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{bom_8ulp_a8f4fc648dc7938d047d127805814ec98}
+
+
+Definiert in Zeile 323 der Datei bom.\+ulp.
+
+
+
+\subsection{Variablen-\/\+Dokumentation}
+\hypertarget{bom_8ulp_a50dee73f73f0902f6c035e550bf1ad3c}{}\index{bom.\+ulp@{bom.\+ulp}!All\+Lib6@{All\+Lib6}}
+\index{All\+Lib6@{All\+Lib6}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{All\+Lib6}]{\setlength{\rightskip}{0pt plus 5cm}string All\+Lib6}\label{bom_8ulp_a50dee73f73f0902f6c035e550bf1ad3c}
+
+
+Definiert in Zeile 50 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a59516eab445b28415bdf1d48fc65db95}{}\index{bom.\+ulp@{bom.\+ulp}!Anforderer@{Anforderer}}
+\index{Anforderer@{Anforderer}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Anforderer}]{\setlength{\rightskip}{0pt plus 5cm}string Anforderer}\label{bom_8ulp_a59516eab445b28415bdf1d48fc65db95}
+
+
+Definiert in Zeile 84 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a7dac06bee1af56d0789d1cac5656a69a}{}\index{bom.\+ulp@{bom.\+ulp}!Author@{Author}}
+\index{Author@{Author}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Author}]{\setlength{\rightskip}{0pt plus 5cm}$<$p$>$ Erzeugt eine Herstellernummern$<$br$>$ Die {\bf Gruppe} D\+E\+S\+Y Z\+E kann die Excel Einzelstueckliste in Orderbase einlesen {\bf n}$<$p$>$$<$author$>$ Author}\label{bom_8ulp_a7dac06bee1af56d0789d1cac5656a69a}
+
+
+Definiert in Zeile 37 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a45e22d9db317238127f2a1d385e17c1c}{}\index{bom.\+ulp@{bom.\+ulp}!config\+\_\+nicht\+\_\+vorhanden@{config\+\_\+nicht\+\_\+vorhanden}}
+\index{config\+\_\+nicht\+\_\+vorhanden@{config\+\_\+nicht\+\_\+vorhanden}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{config\+\_\+nicht\+\_\+vorhanden}]{\setlength{\rightskip}{0pt plus 5cm}int config\+\_\+nicht\+\_\+vorhanden = 0}\label{bom_8ulp_a45e22d9db317238127f2a1d385e17c1c}
+
+
+Definiert in Zeile 57 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a96dcbff778ab4d94b74cc4942d070162}{}\index{bom.\+ulp@{bom.\+ulp}!D\+B\+N\+R@{D\+B\+N\+R}}
+\index{D\+B\+N\+R@{D\+B\+N\+R}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{D\+B\+N\+R}]{\setlength{\rightskip}{0pt plus 5cm}string D\+B\+N\+R}\label{bom_8ulp_a96dcbff778ab4d94b74cc4942d070162}
+
+
+Definiert in Zeile 45 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ab651eee79234101e84eed5bb2c5f9500}{}\index{bom.\+ulp@{bom.\+ulp}!Default\+File\+Name@{Default\+File\+Name}}
+\index{Default\+File\+Name@{Default\+File\+Name}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Default\+File\+Name}]{\setlength{\rightskip}{0pt plus 5cm}string Default\+File\+Name}\label{bom_8ulp_ab651eee79234101e84eed5bb2c5f9500}
+
+
+Definiert in Zeile 58 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a64ec71ee637d23d7673aeb78fb756b69}{}\index{bom.\+ulp@{bom.\+ulp}!description1@{description1}}
+\index{description1@{description1}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{description1}]{\setlength{\rightskip}{0pt plus 5cm}string description1}\label{bom_8ulp_a64ec71ee637d23d7673aeb78fb756b69}
+
+
+Definiert in Zeile 87 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a0544c3fe466e421738dae463968b70ba}{}\index{bom.\+ulp@{bom.\+ulp}!else@{else}}
+\index{else@{else}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{else}]{\setlength{\rightskip}{0pt plus 5cm}else}\label{bom_8ulp_a0544c3fe466e421738dae463968b70ba}
+{\bfseries Initialisierung\+:}
+\begin{DoxyCode}
+\{
+    \hyperlink{bom_8ulp_a5155b4a449afb07c498f38fcc879cb9d}{iniFilelesen}()
+\end{DoxyCode}
+
+
+Definiert in Zeile 531 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a631ee32a616cc0d4795fdaeacb8a01a8}{}\index{bom.\+ulp@{bom.\+ulp}!engineer@{engineer}}
+\index{engineer@{engineer}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{engineer}]{\setlength{\rightskip}{0pt plus 5cm}string engineer}\label{bom_8ulp_a631ee32a616cc0d4795fdaeacb8a01a8}
+
+
+Definiert in Zeile 81 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a71f006e8d6ac2a5d94354155a0da69f8}{}\index{bom.\+ulp@{bom.\+ulp}!file\+Name@{file\+Name}}
+\index{file\+Name@{file\+Name}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{file\+Name}]{\setlength{\rightskip}{0pt plus 5cm}string file\+Name}\label{bom_8ulp_a71f006e8d6ac2a5d94354155a0da69f8}
+
+
+Definiert in Zeile 49 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a06d333dc9622bc3a8b4e590022c75297}{}\index{bom.\+ulp@{bom.\+ulp}!freigegeben@{freigegeben}}
+\index{freigegeben@{freigegeben}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{freigegeben}]{\setlength{\rightskip}{0pt plus 5cm}string freigegeben}\label{bom_8ulp_a06d333dc9622bc3a8b4e590022c75297}
+
+
+Definiert in Zeile 83 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a285b7e5593b6948aedaaba97394ca9ac}{}\index{bom.\+ulp@{bom.\+ulp}!geprueft@{geprueft}}
+\index{geprueft@{geprueft}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{geprueft}]{\setlength{\rightskip}{0pt plus 5cm}string geprueft}\label{bom_8ulp_a285b7e5593b6948aedaaba97394ca9ac}
+
+
+Definiert in Zeile 82 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a47d4dad2288e4e9d400c39dc34630b01}{}\index{bom.\+ulp@{bom.\+ulp}!Gruppe@{Gruppe}}
+\index{Gruppe@{Gruppe}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Gruppe}]{\setlength{\rightskip}{0pt plus 5cm}string Gruppe}\label{bom_8ulp_a47d4dad2288e4e9d400c39dc34630b01}
+
+
+Definiert in Zeile 85 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a76c4b2a7bb59b91514af25d07c1b8075}{}\index{bom.\+ulp@{bom.\+ulp}!H\+S@{H\+S}}
+\index{H\+S@{H\+S}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{H\+S}]{\setlength{\rightskip}{0pt plus 5cm}string H\+S}\label{bom_8ulp_a76c4b2a7bb59b91514af25d07c1b8075}
+
+
+Definiert in Zeile 45 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a61fcfd309e437276f500730e1bfa1074}{}\index{bom.\+ulp@{bom.\+ulp}!H\+S\+N\+R@{H\+S\+N\+R}}
+\index{H\+S\+N\+R@{H\+S\+N\+R}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{H\+S\+N\+R}]{\setlength{\rightskip}{0pt plus 5cm}string H\+S\+N\+R}\label{bom_8ulp_a61fcfd309e437276f500730e1bfa1074}
+
+
+Definiert in Zeile 45 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ae670799ce8e4e5c10333c5ffd950f723}{}\index{bom.\+ulp@{bom.\+ulp}!Lines@{Lines}}
+\index{Lines@{Lines}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Lines}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Lines\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_ae670799ce8e4e5c10333c5ffd950f723}
+
+
+Definiert in Zeile 69 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ac4dbacd07ed6fd2299214fe82e75344f}{}\index{bom.\+ulp@{bom.\+ulp}!List\+Type@{List\+Type}}
+\index{List\+Type@{List\+Type}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{List\+Type}]{\setlength{\rightskip}{0pt plus 5cm}int List\+Type = 0}\label{bom_8ulp_ac4dbacd07ed6fd2299214fe82e75344f}
+
+
+Definiert in Zeile 53 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a52faf0e7daa8d9d1bbbf02e52c9ec521}{}\index{bom.\+ulp@{bom.\+ulp}!n\+Part\+Count@{n\+Part\+Count}}
+\index{n\+Part\+Count@{n\+Part\+Count}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{n\+Part\+Count}]{\setlength{\rightskip}{0pt plus 5cm}int n\+Part\+Count}\label{bom_8ulp_a52faf0e7daa8d9d1bbbf02e52c9ec521}
+
+
+Definiert in Zeile 52 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_aaa6babfc550269768d017226e5515586}{}\index{bom.\+ulp@{bom.\+ulp}!null\+Key@{null\+Key}}
+\index{null\+Key@{null\+Key}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{null\+Key}]{\setlength{\rightskip}{0pt plus 5cm}string null\+Key = \char`\"{}$\ast$\char`\"{}}\label{bom_8ulp_aaa6babfc550269768d017226e5515586}
+
+
+Definiert in Zeile 48 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a7ad4d91e419214c185366026054e1ee8}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Attr@{Part\+Attr}}
+\index{Part\+Attr@{Part\+Attr}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Attr}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Attr\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_a7ad4d91e419214c185366026054e1ee8}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a91c7af708be7031d4c7f7702147482a7}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+D\+B\+N\+R@{Part\+D\+B\+N\+R}}
+\index{Part\+D\+B\+N\+R@{Part\+D\+B\+N\+R}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+D\+B\+N\+R}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+D\+B\+N\+R\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_a91c7af708be7031d4c7f7702147482a7}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a4714c6a59c5bcd5682043afe0a20721c}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Desc@{Part\+Desc}}
+\index{Part\+Desc@{Part\+Desc}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Desc}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Desc\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_a4714c6a59c5bcd5682043afe0a20721c}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a6228403db921b2ffe35b1d6fcc5c2beb}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Description@{Part\+Description}}
+\index{Part\+Description@{Part\+Description}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Description}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Description\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_a6228403db921b2ffe35b1d6fcc5c2beb}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a40b6e54b771e9907cd576cabac8f59c1}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Dev@{Part\+Dev}}
+\index{Part\+Dev@{Part\+Dev}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Dev}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Dev\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_a40b6e54b771e9907cd576cabac8f59c1}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a2109cabfeb535fe6bff12bf1fb092acd}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Headline@{Part\+Headline}}
+\index{Part\+Headline@{Part\+Headline}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Headline}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Headline\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_a2109cabfeb535fe6bff12bf1fb092acd}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_af34f3cdce145b7088430ab4561161595}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Headline\+Ex@{Part\+Headline\+Ex}}
+\index{Part\+Headline\+Ex@{Part\+Headline\+Ex}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Headline\+Ex}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Headline\+Ex\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_af34f3cdce145b7088430ab4561161595}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_aae53009645b43fc7d8ea395c21848537}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+H\+S@{Part\+H\+S}}
+\index{Part\+H\+S@{Part\+H\+S}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+H\+S}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+H\+S\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_aae53009645b43fc7d8ea395c21848537}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_aab5d6a1ef82f71bd599529f5c7a4c496}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+H\+S\+N\+R@{Part\+H\+S\+N\+R}}
+\index{Part\+H\+S\+N\+R@{Part\+H\+S\+N\+R}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+H\+S\+N\+R}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+H\+S\+N\+R\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_aab5d6a1ef82f71bd599529f5c7a4c496}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ac4cc860a9e71524e90eff241b475eee0}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Name@{Part\+Name}}
+\index{Part\+Name@{Part\+Name}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Name}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Name\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_ac4cc860a9e71524e90eff241b475eee0}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a84500c4914a36b14d9bf801dacd2bd27}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Num@{Part\+Num}}
+\index{Part\+Num@{Part\+Num}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Num}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Num\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_a84500c4914a36b14d9bf801dacd2bd27}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a2a39c78e48bddaa1377bf2fbec799590}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Num\+Modified@{Part\+Num\+Modified}}
+\index{Part\+Num\+Modified@{Part\+Num\+Modified}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Num\+Modified}]{\setlength{\rightskip}{0pt plus 5cm}int Part\+Num\+Modified = 0}\label{bom_8ulp_a2a39c78e48bddaa1377bf2fbec799590}
+
+
+Definiert in Zeile 55 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ad9f0da9a6c5a32a87ed13eb28d5453a6}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Num\+Picked@{Part\+Num\+Picked}}
+\index{Part\+Num\+Picked@{Part\+Num\+Picked}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Num\+Picked}]{\setlength{\rightskip}{0pt plus 5cm}int Part\+Num\+Picked = 0}\label{bom_8ulp_ad9f0da9a6c5a32a87ed13eb28d5453a6}
+
+
+Definiert in Zeile 56 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ab38dccbbc14320a5df859acfea65a3e6}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Pkg@{Part\+Pkg}}
+\index{Part\+Pkg@{Part\+Pkg}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Pkg}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Pkg\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_ab38dccbbc14320a5df859acfea65a3e6}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_aae665133b57441f92f2da44703a9ea57}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Sheet@{Part\+Sheet}}
+\index{Part\+Sheet@{Part\+Sheet}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Sheet}]{\setlength{\rightskip}{0pt plus 5cm}int Part\+Sheet\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_aae665133b57441f92f2da44703a9ea57}
+
+
+Definiert in Zeile 66 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_aa0f0748df59ef1a5e748ba8b0f41d3cd}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Val@{Part\+Val}}
+\index{Part\+Val@{Part\+Val}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Val}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Val\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_aa0f0748df59ef1a5e748ba8b0f41d3cd}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a6076bc5f468469ec6838abe6933cb125}{}\index{bom.\+ulp@{bom.\+ulp}!Part\+Z\+E\+V\+O\+R\+Z\+U\+G@{Part\+Z\+E\+V\+O\+R\+Z\+U\+G}}
+\index{Part\+Z\+E\+V\+O\+R\+Z\+U\+G@{Part\+Z\+E\+V\+O\+R\+Z\+U\+G}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Part\+Z\+E\+V\+O\+R\+Z\+U\+G}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Part\+Z\+E\+V\+O\+R\+Z\+U\+G\mbox{[}$\,$\mbox{]}}\label{bom_8ulp_a6076bc5f468469ec6838abe6933cb125}
+
+
+Definiert in Zeile 63 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ad06c90d84f184524f9d3746de4c1cc2a}{}\index{bom.\+ulp@{bom.\+ulp}!Pick\+Part\+D\+B\+N\+R@{Pick\+Part\+D\+B\+N\+R}}
+\index{Pick\+Part\+D\+B\+N\+R@{Pick\+Part\+D\+B\+N\+R}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Pick\+Part\+D\+B\+N\+R}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Pick\+Part\+D\+B\+N\+R}\label{bom_8ulp_ad06c90d84f184524f9d3746de4c1cc2a}
+
+
+Definiert in Zeile 75 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ae0948a58f18dc3accd52842b985053e5}{}\index{bom.\+ulp@{bom.\+ulp}!Pick\+Part\+Desc@{Pick\+Part\+Desc}}
+\index{Pick\+Part\+Desc@{Pick\+Part\+Desc}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Pick\+Part\+Desc}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Pick\+Part\+Desc}\label{bom_8ulp_ae0948a58f18dc3accd52842b985053e5}
+
+
+Definiert in Zeile 79 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a1406270bbecf8f3f17c4ceb7ffaff638}{}\index{bom.\+ulp@{bom.\+ulp}!Pick\+Part\+Dev@{Pick\+Part\+Dev}}
+\index{Pick\+Part\+Dev@{Pick\+Part\+Dev}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Pick\+Part\+Dev}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Pick\+Part\+Dev}\label{bom_8ulp_a1406270bbecf8f3f17c4ceb7ffaff638}
+
+
+Definiert in Zeile 74 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ac44e6ceaf40fadf3bd1fad3a25f3bba8}{}\index{bom.\+ulp@{bom.\+ulp}!Pick\+Part\+H\+S@{Pick\+Part\+H\+S}}
+\index{Pick\+Part\+H\+S@{Pick\+Part\+H\+S}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Pick\+Part\+H\+S}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Pick\+Part\+H\+S}\label{bom_8ulp_ac44e6ceaf40fadf3bd1fad3a25f3bba8}
+
+
+Definiert in Zeile 76 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_acbcdc33dac2b006e723ac2ca032ad8f1}{}\index{bom.\+ulp@{bom.\+ulp}!Pick\+Part\+H\+S\+N\+R@{Pick\+Part\+H\+S\+N\+R}}
+\index{Pick\+Part\+H\+S\+N\+R@{Pick\+Part\+H\+S\+N\+R}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Pick\+Part\+H\+S\+N\+R}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Pick\+Part\+H\+S\+N\+R}\label{bom_8ulp_acbcdc33dac2b006e723ac2ca032ad8f1}
+
+
+Definiert in Zeile 77 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_ac1febc97d5c168ba555c840a75aa53c0}{}\index{bom.\+ulp@{bom.\+ulp}!Pick\+Part\+Num@{Pick\+Part\+Num}}
+\index{Pick\+Part\+Num@{Pick\+Part\+Num}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Pick\+Part\+Num}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Pick\+Part\+Num}\label{bom_8ulp_ac1febc97d5c168ba555c840a75aa53c0}
+
+
+Definiert in Zeile 72 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a143703109bf0f522339429ad817b5c5c}{}\index{bom.\+ulp@{bom.\+ulp}!Pick\+Part\+Val@{Pick\+Part\+Val}}
+\index{Pick\+Part\+Val@{Pick\+Part\+Val}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Pick\+Part\+Val}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Pick\+Part\+Val}\label{bom_8ulp_a143703109bf0f522339429ad817b5c5c}
+
+
+Definiert in Zeile 73 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a19ed50ff9a03f9fcec5a13995ab5d040}{}\index{bom.\+ulp@{bom.\+ulp}!Pick\+Part\+Z\+E\+V\+O\+R\+Z\+U\+G@{Pick\+Part\+Z\+E\+V\+O\+R\+Z\+U\+G}}
+\index{Pick\+Part\+Z\+E\+V\+O\+R\+Z\+U\+G@{Pick\+Part\+Z\+E\+V\+O\+R\+Z\+U\+G}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Pick\+Part\+Z\+E\+V\+O\+R\+Z\+U\+G}]{\setlength{\rightskip}{0pt plus 5cm}numeric string Pick\+Part\+Z\+E\+V\+O\+R\+Z\+U\+G}\label{bom_8ulp_a19ed50ff9a03f9fcec5a13995ab5d040}
+
+
+Definiert in Zeile 78 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a646f3371d3767b31d185e665e471cd8c}{}\index{bom.\+ulp@{bom.\+ulp}!P\+R\+O\+J\+E\+K\+T\+\_\+\+P\+F\+A\+D@{P\+R\+O\+J\+E\+K\+T\+\_\+\+P\+F\+A\+D}}
+\index{P\+R\+O\+J\+E\+K\+T\+\_\+\+P\+F\+A\+D@{P\+R\+O\+J\+E\+K\+T\+\_\+\+P\+F\+A\+D}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{P\+R\+O\+J\+E\+K\+T\+\_\+\+P\+F\+A\+D}]{\setlength{\rightskip}{0pt plus 5cm}string P\+R\+O\+J\+E\+K\+T\+\_\+\+P\+F\+A\+D}\label{bom_8ulp_a646f3371d3767b31d185e665e471cd8c}
+
+
+Definiert in Zeile 46 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a2b671bc2490402c9747f8ee3e399b13d}{}\index{bom.\+ulp@{bom.\+ulp}!rtn@{rtn}}
+\index{rtn@{rtn}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{rtn}]{\setlength{\rightskip}{0pt plus 5cm}int rtn = {\bf App\+Dialog}()}\label{bom_8ulp_a2b671bc2490402c9747f8ee3e399b13d}
+
+
+Definiert in Zeile 536 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_aa63c48313853c05d2e5b345772063942}{}\index{bom.\+ulp@{bom.\+ulp}!Selected@{Selected}}
+\index{Selected@{Selected}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Selected}]{\setlength{\rightskip}{0pt plus 5cm}int Selected = -\/1}\label{bom_8ulp_aa63c48313853c05d2e5b345772063942}
+
+
+Definiert in Zeile 54 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a18a4ac3bd1cb918f565f779006ee77ba}{}\index{bom.\+ulp@{bom.\+ulp}!str\+Version@{str\+Version}}
+\index{str\+Version@{str\+Version}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{str\+Version}]{\setlength{\rightskip}{0pt plus 5cm}string str\+Version = \char`\"{}2.\+0\char`\"{}}\label{bom_8ulp_a18a4ac3bd1cb918f565f779006ee77ba}
+
+
+Definiert in Zeile 47 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_abf922ed4825a62eb9f0838b10265fc5b}{}\index{bom.\+ulp@{bom.\+ulp}!U\+L\+P\+\_\+\+P\+A\+T\+H@{U\+L\+P\+\_\+\+P\+A\+T\+H}}
+\index{U\+L\+P\+\_\+\+P\+A\+T\+H@{U\+L\+P\+\_\+\+P\+A\+T\+H}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{U\+L\+P\+\_\+\+P\+A\+T\+H}]{\setlength{\rightskip}{0pt plus 5cm}string U\+L\+P\+\_\+\+P\+A\+T\+H = \char`\"{}D\+:/Dropbox/Desy\+Bib/Ulp-\/Service\char`\"{}}\label{bom_8ulp_abf922ed4825a62eb9f0838b10265fc5b}
+
+
+Definiert in Zeile 41 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a5b14b1eeb65e50d10a438760f173f2e9}{}\index{bom.\+ulp@{bom.\+ulp}!V\+O\+R\+L\+A\+G\+E\+\_\+\+P\+F\+A\+D@{V\+O\+R\+L\+A\+G\+E\+\_\+\+P\+F\+A\+D}}
+\index{V\+O\+R\+L\+A\+G\+E\+\_\+\+P\+F\+A\+D@{V\+O\+R\+L\+A\+G\+E\+\_\+\+P\+F\+A\+D}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{V\+O\+R\+L\+A\+G\+E\+\_\+\+P\+F\+A\+D}]{\setlength{\rightskip}{0pt plus 5cm}string V\+O\+R\+L\+A\+G\+E\+\_\+\+P\+F\+A\+D = \char`\"{}N\+:/public/Orderbase/Stücklistenexport Vorlage/Einzelteilstueckliste Vorlage.\+xltx\char`\"{}}\label{bom_8ulp_a5b14b1eeb65e50d10a438760f173f2e9}
+
+
+Definiert in Zeile 44 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a190c864c13eed4946823ed73c1865058}{}\index{bom.\+ulp@{bom.\+ulp}!W\+A\+\_\+\+Nummer@{W\+A\+\_\+\+Nummer}}
+\index{W\+A\+\_\+\+Nummer@{W\+A\+\_\+\+Nummer}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{W\+A\+\_\+\+Nummer}]{\setlength{\rightskip}{0pt plus 5cm}string W\+A\+\_\+\+Nummer}\label{bom_8ulp_a190c864c13eed4946823ed73c1865058}
+
+
+Definiert in Zeile 86 der Datei bom.\+ulp.
+
+\hypertarget{bom_8ulp_a0722c36319aaa70ab8b91fc4743b1b99}{}\index{bom.\+ulp@{bom.\+ulp}!Z\+E\+V@{Z\+E\+V}}
+\index{Z\+E\+V@{Z\+E\+V}!bom.\+ulp@{bom.\+ulp}}
+\subsubsection[{Z\+E\+V}]{\setlength{\rightskip}{0pt plus 5cm}string Z\+E\+V}\label{bom_8ulp_a0722c36319aaa70ab8b91fc4743b1b99}
+
+
+Definiert in Zeile 45 der Datei bom.\+ulp.
+

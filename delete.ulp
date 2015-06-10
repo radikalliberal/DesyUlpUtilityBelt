@@ -1,0 +1,19 @@
+/**
+ *  \file delete.ulp
+ *  \brief löscht ein Bauteil in einer Bibliothek
+ */
+
+string cmd ;
+
+if (library) {
+	library(L){
+		deviceset(DS) {
+		cmd="remove '"+DS.name+".dev';";
+		}
+	}
+	
+exit(cmd);
+} else {
+   dlgMessageBox("\x5Cn*** Start this ULP in a Library ***\x5Cn");
+   exit (0);
+}

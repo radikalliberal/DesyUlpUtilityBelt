@@ -1,0 +1,213 @@
+.TH "H:/sze/Eagle6/ulp/Ulp-Service/uebersicht.ulp" 3 "Mit Jun 3 2015" "Desy Eagle Bauteil-Datenbank Service Programme" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+H:/sze/Eagle6/ulp/Ulp-Service/uebersicht.ulp \- Dieses Programm zeigt eine Übersicht aller Bauteile einer alten Bibliothek an, dort wird gezeigt ob bereits ein Überführung in die neue Bibliothek statt gefunden hat\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Funktionen"
+
+.in +1c
+.ti -1c
+.RI "void \fBformatDeviceName\fP (string Device)"
+.br
+.ti -1c
+.RI "string \fBEntferneHtml\fP (string DerString)"
+.br
+.ti -1c
+.RI "string \fBCutSubstring\fP (string longString, string regex, int offset)"
+.br
+.ti -1c
+.RI "string \fBint2str\fP (int number)"
+.br
+.ti -1c
+.RI "void \fBfindLibraryPaths\fP ()"
+.br
+.ti -1c
+.RI "int \fBfoundObBt\fP (string btname)"
+.br
+.ti -1c
+.RI "void \fBmenue\fP ()"
+.br
+.ti -1c
+.RI "\fBlibrary\fP (L)"
+.br
+.in -1c
+.SS "Variablen"
+
+.in +1c
+.ti -1c
+.RI "string \fBDevicesetName1\fP"
+.br
+.ti -1c
+.RI "string \fBDevicesetName2\fP"
+.br
+.ti -1c
+.RI "string \fBdevicesets\fP []"
+.br
+.ti -1c
+.RI "string \fBlibs\fP []"
+.br
+.ti -1c
+.RI "string \fBlibsPath\fP []"
+.br
+.ti -1c
+.RI "string \fBtempString\fP"
+.br
+.ti -1c
+.RI "string \fBLib6path\fP"
+.br
+.ti -1c
+.RI "string \fBtempArrayString\fP []"
+.br
+.ti -1c
+.RI "string \fBLibraries\fP []"
+.br
+.ti -1c
+.RI "string \fBisBib6\fP []"
+.br
+.ti -1c
+.RI "string \fBisBearbeitet\fP []"
+.br
+.ti -1c
+.RI "string \fBvarianten\fP []"
+.br
+.ti -1c
+.RI "int \fBAnfang\fP"
+.br
+.ti -1c
+.RI "int \fBEnde\fP"
+.br
+.ti -1c
+.RI "int \fBselectedVar\fP"
+.br
+.ti -1c
+.RI "int \fBAnzahlDevicesets\fP"
+.br
+.ti -1c
+.RI "int \fBAnzahlDevicesetsBearbeitet\fP"
+.br
+.in -1c
+.SH "Ausführliche Beschreibung"
+.PP 
+Dieses Programm zeigt eine Übersicht aller Bauteile einer alten Bibliothek an, dort wird gezeigt ob bereits ein Überführung in die neue Bibliothek statt gefunden hat\&. 
+
+
+.PP
+\fBAutor:\fP
+.RS 4
+Jan Scholz 
+.RE
+.PP
+
+.PP
+Definiert in Datei \fBuebersicht\&.ulp\fP\&.
+.SH "Dokumentation der Funktionen"
+.PP 
+.SS "string CutSubstring (string longString, string regex, int offset)"
+
+.PP
+Definiert in Zeile 37 der Datei uebersicht\&.ulp\&.
+.SS "string EntferneHtml (string DerString)"
+
+.PP
+Definiert in Zeile 24 der Datei uebersicht\&.ulp\&.
+.SS "void findLibraryPaths ()"
+
+.PP
+Definiert in Zeile 48 der Datei uebersicht\&.ulp\&.
+.SS "void formatDeviceName (string Device)"
+
+.PP
+Definiert in Zeile 13 der Datei uebersicht\&.ulp\&.
+.SS "int foundObBt (string btname)"
+
+.PP
+Definiert in Zeile 63 der Datei uebersicht\&.ulp\&.
+.SS "string int2str (int number)"
+
+.PP
+Definiert in Zeile 42 der Datei uebersicht\&.ulp\&.
+.SS "library (L)"
+
+.PP
+Definiert in Zeile 123 der Datei uebersicht\&.ulp\&.
+.SS "void menue ()"
+
+.PP
+Definiert in Zeile 102 der Datei uebersicht\&.ulp\&.
+.SH "Variablen-Dokumentation"
+.PP 
+.SS "int Anfang"
+
+.PP
+Definiert in Zeile 11 der Datei uebersicht\&.ulp\&.
+.SS "int AnzahlDevicesets"
+
+.PP
+Definiert in Zeile 11 der Datei uebersicht\&.ulp\&.
+.SS "int AnzahlDevicesetsBearbeitet"
+
+.PP
+Definiert in Zeile 11 der Datei uebersicht\&.ulp\&.
+.SS "string DevicesetName1"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "string DevicesetName2"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "string devicesets[]"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "int Ende"
+
+.PP
+Definiert in Zeile 11 der Datei uebersicht\&.ulp\&.
+.SS "string isBearbeitet[]"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "string isBib6[]"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "string Lib6path"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "string Libraries[]"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "string libs[]"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "string libsPath[]"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "int selectedVar"
+
+.PP
+Definiert in Zeile 11 der Datei uebersicht\&.ulp\&.
+.SS "string tempArrayString[]"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "string tempString"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SS "string varianten[]"
+
+.PP
+Definiert in Zeile 10 der Datei uebersicht\&.ulp\&.
+.SH "Autor"
+.PP 
+Automatisch erzeugt von Doxygen für Desy Eagle Bauteil-Datenbank Service Programme aus dem Quellcode\&.

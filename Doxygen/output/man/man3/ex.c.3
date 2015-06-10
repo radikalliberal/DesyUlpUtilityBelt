@@ -1,0 +1,528 @@
+.TH "H:/sze/Eagle6/ulp/Ulp-Service/ex.c" 3 "Mit Jun 3 2015" "Desy Eagle Bauteil-Datenbank Service Programme" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+H:/sze/Eagle6/ulp/Ulp-Service/ex.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'Libdesy\&.lib'\fP
+.br
+
+.SS "Funktionen"
+
+.in +1c
+.ti -1c
+.RI "\fBfileglob\fP (\fBtempStrArr1\fP,'N:/public/Eagle_6+/lbr/*\&.lbr')"
+.br
+.ti -1c
+.RI "\fBfileread\fP (\fBPac_Sort\fP,'N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Package_sortiert\&.csv')"
+.br
+.ti -1c
+.RI "\fBfileread\fP (\fBVal_Sort\fP,'N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Val_sortiert\&.csv')"
+.br
+.ti -1c
+.RI "\fBstrsplit\fP (\fBVal_Sort_Arr\fP, \fBVal_Sort\fP,'\\\fBn\fP')"
+.br
+.ti -1c
+.RI "string \fBreal2str\fP (real value)"
+.br
+.RI "\fIExample showing how to document a function with Doxygen\&. \fP"
+.ti -1c
+.RI "int \fBBTSearch\fP (string searchString, int SORTING)"
+.br
+.ti -1c
+.RI "string \fBrefinedSearch\fP (string searchString, string Subject)"
+.br
+.ti -1c
+.RI "string \fBgetPartVal\fP (string FullPartString, int pos)"
+.br
+.ti -1c
+.RI "string \fBsetPartVal\fP (string FullPartString, int pos, string newVal)"
+.br
+.ti -1c
+.RI "string \fBexchangePart\fP (string Schematics_Part, string Bibliothek_Part, int mode)"
+.br
+.ti -1c
+.RI "void \fBgetPartData\fP ()"
+.br
+.ti -1c
+.RI "string \fBcreateTable\fP (string sb, int SEARCH, int PartNr)"
+.br
+.ti -1c
+.RI "void \fBVorschlaege\fP (int PartNr)"
+.br
+.ti -1c
+.RI "void \fBMainMenu\fP ()"
+.br
+.ti -1c
+.RI "\fBif\fP (schematic)"
+.br
+.in -1c
+.SS "Variablen"
+
+.in +1c
+.ti -1c
+.RI "string \fBtempStrArr1\fP []"
+.br
+.ti -1c
+.RI "string \fBtempStrArr2\fP []"
+.br
+.ti -1c
+.RI "string \fBtempStr1\fP"
+.br
+.ti -1c
+.RI "string \fBtempstr2\fP"
+.br
+.ti -1c
+.RI "string \fBLibList\fP = strjoin(\fBtempStrArr1\fP,'\\\fBn\fP')"
+.br
+.ti -1c
+.RI "int \fBCounter\fP"
+.br
+.ti -1c
+.RI "int \fBindex\fP []"
+.br
+.ti -1c
+.RI "int \fBposition\fP"
+.br
+.ti -1c
+.RI "string \fBout\fP []"
+.br
+.ti -1c
+.RI "string \fBPac_Sort_Arr\fP []"
+.br
+.ti -1c
+.RI "string \fBVal_Sort_Arr\fP []"
+.br
+.ti -1c
+.RI "string \fBPac_Sort\fP"
+.br
+.ti -1c
+.RI "string \fBVal_Sort\fP"
+.br
+.ti -1c
+.RI "string \fBHerstellerNummer\fP []"
+.br
+.ti -1c
+.RI "string \fBVal\fP []"
+.br
+.ti -1c
+.RI "string \fBBeschreibung\fP []"
+.br
+.ti -1c
+.RI "string \fBPackage\fP []"
+.br
+.ti -1c
+.RI "string \fBHersteller\fP []"
+.br
+.ti -1c
+.RI "string \fBVorzug\fP []"
+.br
+.ti -1c
+.RI "string \fBOrderbaseNummer\fP []"
+.br
+.ti -1c
+.RI "string \fBDeviceName\fP []"
+.br
+.ti -1c
+.RI "string \fBPrefix\fP []"
+.br
+.ti -1c
+.RI "int \fBBauteile\fP = \fBstrsplit\fP(\fBPac_Sort_Arr\fP, \fBPac_Sort\fP,'\\\fBn\fP')"
+.br
+.ti -1c
+.RI "int \fBPAC\fP = 1"
+.br
+.ti -1c
+.RI "int \fBVAL\fP = 0"
+.br
+.ti -1c
+.RI "string \fBPartDataValueNames\fP []"
+.br
+.ti -1c
+.RI "int \fBPART_NAME\fP = 0"
+.br
+.ti -1c
+.RI "int \fBDEVICE_NAME\fP = 1"
+.br
+.ti -1c
+.RI "int \fBPACKAGE\fP = 2"
+.br
+.ti -1c
+.RI "int \fBVALUE\fP = 3"
+.br
+.ti -1c
+.RI "int \fBPREFIX\fP = 4"
+.br
+.ti -1c
+.RI "int \fBLIBRARY\fP = 5"
+.br
+.ti -1c
+.RI "int \fBHERSTELLER\fP = 6"
+.br
+.ti -1c
+.RI "int \fBHERSTELLERNR\fP = 7"
+.br
+.ti -1c
+.RI "int \fBVORZUG\fP = 8"
+.br
+.ti -1c
+.RI "int \fBBESCHREIBUNG\fP = 9"
+.br
+.ti -1c
+.RI "int \fBDATENBLATT\fP = 10"
+.br
+.ti -1c
+.RI "int \fBORDERBASE_NUMMER\fP = 11"
+.br
+.ti -1c
+.RI "int \fBCHANGE_MODE\fP = 12"
+.br
+.ti -1c
+.RI "string \fBS_TRUE\fP = 'x'"
+.br
+.ti -1c
+.RI "int \fBCOMPLETE\fP = 0"
+.br
+.ti -1c
+.RI "int \fBATTR_SYM\fP = 1"
+.br
+.ti -1c
+.RI "int \fBPACK_ONLY\fP = 2"
+.br
+.ti -1c
+.RI "int \fBATTR_ONLY\fP = 3"
+.br
+.ti -1c
+.RI "string \fBPartData\fP []"
+.br
+.ti -1c
+.RI "string \fBPartDataRecovery\fP []"
+.br
+.ti -1c
+.RI "int \fBNoOfParts\fP"
+.br
+.ti -1c
+.RI "\fBelse\fP"
+.br
+.in -1c
+.SH "Dokumentation der Funktionen"
+.PP 
+.SS "int BTSearch (string searchString, int SORTING)"
+
+.PP
+Definiert in Zeile 70 der Datei ex\&.c\&.
+.SS "string createTable (string sb, int SEARCH, int PartNr)"
+
+.PP
+Definiert in Zeile 255 der Datei ex\&.c\&.
+.SS "string exchangePart (string Schematics_Part, string Bibliothek_Part, int mode)"
+
+.PP
+Definiert in Zeile 162 der Datei ex\&.c\&.
+.SS "fileglob (\fBtempStrArr1\fP, 'N:/public/Eagle_6+/lbr/*\&.lbr')"
+
+.SS "fileread (\fBPac_Sort\fP, 'N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Package_sortiert\&.csv')"
+
+.SS "fileread (\fBVal_Sort\fP, 'N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Val_sortiert\&.csv')"
+
+.SS "void getPartData ()"
+
+.PP
+Definiert in Zeile 216 der Datei ex\&.c\&.
+.SS "string getPartVal (string FullPartString, int pos)"
+
+.PP
+Definiert in Zeile 146 der Datei ex\&.c\&.
+.SS "if (schematic)"
+
+.PP
+Definiert in Zeile 448 der Datei ex\&.c\&.
+.SS "void MainMenu ()"
+
+.PP
+Definiert in Zeile 420 der Datei ex\&.c\&.
+.SS "string real2str (real value)"
+
+.PP
+Example showing how to document a function with Doxygen\&. Description of what the function does\&. This part may refer to the parameters of the function, like \fCparam1\fP or \fCparam2\fP\&. A word of code can also be inserted like \fCthis\fP which is equivalent to \fCthis\fP and can be useful to say that the function returns a \fCvoid\fP or an \fCint\fP\&. If you want to have more than one word in typewriter font, then just use <tt>\&. We can also include text verbatim, 
+.PP
+.nf
+like this
+.fi
+.PP
+ Sometimes it is also convenient to include an example of usage: 
+.PP
+.nf
+1 BoxStruct *out = Box_The_Function_Name(param1, param2);
+2 printf("something\&.\&.\&.\n");
+
+.fi
+.PP
+ Or, 
+.PP
+.nf
+1 pyval = python_func(arg1, arg2)
+2 print pyval
+
+.fi
+.PP
+ when the language is not the one used in the current source file (but \fBbe careful\fP as this may be supported only by recent versions of Doxygen)\&. By the way, \fBthis is how you write bold text\fP or, if it is just one word, then you can just do \fBthis\fP\&. 
+.PP
+\fBParameter:\fP
+.RS 4
+\fIparam1\fP Description of the first parameter of the function\&. 
+.br
+\fIparam2\fP The second one, which follows \fCparam1\fP\&. 
+.RE
+.PP
+\fBRückgabe:\fP
+.RS 4
+Describe what the function returns\&. 
+.RE
+.PP
+\fBSiehe auch:\fP
+.RS 4
+\fBBox_The_Second_Function\fP 
+.PP
+\fBBox_The_Last_One\fP 
+.PP
+http://website/ 
+.RE
+.PP
+\fBZu beachten:\fP
+.RS 4
+Something to note\&. 
+.RE
+.PP
+\fBWarnung:\fP
+.RS 4
+Warning\&. 
+.RE
+.PP
+
+.PP
+Definiert in Zeile 59 der Datei ex\&.c\&.
+.SS "string refinedSearch (string searchString, string Subject)"
+
+.PP
+Definiert in Zeile 112 der Datei ex\&.c\&.
+.SS "string setPartVal (string FullPartString, int pos, string newVal)"
+
+.PP
+Definiert in Zeile 152 der Datei ex\&.c\&.
+.SS "strsplit (\fBVal_Sort_Arr\fP, \fBVal_Sort\fP, '\\\fBn\fP')"
+
+.SS "void Vorschlaege (int PartNr)"
+
+.PP
+Definiert in Zeile 283 der Datei ex\&.c\&.
+.SH "Variablen-Dokumentation"
+.PP 
+.SS "int ATTR_ONLY = 3"
+
+.PP
+Definiert in Zeile 144 der Datei ex\&.c\&.
+.SS "int ATTR_SYM = 1"
+
+.PP
+Definiert in Zeile 142 der Datei ex\&.c\&.
+.SS "int Bauteile = \fBstrsplit\fP(\fBPac_Sort_Arr\fP, \fBPac_Sort\fP,'\\\fBn\fP')"
+
+.PP
+Definiert in Zeile 22 der Datei ex\&.c\&.
+.SS "string Beschreibung[]"
+
+.PP
+Definiert in Zeile 19 der Datei ex\&.c\&.
+.SS "int BESCHREIBUNG = 9"
+
+.PP
+Definiert in Zeile 132 der Datei ex\&.c\&.
+.SS "int CHANGE_MODE = 12"
+
+.PP
+Definiert in Zeile 135 der Datei ex\&.c\&.
+.SS "int COMPLETE = 0"
+
+.PP
+Definiert in Zeile 141 der Datei ex\&.c\&.
+.SS "int Counter"
+
+.PP
+Definiert in Zeile 12 der Datei ex\&.c\&.
+.SS "int DATENBLATT = 10"
+
+.PP
+Definiert in Zeile 133 der Datei ex\&.c\&.
+.SS "int DEVICE_NAME = 1"
+
+.PP
+Definiert in Zeile 124 der Datei ex\&.c\&.
+.SS "string DeviceName[]"
+
+.PP
+Definiert in Zeile 19 der Datei ex\&.c\&.
+.SS "else"
+\fBInitialisierung:\fP
+.PP
+.nf
+{
+    exit(0)
+.fi
+.PP
+Definiert in Zeile 461 der Datei ex\&.c\&.
+.SS "string Hersteller[]"
+
+.PP
+Definiert in Zeile 19 der Datei ex\&.c\&.
+.SS "int HERSTELLER = 6"
+
+.PP
+Definiert in Zeile 129 der Datei ex\&.c\&.
+.SS "int HERSTELLERNR = 7"
+
+.PP
+Definiert in Zeile 130 der Datei ex\&.c\&.
+.SS "string HerstellerNummer[]"
+
+.PP
+Definiert in Zeile 19 der Datei ex\&.c\&.
+.SS "int index[]"
+Detailed description after the member 
+.PP
+Definiert in Zeile 15 der Datei ex\&.c\&.
+.SS "LibList = strjoin(\fBtempStrArr1\fP,'\\\fBn\fP')"
+
+.PP
+Definiert in Zeile 11 der Datei ex\&.c\&.
+.SS "int LIBRARY = 5"
+
+.PP
+Definiert in Zeile 128 der Datei ex\&.c\&.
+.SS "int NoOfParts"
+
+.PP
+Definiert in Zeile 214 der Datei ex\&.c\&.
+.SS "int ORDERBASE_NUMMER = 11"
+
+.PP
+Definiert in Zeile 134 der Datei ex\&.c\&.
+.SS "string OrderbaseNummer[]"
+
+.PP
+Definiert in Zeile 19 der Datei ex\&.c\&.
+.SS "string out[]"
+
+.PP
+Definiert in Zeile 17 der Datei ex\&.c\&.
+.SS "int PAC = 1"
+
+.PP
+Definiert in Zeile 67 der Datei ex\&.c\&.
+.SS "string Pac_Sort"
+
+.PP
+Definiert in Zeile 18 der Datei ex\&.c\&.
+.SS "string Pac_Sort_Arr[]"
+
+.PP
+Definiert in Zeile 18 der Datei ex\&.c\&.
+.SS "int PACK_ONLY = 2"
+
+.PP
+Definiert in Zeile 143 der Datei ex\&.c\&.
+.SS "string Package[]"
+
+.PP
+Definiert in Zeile 19 der Datei ex\&.c\&.
+.SS "int PACKAGE = 2"
+
+.PP
+Definiert in Zeile 125 der Datei ex\&.c\&.
+.SS "int PART_NAME = 0"
+
+.PP
+Definiert in Zeile 123 der Datei ex\&.c\&.
+.SS "string PartData[]"
+
+.PP
+Definiert in Zeile 212 der Datei ex\&.c\&.
+.SS "string PartDataRecovery[]"
+
+.PP
+Definiert in Zeile 213 der Datei ex\&.c\&.
+.SS "string PartDataValueNames[]"
+\fBInitialisierung:\fP
+.PP
+.nf
+= {"P\&.name", "P\&.device\&.name" , 
+    "P\&.device\&.package\&.name","P\&.value","P\&.device\&.prefix","P\&.device\&.library",
+    "Hersteller","HerstellerNummer","Vorzug","Beschreibung","Datenblatt","OrderbaseNummer"}
+.fi
+.PP
+Definiert in Zeile 118 der Datei ex\&.c\&.
+.SS "int position"
+
+.PP
+Definiert in Zeile 16 der Datei ex\&.c\&.
+.SS "string Prefix[]"
+
+.PP
+Definiert in Zeile 19 der Datei ex\&.c\&.
+.SS "int PREFIX = 4"
+
+.PP
+Definiert in Zeile 127 der Datei ex\&.c\&.
+.SS "string S_TRUE = 'x'"
+
+.PP
+Definiert in Zeile 139 der Datei ex\&.c\&.
+.SS "string tempStr1"
+
+.PP
+Definiert in Zeile 11 der Datei ex\&.c\&.
+.SS "string tempstr2"
+
+.PP
+Definiert in Zeile 11 der Datei ex\&.c\&.
+.SS "string tempStrArr1[]"
+
+.PP
+Definiert in Zeile 11 der Datei ex\&.c\&.
+.SS "string tempStrArr2[]"
+
+.PP
+Definiert in Zeile 11 der Datei ex\&.c\&.
+.SS "string Val[]"
+
+.PP
+Definiert in Zeile 19 der Datei ex\&.c\&.
+.SS "int VAL = 0"
+
+.PP
+Definiert in Zeile 68 der Datei ex\&.c\&.
+.SS "string Val_Sort"
+
+.PP
+Definiert in Zeile 18 der Datei ex\&.c\&.
+.SS "string Val_Sort_Arr[]"
+
+.PP
+Definiert in Zeile 18 der Datei ex\&.c\&.
+.SS "int VALUE = 3"
+
+.PP
+Definiert in Zeile 126 der Datei ex\&.c\&.
+.SS "string Vorzug[]"
+
+.PP
+Definiert in Zeile 19 der Datei ex\&.c\&.
+.SS "int VORZUG = 8"
+
+.PP
+Definiert in Zeile 131 der Datei ex\&.c\&.
+.SH "Autor"
+.PP 
+Automatisch erzeugt von Doxygen für Desy Eagle Bauteil-Datenbank Service Programme aus dem Quellcode\&.

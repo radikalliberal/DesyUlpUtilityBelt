@@ -1,0 +1,128 @@
+#usage	"<b>Change old Layers for SMD (100-103) to default Layers</b>\n"
+		"<p>In der Version 5.11 von Eagle wurden Benutzerdefinierte Layer"
+		"für SMD-Bauteile definiert. Dies wird ab der Version 6.6 wieder "
+		"eingestellt und alle Layer werden auf die Standard-Layer 25 und "
+		"27 zurückgewandelt. Weiter werden Schriftgröße bei Package und  "
+		"Symbol angepasst"
+		"<author>Author: jan_scholz@gmx.net</author>"
+
+/**
+ *  \file layer-change.ulp
+ *  \author Jan Scholz
+ *  \brief 	Value und Name von Packages werden auf die richtigen Layer gesetzt und die
+ *  				Schrifftgröße wird angepasst
+ */
+
+string temp,cmd;
+real dx, dy;
+
+string int2str(int number) {
+	string temp;
+	sprintf(temp,"%d",number);
+	return temp;
+}
+
+void ChangeTextLayer(UL_TEXT T) {
+	dx = u2mm(T.x);
+	dy = u2mm(T.y);
+
+	if( T.layer == 100 || T.layer == 102) {
+		sprintf(temp,"CHANGE LAYER 25 (%.3f %.3f);\n", dx, dy); 
+		cmd += temp;
+	}
+	
+	if( T.layer == 101 || T.layer == 103) {
+		sprintf(temp,"CHANGE LAYER 27 (%.3f %.3f);\n", dx, dy); 
+		cmd += temp;
+	}
+}
+
+void DoPackage(UL_PACKAGE P) {
+	int flag = 0;
+	real dx, dy;
+		
+	P.texts(T) {
+		dx = u2mm(T.x);
+		dy = u2mm(T.y);
+		
+		if (strxstr(T.value,"[vV][Aa][Ll][Uu]?[Ee]?")!=-1) {
+			
+			if (T.layer > 99 ) {
+				sprintf(temp,"CHANGE SIZE 0.8 (%.3f %.3f);\n", dx, dy); cmd += temp;	
+			} else {
+				sprintf(temp,"CHANGE SIZE 1.5 (%.3f %.3f);\n", dx, dy); cmd += temp;
+			}
+			sprintf(temp,"CHANGE RATIO 12 (%.3f %.3f);\n", dx, dy); cmd += temp;		
+			sprintf(temp,"CHANGE LAYER 27 (%.3f %.3f);\n", dx, dy); cmd += temp;		
+			sprintf(temp,"CHANGE TEXT >Val (%.3f %.3f);\n", dx, dy); cmd += temp;
+			
+		} else if (strxstr(T.value,"[nN][Aa][mM][Ee]")!=-1) {
+			
+			if (T.layer > 99 ) {
+				sprintf(temp,"CHANGE SIZE 1.3 (%.3f %.3f);\n", dx, dy); cmd += temp;	
+			} else {
+				sprintf(temp,"CHANGE SIZE 1.5 (%.3f %.3f);\n", dx, dy); cmd += temp;
+			}		
+			sprintf(temp,"CHANGE RATIO 12 (%.3f %.3f);\n", dx, dy); cmd += temp;		
+			sprintf(temp,"CHANGE LAYER 25 (%.3f %.3f);\n", dx, dy); cmd += temp;
+			sprintf(temp,"CHANGE TEXT >Name (%.3f %.3f);\n", dx, dy); cmd += temp;
+		}
+	
+	ChangeTextLayer(T);
+	}
+	
+}
+
+void DoSymbol(UL_SYMBOL S) {
+
+    real dx, dy;
+    S.texts(T) {
+		
+        dx = u2mm(T.x);
+        dy = u2mm(T.y);
+				
+		if (strxstr(T.value,"[nN][Aa][mM][Ee]")!=-1) {
+			sprintf(temp,"CHANGE SIZE 1.5 (%.3f %.3f);\n", dx, dy); cmd += temp;
+			sprintf(temp,"CHANGE RATIO 12 (%.3f %.3f);\n", dx, dy); cmd += temp;
+			sprintf(temp,"CHANGE LAYER 95 (%.3f %.3f);\n", dx, dy); cmd += temp;
+			
+		}
+		if (strxstr(T.value,"[vV][Aa][Ll][Uu]?[Ee]?")!=-1) {
+			sprintf(temp,"CHANGE SIZE 1.5 (%.3f %.3f);\n", dx, dy); cmd += temp;
+			sprintf(temp,"CHANGE RATIO 12 (%.3f %.3f);\n", dx, dy); cmd += temp;
+			sprintf(temp,"CHANGE LAYER 96 (%.3f %.3f);\n", dx, dy); cmd += temp;
+			sprintf(temp,"CHANGE TEXT >Val (%.3f %.3f);\n", dx, dy); cmd += temp;
+			
+		}
+	}
+}
+
+
+
+if (library) {
+	
+	library(L){
+	
+	L.packages(P) {
+		
+		sprintf(temp,"EDIT " + P.name + ".pac;\n"); cmd += temp;
+		sprintf(temp,"Grid MM 0.635 1 alt mm 0.3175 ; \n"); cmd += temp;
+		DoPackage(P);
+		}
+		
+	L.symbols(S) {
+		
+		sprintf(temp,"EDIT " + S.name + ".sym;\n");cmd += temp;
+		sprintf(temp,"Grid MM 0.635 1 alt mm 0.3175 ; \n");cmd += temp;
+		DoSymbol(S);
+		} 
+	
+
+	
+	}
+
+exit (cmd);
+} else {
+   dlgMessageBox("\n*** Start this ULP in a Library ***\n");
+   exit (0);
+}

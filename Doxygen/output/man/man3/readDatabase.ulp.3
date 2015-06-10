@@ -1,0 +1,100 @@
+.TH "H:/sze/Eagle6/ulp/Ulp-Service/readDatabase.ulp" 3 "Mit Jun 3 2015" "Desy Eagle Bauteil-Datenbank Service Programme" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+H:/sze/Eagle6/ulp/Ulp-Service/readDatabase.ulp \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'Libdesy\&.lib'\fP
+.br
+
+.SS "Funktionen"
+
+.in +1c
+.ti -1c
+.RI "\fBfileread\fP (\fBtempstr\fP,'N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile\&.csv')"
+.br
+.ti -1c
+.RI "\fBsort\fP (\fBn\fP, \fBPacSort\fP)"
+.br
+.ti -1c
+.RI "\fBfor\fP (\fBi\fP=0;\fBi\fP< \fBn\fP;\fBi\fP++)"
+.br
+.ti -1c
+.RI "\fBsort\fP (\fBn\fP, \fBValSort\fP)"
+.br
+.ti -1c
+.RI "\fBDebug\fP (strjoin(\fBValSort\fP,'\\\fBn\fP'))"
+.br
+.ti -1c
+.RI "\fBDebug\fP (strjoin(\fBPacSort\fP,'\\\fBn\fP'))"
+.br
+.in -1c
+.SS "Variablen"
+
+.in +1c
+.ti -1c
+.RI "numeric string \fBValSort\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBtemp\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBtempstr\fP"
+.br
+.ti -1c
+.RI "numeric string \fBPacSort\fP []"
+.br
+.ti -1c
+.RI "int \fBn\fP = strsplit(\fBPacSort\fP,\fBtempstr\fP,'\\n')"
+.br
+.ti -1c
+.RI "int \fBi\fP"
+.br
+.in -1c
+.SH "Dokumentation der Funktionen"
+.PP 
+.SS "Debug (strjoin(\fBValSort\fP,'\\\fBn\fP'))"
+
+.SS "Debug (strjoin(\fBPacSort\fP,'\\\fBn\fP'))"
+
+.SS "fileread (\fBtempstr\fP, 'N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile\&.csv')"
+
+.SS "for ()"
+
+.PP
+Definiert in Zeile 10 der Datei readDatabase\&.ulp\&.
+.SS "sort (\fBn\fP, \fBPacSort\fP)"
+
+.SS "sort (\fBn\fP, \fBValSort\fP)"
+
+.SH "Variablen-Dokumentation"
+.PP 
+.SS "int i"
+
+.PP
+Definiert in Zeile 9 der Datei readDatabase\&.ulp\&.
+.SS "int n = strsplit(\fBPacSort\fP,\fBtempstr\fP,'\\n')"
+
+.PP
+Definiert in Zeile 6 der Datei readDatabase\&.ulp\&.
+.SS "numeric string PacSort[]"
+
+.PP
+Definiert in Zeile 2 der Datei readDatabase\&.ulp\&.
+.SS "numeric string temp[]"
+
+.PP
+Definiert in Zeile 2 der Datei readDatabase\&.ulp\&.
+.SS "numeric string tempstr"
+
+.PP
+Definiert in Zeile 2 der Datei readDatabase\&.ulp\&.
+.SS "numeric string ValSort[]"
+
+.PP
+Definiert in Zeile 2 der Datei readDatabase\&.ulp\&.
+.SH "Autor"
+.PP 
+Automatisch erzeugt von Doxygen für Desy Eagle Bauteil-Datenbank Service Programme aus dem Quellcode\&.

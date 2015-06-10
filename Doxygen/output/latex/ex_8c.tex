@@ -1,0 +1,689 @@
+\hypertarget{ex_8c}{}\section{H\+:/sze/\+Eagle6/ulp/\+Ulp-\/\+Service/ex.c-\/\+Dateireferenz}
+\label{ex_8c}\index{H\+:/sze/\+Eagle6/ulp/\+Ulp-\/\+Service/ex.\+c@{H\+:/sze/\+Eagle6/ulp/\+Ulp-\/\+Service/ex.\+c}}
+{\ttfamily \#include \char`\"{}Libdesy.\+lib\char`\"{}}\\*
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{ex_8c_a4f2ae9692dcb1785ee65c9b83dffd83c}{fileglob} (\hyperlink{_platzhalter_ersetzen_8ulp_ace47333a73f430572c0a88ef37c016ac}{temp\+Str\+Arr1},\char`\"{}N\+:/public/Eagle\+\_\+6+/lbr/$\ast$.lbr\char`\"{})
+\item 
+\hyperlink{ex_8c_a311864faf2c7fc626c2d9c62f7af98ee}{fileread} (\hyperlink{_platzhalter_ersetzen_8ulp_a9658b6387aed3b22f25a8be98530d385}{Pac\+\_\+\+Sort},\char`\"{}N\+:/public/Eagle\+\_\+6+/ulp/Ulp-\/Service/Bauteile\+\_\+nach\+\_\+\+Package\+\_\+sortiert.\+csv\char`\"{})
+\item 
+\hyperlink{ex_8c_af6ae1763a98e58dd0565e513c40eeae6}{fileread} (\hyperlink{_platzhalter_ersetzen_8ulp_a4a476a4ca9399cdb40f332c3f4f194f5}{Val\+\_\+\+Sort},\char`\"{}N\+:/public/Eagle\+\_\+6+/ulp/Ulp-\/Service/Bauteile\+\_\+nach\+\_\+\+Val\+\_\+sortiert.\+csv\char`\"{})
+\item 
+\hyperlink{ex_8c_a933c82c776fcedba424d05f5a5bd9346}{strsplit} (\hyperlink{_platzhalter_ersetzen_8ulp_af793855284d36c1b154929e9737ad5eb}{Val\+\_\+\+Sort\+\_\+\+Arr}, \hyperlink{_platzhalter_ersetzen_8ulp_a4a476a4ca9399cdb40f332c3f4f194f5}{Val\+\_\+\+Sort},\textquotesingle{}\textbackslash{}\hyperlink{read_database_8ulp_a76f11d9a0a47b94f72c2d0e77fb32240}{n}\textquotesingle{})
+\item 
+string \hyperlink{ex_8c_add96f686d5ed9719cabc7c3134fea1de}{real2str} (real value)
+\begin{DoxyCompactList}\small\item\em Example showing how to document a function with Doxygen. \end{DoxyCompactList}\item 
+int \hyperlink{ex_8c_ae5c6c522b45bea7503caaebd0e215bce}{B\+T\+Search} (string search\+String, int S\+O\+R\+T\+I\+N\+G)
+\item 
+string \hyperlink{ex_8c_abf112b617933352e6ea9f00864bc16a4}{refined\+Search} (string search\+String, string Subject)
+\item 
+string \hyperlink{ex_8c_a034e0e67b07ac51a39b8fb684448d388}{get\+Part\+Val} (string Full\+Part\+String, int pos)
+\item 
+string \hyperlink{ex_8c_ab03810066546e171a6a7c77464b0fc2c}{set\+Part\+Val} (string Full\+Part\+String, int pos, string new\+Val)
+\item 
+string \hyperlink{ex_8c_a7c0dbd82f8a7792c2dcc1514c7cc9ea5}{exchange\+Part} (string Schematics\+\_\+\+Part, string Bibliothek\+\_\+\+Part, int mode)
+\item 
+void \hyperlink{ex_8c_a47d2d84792b1656dd5e93a65568957d8}{get\+Part\+Data} ()
+\item 
+string \hyperlink{ex_8c_a93f65ab8b9782fa77c6d9909a31259c8}{create\+Table} (string sb, int S\+E\+A\+R\+C\+H, int Part\+Nr)
+\item 
+void \hyperlink{ex_8c_a005756a3de9c56f60d7697b8ccc8a1a2}{Vorschlaege} (int Part\+Nr)
+\item 
+void \hyperlink{ex_8c_ab98dbf196398d8aeaa4ac97f87ae54a1}{Main\+Menu} ()
+\item 
+\hyperlink{ex_8c_a61e5747955dc080ddfb4fccd3ad3f346}{if} (schematic)
+\end{DoxyCompactItemize}
+\subsection*{Variablen}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{ex_8c_ace47333a73f430572c0a88ef37c016ac}{temp\+Str\+Arr1} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_ae747ecefe0a8b1f1678fbf27beca17ed}{temp\+Str\+Arr2} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_a92031faa8b6be9bafd0fcc7bf1f22bb2}{temp\+Str1}
+\item 
+string \hyperlink{ex_8c_a9143525c52788805a93de55749a1c99d}{tempstr2}
+\item 
+string \hyperlink{ex_8c_a5e4f8a98a00b3d3b91b24e9ce15d31ff}{Lib\+List} = strjoin(\hyperlink{_platzhalter_ersetzen_8ulp_ace47333a73f430572c0a88ef37c016ac}{temp\+Str\+Arr1},\textquotesingle{}\textbackslash{}\hyperlink{read_database_8ulp_a76f11d9a0a47b94f72c2d0e77fb32240}{n}\textquotesingle{})
+\item 
+int \hyperlink{ex_8c_a8da6d6b33b7597f02434fedca1781cbc}{Counter}
+\item 
+int \hyperlink{ex_8c_ae529cfd688d748de42fa805b2c306253}{index} \mbox{[}$\,$\mbox{]}
+\item 
+int \hyperlink{ex_8c_a401e942526aac47cef94f478182486e7}{position}
+\item 
+string \hyperlink{ex_8c_a2d524de6e72f33e2cffb9bed0a05cbc7}{out} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_a619ea3d31ff34b29c397408d7a72e2aa}{Pac\+\_\+\+Sort\+\_\+\+Arr} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_af793855284d36c1b154929e9737ad5eb}{Val\+\_\+\+Sort\+\_\+\+Arr} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_a9658b6387aed3b22f25a8be98530d385}{Pac\+\_\+\+Sort}
+\item 
+string \hyperlink{ex_8c_a4a476a4ca9399cdb40f332c3f4f194f5}{Val\+\_\+\+Sort}
+\item 
+string \hyperlink{ex_8c_a6ba91b18d0979e207105d660a2010d8d}{Hersteller\+Nummer} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_a088204f20433deace071409889b5aba1}{Val} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_a0165df64e95135bade509c58bdb353f1}{Beschreibung} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_a36b57fe679881487796855a589fbfb85}{Package} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_a03dd05fe151d0e9f9edf96078bc234d4}{Hersteller} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_a773ea3bd03d30f9371dda8ee12a97b3a}{Vorzug} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_a57ba39a1335c8ae9ef4eb8314d51160e}{Orderbase\+Nummer} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_add6cc63e92e68ae325b1ecb08776c9b9}{Device\+Name} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_aadcab157eddcbfbc94bcde5363c32934}{Prefix} \mbox{[}$\,$\mbox{]}
+\item 
+int \hyperlink{ex_8c_a82a1393e9fe80f33f56eeeb9b8d2195c}{Bauteile} = \hyperlink{_platzhalter_ersetzen_8ulp_a933c82c776fcedba424d05f5a5bd9346}{strsplit}(\hyperlink{_platzhalter_ersetzen_8ulp_a619ea3d31ff34b29c397408d7a72e2aa}{Pac\+\_\+\+Sort\+\_\+\+Arr}, \hyperlink{_platzhalter_ersetzen_8ulp_a9658b6387aed3b22f25a8be98530d385}{Pac\+\_\+\+Sort},\textquotesingle{}\textbackslash{}\hyperlink{read_database_8ulp_a76f11d9a0a47b94f72c2d0e77fb32240}{n}\textquotesingle{})
+\item 
+int \hyperlink{ex_8c_af42346d5e4cb2b5ba2208adc44464398}{P\+A\+C} = 1
+\item 
+int \hyperlink{ex_8c_a9d0755616c25d32c802e0786308b8fba}{V\+A\+L} = 0
+\item 
+string \hyperlink{ex_8c_aa91492c222928815209aa6f685876271}{Part\+Data\+Value\+Names} \mbox{[}$\,$\mbox{]}
+\item 
+int \hyperlink{ex_8c_a20b95608e9793b5cac8103d5881fe983}{P\+A\+R\+T\+\_\+\+N\+A\+M\+E} = 0
+\item 
+int \hyperlink{ex_8c_a6fe0f5b0418b2132d12ac49aa4081291}{D\+E\+V\+I\+C\+E\+\_\+\+N\+A\+M\+E} = 1
+\item 
+int \hyperlink{ex_8c_a2d0a92f7c80ad7c1fae87f79bbaa300f}{P\+A\+C\+K\+A\+G\+E} = 2
+\item 
+int \hyperlink{ex_8c_ad822e380cd5270d0a2aa33a677dde305}{V\+A\+L\+U\+E} = 3
+\item 
+int \hyperlink{ex_8c_a12efc69ea4176b0f4db6e857cb7f0756}{P\+R\+E\+F\+I\+X} = 4
+\item 
+int \hyperlink{ex_8c_a24327f241c43e49fd9913294c6d7ddb3}{L\+I\+B\+R\+A\+R\+Y} = 5
+\item 
+int \hyperlink{ex_8c_af1d4fe1dc2c108fc8a59c5b3b90252a3}{H\+E\+R\+S\+T\+E\+L\+L\+E\+R} = 6
+\item 
+int \hyperlink{ex_8c_ab14fde5d8767bd16f5b91ed81d0d462d}{H\+E\+R\+S\+T\+E\+L\+L\+E\+R\+N\+R} = 7
+\item 
+int \hyperlink{ex_8c_ab66e65ec79f498320544459cd478986a}{V\+O\+R\+Z\+U\+G} = 8
+\item 
+int \hyperlink{ex_8c_ae410fcb7dc0f5e163526a9c617a825de}{B\+E\+S\+C\+H\+R\+E\+I\+B\+U\+N\+G} = 9
+\item 
+int \hyperlink{ex_8c_aaeb2c4795b541d0c2dd2b787afb421f2}{D\+A\+T\+E\+N\+B\+L\+A\+T\+T} = 10
+\item 
+int \hyperlink{ex_8c_a7cdee93856dbfbbf6b1351c9525f6cb0}{O\+R\+D\+E\+R\+B\+A\+S\+E\+\_\+\+N\+U\+M\+M\+E\+R} = 11
+\item 
+int \hyperlink{ex_8c_a3389481e9b966a29fb48e172a5942ddd}{C\+H\+A\+N\+G\+E\+\_\+\+M\+O\+D\+E} = 12
+\item 
+string \hyperlink{ex_8c_a1f05af292fb59094556c3ff72b55e848}{S\+\_\+\+T\+R\+U\+E} = \char`\"{}x\char`\"{}
+\item 
+int \hyperlink{ex_8c_a01030b244f6352425e8de676f9d43288}{C\+O\+M\+P\+L\+E\+T\+E} = 0
+\item 
+int \hyperlink{ex_8c_a13a376a84d960a74f079d8654d95ac1c}{A\+T\+T\+R\+\_\+\+S\+Y\+M} = 1
+\item 
+int \hyperlink{ex_8c_a70ca181c5a9a77b7c4f1499f2fc6af3e}{P\+A\+C\+K\+\_\+\+O\+N\+L\+Y} = 2
+\item 
+int \hyperlink{ex_8c_af88c30c8d185a3f210472a96e11566bd}{A\+T\+T\+R\+\_\+\+O\+N\+L\+Y} = 3
+\item 
+string \hyperlink{ex_8c_a73ff9d2da91fa45853c1dea18eb324f2}{Part\+Data} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{ex_8c_a37c09d8cf4416763821a9df9c26e53e0}{Part\+Data\+Recovery} \mbox{[}$\,$\mbox{]}
+\item 
+int \hyperlink{ex_8c_a92a0e91aab3e1ff3d8857072adcd7c32}{No\+Of\+Parts}
+\item 
+\hyperlink{ex_8c_a0544c3fe466e421738dae463968b70ba}{else}
+\end{DoxyCompactItemize}
+
+
+\subsection{Dokumentation der Funktionen}
+\hypertarget{ex_8c_ae5c6c522b45bea7503caaebd0e215bce}{}\index{ex.\+c@{ex.\+c}!B\+T\+Search@{B\+T\+Search}}
+\index{B\+T\+Search@{B\+T\+Search}!ex.\+c@{ex.\+c}}
+\subsubsection[{B\+T\+Search}]{\setlength{\rightskip}{0pt plus 5cm}int B\+T\+Search (
+\begin{DoxyParamCaption}
+\item[{string}]{search\+String, }
+\item[{int}]{S\+O\+R\+T\+I\+N\+G}
+\end{DoxyParamCaption}
+)}\label{ex_8c_ae5c6c522b45bea7503caaebd0e215bce}
+
+
+Definiert in Zeile 70 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a93f65ab8b9782fa77c6d9909a31259c8}{}\index{ex.\+c@{ex.\+c}!create\+Table@{create\+Table}}
+\index{create\+Table@{create\+Table}!ex.\+c@{ex.\+c}}
+\subsubsection[{create\+Table}]{\setlength{\rightskip}{0pt plus 5cm}string create\+Table (
+\begin{DoxyParamCaption}
+\item[{string}]{sb, }
+\item[{int}]{S\+E\+A\+R\+C\+H, }
+\item[{int}]{Part\+Nr}
+\end{DoxyParamCaption}
+)}\label{ex_8c_a93f65ab8b9782fa77c6d9909a31259c8}
+
+
+Definiert in Zeile 255 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a7c0dbd82f8a7792c2dcc1514c7cc9ea5}{}\index{ex.\+c@{ex.\+c}!exchange\+Part@{exchange\+Part}}
+\index{exchange\+Part@{exchange\+Part}!ex.\+c@{ex.\+c}}
+\subsubsection[{exchange\+Part}]{\setlength{\rightskip}{0pt plus 5cm}string exchange\+Part (
+\begin{DoxyParamCaption}
+\item[{string}]{Schematics\+\_\+\+Part, }
+\item[{string}]{Bibliothek\+\_\+\+Part, }
+\item[{int}]{mode}
+\end{DoxyParamCaption}
+)}\label{ex_8c_a7c0dbd82f8a7792c2dcc1514c7cc9ea5}
+
+
+Definiert in Zeile 162 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a4f2ae9692dcb1785ee65c9b83dffd83c}{}\index{ex.\+c@{ex.\+c}!fileglob@{fileglob}}
+\index{fileglob@{fileglob}!ex.\+c@{ex.\+c}}
+\subsubsection[{fileglob}]{\setlength{\rightskip}{0pt plus 5cm}fileglob (
+\begin{DoxyParamCaption}
+\item[{{\bf temp\+Str\+Arr1}}]{, }
+\item[{\char`\"{}N\+:/public/Eagle\+\_\+6+/lbr/$\ast$.lbr\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{ex_8c_a4f2ae9692dcb1785ee65c9b83dffd83c}
+\hypertarget{ex_8c_a311864faf2c7fc626c2d9c62f7af98ee}{}\index{ex.\+c@{ex.\+c}!fileread@{fileread}}
+\index{fileread@{fileread}!ex.\+c@{ex.\+c}}
+\subsubsection[{fileread}]{\setlength{\rightskip}{0pt plus 5cm}fileread (
+\begin{DoxyParamCaption}
+\item[{{\bf Pac\+\_\+\+Sort}}]{, }
+\item[{\char`\"{}N\+:/public/Eagle\+\_\+6+/ulp/Ulp-\/Service/Bauteile\+\_\+nach\+\_\+\+Package\+\_\+sortiert.\+csv\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{ex_8c_a311864faf2c7fc626c2d9c62f7af98ee}
+\hypertarget{ex_8c_af6ae1763a98e58dd0565e513c40eeae6}{}\index{ex.\+c@{ex.\+c}!fileread@{fileread}}
+\index{fileread@{fileread}!ex.\+c@{ex.\+c}}
+\subsubsection[{fileread}]{\setlength{\rightskip}{0pt plus 5cm}fileread (
+\begin{DoxyParamCaption}
+\item[{{\bf Val\+\_\+\+Sort}}]{, }
+\item[{\char`\"{}N\+:/public/Eagle\+\_\+6+/ulp/Ulp-\/Service/Bauteile\+\_\+nach\+\_\+\+Val\+\_\+sortiert.\+csv\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{ex_8c_af6ae1763a98e58dd0565e513c40eeae6}
+\hypertarget{ex_8c_a47d2d84792b1656dd5e93a65568957d8}{}\index{ex.\+c@{ex.\+c}!get\+Part\+Data@{get\+Part\+Data}}
+\index{get\+Part\+Data@{get\+Part\+Data}!ex.\+c@{ex.\+c}}
+\subsubsection[{get\+Part\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void get\+Part\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{ex_8c_a47d2d84792b1656dd5e93a65568957d8}
+
+
+Definiert in Zeile 216 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a034e0e67b07ac51a39b8fb684448d388}{}\index{ex.\+c@{ex.\+c}!get\+Part\+Val@{get\+Part\+Val}}
+\index{get\+Part\+Val@{get\+Part\+Val}!ex.\+c@{ex.\+c}}
+\subsubsection[{get\+Part\+Val}]{\setlength{\rightskip}{0pt plus 5cm}string get\+Part\+Val (
+\begin{DoxyParamCaption}
+\item[{string}]{Full\+Part\+String, }
+\item[{int}]{pos}
+\end{DoxyParamCaption}
+)}\label{ex_8c_a034e0e67b07ac51a39b8fb684448d388}
+
+
+Definiert in Zeile 146 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a61e5747955dc080ddfb4fccd3ad3f346}{}\index{ex.\+c@{ex.\+c}!if@{if}}
+\index{if@{if}!ex.\+c@{ex.\+c}}
+\subsubsection[{if}]{\setlength{\rightskip}{0pt plus 5cm}if (
+\begin{DoxyParamCaption}
+\item[{schematic}]{}
+\end{DoxyParamCaption}
+)}\label{ex_8c_a61e5747955dc080ddfb4fccd3ad3f346}
+
+
+Definiert in Zeile 448 der Datei ex.\+c.
+
+\hypertarget{ex_8c_ab98dbf196398d8aeaa4ac97f87ae54a1}{}\index{ex.\+c@{ex.\+c}!Main\+Menu@{Main\+Menu}}
+\index{Main\+Menu@{Main\+Menu}!ex.\+c@{ex.\+c}}
+\subsubsection[{Main\+Menu}]{\setlength{\rightskip}{0pt plus 5cm}void Main\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{ex_8c_ab98dbf196398d8aeaa4ac97f87ae54a1}
+
+
+Definiert in Zeile 420 der Datei ex.\+c.
+
+\hypertarget{ex_8c_add96f686d5ed9719cabc7c3134fea1de}{}\index{ex.\+c@{ex.\+c}!real2str@{real2str}}
+\index{real2str@{real2str}!ex.\+c@{ex.\+c}}
+\subsubsection[{real2str}]{\setlength{\rightskip}{0pt plus 5cm}string real2str (
+\begin{DoxyParamCaption}
+\item[{real}]{value}
+\end{DoxyParamCaption}
+)}\label{ex_8c_add96f686d5ed9719cabc7c3134fea1de}
+
+
+Example showing how to document a function with Doxygen. 
+
+Description of what the function does. This part may refer to the parameters of the function, like {\ttfamily param1} or {\ttfamily param2}. A word of code can also be inserted like {\ttfamily this} which is equivalent to {\ttfamily this} and can be useful to say that the function returns a {\ttfamily void} or an {\ttfamily int}. If you want to have more than one word in typewriter font, then just use $<$tt$>$. We can also include text verbatim, \begin{DoxyVerb}like this\end{DoxyVerb}
+ Sometimes it is also convenient to include an example of usage\+: 
+\begin{DoxyCode}
+1 BoxStruct *out = Box\_The\_Function\_Name(param1, param2);
+2 printf("something...\(\backslash\)n");
+\end{DoxyCode}
+ Or, 
+\begin{DoxyCode}
+1 pyval = python\_func(arg1, arg2)
+2 \textcolor{keywordflow}{print} pyval
+\end{DoxyCode}
+ when the language is not the one used in the current source file (but {\bfseries be careful} as this may be supported only by recent versions of Doxygen). By the way, {\bfseries this is how you write bold text} or, if it is just one word, then you can just do {\bfseries this}. 
+\begin{DoxyParams}{Parameter}
+{\em param1} & Description of the first parameter of the function. \\
+\hline
+{\em param2} & The second one, which follows {\ttfamily param1}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Describe what the function returns. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{Siehe auch}
+\hyperlink{example_8c_a7ec4699a4197d74b5487929228b0597c}{Box\+\_\+\+The\+\_\+\+Second\+\_\+\+Function} 
+
+\hyperlink{example_8c_a01d1bdf75bc1d4b6445faeafa8fd853d}{Box\+\_\+\+The\+\_\+\+Last\+\_\+\+One} 
+
+\href{http://website/}{\tt http\+://website/} 
+\end{DoxySeeAlso}
+\begin{DoxyNote}{Zu beachten}
+Something to note. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warnung}
+Warning. 
+\end{DoxyWarning}
+
+
+Definiert in Zeile 59 der Datei ex.\+c.
+
+\hypertarget{ex_8c_abf112b617933352e6ea9f00864bc16a4}{}\index{ex.\+c@{ex.\+c}!refined\+Search@{refined\+Search}}
+\index{refined\+Search@{refined\+Search}!ex.\+c@{ex.\+c}}
+\subsubsection[{refined\+Search}]{\setlength{\rightskip}{0pt plus 5cm}string refined\+Search (
+\begin{DoxyParamCaption}
+\item[{string}]{search\+String, }
+\item[{string}]{Subject}
+\end{DoxyParamCaption}
+)}\label{ex_8c_abf112b617933352e6ea9f00864bc16a4}
+
+
+Definiert in Zeile 112 der Datei ex.\+c.
+
+\hypertarget{ex_8c_ab03810066546e171a6a7c77464b0fc2c}{}\index{ex.\+c@{ex.\+c}!set\+Part\+Val@{set\+Part\+Val}}
+\index{set\+Part\+Val@{set\+Part\+Val}!ex.\+c@{ex.\+c}}
+\subsubsection[{set\+Part\+Val}]{\setlength{\rightskip}{0pt plus 5cm}string set\+Part\+Val (
+\begin{DoxyParamCaption}
+\item[{string}]{Full\+Part\+String, }
+\item[{int}]{pos, }
+\item[{string}]{new\+Val}
+\end{DoxyParamCaption}
+)}\label{ex_8c_ab03810066546e171a6a7c77464b0fc2c}
+
+
+Definiert in Zeile 152 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a933c82c776fcedba424d05f5a5bd9346}{}\index{ex.\+c@{ex.\+c}!strsplit@{strsplit}}
+\index{strsplit@{strsplit}!ex.\+c@{ex.\+c}}
+\subsubsection[{strsplit}]{\setlength{\rightskip}{0pt plus 5cm}strsplit (
+\begin{DoxyParamCaption}
+\item[{{\bf Val\+\_\+\+Sort\+\_\+\+Arr}}]{, }
+\item[{{\bf Val\+\_\+\+Sort}}]{, }
+\item[{\textquotesingle{}\textbackslash{}{\bf n}\textquotesingle{}}]{}
+\end{DoxyParamCaption}
+)}\label{ex_8c_a933c82c776fcedba424d05f5a5bd9346}
+\hypertarget{ex_8c_a005756a3de9c56f60d7697b8ccc8a1a2}{}\index{ex.\+c@{ex.\+c}!Vorschlaege@{Vorschlaege}}
+\index{Vorschlaege@{Vorschlaege}!ex.\+c@{ex.\+c}}
+\subsubsection[{Vorschlaege}]{\setlength{\rightskip}{0pt plus 5cm}void Vorschlaege (
+\begin{DoxyParamCaption}
+\item[{int}]{Part\+Nr}
+\end{DoxyParamCaption}
+)}\label{ex_8c_a005756a3de9c56f60d7697b8ccc8a1a2}
+
+
+Definiert in Zeile 283 der Datei ex.\+c.
+
+
+
+\subsection{Variablen-\/\+Dokumentation}
+\hypertarget{ex_8c_af88c30c8d185a3f210472a96e11566bd}{}\index{ex.\+c@{ex.\+c}!A\+T\+T\+R\+\_\+\+O\+N\+L\+Y@{A\+T\+T\+R\+\_\+\+O\+N\+L\+Y}}
+\index{A\+T\+T\+R\+\_\+\+O\+N\+L\+Y@{A\+T\+T\+R\+\_\+\+O\+N\+L\+Y}!ex.\+c@{ex.\+c}}
+\subsubsection[{A\+T\+T\+R\+\_\+\+O\+N\+L\+Y}]{\setlength{\rightskip}{0pt plus 5cm}int A\+T\+T\+R\+\_\+\+O\+N\+L\+Y = 3}\label{ex_8c_af88c30c8d185a3f210472a96e11566bd}
+
+
+Definiert in Zeile 144 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a13a376a84d960a74f079d8654d95ac1c}{}\index{ex.\+c@{ex.\+c}!A\+T\+T\+R\+\_\+\+S\+Y\+M@{A\+T\+T\+R\+\_\+\+S\+Y\+M}}
+\index{A\+T\+T\+R\+\_\+\+S\+Y\+M@{A\+T\+T\+R\+\_\+\+S\+Y\+M}!ex.\+c@{ex.\+c}}
+\subsubsection[{A\+T\+T\+R\+\_\+\+S\+Y\+M}]{\setlength{\rightskip}{0pt plus 5cm}int A\+T\+T\+R\+\_\+\+S\+Y\+M = 1}\label{ex_8c_a13a376a84d960a74f079d8654d95ac1c}
+
+
+Definiert in Zeile 142 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a82a1393e9fe80f33f56eeeb9b8d2195c}{}\index{ex.\+c@{ex.\+c}!Bauteile@{Bauteile}}
+\index{Bauteile@{Bauteile}!ex.\+c@{ex.\+c}}
+\subsubsection[{Bauteile}]{\setlength{\rightskip}{0pt plus 5cm}int Bauteile = {\bf strsplit}({\bf Pac\+\_\+\+Sort\+\_\+\+Arr}, {\bf Pac\+\_\+\+Sort},\textquotesingle{}\textbackslash{}{\bf n}\textquotesingle{})}\label{ex_8c_a82a1393e9fe80f33f56eeeb9b8d2195c}
+
+
+Definiert in Zeile 22 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a0165df64e95135bade509c58bdb353f1}{}\index{ex.\+c@{ex.\+c}!Beschreibung@{Beschreibung}}
+\index{Beschreibung@{Beschreibung}!ex.\+c@{ex.\+c}}
+\subsubsection[{Beschreibung}]{\setlength{\rightskip}{0pt plus 5cm}string Beschreibung\mbox{[}$\,$\mbox{]}}\label{ex_8c_a0165df64e95135bade509c58bdb353f1}
+
+
+Definiert in Zeile 19 der Datei ex.\+c.
+
+\hypertarget{ex_8c_ae410fcb7dc0f5e163526a9c617a825de}{}\index{ex.\+c@{ex.\+c}!B\+E\+S\+C\+H\+R\+E\+I\+B\+U\+N\+G@{B\+E\+S\+C\+H\+R\+E\+I\+B\+U\+N\+G}}
+\index{B\+E\+S\+C\+H\+R\+E\+I\+B\+U\+N\+G@{B\+E\+S\+C\+H\+R\+E\+I\+B\+U\+N\+G}!ex.\+c@{ex.\+c}}
+\subsubsection[{B\+E\+S\+C\+H\+R\+E\+I\+B\+U\+N\+G}]{\setlength{\rightskip}{0pt plus 5cm}int B\+E\+S\+C\+H\+R\+E\+I\+B\+U\+N\+G = 9}\label{ex_8c_ae410fcb7dc0f5e163526a9c617a825de}
+
+
+Definiert in Zeile 132 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a3389481e9b966a29fb48e172a5942ddd}{}\index{ex.\+c@{ex.\+c}!C\+H\+A\+N\+G\+E\+\_\+\+M\+O\+D\+E@{C\+H\+A\+N\+G\+E\+\_\+\+M\+O\+D\+E}}
+\index{C\+H\+A\+N\+G\+E\+\_\+\+M\+O\+D\+E@{C\+H\+A\+N\+G\+E\+\_\+\+M\+O\+D\+E}!ex.\+c@{ex.\+c}}
+\subsubsection[{C\+H\+A\+N\+G\+E\+\_\+\+M\+O\+D\+E}]{\setlength{\rightskip}{0pt plus 5cm}int C\+H\+A\+N\+G\+E\+\_\+\+M\+O\+D\+E = 12}\label{ex_8c_a3389481e9b966a29fb48e172a5942ddd}
+
+
+Definiert in Zeile 135 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a01030b244f6352425e8de676f9d43288}{}\index{ex.\+c@{ex.\+c}!C\+O\+M\+P\+L\+E\+T\+E@{C\+O\+M\+P\+L\+E\+T\+E}}
+\index{C\+O\+M\+P\+L\+E\+T\+E@{C\+O\+M\+P\+L\+E\+T\+E}!ex.\+c@{ex.\+c}}
+\subsubsection[{C\+O\+M\+P\+L\+E\+T\+E}]{\setlength{\rightskip}{0pt plus 5cm}int C\+O\+M\+P\+L\+E\+T\+E = 0}\label{ex_8c_a01030b244f6352425e8de676f9d43288}
+
+
+Definiert in Zeile 141 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a8da6d6b33b7597f02434fedca1781cbc}{}\index{ex.\+c@{ex.\+c}!Counter@{Counter}}
+\index{Counter@{Counter}!ex.\+c@{ex.\+c}}
+\subsubsection[{Counter}]{\setlength{\rightskip}{0pt plus 5cm}int Counter}\label{ex_8c_a8da6d6b33b7597f02434fedca1781cbc}
+
+
+Definiert in Zeile 12 der Datei ex.\+c.
+
+\hypertarget{ex_8c_aaeb2c4795b541d0c2dd2b787afb421f2}{}\index{ex.\+c@{ex.\+c}!D\+A\+T\+E\+N\+B\+L\+A\+T\+T@{D\+A\+T\+E\+N\+B\+L\+A\+T\+T}}
+\index{D\+A\+T\+E\+N\+B\+L\+A\+T\+T@{D\+A\+T\+E\+N\+B\+L\+A\+T\+T}!ex.\+c@{ex.\+c}}
+\subsubsection[{D\+A\+T\+E\+N\+B\+L\+A\+T\+T}]{\setlength{\rightskip}{0pt plus 5cm}int D\+A\+T\+E\+N\+B\+L\+A\+T\+T = 10}\label{ex_8c_aaeb2c4795b541d0c2dd2b787afb421f2}
+
+
+Definiert in Zeile 133 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a6fe0f5b0418b2132d12ac49aa4081291}{}\index{ex.\+c@{ex.\+c}!D\+E\+V\+I\+C\+E\+\_\+\+N\+A\+M\+E@{D\+E\+V\+I\+C\+E\+\_\+\+N\+A\+M\+E}}
+\index{D\+E\+V\+I\+C\+E\+\_\+\+N\+A\+M\+E@{D\+E\+V\+I\+C\+E\+\_\+\+N\+A\+M\+E}!ex.\+c@{ex.\+c}}
+\subsubsection[{D\+E\+V\+I\+C\+E\+\_\+\+N\+A\+M\+E}]{\setlength{\rightskip}{0pt plus 5cm}int D\+E\+V\+I\+C\+E\+\_\+\+N\+A\+M\+E = 1}\label{ex_8c_a6fe0f5b0418b2132d12ac49aa4081291}
+
+
+Definiert in Zeile 124 der Datei ex.\+c.
+
+\hypertarget{ex_8c_add6cc63e92e68ae325b1ecb08776c9b9}{}\index{ex.\+c@{ex.\+c}!Device\+Name@{Device\+Name}}
+\index{Device\+Name@{Device\+Name}!ex.\+c@{ex.\+c}}
+\subsubsection[{Device\+Name}]{\setlength{\rightskip}{0pt plus 5cm}string Device\+Name\mbox{[}$\,$\mbox{]}}\label{ex_8c_add6cc63e92e68ae325b1ecb08776c9b9}
+
+
+Definiert in Zeile 19 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a0544c3fe466e421738dae463968b70ba}{}\index{ex.\+c@{ex.\+c}!else@{else}}
+\index{else@{else}!ex.\+c@{ex.\+c}}
+\subsubsection[{else}]{\setlength{\rightskip}{0pt plus 5cm}else}\label{ex_8c_a0544c3fe466e421738dae463968b70ba}
+{\bfseries Initialisierung\+:}
+\begin{DoxyCode}
+\{
+    \hyperlink{delete_8ulp_adf5c804dfce7a70e36dda02995fad481}{exit}(0)
+\end{DoxyCode}
+
+
+Definiert in Zeile 461 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a03dd05fe151d0e9f9edf96078bc234d4}{}\index{ex.\+c@{ex.\+c}!Hersteller@{Hersteller}}
+\index{Hersteller@{Hersteller}!ex.\+c@{ex.\+c}}
+\subsubsection[{Hersteller}]{\setlength{\rightskip}{0pt plus 5cm}string Hersteller\mbox{[}$\,$\mbox{]}}\label{ex_8c_a03dd05fe151d0e9f9edf96078bc234d4}
+
+
+Definiert in Zeile 19 der Datei ex.\+c.
+
+\hypertarget{ex_8c_af1d4fe1dc2c108fc8a59c5b3b90252a3}{}\index{ex.\+c@{ex.\+c}!H\+E\+R\+S\+T\+E\+L\+L\+E\+R@{H\+E\+R\+S\+T\+E\+L\+L\+E\+R}}
+\index{H\+E\+R\+S\+T\+E\+L\+L\+E\+R@{H\+E\+R\+S\+T\+E\+L\+L\+E\+R}!ex.\+c@{ex.\+c}}
+\subsubsection[{H\+E\+R\+S\+T\+E\+L\+L\+E\+R}]{\setlength{\rightskip}{0pt plus 5cm}int H\+E\+R\+S\+T\+E\+L\+L\+E\+R = 6}\label{ex_8c_af1d4fe1dc2c108fc8a59c5b3b90252a3}
+
+
+Definiert in Zeile 129 der Datei ex.\+c.
+
+\hypertarget{ex_8c_ab14fde5d8767bd16f5b91ed81d0d462d}{}\index{ex.\+c@{ex.\+c}!H\+E\+R\+S\+T\+E\+L\+L\+E\+R\+N\+R@{H\+E\+R\+S\+T\+E\+L\+L\+E\+R\+N\+R}}
+\index{H\+E\+R\+S\+T\+E\+L\+L\+E\+R\+N\+R@{H\+E\+R\+S\+T\+E\+L\+L\+E\+R\+N\+R}!ex.\+c@{ex.\+c}}
+\subsubsection[{H\+E\+R\+S\+T\+E\+L\+L\+E\+R\+N\+R}]{\setlength{\rightskip}{0pt plus 5cm}int H\+E\+R\+S\+T\+E\+L\+L\+E\+R\+N\+R = 7}\label{ex_8c_ab14fde5d8767bd16f5b91ed81d0d462d}
+
+
+Definiert in Zeile 130 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a6ba91b18d0979e207105d660a2010d8d}{}\index{ex.\+c@{ex.\+c}!Hersteller\+Nummer@{Hersteller\+Nummer}}
+\index{Hersteller\+Nummer@{Hersteller\+Nummer}!ex.\+c@{ex.\+c}}
+\subsubsection[{Hersteller\+Nummer}]{\setlength{\rightskip}{0pt plus 5cm}string Hersteller\+Nummer\mbox{[}$\,$\mbox{]}}\label{ex_8c_a6ba91b18d0979e207105d660a2010d8d}
+
+
+Definiert in Zeile 19 der Datei ex.\+c.
+
+\hypertarget{ex_8c_ae529cfd688d748de42fa805b2c306253}{}\index{ex.\+c@{ex.\+c}!index@{index}}
+\index{index@{index}!ex.\+c@{ex.\+c}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}int index\mbox{[}$\,$\mbox{]}}\label{ex_8c_ae529cfd688d748de42fa805b2c306253}
+Detailed description after the member 
+
+Definiert in Zeile 15 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a5e4f8a98a00b3d3b91b24e9ce15d31ff}{}\index{ex.\+c@{ex.\+c}!Lib\+List@{Lib\+List}}
+\index{Lib\+List@{Lib\+List}!ex.\+c@{ex.\+c}}
+\subsubsection[{Lib\+List}]{\setlength{\rightskip}{0pt plus 5cm}Lib\+List = strjoin({\bf temp\+Str\+Arr1},\textquotesingle{}\textbackslash{}{\bf n}\textquotesingle{})}\label{ex_8c_a5e4f8a98a00b3d3b91b24e9ce15d31ff}
+
+
+Definiert in Zeile 11 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a24327f241c43e49fd9913294c6d7ddb3}{}\index{ex.\+c@{ex.\+c}!L\+I\+B\+R\+A\+R\+Y@{L\+I\+B\+R\+A\+R\+Y}}
+\index{L\+I\+B\+R\+A\+R\+Y@{L\+I\+B\+R\+A\+R\+Y}!ex.\+c@{ex.\+c}}
+\subsubsection[{L\+I\+B\+R\+A\+R\+Y}]{\setlength{\rightskip}{0pt plus 5cm}int L\+I\+B\+R\+A\+R\+Y = 5}\label{ex_8c_a24327f241c43e49fd9913294c6d7ddb3}
+
+
+Definiert in Zeile 128 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a92a0e91aab3e1ff3d8857072adcd7c32}{}\index{ex.\+c@{ex.\+c}!No\+Of\+Parts@{No\+Of\+Parts}}
+\index{No\+Of\+Parts@{No\+Of\+Parts}!ex.\+c@{ex.\+c}}
+\subsubsection[{No\+Of\+Parts}]{\setlength{\rightskip}{0pt plus 5cm}int No\+Of\+Parts}\label{ex_8c_a92a0e91aab3e1ff3d8857072adcd7c32}
+
+
+Definiert in Zeile 214 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a7cdee93856dbfbbf6b1351c9525f6cb0}{}\index{ex.\+c@{ex.\+c}!O\+R\+D\+E\+R\+B\+A\+S\+E\+\_\+\+N\+U\+M\+M\+E\+R@{O\+R\+D\+E\+R\+B\+A\+S\+E\+\_\+\+N\+U\+M\+M\+E\+R}}
+\index{O\+R\+D\+E\+R\+B\+A\+S\+E\+\_\+\+N\+U\+M\+M\+E\+R@{O\+R\+D\+E\+R\+B\+A\+S\+E\+\_\+\+N\+U\+M\+M\+E\+R}!ex.\+c@{ex.\+c}}
+\subsubsection[{O\+R\+D\+E\+R\+B\+A\+S\+E\+\_\+\+N\+U\+M\+M\+E\+R}]{\setlength{\rightskip}{0pt plus 5cm}int O\+R\+D\+E\+R\+B\+A\+S\+E\+\_\+\+N\+U\+M\+M\+E\+R = 11}\label{ex_8c_a7cdee93856dbfbbf6b1351c9525f6cb0}
+
+
+Definiert in Zeile 134 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a57ba39a1335c8ae9ef4eb8314d51160e}{}\index{ex.\+c@{ex.\+c}!Orderbase\+Nummer@{Orderbase\+Nummer}}
+\index{Orderbase\+Nummer@{Orderbase\+Nummer}!ex.\+c@{ex.\+c}}
+\subsubsection[{Orderbase\+Nummer}]{\setlength{\rightskip}{0pt plus 5cm}string Orderbase\+Nummer\mbox{[}$\,$\mbox{]}}\label{ex_8c_a57ba39a1335c8ae9ef4eb8314d51160e}
+
+
+Definiert in Zeile 19 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a2d524de6e72f33e2cffb9bed0a05cbc7}{}\index{ex.\+c@{ex.\+c}!out@{out}}
+\index{out@{out}!ex.\+c@{ex.\+c}}
+\subsubsection[{out}]{\setlength{\rightskip}{0pt plus 5cm}string out\mbox{[}$\,$\mbox{]}}\label{ex_8c_a2d524de6e72f33e2cffb9bed0a05cbc7}
+
+
+Definiert in Zeile 17 der Datei ex.\+c.
+
+\hypertarget{ex_8c_af42346d5e4cb2b5ba2208adc44464398}{}\index{ex.\+c@{ex.\+c}!P\+A\+C@{P\+A\+C}}
+\index{P\+A\+C@{P\+A\+C}!ex.\+c@{ex.\+c}}
+\subsubsection[{P\+A\+C}]{\setlength{\rightskip}{0pt plus 5cm}int P\+A\+C = 1}\label{ex_8c_af42346d5e4cb2b5ba2208adc44464398}
+
+
+Definiert in Zeile 67 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a9658b6387aed3b22f25a8be98530d385}{}\index{ex.\+c@{ex.\+c}!Pac\+\_\+\+Sort@{Pac\+\_\+\+Sort}}
+\index{Pac\+\_\+\+Sort@{Pac\+\_\+\+Sort}!ex.\+c@{ex.\+c}}
+\subsubsection[{Pac\+\_\+\+Sort}]{\setlength{\rightskip}{0pt plus 5cm}string Pac\+\_\+\+Sort}\label{ex_8c_a9658b6387aed3b22f25a8be98530d385}
+
+
+Definiert in Zeile 18 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a619ea3d31ff34b29c397408d7a72e2aa}{}\index{ex.\+c@{ex.\+c}!Pac\+\_\+\+Sort\+\_\+\+Arr@{Pac\+\_\+\+Sort\+\_\+\+Arr}}
+\index{Pac\+\_\+\+Sort\+\_\+\+Arr@{Pac\+\_\+\+Sort\+\_\+\+Arr}!ex.\+c@{ex.\+c}}
+\subsubsection[{Pac\+\_\+\+Sort\+\_\+\+Arr}]{\setlength{\rightskip}{0pt plus 5cm}string Pac\+\_\+\+Sort\+\_\+\+Arr\mbox{[}$\,$\mbox{]}}\label{ex_8c_a619ea3d31ff34b29c397408d7a72e2aa}
+
+
+Definiert in Zeile 18 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a70ca181c5a9a77b7c4f1499f2fc6af3e}{}\index{ex.\+c@{ex.\+c}!P\+A\+C\+K\+\_\+\+O\+N\+L\+Y@{P\+A\+C\+K\+\_\+\+O\+N\+L\+Y}}
+\index{P\+A\+C\+K\+\_\+\+O\+N\+L\+Y@{P\+A\+C\+K\+\_\+\+O\+N\+L\+Y}!ex.\+c@{ex.\+c}}
+\subsubsection[{P\+A\+C\+K\+\_\+\+O\+N\+L\+Y}]{\setlength{\rightskip}{0pt plus 5cm}int P\+A\+C\+K\+\_\+\+O\+N\+L\+Y = 2}\label{ex_8c_a70ca181c5a9a77b7c4f1499f2fc6af3e}
+
+
+Definiert in Zeile 143 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a36b57fe679881487796855a589fbfb85}{}\index{ex.\+c@{ex.\+c}!Package@{Package}}
+\index{Package@{Package}!ex.\+c@{ex.\+c}}
+\subsubsection[{Package}]{\setlength{\rightskip}{0pt plus 5cm}string Package\mbox{[}$\,$\mbox{]}}\label{ex_8c_a36b57fe679881487796855a589fbfb85}
+
+
+Definiert in Zeile 19 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a2d0a92f7c80ad7c1fae87f79bbaa300f}{}\index{ex.\+c@{ex.\+c}!P\+A\+C\+K\+A\+G\+E@{P\+A\+C\+K\+A\+G\+E}}
+\index{P\+A\+C\+K\+A\+G\+E@{P\+A\+C\+K\+A\+G\+E}!ex.\+c@{ex.\+c}}
+\subsubsection[{P\+A\+C\+K\+A\+G\+E}]{\setlength{\rightskip}{0pt plus 5cm}int P\+A\+C\+K\+A\+G\+E = 2}\label{ex_8c_a2d0a92f7c80ad7c1fae87f79bbaa300f}
+
+
+Definiert in Zeile 125 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a20b95608e9793b5cac8103d5881fe983}{}\index{ex.\+c@{ex.\+c}!P\+A\+R\+T\+\_\+\+N\+A\+M\+E@{P\+A\+R\+T\+\_\+\+N\+A\+M\+E}}
+\index{P\+A\+R\+T\+\_\+\+N\+A\+M\+E@{P\+A\+R\+T\+\_\+\+N\+A\+M\+E}!ex.\+c@{ex.\+c}}
+\subsubsection[{P\+A\+R\+T\+\_\+\+N\+A\+M\+E}]{\setlength{\rightskip}{0pt plus 5cm}int P\+A\+R\+T\+\_\+\+N\+A\+M\+E = 0}\label{ex_8c_a20b95608e9793b5cac8103d5881fe983}
+
+
+Definiert in Zeile 123 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a73ff9d2da91fa45853c1dea18eb324f2}{}\index{ex.\+c@{ex.\+c}!Part\+Data@{Part\+Data}}
+\index{Part\+Data@{Part\+Data}!ex.\+c@{ex.\+c}}
+\subsubsection[{Part\+Data}]{\setlength{\rightskip}{0pt plus 5cm}string Part\+Data\mbox{[}$\,$\mbox{]}}\label{ex_8c_a73ff9d2da91fa45853c1dea18eb324f2}
+
+
+Definiert in Zeile 212 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a37c09d8cf4416763821a9df9c26e53e0}{}\index{ex.\+c@{ex.\+c}!Part\+Data\+Recovery@{Part\+Data\+Recovery}}
+\index{Part\+Data\+Recovery@{Part\+Data\+Recovery}!ex.\+c@{ex.\+c}}
+\subsubsection[{Part\+Data\+Recovery}]{\setlength{\rightskip}{0pt plus 5cm}string Part\+Data\+Recovery\mbox{[}$\,$\mbox{]}}\label{ex_8c_a37c09d8cf4416763821a9df9c26e53e0}
+
+
+Definiert in Zeile 213 der Datei ex.\+c.
+
+\hypertarget{ex_8c_aa91492c222928815209aa6f685876271}{}\index{ex.\+c@{ex.\+c}!Part\+Data\+Value\+Names@{Part\+Data\+Value\+Names}}
+\index{Part\+Data\+Value\+Names@{Part\+Data\+Value\+Names}!ex.\+c@{ex.\+c}}
+\subsubsection[{Part\+Data\+Value\+Names}]{\setlength{\rightskip}{0pt plus 5cm}string Part\+Data\+Value\+Names\mbox{[}$\,$\mbox{]}}\label{ex_8c_aa91492c222928815209aa6f685876271}
+{\bfseries Initialisierung\+:}
+\begin{DoxyCode}
+= \{\textcolor{stringliteral}{"P.name"}, \textcolor{stringliteral}{"P.device.name"} , 
+    \textcolor{stringliteral}{"P.device.package.name"},\textcolor{stringliteral}{"P.value"},\textcolor{stringliteral}{"P.device.prefix"},\textcolor{stringliteral}{"P.device.library"},
+    \textcolor{stringliteral}{"Hersteller"},\textcolor{stringliteral}{"HerstellerNummer"},\textcolor{stringliteral}{"Vorzug"},\textcolor{stringliteral}{"Beschreibung"},\textcolor{stringliteral}{"Datenblatt"},\textcolor{stringliteral}{"OrderbaseNummer"}\}
+\end{DoxyCode}
+
+
+Definiert in Zeile 118 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a401e942526aac47cef94f478182486e7}{}\index{ex.\+c@{ex.\+c}!position@{position}}
+\index{position@{position}!ex.\+c@{ex.\+c}}
+\subsubsection[{position}]{\setlength{\rightskip}{0pt plus 5cm}int position}\label{ex_8c_a401e942526aac47cef94f478182486e7}
+
+
+Definiert in Zeile 16 der Datei ex.\+c.
+
+\hypertarget{ex_8c_aadcab157eddcbfbc94bcde5363c32934}{}\index{ex.\+c@{ex.\+c}!Prefix@{Prefix}}
+\index{Prefix@{Prefix}!ex.\+c@{ex.\+c}}
+\subsubsection[{Prefix}]{\setlength{\rightskip}{0pt plus 5cm}string Prefix\mbox{[}$\,$\mbox{]}}\label{ex_8c_aadcab157eddcbfbc94bcde5363c32934}
+
+
+Definiert in Zeile 19 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a12efc69ea4176b0f4db6e857cb7f0756}{}\index{ex.\+c@{ex.\+c}!P\+R\+E\+F\+I\+X@{P\+R\+E\+F\+I\+X}}
+\index{P\+R\+E\+F\+I\+X@{P\+R\+E\+F\+I\+X}!ex.\+c@{ex.\+c}}
+\subsubsection[{P\+R\+E\+F\+I\+X}]{\setlength{\rightskip}{0pt plus 5cm}int P\+R\+E\+F\+I\+X = 4}\label{ex_8c_a12efc69ea4176b0f4db6e857cb7f0756}
+
+
+Definiert in Zeile 127 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a1f05af292fb59094556c3ff72b55e848}{}\index{ex.\+c@{ex.\+c}!S\+\_\+\+T\+R\+U\+E@{S\+\_\+\+T\+R\+U\+E}}
+\index{S\+\_\+\+T\+R\+U\+E@{S\+\_\+\+T\+R\+U\+E}!ex.\+c@{ex.\+c}}
+\subsubsection[{S\+\_\+\+T\+R\+U\+E}]{\setlength{\rightskip}{0pt plus 5cm}string S\+\_\+\+T\+R\+U\+E = \char`\"{}x\char`\"{}}\label{ex_8c_a1f05af292fb59094556c3ff72b55e848}
+
+
+Definiert in Zeile 139 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a92031faa8b6be9bafd0fcc7bf1f22bb2}{}\index{ex.\+c@{ex.\+c}!temp\+Str1@{temp\+Str1}}
+\index{temp\+Str1@{temp\+Str1}!ex.\+c@{ex.\+c}}
+\subsubsection[{temp\+Str1}]{\setlength{\rightskip}{0pt plus 5cm}string temp\+Str1}\label{ex_8c_a92031faa8b6be9bafd0fcc7bf1f22bb2}
+
+
+Definiert in Zeile 11 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a9143525c52788805a93de55749a1c99d}{}\index{ex.\+c@{ex.\+c}!tempstr2@{tempstr2}}
+\index{tempstr2@{tempstr2}!ex.\+c@{ex.\+c}}
+\subsubsection[{tempstr2}]{\setlength{\rightskip}{0pt plus 5cm}string tempstr2}\label{ex_8c_a9143525c52788805a93de55749a1c99d}
+
+
+Definiert in Zeile 11 der Datei ex.\+c.
+
+\hypertarget{ex_8c_ace47333a73f430572c0a88ef37c016ac}{}\index{ex.\+c@{ex.\+c}!temp\+Str\+Arr1@{temp\+Str\+Arr1}}
+\index{temp\+Str\+Arr1@{temp\+Str\+Arr1}!ex.\+c@{ex.\+c}}
+\subsubsection[{temp\+Str\+Arr1}]{\setlength{\rightskip}{0pt plus 5cm}string temp\+Str\+Arr1\mbox{[}$\,$\mbox{]}}\label{ex_8c_ace47333a73f430572c0a88ef37c016ac}
+
+
+Definiert in Zeile 11 der Datei ex.\+c.
+
+\hypertarget{ex_8c_ae747ecefe0a8b1f1678fbf27beca17ed}{}\index{ex.\+c@{ex.\+c}!temp\+Str\+Arr2@{temp\+Str\+Arr2}}
+\index{temp\+Str\+Arr2@{temp\+Str\+Arr2}!ex.\+c@{ex.\+c}}
+\subsubsection[{temp\+Str\+Arr2}]{\setlength{\rightskip}{0pt plus 5cm}string temp\+Str\+Arr2\mbox{[}$\,$\mbox{]}}\label{ex_8c_ae747ecefe0a8b1f1678fbf27beca17ed}
+
+
+Definiert in Zeile 11 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a088204f20433deace071409889b5aba1}{}\index{ex.\+c@{ex.\+c}!Val@{Val}}
+\index{Val@{Val}!ex.\+c@{ex.\+c}}
+\subsubsection[{Val}]{\setlength{\rightskip}{0pt plus 5cm}string Val\mbox{[}$\,$\mbox{]}}\label{ex_8c_a088204f20433deace071409889b5aba1}
+
+
+Definiert in Zeile 19 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a9d0755616c25d32c802e0786308b8fba}{}\index{ex.\+c@{ex.\+c}!V\+A\+L@{V\+A\+L}}
+\index{V\+A\+L@{V\+A\+L}!ex.\+c@{ex.\+c}}
+\subsubsection[{V\+A\+L}]{\setlength{\rightskip}{0pt plus 5cm}int V\+A\+L = 0}\label{ex_8c_a9d0755616c25d32c802e0786308b8fba}
+
+
+Definiert in Zeile 68 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a4a476a4ca9399cdb40f332c3f4f194f5}{}\index{ex.\+c@{ex.\+c}!Val\+\_\+\+Sort@{Val\+\_\+\+Sort}}
+\index{Val\+\_\+\+Sort@{Val\+\_\+\+Sort}!ex.\+c@{ex.\+c}}
+\subsubsection[{Val\+\_\+\+Sort}]{\setlength{\rightskip}{0pt plus 5cm}string Val\+\_\+\+Sort}\label{ex_8c_a4a476a4ca9399cdb40f332c3f4f194f5}
+
+
+Definiert in Zeile 18 der Datei ex.\+c.
+
+\hypertarget{ex_8c_af793855284d36c1b154929e9737ad5eb}{}\index{ex.\+c@{ex.\+c}!Val\+\_\+\+Sort\+\_\+\+Arr@{Val\+\_\+\+Sort\+\_\+\+Arr}}
+\index{Val\+\_\+\+Sort\+\_\+\+Arr@{Val\+\_\+\+Sort\+\_\+\+Arr}!ex.\+c@{ex.\+c}}
+\subsubsection[{Val\+\_\+\+Sort\+\_\+\+Arr}]{\setlength{\rightskip}{0pt plus 5cm}string Val\+\_\+\+Sort\+\_\+\+Arr\mbox{[}$\,$\mbox{]}}\label{ex_8c_af793855284d36c1b154929e9737ad5eb}
+
+
+Definiert in Zeile 18 der Datei ex.\+c.
+
+\hypertarget{ex_8c_ad822e380cd5270d0a2aa33a677dde305}{}\index{ex.\+c@{ex.\+c}!V\+A\+L\+U\+E@{V\+A\+L\+U\+E}}
+\index{V\+A\+L\+U\+E@{V\+A\+L\+U\+E}!ex.\+c@{ex.\+c}}
+\subsubsection[{V\+A\+L\+U\+E}]{\setlength{\rightskip}{0pt plus 5cm}int V\+A\+L\+U\+E = 3}\label{ex_8c_ad822e380cd5270d0a2aa33a677dde305}
+
+
+Definiert in Zeile 126 der Datei ex.\+c.
+
+\hypertarget{ex_8c_a773ea3bd03d30f9371dda8ee12a97b3a}{}\index{ex.\+c@{ex.\+c}!Vorzug@{Vorzug}}
+\index{Vorzug@{Vorzug}!ex.\+c@{ex.\+c}}
+\subsubsection[{Vorzug}]{\setlength{\rightskip}{0pt plus 5cm}string Vorzug\mbox{[}$\,$\mbox{]}}\label{ex_8c_a773ea3bd03d30f9371dda8ee12a97b3a}
+
+
+Definiert in Zeile 19 der Datei ex.\+c.
+
+\hypertarget{ex_8c_ab66e65ec79f498320544459cd478986a}{}\index{ex.\+c@{ex.\+c}!V\+O\+R\+Z\+U\+G@{V\+O\+R\+Z\+U\+G}}
+\index{V\+O\+R\+Z\+U\+G@{V\+O\+R\+Z\+U\+G}!ex.\+c@{ex.\+c}}
+\subsubsection[{V\+O\+R\+Z\+U\+G}]{\setlength{\rightskip}{0pt plus 5cm}int V\+O\+R\+Z\+U\+G = 8}\label{ex_8c_ab66e65ec79f498320544459cd478986a}
+
+
+Definiert in Zeile 131 der Datei ex.\+c.
+

@@ -1,0 +1,723 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>Desy Eagle Bauteil-Datenbank Service Programme: H:/sze/Eagle6/ulp/Ulp-Service/readlibs.ulp-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Desy Eagle Bauteil-Datenbank Service Programme
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Klassen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('readlibs_8ulp.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funktionen</a> &#124;
+<a href="#var-members">Variablen</a>  </div>
+  <div class="headertitle">
+<div class="title">H:/sze/Eagle6/ulp/Ulp-Service/readlibs.ulp-Dateireferenz</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Mit dieser ULP werden die Bauteil Bibliotheken von Eagle eingelesen und in zwei Sortierungen in Dateien abgelegt. Einmal nach Package und einmal nach Val. Diese Ulp wird einmal pro Woche automatisch ausgeführt.  
+<a href="#details">Mehr ...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="_libdesy_8lib_source.html">Libdesy.lib</a>&quot;</code><br />
+</div>
+<p><a href="readlibs_8ulp_source.html">gehe zum Quellcode dieser Datei</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:a4c66fd448cb78d435f0074a60df6e637"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a4c66fd448cb78d435f0074a60df6e637">buildDeviceName</a> (string DSName, string Tech, string Pac)</td></tr>
+<tr class="memdesc:a4c66fd448cb78d435f0074a60df6e637"><td class="mdescLeft">&#160;</td><td class="mdescRight">setzt den Namen des Devices aus den Parametern zusammen, der Platzhalter "*" im namen des Devicesets steht für die Technologie, das "?" steht für das Package. Wenn keine Platzhalter vorhanden sind wird der Name nach dem Schema "DSName + Tech + Pac" erstellt  <a href="#a4c66fd448cb78d435f0074a60df6e637">Mehr ...</a><br /></td></tr>
+<tr class="separator:a4c66fd448cb78d435f0074a60df6e637"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdef7a1fd863a6d3770c1268cb06add3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#acdef7a1fd863a6d3770c1268cb06add3">main</a> ()</td></tr>
+<tr class="separator:acdef7a1fd863a6d3770c1268cb06add3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variablen</h2></td></tr>
+<tr class="memitem:a5060269beb44f9737d13fd98bf0b8f7f"><td class="memItemLeft" align="right" valign="top">&lt; p &gt; Mit dieser ULP werden die Bauteil Bibliotheken von Eagle eingelesen und in zwei Sortierungen in Dateien abgelegt Einmal nach <a class="el" href="test_8ulp.html#a36b57fe679881487796855a589fbfb85">Package</a> und einmal nach <a class="el" href="test_8ulp.html#a088204f20433deace071409889b5aba1">Val</a> Diese Ulp wird einmal pro Woche automatisch ausgeführt&lt;/p &gt;&lt; author &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a5060269beb44f9737d13fd98bf0b8f7f">Author</a></td></tr>
+<tr class="separator:a5060269beb44f9737d13fd98bf0b8f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4f6835ed9b8d2035ccbb5c7c557fcfc"><td class="memItemLeft" align="right" valign="top">&lt; p &gt; Mit dieser ULP werden die Bauteil Bibliotheken von Eagle eingelesen und in zwei Sortierungen in Dateien abgelegt Einmal nach <a class="el" href="test_8ulp.html#a36b57fe679881487796855a589fbfb85">Package</a> und einmal nach <a class="el" href="test_8ulp.html#a088204f20433deace071409889b5aba1">Val</a> Diese Ulp wird einmal pro Woche automatisch ausgeführt&lt;/p &gt;&lt; author &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#ac4f6835ed9b8d2035ccbb5c7c557fcfc">k</a> = 0</td></tr>
+<tr class="separator:ac4f6835ed9b8d2035ccbb5c7c557fcfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f0524c519c9a079ebbe76797552cfff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a2f0524c519c9a079ebbe76797552cfff">selector1</a></td></tr>
+<tr class="separator:a2f0524c519c9a079ebbe76797552cfff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb22ea06df7a98062b750ecca56f1628"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#acb22ea06df7a98062b750ecca56f1628">selector2</a></td></tr>
+<tr class="separator:acb22ea06df7a98062b750ecca56f1628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00c6cb851706bdde7570b25efe80733a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a00c6cb851706bdde7570b25efe80733a">bts</a></td></tr>
+<tr class="separator:a00c6cb851706bdde7570b25efe80733a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e91c7aa482f3c0a8d826efd565190a3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a6e91c7aa482f3c0a8d826efd565190a3">AnzahlLibs</a></td></tr>
+<tr class="separator:a6e91c7aa482f3c0a8d826efd565190a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43b9274914173cbec050c89b07f1824b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a43b9274914173cbec050c89b07f1824b">out</a></td></tr>
+<tr class="separator:a43b9274914173cbec050c89b07f1824b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab79ee21fe4aae7937f99de5b9c7b7d2c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#ab79ee21fe4aae7937f99de5b9c7b7d2c">LIBS</a> []</td></tr>
+<tr class="separator:ab79ee21fe4aae7937f99de5b9c7b7d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdccf00f7f9b4c4daf90921260c72e92"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#afdccf00f7f9b4c4daf90921260c72e92">rest</a></td></tr>
+<tr class="separator:afdccf00f7f9b4c4daf90921260c72e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a530865d3310688a7b794eea8ab03c60b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a530865d3310688a7b794eea8ab03c60b">Pac_Sort</a> []</td></tr>
+<tr class="separator:a530865d3310688a7b794eea8ab03c60b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08666752575cacdcfcc8699eb3c95022"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a08666752575cacdcfcc8699eb3c95022">Val_Sort</a> []</td></tr>
+<tr class="separator:a08666752575cacdcfcc8699eb3c95022"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03ca86bb44d6d953219c512adb218dbb"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a03ca86bb44d6d953219c512adb218dbb">tempstr</a></td></tr>
+<tr class="separator:a03ca86bb44d6d953219c512adb218dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a801e8dfc827f7961b6012c0100f77ab4"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a801e8dfc827f7961b6012c0100f77ab4">outAttArr</a> []</td></tr>
+<tr class="separator:a801e8dfc827f7961b6012c0100f77ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd552ace971c34ee4d05fc524378dc32"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#abd552ace971c34ee4d05fc524378dc32">outElemArr</a> []</td></tr>
+<tr class="separator:abd552ace971c34ee4d05fc524378dc32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f8d954bdd72eba003a9802a6248de83"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a2f8d954bdd72eba003a9802a6248de83">temp</a> []</td></tr>
+<tr class="separator:a2f8d954bdd72eba003a9802a6248de83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1739e013da948312edaaa3ade1bd7f7a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a1739e013da948312edaaa3ade1bd7f7a">temp1</a> []</td></tr>
+<tr class="separator:a1739e013da948312edaaa3ade1bd7f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93cd3f3f743b20e134149e06efa22a88"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a93cd3f3f743b20e134149e06efa22a88">temp2</a> []</td></tr>
+<tr class="separator:a93cd3f3f743b20e134149e06efa22a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d07a7b1d2f2bb3e3061eba3b676dd44"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a6d07a7b1d2f2bb3e3061eba3b676dd44">temp3</a> []</td></tr>
+<tr class="separator:a6d07a7b1d2f2bb3e3061eba3b676dd44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6a0fc9c82629f46ca764b920e57db24"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#ad6a0fc9c82629f46ca764b920e57db24">temp4</a> []</td></tr>
+<tr class="separator:ad6a0fc9c82629f46ca764b920e57db24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5f54da751f4d315227472fb369d04b5"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#ad5f54da751f4d315227472fb369d04b5">temp5</a> []</td></tr>
+<tr class="separator:ad5f54da751f4d315227472fb369d04b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ba91b18d0979e207105d660a2010d8d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a6ba91b18d0979e207105d660a2010d8d">HerstellerNummer</a> []</td></tr>
+<tr class="separator:a6ba91b18d0979e207105d660a2010d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a088204f20433deace071409889b5aba1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a088204f20433deace071409889b5aba1">Val</a> []</td></tr>
+<tr class="separator:a088204f20433deace071409889b5aba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0165df64e95135bade509c58bdb353f1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a0165df64e95135bade509c58bdb353f1">Beschreibung</a> []</td></tr>
+<tr class="separator:a0165df64e95135bade509c58bdb353f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b57fe679881487796855a589fbfb85"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a36b57fe679881487796855a589fbfb85">Package</a> []</td></tr>
+<tr class="separator:a36b57fe679881487796855a589fbfb85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03dd05fe151d0e9f9edf96078bc234d4"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a03dd05fe151d0e9f9edf96078bc234d4">Hersteller</a> []</td></tr>
+<tr class="separator:a03dd05fe151d0e9f9edf96078bc234d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a773ea3bd03d30f9371dda8ee12a97b3a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a773ea3bd03d30f9371dda8ee12a97b3a">Vorzug</a> []</td></tr>
+<tr class="separator:a773ea3bd03d30f9371dda8ee12a97b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57ba39a1335c8ae9ef4eb8314d51160e"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a57ba39a1335c8ae9ef4eb8314d51160e">OrderbaseNummer</a> []</td></tr>
+<tr class="separator:a57ba39a1335c8ae9ef4eb8314d51160e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add6cc63e92e68ae325b1ecb08776c9b9"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#add6cc63e92e68ae325b1ecb08776c9b9">DeviceName</a> []</td></tr>
+<tr class="separator:add6cc63e92e68ae325b1ecb08776c9b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadcab157eddcbfbc94bcde5363c32934"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#aadcab157eddcbfbc94bcde5363c32934">Prefix</a> []</td></tr>
+<tr class="separator:aadcab157eddcbfbc94bcde5363c32934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afabb0100cbb25a94f420c30a4f376b58"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#afabb0100cbb25a94f420c30a4f376b58">Datenblatt1</a> []</td></tr>
+<tr class="separator:afabb0100cbb25a94f420c30a4f376b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a658ffd52f046be63e7d0116d947c0e6f"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a658ffd52f046be63e7d0116d947c0e6f">Datenblatt2</a> []</td></tr>
+<tr class="separator:a658ffd52f046be63e7d0116d947c0e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44dc1eefd5382033cf032f578a0130b9"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="readlibs_8ulp.html#a44dc1eefd5382033cf032f578a0130b9">LIB6_PATH</a> = &quot;//win.desy.de/group/sze/public/Eagle_6+/lbr&quot;</td></tr>
+<tr class="separator:a44dc1eefd5382033cf032f578a0130b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p>Mit dieser ULP werden die Bauteil Bibliotheken von Eagle eingelesen und in zwei Sortierungen in Dateien abgelegt. Einmal nach Package und einmal nach Val. Diese Ulp wird einmal pro Woche automatisch ausgeführt. </p>
+<dl class="section author"><dt>Autor</dt><dd>Jan Scholz </dd></dl>
+
+<p>Definiert in Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+</div><h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a class="anchor" id="a4c66fd448cb78d435f0074a60df6e637"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string buildDeviceName </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>DSName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>Tech</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>Pac</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>setzt den Namen des Devices aus den Parametern zusammen, der Platzhalter "*" im namen des Devicesets steht für die Technologie, das "?" steht für das Package. Wenn keine Platzhalter vorhanden sind wird der Name nach dem Schema "DSName + Tech + Pac" erstellt </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">DSName</td><td>DeviceSetName </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Tech</td><td>Technologie </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Pac</td><td>Package </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>DeviceName </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00037">37</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acdef7a1fd863a6d3770c1268cb06add3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00052">52</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variablen-Dokumentation</h2>
+<a class="anchor" id="a6e91c7aa482f3c0a8d826efd565190a3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int AnzahlLibs</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00018">18</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5060269beb44f9737d13fd98bf0b8f7f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;p&gt; Mit dieser ULP werden die Bauteil Bibliotheken von Eagle eingelesen und in zwei Sortierungen in Dateien abgelegt Einmal nach <a class="el" href="test_8ulp.html#a36b57fe679881487796855a589fbfb85">Package</a> und einmal nach <a class="el" href="test_8ulp.html#a088204f20433deace071409889b5aba1">Val</a> Diese Ulp wird einmal pro Woche automatisch ausgeführt&lt;/p&gt;&lt;author&gt; Author</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00016">16</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0165df64e95135bade509c58bdb353f1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Beschreibung[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a00c6cb851706bdde7570b25efe80733a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bts</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00017">17</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afabb0100cbb25a94f420c30a4f376b58"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Datenblatt1[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a658ffd52f046be63e7d0116d947c0e6f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Datenblatt2[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="add6cc63e92e68ae325b1ecb08776c9b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string DeviceName[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a03dd05fe151d0e9f9edf96078bc234d4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Hersteller[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6ba91b18d0979e207105d660a2010d8d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string HerstellerNummer[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac4f6835ed9b8d2035ccbb5c7c557fcfc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;p&gt; Mit dieser ULP werden die Bauteil Bibliotheken von Eagle eingelesen und in zwei Sortierungen in Dateien abgelegt Einmal nach <a class="el" href="test_8ulp.html#a36b57fe679881487796855a589fbfb85">Package</a> und einmal nach <a class="el" href="test_8ulp.html#a088204f20433deace071409889b5aba1">Val</a> Diese Ulp wird einmal pro Woche automatisch ausgeführt&lt;/p&gt;&lt;author&gt; k = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00016">16</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a44dc1eefd5382033cf032f578a0130b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string LIB6_PATH = &quot;//win.desy.de/group/sze/public/Eagle_6+/lbr&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00024">24</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab79ee21fe4aae7937f99de5b9c7b7d2c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string LIBS[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00019">19</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a57ba39a1335c8ae9ef4eb8314d51160e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string OrderbaseNummer[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a43b9274914173cbec050c89b07f1824b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string out</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00019">19</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a801e8dfc827f7961b6012c0100f77ab4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string outAttArr[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00022">22</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abd552ace971c34ee4d05fc524378dc32"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string outElemArr[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00022">22</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a530865d3310688a7b794eea8ab03c60b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Pac_Sort[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00020">20</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a36b57fe679881487796855a589fbfb85"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Package[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aadcab157eddcbfbc94bcde5363c32934"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Prefix[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afdccf00f7f9b4c4daf90921260c72e92"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string rest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00019">19</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2f0524c519c9a079ebbe76797552cfff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int selector1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00017">17</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acb22ea06df7a98062b750ecca56f1628"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int selector2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00017">17</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2f8d954bdd72eba003a9802a6248de83"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string temp[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00022">22</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1739e013da948312edaaa3ade1bd7f7a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string temp1[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00022">22</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a93cd3f3f743b20e134149e06efa22a88"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string temp2[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00022">22</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6d07a7b1d2f2bb3e3061eba3b676dd44"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string temp3[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00022">22</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad6a0fc9c82629f46ca764b920e57db24"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string temp4[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00022">22</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad5f54da751f4d315227472fb369d04b5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string temp5[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00022">22</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a03ca86bb44d6d953219c512adb218dbb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string tempstr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00021">21</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a088204f20433deace071409889b5aba1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Val[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a08666752575cacdcfcc8699eb3c95022"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Val_Sort[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00020">20</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a773ea3bd03d30f9371dda8ee12a97b3a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Vorzug[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definiert in Zeile <a class="el" href="readlibs_8ulp_source.html#l00023">23</a> der Datei <a class="el" href="readlibs_8ulp_source.html">readlibs.ulp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="readlibs_8ulp.html">readlibs.ulp</a></li>
+    <li class="footer">Erzeugt am Mit Jun 3 2015 17:46:15 für Desy Eagle Bauteil-Datenbank Service Programme von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,546 @@
+.TH "H:/sze/Eagle6/ulp/Ulp-Service/bom.ulp" 3 "Mit Jun 3 2015" "Desy Eagle Bauteil-Datenbank Service Programme" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+H:/sze/Eagle6/ulp/Ulp-Service/bom.ulp \- Erzeugt eine Stückliste (Bill Of Material) eines Projekts in Excel, diese Einzelstückliste kann von der Gruppe ZE in Orderbase eingelesen werden\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'Libdesy\&.lib'\fP
+.br
+
+.SS "Funktionen"
+
+.in +1c
+.ti -1c
+.RI "< p > Erzeugt eine \fBStückliste\fP (Bill Of Material) eines \fBProjekts\&.\\n\fP' '< p >' 'Eine Excel-Einzelteilstückliste kann erzeugt werden\&.< br >\\\fBn\fP' 'Diese Excelliste enthält zusätzliche Informationen wie \fBz\&.B\&.Hersteller\fP"
+.br
+.ti -1c
+.RI "\fBDebug\fP (\fBAllLib6\fP)"
+.br
+.ti -1c
+.RI "int \fBisquote\fP (char c)"
+.br
+.ti -1c
+.RI "string \fBTrimQuotes\fP (string s)"
+.br
+.ti -1c
+.RI "int \fBIsKnownDevice\fP (string devname)"
+.br
+.ti -1c
+.RI "int \fBIsKnownAttribute\fP (string attrname)"
+.br
+.ti -1c
+.RI "void \fBiniFilelesen\fP ()"
+.br
+.ti -1c
+.RI "int \fBisLib6\fP (string lib)"
+.br
+.ti -1c
+.RI "void \fBCollectPartData\fP (void)"
+.br
+.ti -1c
+.RI "string \fBMakeListHeader\fP (void)"
+.br
+.ti -1c
+.RI "string \fBMakeListText\fP (void)"
+.br
+.ti -1c
+.RI "void \fBSaveList\fP (void)"
+.br
+.ti -1c
+.RI "void \fBViewList\fP (void)"
+.br
+.ti -1c
+.RI "void \fBGeneratePartList\fP (void)"
+.br
+.ti -1c
+.RI "void \fBGenerateValueList\fP (void)"
+.br
+.ti -1c
+.RI "void \fBOnListTypeChange\fP ()"
+.br
+.ti -1c
+.RI "int \fBExportOrderbaseXML\fP ()"
+.br
+.ti -1c
+.RI "void \fBreadLib6\fP ()"
+.br
+.ti -1c
+.RI "int \fBAppDialog\fP ()"
+.br
+.ti -1c
+.RI "\fBif\fP (!schematic)"
+.br
+.in -1c
+.SS "Variablen"
+
+.in +1c
+.ti -1c
+.RI "< p > Erzeugt eine Herstellernummern< br > Die \fBGruppe\fP DESY ZE kann die Excel Einzelstueckliste in Orderbase einlesen \fBn\fP< p >< author > \fBAuthor\fP"
+.br
+.ti -1c
+.RI "string \fBULP_PATH\fP = 'D:/Dropbox/DesyBib/Ulp-Service'"
+.br
+.ti -1c
+.RI "string \fBVORLAGE_PFAD\fP = 'N:/public/Orderbase/Stücklistenexport Vorlage/Einzelteilstueckliste Vorlage\&.xltx'"
+.br
+.ti -1c
+.RI "string \fBDBNR\fP"
+.br
+.ti -1c
+.RI "string \fBHSNR\fP"
+.br
+.ti -1c
+.RI "string \fBHS\fP"
+.br
+.ti -1c
+.RI "string \fBZEV\fP"
+.br
+.ti -1c
+.RI "string \fBPROJEKT_PFAD\fP"
+.br
+.ti -1c
+.RI "string \fBstrVersion\fP = '2\&.0'"
+.br
+.ti -1c
+.RI "string \fBnullKey\fP = '*'"
+.br
+.ti -1c
+.RI "string \fBfileName\fP"
+.br
+.ti -1c
+.RI "string \fBAllLib6\fP"
+.br
+.ti -1c
+.RI "int \fBnPartCount\fP"
+.br
+.ti -1c
+.RI "int \fBListType\fP = 0"
+.br
+.ti -1c
+.RI "int \fBSelected\fP = -1"
+.br
+.ti -1c
+.RI "int \fBPartNumModified\fP = 0"
+.br
+.ti -1c
+.RI "int \fBPartNumPicked\fP = 0"
+.br
+.ti -1c
+.RI "int \fBconfig_nicht_vorhanden\fP = 0"
+.br
+.ti -1c
+.RI "string \fBDefaultFileName\fP"
+.br
+.ti -1c
+.RI "numeric string \fBPartNum\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartName\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartVal\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartAttr\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartDev\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartPkg\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartDesc\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartDescription\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartDBNR\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartHS\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartHSNR\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartZEVORZUG\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartHeadline\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPartHeadlineEx\fP []"
+.br
+.ti -1c
+.RI "int \fBPartSheet\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBLines\fP []"
+.br
+.ti -1c
+.RI "numeric string \fBPickPartNum\fP"
+.br
+.ti -1c
+.RI "numeric string \fBPickPartVal\fP"
+.br
+.ti -1c
+.RI "numeric string \fBPickPartDev\fP"
+.br
+.ti -1c
+.RI "numeric string \fBPickPartDBNR\fP"
+.br
+.ti -1c
+.RI "numeric string \fBPickPartHS\fP"
+.br
+.ti -1c
+.RI "numeric string \fBPickPartHSNR\fP"
+.br
+.ti -1c
+.RI "numeric string \fBPickPartZEVORZUG\fP"
+.br
+.ti -1c
+.RI "numeric string \fBPickPartDesc\fP"
+.br
+.ti -1c
+.RI "string \fBengineer\fP"
+.br
+.ti -1c
+.RI "string \fBgeprueft\fP"
+.br
+.ti -1c
+.RI "string \fBfreigegeben\fP"
+.br
+.ti -1c
+.RI "string \fBAnforderer\fP"
+.br
+.ti -1c
+.RI "string \fBGruppe\fP"
+.br
+.ti -1c
+.RI "string \fBWA_Nummer\fP"
+.br
+.ti -1c
+.RI "string \fBdescription1\fP"
+.br
+.ti -1c
+.RI "\fBelse\fP"
+.br
+.ti -1c
+.RI "int \fBrtn\fP = \fBAppDialog\fP()"
+.br
+.in -1c
+.SH "Ausführliche Beschreibung"
+.PP 
+Erzeugt eine Stückliste (Bill Of Material) eines Projekts in Excel, diese Einzelstückliste kann von der Gruppe ZE in Orderbase eingelesen werden\&. 
+
+
+.PP
+\fBAutor:\fP
+.RS 4
+Jan Scholz 
+.RE
+.PP
+
+.PP
+Definiert in Datei \fBbom\&.ulp\fP\&.
+.SH "Dokumentation der Funktionen"
+.PP 
+.SS "int AppDialog ()"
+
+.PP
+Definiert in Zeile 484 der Datei bom\&.ulp\&.
+.SS "CollectPartData (void)"
+
+.PP
+Definiert in Zeile 170 der Datei bom\&.ulp\&.
+.SS "Debug (\fBAllLib6\fP)"
+
+.SS "int ExportOrderbaseXML ()"
+
+.PP
+Definiert in Zeile 407 der Datei bom\&.ulp\&.
+.SS "GeneratePartList (void)"
+
+.PP
+Definiert in Zeile 340 der Datei bom\&.ulp\&.
+.SS "void GenerateValueList (void)"
+
+.PP
+Definiert in Zeile 358 der Datei bom\&.ulp\&.
+.SS "if (! schematic)"
+
+.PP
+Definiert in Zeile 528 der Datei bom\&.ulp\&.
+.SS "void iniFilelesen ()"
+
+.PP
+Definiert in Zeile 136 der Datei bom\&.ulp\&.
+.SS "int IsKnownAttribute (string attrname)"
+
+.PP
+Definiert in Zeile 121 der Datei bom\&.ulp\&.
+.SS "int IsKnownDevice (string devname)"
+
+.PP
+Definiert in Zeile 103 der Datei bom\&.ulp\&.
+.SS "int isLib6 (string lib)"
+
+.PP
+Definiert in Zeile 165 der Datei bom\&.ulp\&.
+.SS "int isquote (char c)"
+
+.PP
+Definiert in Zeile 89 der Datei bom\&.ulp\&.
+.SS "string MakeListHeader (void)"
+
+.PP
+Definiert in Zeile 264 der Datei bom\&.ulp\&.
+.SS "string MakeListText (void)"
+
+.PP
+Definiert in Zeile 271 der Datei bom\&.ulp\&.
+.SS "void OnListTypeChange ()"
+
+.PP
+Definiert in Zeile 398 der Datei bom\&.ulp\&.
+.SS "readLib6 ()"
+
+.PP
+Definiert in Zeile 478 der Datei bom\&.ulp\&.
+.SS "void SaveList (void)"
+
+.PP
+Definiert in Zeile 303 der Datei bom\&.ulp\&.
+.SS "<p> Erzeugt eine Stückliste (Bill Of Material)"
+
+.SS "string TrimQuotes (string s)"
+
+.PP
+Definiert in Zeile 94 der Datei bom\&.ulp\&.
+.SS "void ViewList (void)"
+
+.PP
+Definiert in Zeile 323 der Datei bom\&.ulp\&.
+.SH "Variablen-Dokumentation"
+.PP 
+.SS "string AllLib6"
+
+.PP
+Definiert in Zeile 50 der Datei bom\&.ulp\&.
+.SS "string Anforderer"
+
+.PP
+Definiert in Zeile 84 der Datei bom\&.ulp\&.
+.SS "<p> Erzeugt eine Herstellernummern<br> Die \fBGruppe\fP DESY ZE kann die Excel Einzelstueckliste in Orderbase einlesen \fBn\fP<p><author> Author"
+
+.PP
+Definiert in Zeile 37 der Datei bom\&.ulp\&.
+.SS "int config_nicht_vorhanden = 0"
+
+.PP
+Definiert in Zeile 57 der Datei bom\&.ulp\&.
+.SS "string DBNR"
+
+.PP
+Definiert in Zeile 45 der Datei bom\&.ulp\&.
+.SS "string DefaultFileName"
+
+.PP
+Definiert in Zeile 58 der Datei bom\&.ulp\&.
+.SS "string description1"
+
+.PP
+Definiert in Zeile 87 der Datei bom\&.ulp\&.
+.SS "else"
+\fBInitialisierung:\fP
+.PP
+.nf
+{
+    iniFilelesen()
+.fi
+.PP
+Definiert in Zeile 531 der Datei bom\&.ulp\&.
+.SS "string engineer"
+
+.PP
+Definiert in Zeile 81 der Datei bom\&.ulp\&.
+.SS "string fileName"
+
+.PP
+Definiert in Zeile 49 der Datei bom\&.ulp\&.
+.SS "string freigegeben"
+
+.PP
+Definiert in Zeile 83 der Datei bom\&.ulp\&.
+.SS "string geprueft"
+
+.PP
+Definiert in Zeile 82 der Datei bom\&.ulp\&.
+.SS "string Gruppe"
+
+.PP
+Definiert in Zeile 85 der Datei bom\&.ulp\&.
+.SS "string HS"
+
+.PP
+Definiert in Zeile 45 der Datei bom\&.ulp\&.
+.SS "string HSNR"
+
+.PP
+Definiert in Zeile 45 der Datei bom\&.ulp\&.
+.SS "numeric string Lines[]"
+
+.PP
+Definiert in Zeile 69 der Datei bom\&.ulp\&.
+.SS "int ListType = 0"
+
+.PP
+Definiert in Zeile 53 der Datei bom\&.ulp\&.
+.SS "int nPartCount"
+
+.PP
+Definiert in Zeile 52 der Datei bom\&.ulp\&.
+.SS "string nullKey = '*'"
+
+.PP
+Definiert in Zeile 48 der Datei bom\&.ulp\&.
+.SS "numeric string PartAttr[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartDBNR[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartDesc[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartDescription[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartDev[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartHeadline[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartHeadlineEx[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartHS[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartHSNR[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartName[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartNum[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "int PartNumModified = 0"
+
+.PP
+Definiert in Zeile 55 der Datei bom\&.ulp\&.
+.SS "int PartNumPicked = 0"
+
+.PP
+Definiert in Zeile 56 der Datei bom\&.ulp\&.
+.SS "numeric string PartPkg[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "int PartSheet[]"
+
+.PP
+Definiert in Zeile 66 der Datei bom\&.ulp\&.
+.SS "numeric string PartVal[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PartZEVORZUG[]"
+
+.PP
+Definiert in Zeile 63 der Datei bom\&.ulp\&.
+.SS "numeric string PickPartDBNR"
+
+.PP
+Definiert in Zeile 75 der Datei bom\&.ulp\&.
+.SS "numeric string PickPartDesc"
+
+.PP
+Definiert in Zeile 79 der Datei bom\&.ulp\&.
+.SS "numeric string PickPartDev"
+
+.PP
+Definiert in Zeile 74 der Datei bom\&.ulp\&.
+.SS "numeric string PickPartHS"
+
+.PP
+Definiert in Zeile 76 der Datei bom\&.ulp\&.
+.SS "numeric string PickPartHSNR"
+
+.PP
+Definiert in Zeile 77 der Datei bom\&.ulp\&.
+.SS "numeric string PickPartNum"
+
+.PP
+Definiert in Zeile 72 der Datei bom\&.ulp\&.
+.SS "numeric string PickPartVal"
+
+.PP
+Definiert in Zeile 73 der Datei bom\&.ulp\&.
+.SS "numeric string PickPartZEVORZUG"
+
+.PP
+Definiert in Zeile 78 der Datei bom\&.ulp\&.
+.SS "string PROJEKT_PFAD"
+
+.PP
+Definiert in Zeile 46 der Datei bom\&.ulp\&.
+.SS "int rtn = \fBAppDialog\fP()"
+
+.PP
+Definiert in Zeile 536 der Datei bom\&.ulp\&.
+.SS "int Selected = -1"
+
+.PP
+Definiert in Zeile 54 der Datei bom\&.ulp\&.
+.SS "string strVersion = '2\&.0'"
+
+.PP
+Definiert in Zeile 47 der Datei bom\&.ulp\&.
+.SS "string ULP_PATH = 'D:/Dropbox/DesyBib/Ulp-Service'"
+
+.PP
+Definiert in Zeile 41 der Datei bom\&.ulp\&.
+.SS "string VORLAGE_PFAD = 'N:/public/Orderbase/Stücklistenexport Vorlage/Einzelteilstueckliste Vorlage\&.xltx'"
+
+.PP
+Definiert in Zeile 44 der Datei bom\&.ulp\&.
+.SS "string WA_Nummer"
+
+.PP
+Definiert in Zeile 86 der Datei bom\&.ulp\&.
+.SS "string ZEV"
+
+.PP
+Definiert in Zeile 45 der Datei bom\&.ulp\&.
+.SH "Autor"
+.PP 
+Automatisch erzeugt von Doxygen für Desy Eagle Bauteil-Datenbank Service Programme aus dem Quellcode\&.

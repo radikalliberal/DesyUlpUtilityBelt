@@ -1,0 +1,111 @@
+.TH "H:/sze/Eagle6/ulp/Ulp-Service/tags.ulp" 3 "Mit Jun 3 2015" "Desy Eagle Bauteil-Datenbank Service Programme" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+H:/sze/Eagle6/ulp/Ulp-Service/tags.ulp \- die Schalgwörter(tags) unter denen ein neues Bauteil gefunden werden kann werden ausgelesen und können editiert werden\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Funktionen"
+
+.in +1c
+.ti -1c
+.RI "void \fBDebug\fP (string msg)"
+.br
+.ti -1c
+.RI "string \fBstr_insert\fP (string subject, string regex, string insert, int initialOffset, int Wiederholungen)"
+.br
+.ti -1c
+.RI "string \fBint2str\fP (int number)"
+.br
+.ti -1c
+.RI "string \fBchangeChar\fP (string DerString, char old, char new)"
+.br
+.ti -1c
+.RI "string \fBgetTags\fP (string description)"
+.br
+.ti -1c
+.RI "\fBif\fP (\fBlibrary\fP)"
+.br
+.ti -1c
+.RI "\fBexit\fP (0)"
+.br
+.in -1c
+.SS "Variablen"
+
+.in +1c
+.ti -1c
+.RI "string \fBtags\fP"
+.br
+.ti -1c
+.RI "string \fBdesc\fP"
+.br
+.ti -1c
+.RI "\fBelse\fP"
+.br
+.in -1c
+.SH "Ausführliche Beschreibung"
+.PP 
+die Schalgwörter(tags) unter denen ein neues Bauteil gefunden werden kann werden ausgelesen und können editiert werden\&. 
+
+
+.PP
+\fBAutor:\fP
+.RS 4
+Jan Scholz 
+.RE
+.PP
+
+.PP
+Definiert in Datei \fBtags\&.ulp\fP\&.
+.SH "Dokumentation der Funktionen"
+.PP 
+.SS "string changeChar (string DerString, char old, char new)"
+
+.PP
+Definiert in Zeile 47 der Datei tags\&.ulp\&.
+.SS "void Debug (string msg)"
+
+.PP
+Definiert in Zeile 11 der Datei tags\&.ulp\&.
+.SS "exit (0)"
+
+.SS "string getTags (string description)"
+
+.PP
+Definiert in Zeile 55 der Datei tags\&.ulp\&.
+.SS "if (\fBlibrary\fP)"
+
+.PP
+Definiert in Zeile 79 der Datei tags\&.ulp\&.
+.SS "string int2str (int number)"
+
+.PP
+Definiert in Zeile 40 der Datei tags\&.ulp\&.
+.SS "string str_insert (string subject, string regex, string insert, int initialOffset, int Wiederholungen)"
+
+.PP
+Definiert in Zeile 20 der Datei tags\&.ulp\&.
+.SH "Variablen-Dokumentation"
+.PP 
+.SS "string desc"
+
+.PP
+Definiert in Zeile 9 der Datei tags\&.ulp\&.
+.SS "else"
+\fBInitialisierung:\fP
+.PP
+.nf
+{
+    dlgMessageBox("Diese ULP muss in einer Bibliothek geöffnet werden")
+.fi
+.PP
+Definiert in Zeile 110 der Datei tags\&.ulp\&.
+.SS "string tags"
+
+.PP
+Definiert in Zeile 8 der Datei tags\&.ulp\&.
+.SH "Autor"
+.PP 
+Automatisch erzeugt von Doxygen für Desy Eagle Bauteil-Datenbank Service Programme aus dem Quellcode\&.

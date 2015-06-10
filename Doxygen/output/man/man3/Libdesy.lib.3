@@ -1,0 +1,167 @@
+.TH "H:/sze/Eagle6/ulp/Ulp-Service/Libdesy.lib" 3 "Mit Jun 3 2015" "Desy Eagle Bauteil-Datenbank Service Programme" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+H:/sze/Eagle6/ulp/Ulp-Service/Libdesy.lib \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Funktionen"
+
+.in +1c
+.ti -1c
+.RI "string \fBint2str\fP (int number)"
+.br
+.ti -1c
+.RI "string \fBreal2str\fP (real value)"
+.br
+.ti -1c
+.RI "string \fBchangeChar\fP (string DerString, char old, char new)"
+.br
+.RI "\fItauscht einen Buchstaben eines Strings gegen einen anderen \fP"
+.ti -1c
+.RI "string \fBCutSubstring\fP (string longString, string regex, int offset)"
+.br
+.ti -1c
+.RI "string \fBTrimWhiteSpace\fP (string s)"
+.br
+.ti -1c
+.RI "void \fBDebug\fP (string msg)"
+.br
+.ti -1c
+.RI "real \fBlog2\fP (int number)"
+.br
+.RI "\fILogarithmus zur Basis 2 auf 3 Nachkommastellen genau\&. \fP"
+.ti -1c
+.RI "int \fBcmpstr\fP (string a, string b)"
+.br
+.ti -1c
+.RI "string \fBstr_replace\fP (string subject, string regex, string replace, int initialOffset, int Wiederholungen)"
+.br
+.ti -1c
+.RI "string \fBregex_from_string\fP (string subject)"
+.br
+.ti -1c
+.RI "string \fBdlgStrEd\fP (string Ueberschrifft, string Frage, string Subject)"
+.br
+.ti -1c
+.RI "int \fBErrorMsg\fP (string msg, string opt1, string opt2, int btns)"
+.br
+.ti -1c
+.RI "string \fBHtmlTagsentfernen\fP (string s)"
+.br
+.in -1c
+.SS "Variablen"
+
+.in +1c
+.ti -1c
+.RI "int \fBTRUE\fP = 1"
+.br
+.ti -1c
+.RI "int \fBFALSE\fP = 0"
+.br
+.ti -1c
+.RI "int \fBSTART\fP = 0"
+.br
+.ti -1c
+.RI "int \fBREPEAT\fP = 1"
+.br
+.ti -1c
+.RI "int \fBONCE\fP = 0"
+.br
+.in -1c
+.SH "Dokumentation der Funktionen"
+.PP 
+.SS "string changeChar (string DerString, char old, char new)"
+
+.PP
+tauscht einen Buchstaben eines Strings gegen einen anderen 
+.PP
+Definiert in Zeile 23 der Datei Libdesy\&.lib\&.
+.SS "int cmpstr (string a, string b)"
+
+.PP
+Definiert in Zeile 90 der Datei Libdesy\&.lib\&.
+.SS "string CutSubstring (string longString, string regex, int offset)"
+
+.PP
+Definiert in Zeile 31 der Datei Libdesy\&.lib\&.
+.SS "void Debug (string msg)"
+
+.PP
+Definiert in Zeile 51 der Datei Libdesy\&.lib\&.
+.SS "string dlgStrEd (string Ueberschrifft, string Frage, string Subject)"
+
+.PP
+Definiert in Zeile 145 der Datei Libdesy\&.lib\&.
+.SS "int ErrorMsg (string msg, string opt1, string opt2, int btns)"
+
+.PP
+Definiert in Zeile 157 der Datei Libdesy\&.lib\&.
+.SS "string HtmlTagsentfernen (string s)"
+
+.PP
+Definiert in Zeile 167 der Datei Libdesy\&.lib\&.
+.SS "string int2str (int number)"
+
+.PP
+Definiert in Zeile 6 der Datei Libdesy\&.lib\&.
+.SS "real log2 (int number)"
+
+.PP
+Logarithmus zur Basis 2 auf 3 Nachkommastellen genau\&. 
+.PP
+\fBParameter:\fP
+.RS 4
+\fInumber\fP integer Zahl 
+.RE
+.PP
+\fBRückgabe:\fP
+.RS 4
+der Logarithmus zur Basis 2 
+.RE
+.PP
+
+.PP
+Definiert in Zeile 67 der Datei Libdesy\&.lib\&.
+.SS "string real2str (real value)"
+
+.PP
+Definiert in Zeile 13 der Datei Libdesy\&.lib\&.
+.SS "string regex_from_string (string subject)"
+wenn ein String als regulärer Ausdruck genutz werden soll müssen einige Buchstaben mit Escape-Sequenz versehen werden damit keine Fehler auftreten\&. 
+.PP
+Definiert in Zeile 125 der Datei Libdesy\&.lib\&.
+.SS "string str_replace (string subject, string regex, string replace, int initialOffset, int Wiederholungen)"
+
+.PP
+Definiert in Zeile 103 der Datei Libdesy\&.lib\&.
+.SS "string TrimWhiteSpace (string s)"
+
+.PP
+Definiert in Zeile 41 der Datei Libdesy\&.lib\&.
+.SH "Variablen-Dokumentation"
+.PP 
+.SS "int FALSE = 0"
+
+.PP
+Definiert in Zeile 2 der Datei Libdesy\&.lib\&.
+.SS "int ONCE = 0"
+
+.PP
+Definiert in Zeile 101 der Datei Libdesy\&.lib\&.
+.SS "int REPEAT = 1"
+
+.PP
+Definiert in Zeile 100 der Datei Libdesy\&.lib\&.
+.SS "int START = 0"
+
+.PP
+Definiert in Zeile 99 der Datei Libdesy\&.lib\&.
+.SS "int TRUE = 1"
+
+.PP
+Definiert in Zeile 1 der Datei Libdesy\&.lib\&.
+.SH "Autor"
+.PP 
+Automatisch erzeugt von Doxygen für Desy Eagle Bauteil-Datenbank Service Programme aus dem Quellcode\&.

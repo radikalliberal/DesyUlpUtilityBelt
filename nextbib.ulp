@@ -1,0 +1,25 @@
+/**
+ *  \file nextbib.ulp
+ *  \author Jan Scholz
+ *  \brief öffnet die nächste Bibliothek und das erste Bauteil in ihr
+ *  
+ */
+
+int Anzahl_Bibliotheken;
+string libsPath[],cmd;
+		
+void main() {
+	
+
+	library(L) {
+		
+		Anzahl_Bibliotheken = fileglob(libsPath, filedir(L.name)+"/*.lbr"); 
+		for(int l = 0; l < Anzahl_Bibliotheken-1 ; l++) {
+			
+			if(libsPath[l]==L.name) cmd+= "OPEN '"+libsPath[l+1]+"';edit";
+			
+		}
+	}
+	//Ding("","");
+exit(cmd);
+}

@@ -1,0 +1,267 @@
+\hypertarget{test_8ulp}{}\section{H\+:/sze/\+Eagle6/ulp/\+Ulp-\/\+Service/test.ulp-\/\+Dateireferenz}
+\label{test_8ulp}\index{H\+:/sze/\+Eagle6/ulp/\+Ulp-\/\+Service/test.\+ulp@{H\+:/sze/\+Eagle6/ulp/\+Ulp-\/\+Service/test.\+ulp}}
+{\ttfamily \#include \char`\"{}Libdesy.\+lib\char`\"{}}\\*
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{test_8ulp_a7ff0a764a1a161522eb0e1c3b7981d20}{for} (\hyperlink{test_8ulp_ab66ed8e0098c0a86b458672a55a9cca9}{k};\hyperlink{test_8ulp_ab66ed8e0098c0a86b458672a55a9cca9}{k}$<$ \hyperlink{test_8ulp_ae8b208e90c3b4ab20d7c823612b1a0f7}{Anzahl\+Libs};\hyperlink{test_8ulp_ab66ed8e0098c0a86b458672a55a9cca9}{k}++)
+\item 
+\hyperlink{test_8ulp_a6db4303775314f3afbb16074b373f079}{output} (\char`\"{}N\+:/public/Eagle\+\_\+6+/ulp/Ulp-\/Service/Bauteile.\+csv\char`\"{},\char`\"{}wt\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Variablen}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{test_8ulp_acb559820d9ca11295b4500f179ef6392}{i} = 0
+\item 
+int \hyperlink{test_8ulp_ab66ed8e0098c0a86b458672a55a9cca9}{k} = 0
+\item 
+int \hyperlink{test_8ulp_a2f0524c519c9a079ebbe76797552cfff}{selector1}
+\item 
+int \hyperlink{test_8ulp_acb22ea06df7a98062b750ecca56f1628}{selector2}
+\item 
+int \hyperlink{test_8ulp_a00c6cb851706bdde7570b25efe80733a}{bts}
+\item 
+int \hyperlink{test_8ulp_ae8b208e90c3b4ab20d7c823612b1a0f7}{Anzahl\+Libs} = fileglob(\hyperlink{test_8ulp_ab79ee21fe4aae7937f99de5b9c7b7d2c}{L\+I\+B\+S},\hyperlink{test_8ulp_a44dc1eefd5382033cf032f578a0130b9}{L\+I\+B6\+\_\+\+P\+A\+T\+H}+\char`\"{}/$\ast$.lbr\char`\"{})
+\item 
+string \hyperlink{test_8ulp_a43b9274914173cbec050c89b07f1824b}{out}
+\item 
+string \hyperlink{test_8ulp_ab79ee21fe4aae7937f99de5b9c7b7d2c}{L\+I\+B\+S} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a801e8dfc827f7961b6012c0100f77ab4}{out\+Att\+Arr} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_abd552ace971c34ee4d05fc524378dc32}{out\+Elem\+Arr} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a2f8d954bdd72eba003a9802a6248de83}{temp} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_af0d191df3e333660839f50e87bc098c8}{Bt\+Table} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a44f73a7606acf532b5a5c0eb0aef6fbc}{Dev\+Table} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a1739e013da948312edaaa3ade1bd7f7a}{temp1} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a93cd3f3f743b20e134149e06efa22a88}{temp2} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a6d07a7b1d2f2bb3e3061eba3b676dd44}{temp3} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_ad6a0fc9c82629f46ca764b920e57db24}{temp4} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a6ba91b18d0979e207105d660a2010d8d}{Hersteller\+Nummer} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a088204f20433deace071409889b5aba1}{Val} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a0165df64e95135bade509c58bdb353f1}{Beschreibung} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a36b57fe679881487796855a589fbfb85}{Package} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a03dd05fe151d0e9f9edf96078bc234d4}{Hersteller} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a773ea3bd03d30f9371dda8ee12a97b3a}{Vorzug} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a57ba39a1335c8ae9ef4eb8314d51160e}{Orderbase\+Nummer} \mbox{[}$\,$\mbox{]}
+\item 
+string \hyperlink{test_8ulp_a44dc1eefd5382033cf032f578a0130b9}{L\+I\+B6\+\_\+\+P\+A\+T\+H} = \char`\"{}//win.\+desy.\+de/group/sze/public/Eagle\+\_\+6+/lbr\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Dokumentation der Funktionen}
+\hypertarget{test_8ulp_a7ff0a764a1a161522eb0e1c3b7981d20}{}\index{test.\+ulp@{test.\+ulp}!for@{for}}
+\index{for@{for}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{for}]{\setlength{\rightskip}{0pt plus 5cm}for (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{test_8ulp_a7ff0a764a1a161522eb0e1c3b7981d20}
+
+
+Definiert in Zeile 11 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a6db4303775314f3afbb16074b373f079}{}\index{test.\+ulp@{test.\+ulp}!output@{output}}
+\index{output@{output}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{output}]{\setlength{\rightskip}{0pt plus 5cm}output (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}N\+:/public/Eagle\+\_\+6+/ulp/Ulp-\/Service/Bauteile.\+csv\char`\"{}}]{, }
+\item[{\char`\"{}wt\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{test_8ulp_a6db4303775314f3afbb16074b373f079}
+
+
+Definiert in Zeile 45 der Datei test.\+ulp.
+
+
+
+\subsection{Variablen-\/\+Dokumentation}
+\hypertarget{test_8ulp_ae8b208e90c3b4ab20d7c823612b1a0f7}{}\index{test.\+ulp@{test.\+ulp}!Anzahl\+Libs@{Anzahl\+Libs}}
+\index{Anzahl\+Libs@{Anzahl\+Libs}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{Anzahl\+Libs}]{\setlength{\rightskip}{0pt plus 5cm}Anzahl\+Libs = fileglob({\bf L\+I\+B\+S},{\bf L\+I\+B6\+\_\+\+P\+A\+T\+H}+\char`\"{}/$\ast$.lbr\char`\"{})}\label{test_8ulp_ae8b208e90c3b4ab20d7c823612b1a0f7}
+
+
+Definiert in Zeile 4 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a0165df64e95135bade509c58bdb353f1}{}\index{test.\+ulp@{test.\+ulp}!Beschreibung@{Beschreibung}}
+\index{Beschreibung@{Beschreibung}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{Beschreibung}]{\setlength{\rightskip}{0pt plus 5cm}string Beschreibung\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a0165df64e95135bade509c58bdb353f1}
+
+
+Definiert in Zeile 7 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a00c6cb851706bdde7570b25efe80733a}{}\index{test.\+ulp@{test.\+ulp}!bts@{bts}}
+\index{bts@{bts}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{bts}]{\setlength{\rightskip}{0pt plus 5cm}int bts}\label{test_8ulp_a00c6cb851706bdde7570b25efe80733a}
+
+
+Definiert in Zeile 3 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_af0d191df3e333660839f50e87bc098c8}{}\index{test.\+ulp@{test.\+ulp}!Bt\+Table@{Bt\+Table}}
+\index{Bt\+Table@{Bt\+Table}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{Bt\+Table}]{\setlength{\rightskip}{0pt plus 5cm}string Bt\+Table\mbox{[}$\,$\mbox{]}}\label{test_8ulp_af0d191df3e333660839f50e87bc098c8}
+
+
+Definiert in Zeile 6 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a44f73a7606acf532b5a5c0eb0aef6fbc}{}\index{test.\+ulp@{test.\+ulp}!Dev\+Table@{Dev\+Table}}
+\index{Dev\+Table@{Dev\+Table}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{Dev\+Table}]{\setlength{\rightskip}{0pt plus 5cm}string Dev\+Table\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a44f73a7606acf532b5a5c0eb0aef6fbc}
+
+
+Definiert in Zeile 6 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a03dd05fe151d0e9f9edf96078bc234d4}{}\index{test.\+ulp@{test.\+ulp}!Hersteller@{Hersteller}}
+\index{Hersteller@{Hersteller}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{Hersteller}]{\setlength{\rightskip}{0pt plus 5cm}string Hersteller\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a03dd05fe151d0e9f9edf96078bc234d4}
+
+
+Definiert in Zeile 7 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a6ba91b18d0979e207105d660a2010d8d}{}\index{test.\+ulp@{test.\+ulp}!Hersteller\+Nummer@{Hersteller\+Nummer}}
+\index{Hersteller\+Nummer@{Hersteller\+Nummer}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{Hersteller\+Nummer}]{\setlength{\rightskip}{0pt plus 5cm}string Hersteller\+Nummer\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a6ba91b18d0979e207105d660a2010d8d}
+
+
+Definiert in Zeile 7 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_acb559820d9ca11295b4500f179ef6392}{}\index{test.\+ulp@{test.\+ulp}!i@{i}}
+\index{i@{i}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{i}]{\setlength{\rightskip}{0pt plus 5cm}int i = 0}\label{test_8ulp_acb559820d9ca11295b4500f179ef6392}
+
+
+Definiert in Zeile 2 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_ab66ed8e0098c0a86b458672a55a9cca9}{}\index{test.\+ulp@{test.\+ulp}!k@{k}}
+\index{k@{k}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{k}]{\setlength{\rightskip}{0pt plus 5cm}int k = 0}\label{test_8ulp_ab66ed8e0098c0a86b458672a55a9cca9}
+
+
+Definiert in Zeile 2 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a44dc1eefd5382033cf032f578a0130b9}{}\index{test.\+ulp@{test.\+ulp}!L\+I\+B6\+\_\+\+P\+A\+T\+H@{L\+I\+B6\+\_\+\+P\+A\+T\+H}}
+\index{L\+I\+B6\+\_\+\+P\+A\+T\+H@{L\+I\+B6\+\_\+\+P\+A\+T\+H}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{L\+I\+B6\+\_\+\+P\+A\+T\+H}]{\setlength{\rightskip}{0pt plus 5cm}string L\+I\+B6\+\_\+\+P\+A\+T\+H = \char`\"{}//win.\+desy.\+de/group/sze/public/Eagle\+\_\+6+/lbr\char`\"{}}\label{test_8ulp_a44dc1eefd5382033cf032f578a0130b9}
+
+
+Definiert in Zeile 8 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_ab79ee21fe4aae7937f99de5b9c7b7d2c}{}\index{test.\+ulp@{test.\+ulp}!L\+I\+B\+S@{L\+I\+B\+S}}
+\index{L\+I\+B\+S@{L\+I\+B\+S}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{L\+I\+B\+S}]{\setlength{\rightskip}{0pt plus 5cm}string L\+I\+B\+S\mbox{[}$\,$\mbox{]}}\label{test_8ulp_ab79ee21fe4aae7937f99de5b9c7b7d2c}
+
+
+Definiert in Zeile 5 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a57ba39a1335c8ae9ef4eb8314d51160e}{}\index{test.\+ulp@{test.\+ulp}!Orderbase\+Nummer@{Orderbase\+Nummer}}
+\index{Orderbase\+Nummer@{Orderbase\+Nummer}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{Orderbase\+Nummer}]{\setlength{\rightskip}{0pt plus 5cm}string Orderbase\+Nummer\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a57ba39a1335c8ae9ef4eb8314d51160e}
+
+
+Definiert in Zeile 7 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a43b9274914173cbec050c89b07f1824b}{}\index{test.\+ulp@{test.\+ulp}!out@{out}}
+\index{out@{out}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{out}]{\setlength{\rightskip}{0pt plus 5cm}string out}\label{test_8ulp_a43b9274914173cbec050c89b07f1824b}
+
+
+Definiert in Zeile 5 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a801e8dfc827f7961b6012c0100f77ab4}{}\index{test.\+ulp@{test.\+ulp}!out\+Att\+Arr@{out\+Att\+Arr}}
+\index{out\+Att\+Arr@{out\+Att\+Arr}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{out\+Att\+Arr}]{\setlength{\rightskip}{0pt plus 5cm}string out\+Att\+Arr\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a801e8dfc827f7961b6012c0100f77ab4}
+
+
+Definiert in Zeile 6 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_abd552ace971c34ee4d05fc524378dc32}{}\index{test.\+ulp@{test.\+ulp}!out\+Elem\+Arr@{out\+Elem\+Arr}}
+\index{out\+Elem\+Arr@{out\+Elem\+Arr}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{out\+Elem\+Arr}]{\setlength{\rightskip}{0pt plus 5cm}string out\+Elem\+Arr\mbox{[}$\,$\mbox{]}}\label{test_8ulp_abd552ace971c34ee4d05fc524378dc32}
+
+
+Definiert in Zeile 6 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a36b57fe679881487796855a589fbfb85}{}\index{test.\+ulp@{test.\+ulp}!Package@{Package}}
+\index{Package@{Package}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{Package}]{\setlength{\rightskip}{0pt plus 5cm}string Package\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a36b57fe679881487796855a589fbfb85}
+
+
+Definiert in Zeile 7 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a2f0524c519c9a079ebbe76797552cfff}{}\index{test.\+ulp@{test.\+ulp}!selector1@{selector1}}
+\index{selector1@{selector1}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{selector1}]{\setlength{\rightskip}{0pt plus 5cm}int selector1}\label{test_8ulp_a2f0524c519c9a079ebbe76797552cfff}
+
+
+Definiert in Zeile 3 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_acb22ea06df7a98062b750ecca56f1628}{}\index{test.\+ulp@{test.\+ulp}!selector2@{selector2}}
+\index{selector2@{selector2}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{selector2}]{\setlength{\rightskip}{0pt plus 5cm}int selector2}\label{test_8ulp_acb22ea06df7a98062b750ecca56f1628}
+
+
+Definiert in Zeile 3 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a2f8d954bdd72eba003a9802a6248de83}{}\index{test.\+ulp@{test.\+ulp}!temp@{temp}}
+\index{temp@{temp}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{temp}]{\setlength{\rightskip}{0pt plus 5cm}string temp\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a2f8d954bdd72eba003a9802a6248de83}
+
+
+Definiert in Zeile 6 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a1739e013da948312edaaa3ade1bd7f7a}{}\index{test.\+ulp@{test.\+ulp}!temp1@{temp1}}
+\index{temp1@{temp1}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{temp1}]{\setlength{\rightskip}{0pt plus 5cm}string temp1\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a1739e013da948312edaaa3ade1bd7f7a}
+
+
+Definiert in Zeile 6 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a93cd3f3f743b20e134149e06efa22a88}{}\index{test.\+ulp@{test.\+ulp}!temp2@{temp2}}
+\index{temp2@{temp2}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{temp2}]{\setlength{\rightskip}{0pt plus 5cm}string temp2\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a93cd3f3f743b20e134149e06efa22a88}
+
+
+Definiert in Zeile 6 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a6d07a7b1d2f2bb3e3061eba3b676dd44}{}\index{test.\+ulp@{test.\+ulp}!temp3@{temp3}}
+\index{temp3@{temp3}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{temp3}]{\setlength{\rightskip}{0pt plus 5cm}string temp3\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a6d07a7b1d2f2bb3e3061eba3b676dd44}
+
+
+Definiert in Zeile 6 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_ad6a0fc9c82629f46ca764b920e57db24}{}\index{test.\+ulp@{test.\+ulp}!temp4@{temp4}}
+\index{temp4@{temp4}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{temp4}]{\setlength{\rightskip}{0pt plus 5cm}string temp4\mbox{[}$\,$\mbox{]}}\label{test_8ulp_ad6a0fc9c82629f46ca764b920e57db24}
+
+
+Definiert in Zeile 6 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a088204f20433deace071409889b5aba1}{}\index{test.\+ulp@{test.\+ulp}!Val@{Val}}
+\index{Val@{Val}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{Val}]{\setlength{\rightskip}{0pt plus 5cm}string Val\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a088204f20433deace071409889b5aba1}
+
+
+Definiert in Zeile 7 der Datei test.\+ulp.
+
+\hypertarget{test_8ulp_a773ea3bd03d30f9371dda8ee12a97b3a}{}\index{test.\+ulp@{test.\+ulp}!Vorzug@{Vorzug}}
+\index{Vorzug@{Vorzug}!test.\+ulp@{test.\+ulp}}
+\subsubsection[{Vorzug}]{\setlength{\rightskip}{0pt plus 5cm}string Vorzug\mbox{[}$\,$\mbox{]}}\label{test_8ulp_a773ea3bd03d30f9371dda8ee12a97b3a}
+
+
+Definiert in Zeile 7 der Datei test.\+ulp.
+
