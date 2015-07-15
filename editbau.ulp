@@ -184,7 +184,7 @@ nDev=1;
 newBib=0;
 newDev=0;
 DevAktualisieren=0;
-sprintf(Datum,"%d.%d.%d",t2day(time()),t2month(time())+1,t2year(time()));
+
 
 //Funktionen
 
@@ -201,6 +201,9 @@ string Device_func(string tech,string vari) {
 	return str_replace(str_replace(Devname,"\\*",tech,0,0),"\\?",vari,0,0);
 }
 
+/**
+*	\brief Der Benutzername wird ausgelesen
+*/
 void readBearbeiter(){
 	system("cmd.exe /c echo %USERPROFILE% > " + ULP_PATH + "/user.ini");
 	fileread(temp_str,ULP_PATH + "/user.ini");
@@ -210,7 +213,7 @@ void readBearbeiter(){
 }
 
 /**
-*	erneuert die Tabelle im ersten Tab
+*	\brief erneuert die Tabelle im ersten Tab
 */
 void updateVarianten() {
 	
@@ -234,7 +237,7 @@ int libExsists(string path) {
 }
 
 /**
-*	Die eingegebenen Daten werden nochmals einer Kotrolle unterzogen bevor das
+*	\brief Die eingegebenen Daten werden nochmals einer Kotrolle unterzogen bevor das
 *	Bauteil abgespeichert wird.
 */
 void Check() {
@@ -260,30 +263,32 @@ void Check() {
 	if(!backtoMenu) {
 		if(!libExsists(curLibPath)){
 			if(ErrorMsg("Es exsistier noch keine Bibliothek für diesen Hersteller \n"
-									"unter dem akteullen Pfad in der 6er Bibliothek. \n"
+									"unter dem aktuellen Pfad in der 6er Bibliothek. \n"
 									"Soll eine Bibliothek angelegt oder verknüpft werden?"
 									,"Ja"
 									,"Nein"
-									,2))
-			do {
-				if(strlen(curLibPath) < 8)
-				curLibPath = dlgFileSave("Neue Bibliothek anlegen"
-																,LIB6_PATH+"/"+Hs+".lbr");
-				else
-				curLibPath = dlgFileSave("Neue Bibliothek anlegen",curLibPath);
-				if(curLibPath == "") {
-					pfad_waehlen = ErrorMsg("Es ist keine Bibliothek ausgewählt worden\n"
-																	"Bibliothek erneut auswählen?"
-																	,"Ok"
-																	,"Abbrechen"
-																	,2);
-					backtoMenu = 1;
-				}else{
-					backtoMenu = 0;
-					break;
-				}
-			}while( pfad_waehlen );	
-			else backtoMenu = 1;
+									,2)) {
+				do {
+					if(strlen(curLibPath) < 8)
+					curLibPath = dlgFileSave("Neue Bibliothek anlegen"
+																	,LIB6_PATH+"/"+Hs+".lbr");
+					else
+					curLibPath = dlgFileSave("Neue Bibliothek anlegen",curLibPath);
+					if(curLibPath == "") {
+						pfad_waehlen = ErrorMsg("Es ist keine Bibliothek ausgewählt worden\n"
+																		"Bibliothek erneut auswählen?"
+																		,"Ok"
+																		,"Abbrechen"
+																		,2);
+						backtoMenu = 1;
+					}else{
+						backtoMenu = 0;
+						break;
+					}
+				}while( pfad_waehlen );	
+			}	else { 
+				backtoMenu = 0;
+			}
 		}
 	}
 	if(!backtoMenu) {
@@ -326,7 +331,7 @@ string getTags(string description) {
 }
 
 /**
-*	Liest den Hersteller aus der Beschreibung herraus, selbst wenn das Bauteil recht alt ist und die neuen
+*	\brief Liest den Hersteller aus der Beschreibung herraus, selbst wenn das Bauteil recht alt ist und die neuen
 *	Konventionen noch nicht benutzt werden, steht die Chance recht hoch das etwas gefunden wird
 */
 
@@ -420,7 +425,7 @@ string ExtractHsBez(string Description) {
 }
 
 /**
-*	Der Name des Pdf-dokumentes wird aus der Beschreibung entnommen
+*	\brief Der Name des Pdf-dokumentes wird aus der Beschreibung entnommen
 */
 string ExtractPdf(string Description) {
 	status("ExtractPdf()");
@@ -475,7 +480,7 @@ string ExtractPdf(string Description) {
 }
 
 /**
-*	Es wird geschaut wie oft ein Substring in einem String vorkommt
+*	\brief Es wird geschaut wie oft ein Substring in einem String vorkommt
 */
 int QuantityOfSubstring(string sub,string main) {
 	status("QuantityOfSubstring()");
@@ -493,7 +498,7 @@ int QuantityOfSubstring(string sub,string main) {
 	return Anzahl;
 }
 /**
-*	Hier wird mit Hilfe von einem Regulären Ausdruck ein Text
+*	\brief Hier wird mit Hilfe von einem Regulären Ausdruck ein Text
 *	nach Treffern durchsucht, die Treffer werden zurückgegeben
 */
 
@@ -539,7 +544,7 @@ string Ersetzen(string Subject, string regex, string newString) {
 	return return_Value;
 }	
 /**
-*	Die Beschreibung wird ausgelesen und HTML-Tags werden entfernt
+*	\brief Die Beschreibung wird ausgelesen und HTML-Tags werden entfernt
 */
 string ExtractDescription(string DerString) {
 	status("ExtractDescription()");
@@ -610,7 +615,7 @@ string formatDeviceName(string Device, string techno, string var) {
 }
 
 /**
-*	Aus einem String wird ein regulärer Ausdruck gemacht der auch leicht abweichende 
+*	\brief Aus einem String wird ein regulärer Ausdruck gemacht der auch leicht abweichende 
 *  Strings finden kann
 */
 string FuzzySearchRegex(string Suchbegriff) {
@@ -628,7 +633,7 @@ string FuzzySearchRegex(string Suchbegriff) {
 	return ReturnVal;
 }
 /**
-*	Es wird geschaut wer das Bauteil erstellt und bearbeitet hat	
+*	\brief Es wird geschaut wer das Bauteil erstellt und bearbeitet hat	
 */
 void  evaluateRevisionHistory(){
 	int len;
@@ -688,7 +693,7 @@ void  evaluateRevisionHistory(){
 	
 }
 /**
-*	unter dem Reiter Tools kann mittels dieser Funktion schnell eine Auswahl von Herstellernummern 
+*	\brief unter dem Reiter Tools kann mittels dieser Funktion schnell eine Auswahl von Herstellernummern 
 *	oder Bezeichnungen erstellt werden
 */
 void createHsNrs() {
@@ -854,7 +859,7 @@ void initVariablesAndPaths() {
 
 
 /**
-*	Für einige Hersteller kann direkt auf der Herstellerseite nach dem Bauteil gesucht werden.
+*	\brief Für einige Hersteller kann direkt auf der Herstellerseite nach dem Bauteil gesucht werden.
 *	Der Name des Hersteller wird mit einer Auswahl von bekannten Herstellern verglichen
 *	und wenn eine Übereinstimmung gefunden ist wird ein Link auf die Seite des Herstellers
 *	erzeugt mit einer Suchanfrage zu dem aktuellen Bauteil
@@ -897,7 +902,7 @@ void pdfSuchen() {
 }
 
 /*
-*	Die Beschreibung wird vor und nach dem bearbeiten von falschen
+*	\brief Die Beschreibung wird vor und nach dem bearbeiten von falschen
 *  Zeichen befreit und unnötigen Zeilenumbrüchen bereinigt
 */
 
@@ -910,7 +915,7 @@ string cleanDescription(string description) {
 }
 
 /**
-*	Vorhandene Attribute werden ausgelesen
+*	\brief Vorhandene Attribute werden ausgelesen
 */
 void readAttributes(){
 	int i = 0;
@@ -1065,10 +1070,11 @@ int UebersichtTab() {
 							dlgCheckBox("Attribute aus Technologien und Varianten erstellen",
 							Attrib_automatisch_anlegen);
 							dlgCheckBox("ZE-Vorzug", ZE_Vorzug);
-							dlgCheckBox("Orderbase Daten abgleichen (noch keine Funktion)", importOB);
+							//dlgCheckBox("Orderbase Daten abgleichen (noch keine Funktion)", importOB);
 							dlgCheckBox("neues Bauteil aus Vorlage erstellen", vorheriges_Device_beibehalten);
 							dlgHBoxLayout{
 								dlgComboBox(Pdfs,pdfSelect) system("cmd /c \""+PDF_PATHS[pdfSelect] + "\"");
+								dlgLabel("Datenblätt/er öffnen");
 								dlgStretch(1);
 							}
 						}
@@ -1328,7 +1334,7 @@ int OrderbaseTab() {
 			dlgCell(0, 1) dlgStringEdit(SuchText);
 			dlgCell(1, 0) dlgLabel("Hersteller: ");
 			dlgCell(1, 1) dlgStringEdit(Suche_Hersteller);
-			dlgCell(1, 2) dlgPushButton("&Suchen") { 
+			dlgCell(1, 2) dlgPushButton("+&Suchen") { 
 				//btsearch();
 				error = system("cmd.exe /c sqlcmd -S zitleitsql3 -d orderbase_ze -Q "
 				"\"select nr, name, hersteller_artikelnr, beschreibung "
@@ -1336,10 +1342,10 @@ int OrderbaseTab() {
 				+ changeChar(Suche_Hersteller,'*','%') +"%' and hersteller_artikelnr like '"
 				+ changeChar(SuchText,'*','%')+"%';\"  -s\"$\" > "+ULP_PATH+"/orderbase.txt");
 				if(error) 
-				if(ErrorMsg("SQL-Abfragen können nur getätigt werden wenn Microsoft® SQL Server® 2014 installiert ist\nSoll die Software installiert werden?","Ja","Nein",2)) {
-					error = system("cmd.exe /c " + ULP_PATH + "/SQLEXPR_x86_ENU/setup.exe");
-					if(error) ErrorMsg("Es ist ein Fehler bei der Installation aufgetreten","Ok","",1);
-				}
+					if(ErrorMsg("SQL-Abfragen können nur getätigt werden wenn Microsoft® SQL Server® 2014 installiert ist\nSoll die Software installiert werden?","Ja","Nein",2)) {
+						error = system("cmd.exe /c " + ULP_PATH + "/SQLEXPR_x86_ENU/setup.exe");
+						if(error) ErrorMsg("Es ist ein Fehler bei der Installation aufgetreten","Ok","",1);
+					}
 				fileread(oboutput,ULP_PATH+"/orderbase.txt");
 				//str_replace(oboutput,"\\s{,20}",";",0,1);
 				oboutput = changeChar(oboutput,'$','\t');
@@ -1399,7 +1405,7 @@ int OrderbaseTab() {
 	return 0;
 }
 /**
-*	Benutzeroberfläche
+*	\brief Benutzeroberfläche
 */
 int menue() {
 	status("menue()");
@@ -1429,10 +1435,13 @@ int menue() {
 }
 
 /**
-*	Hauptprogramm
+*	\brief Hauptprogramm
 */
 void main() {
 	status("main() start");
+	
+	sprintf(Datum,"%d.%d.%d",t2day(time()),t2month(time())+1,t2year(time()));
+	
 	if (library) {
 		library(L){
 			//Debug_file("Debug Log vom "+Datum+"\n");
@@ -1483,12 +1492,6 @@ void main() {
 					}
 				}
 				
-				if(curLibPath != L.name) {
-					cmd += "OPEN '"+curLibPath+"';";
-					cmd += "COPY '"+DS.name+".dev@"+L.name+"';";
-					cmd += "EDIT '"+DS.name+".dev';"; 
-				}
-				
 				cmd += "Prefix "+Prefix+";";
 				
 				
@@ -1512,9 +1515,21 @@ void main() {
 						}
 					}
 				} else { 
+					if(curLibPath != L.name) {
+						cmd += "WRITE;";
+						cmd += "OPEN '"+curLibPath+"';";
+						cmd += "COPY '"+DS.name+".dev@"+L.name+"';";
+						cmd += "WRITE;";
+						cmd += "OPEN '"+L.name+"';";
+						cmd += "REMOVE '"+DS.name+".dev';";
+						cmd += "WRITE;";
+						cmd += "OPEN '"+curLibPath+"';";
+						cmd += "EDIT '"+DS.name+".dev';"; 
+					} 
 					if(initial_Devname != Devname) {
 						cmd += "rename '"+ DS.name + "' '" + Devname + "';";
 					}
+					
 				}
 
 				string  o[]; 
@@ -1532,11 +1547,11 @@ void main() {
 			*  Script erstellt.
 			*/
 					for(int g = 0; g < Anzahl_Varianten; g++) {
-						if( (strCmp(vz_compare[g],            Vorzug[g]) == 0) ||	
-								(strCmp( o_compare[g],         OBNummern[g]) == 0) ||
-								(strCmp( t_compare[g],      technologien[g]) == 0) ||
-								(strCmp( h_compare[g], Herstellernummern[g]) == 0) ||
-								(strCmp( v_compare[g],            Values[g]) == 0) ||
+						if( (cmpstr(vz_compare[g],            Vorzug[g]) != 0) ||	
+								(cmpstr( o_compare[g],         OBNummern[g]) != 0) ||
+								(cmpstr( t_compare[g],      technologien[g]) != 0) ||
+								(cmpstr( h_compare[g], Herstellernummern[g]) != 0) ||
+								(cmpstr( v_compare[g],            Values[g]) != 0) ||
 								Attrib_automatisch_anlegen == 1){
 							
 							strsplit(vz,           		 Vorzug[g], '\n');
@@ -1591,7 +1606,7 @@ void main() {
 									else if(t[i]=="''") cmd+="TECHNOLOGY ''";	
 									else if(t[i]=="") cmd+="TECHNOLOGY ''";
 									else cmd +="TECHNOLOGY '"+t[i]+"'";
-									cmd +=";  ATTRIBUTE "+att[k]+" '"+value+"' constant;\n";
+									cmd +=";  ATTRIBUTE "+att[k]+" '"+value+"' variable;\n";
 								}
 							}
 						}

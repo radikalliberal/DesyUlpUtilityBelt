@@ -2819,17 +2819,17 @@ für Wellenlöten auf der Bottom-Seite angepasst</description>
 <pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
 </symbol>
 <symbol name="DIODE-NEU">
-<wire x1="0" y1="-1.27" x2="-1.27" y2="-1.27" width="0.2" layer="94"/>
-<wire x1="-1.27" y1="1.27" x2="0" y2="-1.27" width="0.2" layer="94"/>
-<wire x1="0" y1="-1.27" x2="1.27" y2="1.27" width="0.2" layer="94"/>
-<wire x1="0" y1="-2.54" x2="0" y2="-1.27" width="0.1" layer="94"/>
-<wire x1="1.27" y1="-1.27" x2="0" y2="-1.27" width="0.2" layer="94"/>
-<wire x1="0" y1="2.54" x2="0" y2="1.27" width="0.1" layer="94"/>
-<wire x1="1.27" y1="1.27" x2="-1.27" y2="1.27" width="0.2" layer="94"/>
-<text x="1.27" y="1.905" size="1.5" layer="95" ratio="12">&gt;Name</text>
-<text x="1.27" y="-3.175" size="1.5" layer="96" ratio="12">&gt;Value</text>
-<pin name="1" x="0" y="3.81" visible="off" length="short" direction="pas" rot="R270"/>
-<pin name="2" x="0" y="-3.81" visible="off" length="short" direction="pas" rot="R90"/>
+<wire x1="1.27" y1="0" x2="1.27" y2="-1.27" width="0.2" layer="94"/>
+<wire x1="-1.27" y1="-1.27" x2="1.27" y2="0" width="0.2" layer="94"/>
+<wire x1="1.27" y1="0" x2="-1.27" y2="1.27" width="0.2" layer="94"/>
+<wire x1="2.54" y1="0" x2="1.27" y2="0" width="0.1" layer="94"/>
+<wire x1="1.27" y1="1.27" x2="1.27" y2="0" width="0.2" layer="94"/>
+<wire x1="-2.54" y1="0" x2="-1.27" y2="0" width="0.1" layer="94"/>
+<wire x1="-1.27" y1="1.27" x2="-1.27" y2="-1.27" width="0.2" layer="94"/>
+<text x="-2.54" y="1.905" size="1.5" layer="95" ratio="12">&gt;Name</text>
+<text x="-2.54" y="-3.175" size="1.5" layer="96" ratio="12">&gt;Value</text>
+<pin name="1" x="-3.81" y="0" visible="off" length="short" direction="pas"/>
+<pin name="2" x="3.81" y="0" visible="off" length="short" direction="pas" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -2873,7 +2873,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-02,5"/>
+<attribute name="VAL" value="Platzhalter-02,5"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-05,0" package="R-05,0A">
@@ -2882,7 +2888,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-05,0"/>
+<attribute name="VAL" value="Platzhalter-05,0"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-07,5" package="R-07,5A">
@@ -2891,7 +2903,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-07,5"/>
+<attribute name="VAL" value="Platzhalter-07,5"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-10,0" package="R-10,0A">
@@ -2900,7 +2918,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-10,0"/>
+<attribute name="VAL" value="Platzhalter-10,0"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-12,5" package="R-12,5A">
@@ -2909,7 +2933,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-12,5"/>
+<attribute name="VAL" value="Platzhalter-12,5"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-15,0" package="R-15,0A">
@@ -2918,7 +2948,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-15,0"/>
+<attribute name="VAL" value="Platzhalter-15,0"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-18,0" package="R-18,0A">
@@ -2927,7 +2963,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-18,0"/>
+<attribute name="VAL" value="Platzhalter-18,0"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-30,0" package="R-30,0A">
@@ -2936,7 +2978,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-30,0"/>
+<attribute name="VAL" value="Platzhalter-30,0"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-40,0" package="R-40,0A">
@@ -2945,7 +2993,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-40,0"/>
+<attribute name="VAL" value="Platzhalter-40,0"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-15,0A1" package="R-15,0A_1MM">
@@ -2954,7 +3008,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-15,0A1"/>
+<attribute name="VAL" value="Platzhalter-15,0A1"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-04,0" package="R-04,0R">
@@ -2963,7 +3023,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-04,0"/>
+<attribute name="VAL" value="Platzhalter-04,0"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-03,5" package="RL-03,5">
@@ -2972,7 +3038,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-03,5"/>
+<attribute name="VAL" value="Platzhalter-03,5"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="0402_SMD" package="0402">
@@ -2981,7 +3053,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter0402_SMD"/>
+<attribute name="VAL" value="Platzhalter0402_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="0603_SMD" package="0603">
@@ -2990,7 +3068,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter0603_SMD"/>
+<attribute name="VAL" value="Platzhalter0603_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="0805_SMD" package="0805">
@@ -2999,7 +3083,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter0805_SMD"/>
+<attribute name="VAL" value="Platzhalter0805_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="1206_SMD" package="1206">
@@ -3008,7 +3098,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter1206_SMD"/>
+<attribute name="VAL" value="Platzhalter1206_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="1210_SMD" package="1210">
@@ -3017,7 +3113,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter1210_SMD"/>
+<attribute name="VAL" value="Platzhalter1210_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="2010_SMD" package="2010">
@@ -3026,7 +3128,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter2010_SMD"/>
+<attribute name="VAL" value="Platzhalter2010_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="2012_SMD" package="2012">
@@ -3035,7 +3143,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter2012_SMD"/>
+<attribute name="VAL" value="Platzhalter2012_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="2512_SMD" package="2512">
@@ -3044,7 +3158,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter2512_SMD"/>
+<attribute name="VAL" value="Platzhalter2512_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="3216_SMD" package="3216">
@@ -3053,7 +3173,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter3216_SMD"/>
+<attribute name="VAL" value="Platzhalter3216_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="3516_SMD" package="3516">
@@ -3062,7 +3188,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter3516_SMD"/>
+<attribute name="VAL" value="Platzhalter3516_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="5923_SMD" package="5923">
@@ -3071,7 +3203,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter5923_SMD"/>
+<attribute name="VAL" value="Platzhalter5923_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="SOD-80_SMD" package="SOD-80">
@@ -3080,7 +3218,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterSOD-80_SMD"/>
+<attribute name="VAL" value="PlatzhalterSOD-80_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="SOD-87_SMD" package="SOD-87">
@@ -3089,7 +3233,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterSOD-87_SMD"/>
+<attribute name="VAL" value="PlatzhalterSOD-87_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-35,0" package="R-35,0A">
@@ -3098,7 +3248,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-35,0"/>
+<attribute name="VAL" value="Platzhalter-35,0"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-05,0A1" package="R-05,0R">
@@ -3107,7 +3263,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-05,0A1"/>
+<attribute name="VAL" value="Platzhalter-05,0A1"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-05,0R_AC03" package="R-05,0R1">
@@ -3116,7 +3278,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-05,0R_AC03"/>
+<attribute name="VAL" value="Platzhalter-05,0R_AC03"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-07,5R_AC03" package="R-07,5R">
@@ -3125,7 +3293,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-07,5R_AC03"/>
+<attribute name="VAL" value="Platzhalter-07,5R_AC03"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-07,5R_AC05" package="R-07,5R1">
@@ -3134,7 +3308,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-07,5R_AC05"/>
+<attribute name="VAL" value="Platzhalter-07,5R_AC05"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-17,7" package="AC03">
@@ -3143,7 +3323,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-17,7"/>
+<attribute name="VAL" value="Platzhalter-17,7"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-22,8" package="AC05">
@@ -3152,7 +3338,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-22,8"/>
+<attribute name="VAL" value="Platzhalter-22,8"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-20,0A1" package="R-20,0A1">
@@ -3161,7 +3353,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-20,0A1"/>
+<attribute name="VAL" value="Platzhalter-20,0A1"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-12,5A1" package="R-12,5A1">
@@ -3170,7 +3368,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-12,5A1"/>
+<attribute name="VAL" value="Platzhalter-12,5A1"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-20,0A" package="R-20,0A">
@@ -3179,7 +3383,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-20,0A"/>
+<attribute name="VAL" value="Platzhalter-20,0A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-35,0A1" package="R-35,0A1">
@@ -3188,7 +3398,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-35,0A1"/>
+<attribute name="VAL" value="Platzhalter-35,0A1"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-33,2" package="AC07">
@@ -3197,7 +3413,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-33,2"/>
+<attribute name="VAL" value="Platzhalter-33,2"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="PBH-1" package="PBH-1">
@@ -3206,7 +3428,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterPBH-1"/>
+<attribute name="VAL" value="PlatzhalterPBH-1"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="PBH-1-ST" package="PBH-1ST">
@@ -3215,7 +3443,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterPBH-1-ST"/>
+<attribute name="VAL" value="PlatzhalterPBH-1-ST"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-03,8R" package="R-TRC">
@@ -3224,7 +3458,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-03,8R"/>
+<attribute name="VAL" value="Platzhalter-03,8R"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-45,7" package="R-45,7A">
@@ -3233,7 +3473,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-45,7"/>
+<attribute name="VAL" value="Platzhalter-45,7"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-50,8" package="R-50,8A">
@@ -3242,7 +3488,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-50,8"/>
+<attribute name="VAL" value="Platzhalter-50,8"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-5,08_S-SERIE" package="S-SERIE">
@@ -3251,7 +3503,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-5,08_S-SERIE"/>
+<attribute name="VAL" value="Platzhalter-5,08_S-SERIE"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="1206W_SMD" package="R1206W">
@@ -3260,7 +3518,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter1206W_SMD"/>
+<attribute name="VAL" value="Platzhalter1206W_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="0603W_SMD" package="R0603W">
@@ -3269,7 +3533,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter0603W_SMD"/>
+<attribute name="VAL" value="Platzhalter0603W_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="0805W_SMD" package="R0805W">
@@ -3278,7 +3548,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter0805W_SMD"/>
+<attribute name="VAL" value="Platzhalter0805W_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="1210W_SMD" package="R1210W">
@@ -3287,7 +3563,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter1210W_SMD"/>
+<attribute name="VAL" value="Platzhalter1210W_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="MPC10" package="MPC10">
@@ -3296,7 +3578,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterMPC10"/>
+<attribute name="VAL" value="PlatzhalterMPC10"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-WSC4527" package="WSC4527">
@@ -3305,7 +3593,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-WSC4527"/>
+<attribute name="VAL" value="Platzhalter-WSC4527"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="PR03" package="PR03">
@@ -3314,7 +3608,13 @@ Hierbei bitte die Lötrichtung beachten.&lt;br&gt;
 <connect gate="R" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterPR03"/>
+<attribute name="VAL" value="PlatzhalterPR03"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -3358,7 +3658,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-C2,5R" constant="no"/>
+<attribute name="VAL" value="Platzhalter-C2,5R" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-C5,0R" package="EGPU5R">
@@ -3367,7 +3673,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-C5,0R" constant="no"/>
+<attribute name="VAL" value="Platzhalter-C5,0R" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-C2,5R1" package="KDPU2,5R">
@@ -3376,7 +3688,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-C2,5R1" constant="no"/>
+<attribute name="VAL" value="Platzhalter-C2,5R1" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-0504-SMD" package="0504">
@@ -3385,7 +3703,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-0504-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-0504-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-1206-SMD" package="1206">
@@ -3394,7 +3718,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-1206-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-1206-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-1210-SMD" package="1210">
@@ -3403,7 +3733,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-1210-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-1210-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-1812-SMD" package="1812">
@@ -3412,7 +3748,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-1812-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-1812-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-1825-SMD" package="1825">
@@ -3421,7 +3763,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-1825-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-1825-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-FKC-10R" package="FKC-10R">
@@ -3430,7 +3778,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-FKC-10R" constant="no"/>
+<attribute name="VAL" value="Platzhalter-FKC-10R" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-FKC-7,5" package="FKC-7,5R">
@@ -3439,7 +3793,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-FKC-7,5" constant="no"/>
+<attribute name="VAL" value="Platzhalter-FKC-7,5" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKP10-10R" package="MKP10-10R">
@@ -3448,7 +3808,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKP10-10R" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKP10-10R" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKP10-15R" package="MKP10-15R">
@@ -3457,7 +3823,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKP10-15R" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKP10-15R" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS2-2,5R" package="MKS2-25R">
@@ -3466,7 +3838,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS2-2,5R" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS2-2,5R" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS2-5R1" package="MKS2-5R1">
@@ -3475,7 +3853,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS2-5R1" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS2-5R1" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS2-5R2" package="MKS2-5R2">
@@ -3484,7 +3868,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS2-5R2" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS2-5R2" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS2-5R3" package="MKS2-5R3">
@@ -3493,7 +3883,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS2-5R3" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS2-5R3" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS2-5R4" package="MKS2-5R4">
@@ -3502,7 +3898,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS2-5R4" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS2-5R4" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS2-5R5" package="MKS2-5R5">
@@ -3511,7 +3913,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS2-5R5" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS2-5R5" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS3-7,5R" package="MKS3-75R">
@@ -3520,7 +3928,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS3-7,5R" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS3-7,5R" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS4-27R2" package="MKS4-27R2">
@@ -3529,7 +3943,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS4-27R2" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS4-27R2" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS4-10R" package="MKS4-10R">
@@ -3538,7 +3958,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS4-10R" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS4-10R" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS4-15R1" package="MKS4-15R1">
@@ -3547,7 +3973,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS4-15R1" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS4-15R1" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS4-15R2" package="MKS4-15R2">
@@ -3556,7 +3988,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS4-15R2" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS4-15R2" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS4-22R1" package="MKS4-22R1">
@@ -3565,7 +4003,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS4-22R1" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS4-22R1" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS4-22R2" package="MKS4-22R2">
@@ -3574,7 +4018,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS4-22R2" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS4-22R2" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS4-22R3" package="MKS4-22R3">
@@ -3583,7 +4033,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS4-22R3" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS4-22R3" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS4-27R1" package="MKS4-27R1">
@@ -3592,7 +4048,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS4-27R1" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS4-27R1" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS47,5R1" package="MKS4-75R1">
@@ -3601,7 +4063,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS47,5R1" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS47,5R1" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS4-7,5R2" package="MKS4-75R2">
@@ -3610,7 +4078,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS4-7,5R2" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS4-7,5R2" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-FKP2-5R1" package="FKP2-5R1">
@@ -3619,7 +4093,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-FKP2-5R1" constant="no"/>
+<attribute name="VAL" value="Platzhalter-FKP2-5R1" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-FKP2-5R2" package="FKP2-5R2">
@@ -3628,7 +4108,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-FKP2-5R2" constant="no"/>
+<attribute name="VAL" value="Platzhalter-FKP2-5R2" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-FKP2-5R3" package="FKP2-5R3">
@@ -3637,7 +4123,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-FKP2-5R3" constant="no"/>
+<attribute name="VAL" value="Platzhalter-FKP2-5R3" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKP2-5R1" package="MKP2-5R1">
@@ -3646,7 +4138,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKP2-5R1" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKP2-5R1" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKP2-5R2" package="MKP2-5R2">
@@ -3655,7 +4153,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKP2-5R2" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKP2-5R2" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKP2-5R3" package="MKP2-5R3">
@@ -3664,7 +4168,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKP2-5R3" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKP2-5R3" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-FOLIE-45,0A" package="FOLIE-45,0A">
@@ -3673,7 +4183,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-FOLIE-45,0A" constant="no"/>
+<attribute name="VAL" value="Platzhalter-FOLIE-45,0A" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-FOLIE-50,0A" package="FOLIE-50,0A">
@@ -3682,7 +4198,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-FOLIE-50,0A" constant="no"/>
+<attribute name="VAL" value="Platzhalter-FOLIE-50,0A" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-5045-SMD" package="5045">
@@ -3691,7 +4213,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-5045-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-5045-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-0402-SMD" package="0402">
@@ -3700,7 +4228,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-0402-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-0402-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-0603-SMD" package="0603">
@@ -3709,7 +4243,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-0603-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-0603-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-0805-SMD" package="0805">
@@ -3718,7 +4258,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-0805-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-0805-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-2220-SMD" package="2220">
@@ -3727,7 +4273,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-2220-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-2220-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS2-5R6" package="MKS2-5R6">
@@ -3736,7 +4288,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS2-5R6" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS2-5R6" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-0306-LICC" package="0306">
@@ -3745,7 +4303,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-0306-LICC" constant="no"/>
+<attribute name="VAL" value="Platzhalter-0306-LICC" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-0508-LICC" package="0508">
@@ -3754,7 +4318,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-0508-LICC" constant="no"/>
+<attribute name="VAL" value="Platzhalter-0508-LICC" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-0612-LICC" package="0612">
@@ -3763,7 +4333,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-0612-LICC" constant="no"/>
+<attribute name="VAL" value="Platzhalter-0612-LICC" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-0603W_SMD" package="C0603W">
@@ -3772,7 +4348,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-0603W_SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-0603W_SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-1206W_SMD" package="C1206W">
@@ -3781,7 +4363,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-1206W_SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-1206W_SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-0805W_SMD" package="C0805W">
@@ -3790,7 +4378,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-0805W_SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-0805W_SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-1210W_SMD" package="C1210W">
@@ -3799,7 +4393,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-1210W_SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-1210W_SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKP22_5R1" package="MKP22_5R1">
@@ -3808,7 +4408,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="P$2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKP22_5R1" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKP22_5R1" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKP22_5R2" package="MKP22_5R2">
@@ -3817,7 +4423,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="P$2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKP22_5R2" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKP22_5R2" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-MKS4_27,5R3" package="MKS427R3">
@@ -3826,7 +4438,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="P$2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-MKS4_27,5R3" constant="no"/>
+<attribute name="VAL" value="Platzhalter-MKS4_27,5R3" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-CKG45" package="CKG45">
@@ -3835,7 +4453,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-CKG45" constant="no"/>
+<attribute name="VAL" value="Platzhalter-CKG45" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-CKG57" package="CKG57">
@@ -3844,7 +4468,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-CKG57" constant="no"/>
+<attribute name="VAL" value="Platzhalter-CKG57" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-PPB42.5" package="PPB42.5">
@@ -3853,7 +4483,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-PPB42.5" constant="no"/>
+<attribute name="VAL" value="Platzhalter-PPB42.5" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-22,5_PHE" package="FOLIE-22,5_PHE">
@@ -3862,7 +4498,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-22,5_PHE" constant="no"/>
+<attribute name="VAL" value="Platzhalter-22,5_PHE" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-37,5_PHE" package="FOLIE-37,5_PHE">
@@ -3871,7 +4513,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-37,5_PHE" constant="no"/>
+<attribute name="VAL" value="Platzhalter-37,5_PHE" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="-C2220-SMD" package="C2220">
@@ -3880,7 +4528,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="C" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value="" constant="no"/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter" constant="no"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-C2220-SMD" constant="no"/>
+<attribute name="VAL" value="Platzhalter-C2220-SMD" constant="no"/>
+<attribute name="ZE-VORZUG" value="nein" constant="no"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -3901,6 +4555,7 @@ Beispiel: C0805W_SMD&lt;br&gt;
 &lt;td width=250&gt;
 &amp;nbsp; Platzhalter&lt;br&gt;  
 &amp;nbsp; Platzhalter &lt;br&gt;  
+&amp;nbsp; &lt;a href = "file:\\elmadata.desy.de\desy_WN\Elektronik\Artikel\\.pdf"&gt;.pdf&lt;/a&gt;
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
@@ -3919,7 +4574,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter1210_SMD"/>
+<attribute name="VAL" value="Platzhalter1210_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="2012C_SMD" package="2012C">
@@ -3928,7 +4589,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter2012C_SMD"/>
+<attribute name="VAL" value="Platzhalter2012C_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="2825P_SMD" package="2825P">
@@ -3937,7 +4604,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter2825P_SMD"/>
+<attribute name="VAL" value="Platzhalter2825P_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="3216C_SMD" package="3216C">
@@ -3946,7 +4619,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter3216C_SMD"/>
+<attribute name="VAL" value="Platzhalter3216C_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="3225M_SMD" package="3225M">
@@ -3955,7 +4634,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter3225M_SMD"/>
+<attribute name="VAL" value="Platzhalter3225M_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="3225P_SMD" package="3225P">
@@ -3964,7 +4649,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter3225P_SMD"/>
+<attribute name="VAL" value="Platzhalter3225P_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="3230M_SMD" package="3230M">
@@ -3973,7 +4664,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter3230M_SMD"/>
+<attribute name="VAL" value="Platzhalter3230M_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="4035M_SMD" package="4035M">
@@ -3982,7 +4679,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter4035M_SMD"/>
+<attribute name="VAL" value="Platzhalter4035M_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="4516C_SMD" package="4516C">
@@ -3991,7 +4694,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter4516C_SMD"/>
+<attribute name="VAL" value="Platzhalter4516C_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="4532M_SMD" package="4532M">
@@ -4000,7 +4709,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter4532M_SMD"/>
+<attribute name="VAL" value="Platzhalter4532M_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="4532P_SMD" package="4532P">
@@ -4009,7 +4724,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter4532P_SMD"/>
+<attribute name="VAL" value="Platzhalter4532P_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="5038P_SMD" package="5038P">
@@ -4018,7 +4739,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter5038P_SMD"/>
+<attribute name="VAL" value="Platzhalter5038P_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="5650M_SMD" package="5650M">
@@ -4027,7 +4754,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter5650M_SMD"/>
+<attribute name="VAL" value="Platzhalter5650M_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="8530M_SMD" package="8530M">
@@ -4036,7 +4769,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter8530M_SMD"/>
+<attribute name="VAL" value="Platzhalter8530M_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="RM07,5A" package="R-07,5A">
@@ -4045,7 +4784,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterRM07,5A"/>
+<attribute name="VAL" value="PlatzhalterRM07,5A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="RM10,0A" package="R-10,0A">
@@ -4054,7 +4799,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterRM10,0A"/>
+<attribute name="VAL" value="PlatzhalterRM10,0A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="RM12,5A" package="R-12,5A">
@@ -4063,7 +4814,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterRM12,5A"/>
+<attribute name="VAL" value="PlatzhalterRM12,5A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="RM15,0A" package="R-15,0A">
@@ -4072,7 +4829,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterRM15,0A"/>
+<attribute name="VAL" value="PlatzhalterRM15,0A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="RM18,0A" package="R-18,0A">
@@ -4081,7 +4844,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterRM18,0A"/>
+<attribute name="VAL" value="PlatzhalterRM18,0A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="SMID03" package="SMID03">
@@ -4090,7 +4859,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterSMID03"/>
+<attribute name="VAL" value="PlatzhalterSMID03"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="0805_SMD" package="0805">
@@ -4099,7 +4874,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter0805_SMD"/>
+<attribute name="VAL" value="Platzhalter0805_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="0805L_SMD" package="0805L">
@@ -4108,7 +4889,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter0805L_SMD"/>
+<attribute name="VAL" value="Platzhalter0805L_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="0603_SMD" package="0603">
@@ -4117,7 +4904,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter0603_SMD"/>
+<attribute name="VAL" value="Platzhalter0603_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="WE-PD4_S" package="WE-PD4-S">
@@ -4126,7 +4919,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterWE-PD4_S"/>
+<attribute name="VAL" value="PlatzhalterWE-PD4_S"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-1210_SMD-W" package="L1210W">
@@ -4135,7 +4934,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-1210_SMD-W"/>
+<attribute name="VAL" value="Platzhalter-1210_SMD-W"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="1206_WECBF" package="1206">
@@ -4144,7 +4949,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter1206_WECBF"/>
+<attribute name="VAL" value="Platzhalter1206_WECBF"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="WE-1812_SMD" package="WE-1812">
@@ -4153,7 +4964,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="PlatzhalterWE-1812_SMD"/>
+<attribute name="VAL" value="PlatzhalterWE-1812_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -4192,7 +5009,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-02,5R"/>
+<attribute name="VAL" value="Platzhalter-02,5R"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-07,5A" package="D-7,5A">
@@ -4201,7 +5024,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-07,5A"/>
+<attribute name="VAL" value="Platzhalter-07,5A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-10,0A" package="D-10,0A">
@@ -4210,7 +5039,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-10,0A"/>
+<attribute name="VAL" value="Platzhalter-10,0A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-12,5A" package="D-12,5A">
@@ -4219,7 +5054,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-12,5A"/>
+<attribute name="VAL" value="Platzhalter-12,5A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-15,0A" package="D-15,0A">
@@ -4228,7 +5069,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-15,0A"/>
+<attribute name="VAL" value="Platzhalter-15,0A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-20,0A" package="D-20,0A">
@@ -4237,7 +5084,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-20,0A"/>
+<attribute name="VAL" value="Platzhalter-20,0A"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-SOD87_SMD" package="SOD-87">
@@ -4246,7 +5099,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-SOD87_SMD"/>
+<attribute name="VAL" value="Platzhalter-SOD87_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-SOD80_SMD" package="SOD-80">
@@ -4255,7 +5114,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-SOD80_SMD"/>
+<attribute name="VAL" value="Platzhalter-SOD80_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-DO7" package="DO-7">
@@ -4264,7 +5129,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-DO7"/>
+<attribute name="VAL" value="Platzhalter-DO7"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-DO14A1" package="DO-14A1">
@@ -4273,7 +5144,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-DO14A1"/>
+<attribute name="VAL" value="Platzhalter-DO14A1"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-DO14A2" package="DO-14A2">
@@ -4282,7 +5159,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-DO14A2"/>
+<attribute name="VAL" value="Platzhalter-DO14A2"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-SMB_SMD" package="SMB">
@@ -4291,7 +5174,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-SMB_SMD"/>
+<attribute name="VAL" value="Platzhalter-SMB_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-05,08ST" package="D-5,08-DO201-RST">
@@ -4300,7 +5189,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-05,08ST"/>
+<attribute name="VAL" value="Platzhalter-05,08ST"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-SMC_SMD" package="SMC">
@@ -4309,7 +5204,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-SMC_SMD"/>
+<attribute name="VAL" value="Platzhalter-SMC_SMD"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-SOT23_ZE" package="SOT23_ZE">
@@ -4318,7 +5219,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="3"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-SOT23_ZE"/>
+<attribute name="VAL" value="Platzhalter-SOT23_ZE"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-SOT23-R_ZE" package="SOT23_ZE">
@@ -4327,7 +5234,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="1"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-SOT23-R_ZE"/>
+<attribute name="VAL" value="Platzhalter-SOT23-R_ZE"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-DO204AR" package="DO204AR">
@@ -4336,7 +5249,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="1"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-DO204AR"/>
+<attribute name="VAL" value="Platzhalter-DO204AR"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-SOD80_SMD-W" package="SOD80W">
@@ -4345,7 +5264,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-SOD80_SMD-W"/>
+<attribute name="VAL" value="Platzhalter-SOD80_SMD-W"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-SMC_SMDW" package="SMCW">
@@ -4354,7 +5279,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="2"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-SMC_SMDW"/>
+<attribute name="VAL" value="Platzhalter-SMC_SMDW"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 <device name="-SMA_DO-214AC_W" package="SMA_DO-214AC_W">
@@ -4363,7 +5294,13 @@ Beispiel: C0805W_SMD&lt;br&gt;
 <connect gate="G" pin="2" pad="1"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="DATENBANKOB-NR" value=""/>
+<attribute name="HERSTELLER_NAME" value="Platzhalter"/>
+<attribute name="HERSTELLER_NR" value="Platzhalter-SMA_DO-214AC_W"/>
+<attribute name="VAL" value="Platzhalter-SMA_DO-214AC_W"/>
+<attribute name="ZE-VORZUG" value="nein"/>
+</technology>
 </technologies>
 </device>
 </devices>

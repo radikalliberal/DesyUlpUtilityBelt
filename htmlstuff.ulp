@@ -1,9 +1,0 @@
-#include "Libdesy.lib"
-
-string s = "&dagger;";
-Debug(s);
-s = HtmlCharactersTauschen(s);
-Debug(s);
-output("C:/Users/Scholzj/Desktop/debug.txt", "wt") { 
-			printf("%s",s); 
-}

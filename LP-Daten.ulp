@@ -6,13 +6,15 @@
  *  
  */
 
-#usage "en: <b>PCB Quote Service</b\n>"
+#usage "en: <b>LP-Daten</b\n>"
            "<p>"
-           "Get a quote for manufacturing your PCB.<br>",
-       "de: <b>PCB-Angebots-Service</b>\n"
+           "This is a modification of the bom.ulp of Cadsoft ,<br>"
+					 "PCB specifications are entered in a PDF template .",
+       "de: <b>LP-Daten</b>\n"
            "<p>"
-           "Hiermit gelangen Sie zu einem Angebot zur Fertigung Ihres Boards.<p>"
-           "<author>Autor: support@cadsoft.de</author><p>"
+           "Dies ist eine Abwandelung der BOM.ulp von Cadsoft, Leiterplatten-"
+    			 "Spezifikationen werden in eine PDF-Vorlage eingetragen..<p>"
+           "<author>Autor: jan_scholz@gmx.net</author><p>"
 
 // THIS PROGRAM IS PROVIDED AS IS AND WITHOUT WARRANTY OF ANY KIND, EXPRESSED OR IMPLIED
 
@@ -268,7 +270,7 @@ void UpdateBBoxBox(int xmin, int ymin, int xmax, int ymax) {
 
 void UpdateBBoxWire(UL_WIRE W, int layer) {
   if (W.layer == layer) {
-     real w2 = W.width/2;
+     real w2 = 0;
      real xmin = min(W.x1 - w2, W.x2 - w2), ymin = min(W.y1 - w2, W.y2 - w2);
      real xmax = max(W.x1 + w2, W.x2 + w2), ymax = max(W.y1 + w2, W.y2 + w2);
      if (W.arc)
@@ -307,17 +309,17 @@ string prozent="%";
 
 void outputFile() {
 
-    output( dlgFileSave("LP-Daten Export",PROJEKT_PFAD+"LP-Daten_"+filesetext(BoardName,"")+".fdf") , "wt")  {
+    output( PROJEKT_PFAD+"LP-Daten_"+filesetext(BoardName,"")+".fdf" , "wt")  {
   string file = "%FDF-1.4 \n"
                 "%âãÏÓ \n"
                 "1 0 obj \n"
                 "<<\n"
                 "/FDF << \n"
-                "/F (N:\\\\public\\\\Eagle_6+\\\\ulp\\\\Ulp-Service\\\\pdfform\\\\kurzbeschreibung.pdf) \n"
+                "/F (N:\\\\public\\\\Eagle_6+\\\\ulp\\\\kurzbeschreibung.pdf) \n"
                 "/Type /Catalog \n"
                 "/Fields [<< \n"
                 "/T (LP-Nr) \n"
-                "/V ("+WA_Nummer+")\n"
+                "/V ("+filesetext(BoardName,"")+")\n"
                 ">> << \n"
                 "/T (Datum)\n"
                 "/V ("+Datum+")\n"
@@ -326,7 +328,7 @@ void outputFile() {
                 "/V ("+engineer+")\n"
                 ">> <<\n"
                 "/T (Layoutname) \n"
-                "/V ("+BoardName+")\n"
+                "/V ("+Description1+")\n"
                 ">> <<\n"
                 "/T (Lagenanzahl)\n"
                 "/V ("+I2Str(NrLayers)+")\n"
@@ -335,27 +337,30 @@ void outputFile() {
                 "/V ("+U2MmStr(MaterialThickness)+")\n"
                 ">> <<\n"
                 "/T (Leiterplatten-FormatX)\n"
-                "/V ("+(ValidBBox() ? U2MmStr(XMax - XMin) : "unknown")+") \n"
+                "/V ("+(ValidBBox() ? U2MmStr(XMax - XMin) : "unbekannt")+") \n"
                 ">> <<\n"
                 "/T (Leiterplatten-FormatY)\n"
-                "/V ("+(ValidBBox() ? U2MmStr(YMax - YMin) : "unknown")+") \n"
+                "/V ("+(ValidBBox() ? U2MmStr(YMax - YMin) : "unbekannt")+") \n"
                 ">> <<\n"
                 "/T (KupferAußen)\n"
                 "/V ("+U2MmStr(CopperThicknessOutside*1000)+")\n"
                 ">> <<\n"
                 "/T (KupferInnen)\n"
-                "/V ("+(Within(CopperThicknessInside, 0, INT_MAX) ? U2MmStr(CopperThicknessInside*1000) : "unknown")+")\n"
+                "/V ("+(Within(CopperThicknessInside, 0, INT_MAX) ? U2MmStr(CopperThicknessInside*1000) : "unbekannt")+")\n"
                 ">> <<\n"
                 "/T (klLeiterbahnbreite) \n"
-                "/V ("+(Within(MinTraceWidth, 0, INT_MAX) ? U2MmStr(MinTraceWidth*1000) : "unknown")+")\n"
+                "/V ("+(Within(MinTraceWidth, 0, INT_MAX) ? U2MmStr(MinTraceWidth*1000) : "unbekannt")+")\n"
                 ">> <<\n"
                 "/T (Loetstoppmaske) \n"
                 "/V ("+SolderSides+")\n"
                 ">> <<\n"
                 "/T (Positionsdruck) \n"
                 "/V ("+SilkScreenSides+")\n"
-                ">> <<\n"
+								">> <<\n"
                 "/T (SMD)\n"
+                "/V ("+SilkScreenSides+")\n"
+                ">> <<\n"
+                "/T (AnzahlSMD)\n"
                 "/V ("+I2Str(NrSmdPadsTop+NrSmdPadsBottom)+")\n"
                 ">> <<\n"
                 "/T (BuriedVias)\n"
@@ -368,7 +373,13 @@ void outputFile() {
                 "/V ("+I2Str(Bohrungen)+")\n"
                 ">> <<\n"
                 "/T (klBohrdurchmesser)\n"
-                "/V ("+(MinHoleSize < INT_MAX ? U2MmStr(MinHoleSize) : "unknown")+")\n"
+                "/V ("+(MinHoleSize < INT_MAX ? U2MmStr(MinHoleSize) : "unbekannt")+")\n"
+								">> <<\n"
+                "/T (Bohrdurchmesser)\n"
+                "/V ("+I2Str(Bohrdurchmesser)+")\n"
+								">> <<\n"
+                "/T (Gruppe)\n"
+                "/V ("+Gruppe+")\n"
                 ">>]\n"
                 ">>\n"
                 ">>\n"
@@ -567,9 +578,9 @@ void GetPCBParams() {
          else if (L.number == LAYER_BPLACE) silk_bottom = 1; // Could also take BNAMES/BVALUES. Leave the criterium less strict
    }
    SolderSides = smask_top ? (smask_bottom ? "Beidseitig" : "Oberseite") :
-                             (smask_bottom ? "Unterseite" : "keine");
+                             (smask_bottom ? "Unterseite" : "Nein");
    SilkScreenSides = (silk_top) ? (silk_bottom ? "Beidseitig" : "Oberseite") :
-                                  (silk_bottom ? "Unterseite" : "None");
+                                  (silk_bottom ? "Unterseite" : "Nein");
    if (nr_used_layers == 0) {
       Warnings += LItem(tr("None of the signal layers are used."));
       Useless = 1;
@@ -721,24 +732,24 @@ string MakeParamSendString() {
    return send;
 }
 
+void Hinweis() {
+	dlgDialog("Achtung!") {
+		dlgLabel("<font size =\"40\" color=\"#123456\">Es ist unbedingt ein erfolgreicher Designrule Check vor Übermittlung der Daten zu tätigen.");
+		dlgPushButton("Ok") dlgAccept();
+	};
+}	
+
+
 int Dialog() {
+		Hinweis();
     string strNoCfg;
-    if(config_nicht_vorhanden) strNoCfg = "wenn die Config nicht fehlen würde";
-   string Info[] = {
-      "Based on your board layout and the design rules, key parameters for manufacturing "
-      "your board like board size, minimum hole size etc. are determined. Your design "
-      "should be complete and have passed a DRC successfully.<br>"
-      "By following the link below you get to the PCB quote site on Element14 where these "
-      "parameters are transferred. This way with a few steps you get a quote for manufacturing "
-      "your board."
-      ,
-      "Hier wird dann der Text stehen der für diese Ulp angedacht ist "
-      "beispielweise könnte hier \nWA-Nr: "+WA_Nummer+" \n"
-      "Ersteller: "+engineer+"\nstehen "+ strNoCfg
-   };
+     strNoCfg = "<font color=\"#FF0000\"> Es existier noch kein Config-Datei für das Board!";
+
    return dlgDialog(tr("DESY LP-Daten (Version " + I2Str(Version) + ")")) {
       dlgHBoxLayout dlgSpacing(470);
-         dlgLabel(Info[LangIdx], 1);
+				if(config_nicht_vorhanden) 
+				 dlgLabel("<font color=\"#FF0000\">Es existier noch keine Config-Datei für das Board!");
+        dlgLabel("WA-Nr: "+WA_Nummer+"\nErsteller: "+engineer+"\n");
       if (Warnings)
          dlgHBoxLayout
             dlgGroup(tr("Warnings:"))
@@ -785,7 +796,10 @@ int Dialog() {
       dlgHBoxLayout {
          dlgStretch(1);
          if (!Useless)
-            dlgPushButton("Daten exportieren") outputFile();
+            dlgPushButton("Daten exportieren") {
+							outputFile();
+							system("cmd /c \""+PROJEKT_PFAD+"LP-Daten_"+filesetext(BoardName,"")+".fdf\"");
+						}
          dlgStretch(1);
          dlgPushButton(tr("Close")) dlgReject();
       }

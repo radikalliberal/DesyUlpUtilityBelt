@@ -1,12 +1,3 @@
-/**
- *  \file bom.ulp
- *  \author Jan Scholz
- *  \brief 	Erzeugt eine Stückliste (Bill Of Material) eines Projekts in Excel,
- *  				diese Einzelstückliste kann von der Gruppe ZE in Orderbase eingelesen
- *  				werden
- *  
- */
- 
 // -------------------------------------------------
 //  BILL OF MATERIALS
 //  Stücklistenexport über Excel nach Orderbase 
@@ -14,41 +5,34 @@
 //  Version 1.0  von Jan Scholz
 //  Version 1.1  von R. Apel
 //  Version 2.0  von Jan Scholz
-//  Stand: 09.2014
+// 	Version 2.1  von Jan Scholz //Html-Tags werden nun ordnungsgemäß erkannt und aus der Beschreibung entfernt
+//  Stand: 14.11.2014
 // -------------------------------------------------
-
+//#include "Libdesy.lib"
 #require 6.05
-#include "Libdesy.lib"
 
 #usage  "de: <b>Stückliste nach MS-Excel exportieren</b>\n"
-"<p>"
-"Erzeugt eine Stückliste (Bill Of Material) eines Projekts. \n" 
-"<p>"
-"Eine Excel-Einzelteilstückliste kann erzeugt werden.<br> \n"
-"Diese Excelliste enthält zusätzliche Informationen wie z.B. Hersteller,  Herstellernummern.<br> "
-"Die Gruppe DESY -ZE- kann die Excel-Einzelstueckliste in Orderbase einlesen. \n "
-""
-"<p>"
-"<author>Author: DESY -ZE- </author> <br>   Stand: 08.2014"
-
+           "<p>"
+           "Erzeugt eine Stückliste (Bill Of Material) eines Projekts. \n" 
+		   "<p>"
+		   "Eine Excel-Einzelteilstückliste kann erzeugt werden.<br> \n"
+           "Diese Excelliste enthält zusätzliche Informationen wie z.B. Hersteller,  Herstellernummern.<br> "
+           "Die Gruppe DESY -ZE- kann diese Excel-Liste in das Orderbase-Programm einlesen. \n "
+		   ""
+           "<p>"
+           "<author>Author: DESY -ZE- </author> <br>   Stand: 11.2014"
+		   
 // ---------  Variablen-Definition     --------------------------------------------------------
 
-//"//win.desy.de/group/sze/public/Eagle_6+/lbr"; 
-string LIB6_PATH = "D:/Dropbox/DesyBib/lbr_6";
-//"/home/jan/Dropbox/DesyBib/lbr_6"; //	
-//"//win.desy.de/group/sze/public/Eagle_6+/ulp/Ulp-Service";
-//"/home/jan/Dropbox/DesyBib/Ulp-Service";
-string ULP_PATH = "D:/Dropbox/DesyBib/Ulp-Service"; 
 
-
-string VORLAGE_PFAD = "N:/public/Orderbase/Stücklistenexport Vorlage/Einzelteilstueckliste Vorlage.xltx";
+string VORLAGE_PFAD = "//win.desy.de/group/sze/public/Eagle_6+/ulp/Einzelteilstuecklisten_vordruck.xlsx";
+string ULP_PATH = "//win.desy.de/group/sze/public/Eagle_6+/ulp";
 string DBNR,HSNR,HS,ZEV; 
 string PROJEKT_PFAD;
 string strVersion = "2.0";
-string nullKey    = "*";
+string nullKey          = "*";
 string fileName;
-string AllLib6;
-Debug(AllLib6);
+string BoardName;
 int nPartCount;
 int ListType = 0;
 int Selected = -1;
@@ -58,15 +42,19 @@ int config_nicht_vorhanden = 0;
 string DefaultFileName;
 
 ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
 
 //Bauteildaten
-numeric string PartNum[], PartName[], PartVal[], PartAttr[], 
-PartDev[], PartPkg[], PartDesc[],PartDescription[],
-PartDBNR[],PartHS[],PartHSNR[],PartZEVORZUG[],PartHeadline[],PartHeadlineEx[];
+numeric string PartNum[], PartName[], PartVal[], PartAttr[], PartSide[],
+               PartDev[], PartPkg[], PartDesc[],PartDescription[], PartPack[],
+			   PartDBNR[],PartHS[],PartHSNR[],PartZEVORZUG[],PartHeadline[],
+			   PartHeadlineEx[];
 int PartSheet[];	
 
 //Tabelle der Bauteildaten 	   
 numeric string Lines[];
+
 
 //Attribute von Bauteil in Bearbeitung
 numeric string PickPartNum;
@@ -78,6 +66,7 @@ numeric string PickPartHSNR;
 numeric string PickPartZEVORZUG;
 numeric string PickPartDesc;
 
+
 string engineer;
 string geprueft;
 string freigegeben;
@@ -86,29 +75,121 @@ string Gruppe;
 string WA_Nummer;
 string description1;
 
-int isquote(char c){
+void Debug(string msg) {
+	status("Debug()");
+	dlgDialog("Debug") {
+		dlgHBoxLayout { dlgLabel(msg); }
+		dlgPushButton("+&ok") { dlgAccept();}
+		dlgPushButton("-&cancel") { dlgReject(); exit (0);}
+	};
+}
+string int2str(int number) {
+	string temp;
+	sprintf(temp,"%d",number);
+	return temp;
+}
+
+string str_replace(string subject, string regex, string replace, int initialOffset, int Wiederholungen) {
+    status("str_replace()");
+	int lastpos = initialOffset;
+	int length = 0;
+    while(strxstr(subject, regex, lastpos) >= 0) {
+        int pos = strxstr(subject, regex, lastpos, length);
+        string before = strsub(subject, 0, pos);
+        string after = strsub(subject, pos + length);
+        subject = before + replace + after;
+        lastpos = pos + strlen(replace);
+		if(!Wiederholungen) break;
+    }
+    return subject;
+}
+
+
+		
+string HtmlTagsentfernen(string s) {	
+	int Anfang,Ende,Laenge,dump;
+	string temps1;
+
+	s = strsub(s,0,strxstr(s,"<table"));
+	
+	
+	//Zeilenumbrüche werden entfernt
+	while(strchr(s,'\n')!=-1)
+	{	
+		Anfang = strchr(s,'\n');
+		temps1 = strsub(s,0,Anfang);
+		temps1 +=strsub(s,Anfang+1);
+		s = temps1;
+	}
+	
+	//Zeilenumbrüche einsetzen für <br> & <p>
+	s = str_replace(s,"(<br>)|(<p>)","\n",0,1);
+
+	
+	string htmltags = 	"(html|body|h1|h2|h3|p|center|blockquote|ul|ol"
+						"|li|pre|a|em|strong|i|b|u|big|small|code"	
+						"|tt|font|img|hr|br|nobr|table|tr|td|th|author"
+						"|dl|dt|dd)";
+						
+	string regex = "<\\s?[/]?"+htmltags+"(\\s\\w+=\"\\w\"\\s)*>";
+	
+	//Htmltags werden mit dem Regulären Ausdruck erkannt
+	while(strxstr(s,regex) != -1) {
+		Anfang = strxstr(s,regex,dump,Laenge);
+		Ende = Anfang + Laenge;
+		temps1 = strsub(s,0,Anfang);
+		temps1 += strsub(s,Ende);
+		s = temps1;
+	}
+	return s;
+}
+
+
+int isquote(char c)
+{
     return (c == '"') ? 1 : 0;
 }
 
+string pdf(string description) {
+	int pos1=0,pos2=0,len=0;
+	string hyperlink;
+	
+	pos1 = strxstr(description,"<a href.*</a>",0,len);
+	hyperlink = strsub(description,pos1,len);
+		
+	return hyperlink;
+}
+// Trim leading and trailing white space characters
+string TrimWhiteSpace(string s)
+{
+    while (s && isspace(s[0]))
+        s = strsub(s, 1);
+    while (s && isspace(s[strlen(s) - 1]))
+        s = strsub(s, 0, strlen(s) - 1);
+    return s;
+}
+
 // Trim leading and trailing quote characters from string
-string TrimQuotes(string s){
+string TrimQuotes(string s)
+{
     while (s && isquote(s[0]))
-    s = strsub(s, 1);
+        s = strsub(s, 1);
     while (s && isquote(s[strlen(s) - 1]))
-    s = strsub(s, 0, strlen(s) - 1);
+        s = strsub(s, 0, strlen(s) - 1);
     return s;
 }
 
 
-int IsKnownDevice(string devname){
-    //string names = "BOM-ENTRY:BOM-PART:JUMPER:JUMP-A:JUMP-B:JUMP-Q";
-	string names = "INFO";
+int IsKnownDevice(string devname)
+{
+    string names = "BOM-ENTRY:BOM-PART:JUMPER:JUMP-A:JUMP-B:JUMP-Q";
     string a[];
     int n = strsplit(a, names, ':');
     int i;
-    for (i=0; i < n; i++){
+    for (i=0; i < n; i++)
+    {
         if (devname == a[i])
-        return 1;
+            return 1;
     }
     return 0;
 }
@@ -118,14 +199,16 @@ int IsKnownDevice(string devname){
 // we will allow to display in the Attributes column of the BOM. Any other
 // part attributes we will ignore for now.
 
-int IsKnownAttribute(string attrname){
+int IsKnownAttribute(string attrname)
+{
     string names = "DATENBANKOB-NR:HERSTELLER_NAME:HERSTELLER_NR:VAL:ZE-VORZUG";
     string a[];
     int n = strsplit(a, names, ':');
     int i;
-    for (i=0; i < n; i++){
+    for (i=0; i < n; i++)
+    {
         if (attrname == a[i])
-        return 1;
+            return 1;
     }
     return 0;
 }
@@ -133,405 +216,528 @@ int IsKnownAttribute(string attrname){
 //////////////////////////////////////////////////////////////////////////////
 // Collect all part data for the BOM and process and handle any attribute
 // modifiers found for the part.
-void iniFilelesen(){
+void iniFilelesen() {
 	string a[];
 	int nLines;
 	string lines[];
-	schematic(S){
+	schematic(S) {
+  		S.sheets(SCH)
     	fileName = filesetext(S.name, "_config.ini");
-    	// PROJEKT_PFAD = path_epf[i];
+		int i=0;
 		PROJEKT_PFAD = filedir(S.name);
-		
     }	//---  schematic(S)
-    
-	if (fileglob(a, fileName)){
+
+	if (fileglob(a, fileName)) {
      	//--- get options from INI-File
     	nLines = fileread(lines, fileName);
-        
+
      	engineer       	                = lines[3];
   	  	geprueft       	                = lines[4];
      	freigegeben    	                = lines[5];
 	    Anforderer     	                = lines[6];
   	    Gruppe         	                = lines[7];
-     	WA_Nummer                       = lines[8];
+     	WA_Nummer                         = lines[8];
 		description1   	                = lines[9];
-        
-        } else {
+
+  	} else {
 		config_nicht_vorhanden = 1;
 		//dlgMessageBox(fileName+" nicht vorhanden");
-    }
+	
+	}
 }
 
-int isLib6(string lib) {
-    if( strxstr(AllLib6,lib+"\\.lbr") < 0) return 0;
-    else return 1;
-}
-
-void CollectPartData(void){
+void CollectPartData(void)
+{
+	int isbot[],pack[];
+	int count, issmd;
+	string name[];
+	count = 0;
     nPartCount = 0;
-    
-    schematic(SCH){
-        SCH.sheets(S){
-            S.parts(P){
-                // if ((P.device.package) || IsKnownDevice(P.device.name))
-                if (P.device.package){   
-                    if(strxstr(P.device.package.name,"REF-SMD-")>=0)
-                        continue;
-                   
+	project.board(B){
+		BoardName = filename(B.name);
+		B.elements(E) {
+		
+			issmd = 0;
+			E.package.contacts(C) {
+				if(C.smd) { 
+					//Debug(E.name + " " + int2str(count));
+					issmd = 1;
+					break;
+				}
+			}
+			name[count] = E.name;
+			isbot[count] = E.mirror;
+			pack[count] = issmd;
+			count++;
+			//Debug(int2str(E.mirror)+"  "+E.name);
+		
+		}
+	}
+	
+    schematic(SCH)
+    {
+        SCH.sheets(S)
+        {
+            S.parts(P)
+            {
+			
+				//Debug(P.name);
+				// dlgMessageBox(P.name);
+                if ((P.device.package) || IsKnownDevice(P.device.name))  {
+					
+					if(strxstr(P.device.package.name,"REF-SMD-")>=0) {
+						continue;
+					}
+				
                     int exclude = 0;
                     int dnp = 0;
-                    if(!isLib6(P.device.library))  Debug(P.device.library+" ist nicht in der 6er Bib");
+
                     // PART NUMBER CANNOT BE EMPTY FOR LIST BY VALUE SORT!
                     string partnum = nullKey;
-                    // string val     = "";
                     string val     = P.value;
-                    // string val;
                     string attrs   = "";
                     string desc    = "";
-                    string description = "";
+					string description = "";
                     int qty        = 0;
-                    int hasAttributes	   = 0;
-                    
-                    description = P.deviceset.description;
-                    desc        = HtmlTagsentfernen(description); 
-                    
-                    DBNR = "";
-                    HS   = "";		
-                    HSNR = "";
-                    val  = "";
-                    ZEV  = "";								
-                    P.attributes(A){	
-                        if (A.name == "DATENBANKOB-NR"){
-                            DBNR = A.value;
-                            hasAttributes = 1;
-                        }
-                        
-                        if (A.name == "HERSTELLER_NAME"){
-                            HS = A.value;
-                        } 
-                        
-                        if (A.name == "HERSTELLER_NR"){
-                            HSNR = A.value;
-                        } 
-                        
-                        if (A.name == "VAL"){
-                            val = A.value;
-                        } 
-                        
-                        if (A.name == "ZE-VORZUG"){
-                            ZEV = A.value;
-                        } 
-                        
-                        if (IsKnownAttribute(A.name)){
-                            if (strlen(attrs))
-                            attrs += "/";
-                            attrs += A.value;
-                        }
-                        
+					int Lib6dev	 = 0;
+					
+					description = P.deviceset.description;
+					desc = HtmlTagsentfernen(description); 
+					
+					DBNR = "";
+					HS = "";		
+					HSNR = "";
+					val = "";
+					ZEV = "";	
+					
+                    P.attributes(A)
+                    {	
+						
+						if (A.name=="DATENBANKOB-NR")
+						{
+							DBNR = A.value;
+							Lib6dev = 1;
+						}
+						
+						if (A.name=="HERSTELLER_NAME")
+						{
+							HS = A.value;
+						}
+						
+						if (A.name=="HERSTELLER_NR")
+						{
+							HSNR = A.value;
+						}
+						
+						if (A.name=="ZE-VORZUG")
+						{
+							ZEV = A.value;
+						}
+						
+						if (A.name == "VAL")
+						{
+							val = A.value;
+						} 
+						
+						if (IsKnownAttribute(A.name))
+						{
+							if (strlen(attrs))
+								attrs += "/";
+							attrs += A.value;
+						}
+					
                     }
-                    // We have to check to make sure the part has not already been added
-                    // since it's possible a multi-gate part can appear on multiple sheets.
-                    //
-                    // In this case we only need to update the attributes on the first
-                    // instance encountered for the attributes update process.
-                    
-                    /*if (lookup(PartName, P.name, 0))
-                    continue;*/
-                    
-                    PartSheet[nPartCount]   = S.number;
-                    PartName[nPartCount]    = P.name;
-                    PartVal[nPartCount]     = hasAttributes ? val : P.value ;
-                    PartDBNR[nPartCount] 	= DBNR;
-                    PartHS[nPartCount] 		= HS;
-                    PartHSNR[nPartCount]    = HSNR;
-                    PartZEVORZUG[nPartCount]= ZEV; 
-                    PartAttr[nPartCount]    = attrs;
-                    PartNum[nPartCount]     = partnum;
-                    PartDev[nPartCount]     = P.device.name;
-                    PartPkg[nPartCount]     = (P.device.package) ? P.device.package.name : "*";
-                    PartDesc[nPartCount]    = (desc != "") ? desc : P.deviceset.headline;
-                    PartDescription[nPartCount] = description;
-                    PartHeadline[nPartCount]  = P.device.headline;
-                    PartHeadlineEx[nPartCount] = hasAttributes ? P.device.headline + " :       " + val : P.device.headline + " :       " + P.value;
-                    
-                    nPartCount++;
+					// We have to check to make sure the part has not already been added
+					// since it's possible a multi-gate part can appear on multiple sheets.
+					
+					// In this case we only need to update the attributes on the first
+					// instance encountered for the attributes update process.
+
+					if (lookup(PartName, P.name, 0))
+						continue;
+					for(int c = 0; c < count; c++) {
+						if(P.name == name[c]) break;
+					}
+					
+					PartSheet[nPartCount]   = S.number;
+					PartName[nPartCount]    = P.name;
+					PartSide[nPartCount]	= isbot[c] ? "B" : "T";
+					PartPack[nPartCount] 	= pack[c]	? "SMD" : "THT";
+					PartVal[nPartCount]     = (Lib6dev) ? val : P.value ;
+					PartDBNR[nPartCount] 	= DBNR;
+					PartHS[nPartCount] 		= HS;
+					PartHSNR[nPartCount]    = HSNR;
+					PartZEVORZUG[nPartCount]= ZEV; 
+					PartAttr[nPartCount]    = attrs;
+					PartNum[nPartCount]     = partnum;
+					PartDev[nPartCount]     = P.device.name;
+					PartPkg[nPartCount]     = (P.device.package) ? P.device.package.name : "*";
+					PartDesc[nPartCount]    = (desc != "") ? desc : P.deviceset.headline;
+					PartDescription[nPartCount] = description;
+					PartHeadline[nPartCount]  = P.device.headline;
+					PartHeadlineEx[nPartCount] = (Lib6dev) ? P.device.headline + " :   " + val : P.device.headline + " :       " + P.value;
+
+
+					nPartCount++;
+					// dlgMessageBox("geschafft");
                 }
             }
         }
     }
 }
 
-string MakeListHeader (void){
-    string s;
-    schematic(SCH)
-    sprintf (s, "Stückliste exportiert aus %s am %s", SCH.name, t2string (time ()));
-    return s;
+int PartSearchIndex(string partval, int indx) {	
+	
+    if (PartVal[indx] == partval) {
+		
+		return indx;
+	}
+    return -1;
 }
 
-string MakeListText(void){
-    int l, Width [];
-    string List;
-    int numHeaders;
-    
-    for (l = 0; Lines[l]; l ++){
-        string a [];
-        for (int n = strsplit (a, Lines[l], '\t'); n --; )
-        Width [n] = max (Width [n], strlen (a [n]));
+
+int PartSearch(string partname)
+{
+    for (int i=0; i < nPartCount; i++)
+    {
+        if (PartName[i] == partname)
+            return i;
     }
-    
-    List = MakeListHeader () + "\n\n";
-    
-    for (l = 0; Lines[l]; l ++){
-        string line, a [];
-        
-        int n = strsplit (a, Lines[l], '\t');
-        if (l == 0)
-            numHeaders = n;
-        else
-            n = numHeaders; // for the hidden key!
-        for (int i = 0; i < n; i ++){
-            string s;
-            
-            sprintf (s, "%s%-*s", line ? " " : "", Width [i], a [i]);
-            line += s;
-        }
-        List += line + "\n";
+    return -1;
+}
+
+string MakeListHeader (void)
+{
+  string s;
+  schematic(SCH)
+    sprintf (s, "Stückliste exportiert aus %s am %s", SCH.name, t2string (time ()));
+  return s;
+}
+
+
+string MakeListText(void)
+{
+  int l, Width [];
+  string List;
+  int numHeaders;
+
+  for (l = 0; Lines[l]; l ++)
+  {
+    string a [];
+    for (int n = strsplit (a, Lines[l], '\t'); n --; )
+      Width [n] = max (Width [n], strlen (a [n]));
+  }
+
+  List = MakeListHeader () + "\n\n";
+
+  for (l = 0; Lines[l]; l ++)
+  {
+    string line, a [];
+
+    int n = strsplit (a, Lines[l], '\t');
+    if (l == 0)
+      numHeaders = n;
+    else
+      n = numHeaders; // for the hidden key!
+    for (int i = 0; i < n; i ++)
+    {
+      string s;
+
+      sprintf (s, "%s%-*s", line ? " " : "", Width [i], a [i]);
+      line += s;
     }
-        return List;
+    List += line + "\n";
+  }
+  return List;
 }
-        
-void SaveList (void){
-    string FileName;
-    string FileName1;
-    string FileExt;
-    
-    
-    schematic(SCH) FileName = filesetext (SCH.name, ".txt");
-    FileName = dlgFileSave ("Stückliste speichern unter...", FileName);
-    if (FileName){
-        string a [];
-        if (!fileglob (a, FileName) || dlgMessageBox ("File '" + FileName +
-        "' exists\n\nOverwrite?", "+&Yes", "-&No") == 0){
-            output (FileName, "wt"){
-                printf ("%s", MakeListText ()); // using "%s" to avoid problems if list contains any '%'
-            }
-        }
+
+void SaveList (void)
+{
+  string FileName;
+  string FileName1;
+  string FileExt;
+
+  
+  schematic(SCH) FileName = filesetext (SCH.name, ".txt");
+  FileName = dlgFileSave ("Stückliste speichern unter...", FileName);
+  if (FileName)
+  {
+    string a [];
+    if (!fileglob (a, FileName) || dlgMessageBox ("File '" + FileName +
+       "' exists\n\nOverwrite?", "+&Yes", "-&No") == 0)
+    {
+      output (FileName, "wt")
+      {
+        printf ("%s", MakeListText ()); // using "%s" to avoid problems if list contains any '%'
+      }
     }
+  }
 }
-        
-        
-void ViewList (void){
-    dlgDialog ("Vorschau - Stückliste "){
-        string s = MakeListText();
-        s = "<pre>" + s + "</pre>";
-        dlgHBoxLayout dlgSpacing (800);
-        dlgHBoxLayout{
-            dlgVBoxLayout dlgSpacing (500);
-            dlgTextView (s);
-        }
-        dlgHBoxLayout{
-            dlgStretch (1);
-            dlgPushButton ("&Speichern Textliste") SaveList (); 
-            dlgPushButton ("-Schließen") dlgReject ();
-        }
-    };
+
+
+void ViewList (void)
+{
+  dlgDialog ("Vorschau - Stückliste ")
+  {
+    string s = MakeListText();
+       s = "<pre>" + s + "</pre>";
+    dlgHBoxLayout dlgSpacing (800);
+    dlgHBoxLayout
+    {
+      dlgVBoxLayout dlgSpacing (500);
+      dlgTextView (s);
+    }
+    dlgHBoxLayout
+    {
+      dlgStretch (1);
+     	dlgPushButton ("&Speichern Textliste") SaveList (); 
+		dlgPushButton ("-Schließen") dlgReject ();
+    }
+  };
 }
-        
-void GeneratePartList(void){
+
+void GeneratePartList(void)
+{
     int NumLines = 0;
     //XXX column sequence?
-    Lines[NumLines++] = "Position\tBauteil\tBauteil-Wert\tDatenbank-Nr\tHersteller\tHersteller-Nr\tPackage\tZE-Vorzug\tDescription" ;
-    
-    for (int i=0; i < nPartCount; i++){
+    Lines[NumLines++] = "Position\tBauteil\tOrt\tBauform\tBezeichnung\tDatenbankNr\tHersteller\tHersteller-Nr\tPackage\tZE-Vorzug\tDescription" ;
+
+    for (int i=0; i < nPartCount; i++)
+    {
         // append (DNP) suffix on part name if needed
         string partname;
         partname = PartName[i];
-        
-        Lines[NumLines] =  int2str(i+1) + "\t" + partname + "\t" + PartVal[i] + "\t" + PartDBNR[i] + "\t" +PartHS[i] + "\t" +PartHSNR[i] + "\t"  + PartPkg[i] + "\t"+PartZEVORZUG[i] + "\t" + PartHeadline[i] ; 
-        
+
+        Lines[NumLines] =  int2str(i+1) + "\t" + partname + "\t" + PartSide[i] + "\t" + PartPack[i]+ "\t" + PartVal[i] + "\t" + PartDBNR[i] + "\t" +PartHS[i] + "\t" +PartHSNR[i] + "\t"  + PartPkg[i] + "\t"+PartZEVORZUG[i] + "\t" + PartHeadline[i] ; 
+
         NumLines++;
     }
-    
+
     //Lines[NumLines] = "";
 }
-        
-void GenerateValueList (void){
-    int NumLines = 0;
-    int Index [];
-    string attr[], s, s_val;
-    
-    // 2010-04-17 cwi: Included description.
-    Lines[NumLines ++] = "Menge\tBauteile\tWert\tDevice\tPackage\tDescription\t" + s;                 // 2011-04-08
-    sort (nPartCount, Index, PartVal, PartPkg, PartName, PartHeadline); // 2011-11-08 Partattribute jetzt nach Package alf@cadsoft.de
-    for (int n1 = 0, n2 = 0; ++ n2 <= nPartCount; ){
-        int i1 = Index [n1];
-        //strsplit (attr, PartAttributes[i1], Separator);
-        
-        // s_val = attr[i1];
-        if (n2 < nPartCount){
-            int i2 = Index [n2]; // 2012-11-08
-            //strsplit (attr, PartAttributes[i2], Separator);
-            if (PartVal[i1] == PartVal[i2] && PartDev[i1] == PartDev[i2]) // 2012-11-08 check diffent values of attributes
-            continue;
-        }
-        string Anzahl;
-        sprintf (Anzahl, "%d", n2 - n1);
-        Lines[NumLines] = Anzahl + "\t" ;
-        for (;;){
-            Lines[NumLines] += PartName[i1];
-            if (++n1 < n2){
-                i1 = Index [n1];
-                Lines[NumLines] += ", ";
-            }
-            else
-            break;
-        }
-        // cwi: add extra information from attributes
-        // 2010-04-17 cwi: Included description.
-        Lines[NumLines] +=  "\t" + PartVal[i1] + "\t" + PartDev[i1] + "\t" + PartPkg[i1] + "\t" + PartHeadline[i1] + "\t" + s;
-        NumLines ++;
+
+void GenerateValueList (void)
+{
+  int NumLines = 0;
+  int Index [];
+  string attr[], s, s_val;
+
+  // 2010-04-17 cwi: Included description.
+  Lines[NumLines ++] = "Menge\tBauteile\tWert\tDevice\tGehäuse\tDescription\t" + s;                 // 2011-04-08
+  sort (nPartCount, Index, PartVal, PartPkg, PartName, PartHeadline); // 2011-11-08 Partattribute jetzt nach Package alf@cadsoft.de
+  for (int n1 = 0, n2 = 0; ++ n2 <= nPartCount; )
+  {
+    int i1 = Index [n1];
+    //strsplit (attr, PartAttributes[i1], Separator);
+   
+    // s_val = attr[i1];
+    if (n2 < nPartCount)
+    {
+      int i2 = Index [n2]; // 2012-11-08
+      //strsplit (attr, PartAttributes[i2], Separator);
+      if (PartVal[i1] == PartVal[i2] && PartDev[i1] == PartDev[i2]) // 2012-11-08 check diffent values of attributes
+        continue;
     }
-    Lines[NumLines] = "";
+    string Anzahl;
+    sprintf (Anzahl, "%d", n2 - n1);
+    Lines[NumLines] = Anzahl + "\t" ;
+    for (;;)
+    {
+      Lines[NumLines] += PartName[i1];
+      if (++n1 < n2)
+      {
+        i1 = Index [n1];
+        Lines[NumLines] += ", ";
+      }
+      else
+        break;
+    }
+    // cwi: add extra information from attributes
+    // 2010-04-17 cwi: Included description.
+    Lines[NumLines] +=  "\t" + PartVal[i1] + "\t" + PartDev[i1] + "\t" + PartPkg[i1] + "\t" + PartHeadline[i1] + "\t" + s;
+    NumLines ++;
+  }
+  Lines[NumLines] = "";
 }
-        
-        
-void OnListTypeChange(){
+
+
+void OnListTypeChange()
+{
     if (ListType == 0)
-    GeneratePartList();
+        GeneratePartList();
     else
-    GenerateValueList();
-    
+        GenerateValueList();
+
     Selected = 0;
 }
-        
-int ExportOrderbaseXML(){
-    string IndexOB,Value;
-    string Ext,Anzahl;
+
+int ExportOrderbaseXML()
+{
+	string IndexOB,Value;
+	string Ext,Anzahl;
     string fname;
     string fnext;
-    string Kopf;
-    string Datum;
-    string temp[];
+	string Kopf;
+	string Datum;
+	string temp[];
     int pos;
-    Ext=" ss:StyleID=\"s66\"";  
-    
-    fileread(Kopf, ULP_PATH + "/xmlheader.txt"); 
-    
+	Ext=" ss:StyleID=\"s66\"";  
+
+	
+	fileread(Kopf, ULP_PATH + "/xmlheader.txt"); 
     fileerror();
-    
+	
     int records = 0;
-    
-    output(PROJEKT_PFAD + "/BOM.xml", "wtD") // output(fname, "wt");{
-    // print out the inital header line of the column descriptions
-    // for all database header fields.
-    
-    sprintf(Datum,"%d.%d.%d",t2day(time()),t2month(time())+1,t2year(time()));
-    strsplit(temp,Kopf, '*'); 
-    Kopf=temp[0]+Datum+temp[1];
-    printf(Kopf);
-    printf(" <Worksheet ss:Name=\"\x45inzelstueckliste\"> \n  <Table ss:ExpandedColumnCount=\"\x38\" ss:ExpandedRowCount=\"%d\" x:FullColumns=\"\x31\" x:FullRows=\"\x31\" ss:DefaultColumnWidth=\"\x36\x30\" ss:DefaultRowHeight=\"\x31\x35\">\n",nPartCount+1);
-    
-    printf("   <Row ss:AutoFitHeight=\"\x30\">\n");
-    printf("    <Cell ss:StyleID=\"s65\"><Data ss:Type=\"Number\"></Data></Cell>\n");
-    printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">" + engineer + "</Data></Cell>\n");
-    printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">" + WA_Nummer + "</Data></Cell>\n");
-    printf("    <Cell ss:MergeAcross=\"2\" ss:StyleID=\"s66\"><Data ss:Type=\"String\">"  "</Data></Cell>\n");
-    printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">" + description1 + "</Data></Cell>\n");
-    printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">"+ Datum +"</Data></Cell>\n");
-    printf("   </Row>\n");
-    
-    for (int n=0; n < nPartCount; n++){
-        sprintf(IndexOB, "%d", n+1); 
-        printf("   <Row ss:AutoFitHeight=\"\x30\">\n");
-        printf("    <Cell ss:StyleID=\"s65\"><Data ss:Type=\"Number\">" + IndexOB + "</Data></Cell>\n");
-        
-        for(int k=0;k<=4;k++){	
-            
-            switch(k){
-                case 0: Value=PartDBNR[n]; break;
-                case 1:	Value=PartName[n]; break;
-                case 2:	Value=PartHeadlineEx[n];  Ext=" ss:MergeAcross=\"\x32\" ss:StyleID=\"s66\""; break;
-                case 3:	Value=PartHS[n]; Ext=" ss:StyleID=\"s66\"";  break;
-                case 4:	Value=PartHSNR[n]; break;
-            }
-            
-            printf("    <Cell" + Ext + "><Data ss:Type=\"String\">" + Value + "</Data></Cell>\n");
+
+    output(PROJEKT_PFAD + "/BOM.xml", "wtD") // output(fname, "wt");
+    {
+        // print out the inital header line of the column descriptions
+        // for all database header fields.
+		
+        sprintf(Datum,"%d.%d.%d",t2day(time()),t2month(time())+1,t2year(time()));
+		strsplit(temp,Kopf, '*'); 
+		Kopf=temp[0]+Datum+temp[1];
+        printf(Kopf);
+		printf(" <Worksheet ss:Name=\"\x45inzelstueckliste\"> \n  <Table ss:ExpandedColumnCount=\"8\" ss:ExpandedRowCount=\"%d\" x:FullColumns=\"\x31\" x:FullRows=\"\x31\" ss:DefaultColumnWidth=\"\x36\x30\" ss:DefaultRowHeight=\"\x31\x35\">\n",nPartCount+2);		
+		
+
+		
+		printf("   <Row ss:AutoFitHeight=\"\x30\">\n");
+		printf("    <Cell ss:StyleID=\"s65\"><Data ss:Type=\"Number\"></Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">" + engineer + "</Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">" + WA_Nummer + "</Data></Cell>\n");
+		printf("    <Cell ss:MergeAcross=\"2\" ss:StyleID=\"s66\"><Data ss:Type=\"String\">"  "</Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">" + description1 + "</Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">"+ Datum +"</Data></Cell>\n");
+		printf("   </Row>\n");
+		
+		printf("   <Row ss:AutoFitHeight=\"\x30\">\n");
+		printf("    <Cell ss:StyleID=\"s65\"><Data ss:Type=\"Number\">1</Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">LP1</Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">LP</Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\"></Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">"+filesetext(BoardName,"")+"</Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">Leiterplatte: " + description1 +  "</Data></Cell>\n");
+		printf("   </Row>\n");
+		
+        for (int n=0; n < nPartCount; n++)
+        {
+			sprintf(IndexOB, "%d", n+2); 
+			printf("   <Row ss:AutoFitHeight=\"\x30\">\n");
+			printf("    <Cell ss:StyleID=\"s65\"><Data ss:Type=\"Number\">" + IndexOB + "</Data></Cell>\n");
+			
+			for(int k=0;k<=6;k++)
+			{	
+				
+				switch(k) {
+					case 0: Value=PartName[n]; break;
+					case 1:	Value=PartSide[n]; break;
+					case 2: Value=PartPack[n]; break;
+					case 3:	Value=PartDBNR[n]; break;
+					case 4: Value=PartHeadlineEx[n]; break;
+					case 5:	Value=PartHS[n]; Ext=" ss:StyleID=\"s66\"";  break;
+					case 6:	Value=PartHSNR[n]; break;
+				}
+				
+				Value = str_replace(Value,"%","%%",0,1);
+				
+				printf("    <Cell" + Ext + "><Data ss:Type=\"String\">" + Value + "</Data></Cell>\n");
+			}
+			printf("   </Row>\n");
         }
-        printf("   </Row>\n");
-    }
-    
-    printf("\t\t\t</Table>\n\t</Worksheet>\n</Workbook>");
-    
-    sprintf(Anzahl,"%d",nPartCount+1);
-    // string basgewrherh = ULP_PATH + "/XMLimport.exe \"" + PROJEKT_PFAD + "BOM.xml\" \" + VORLAGE_PFAD + \" " + Anzahl + "\ndel \""+ str_replace(PROJEKT_PFAD,"/","\\",0,1) +"\BOM.xml\"" ;
-    // // dlgDialog("bla"){
-    // // dlgTextEdit(basgewrherh);
-    // // };
-    system(ULP_PATH + "/XMLimport.exe \"" + PROJEKT_PFAD + "BOM.xml\" \"" + VORLAGE_PFAD + "\" " + Anzahl);
-    if (fileerror()){
+	
+        printf("\t\t\t</Table>\n\t</Worksheet>\n</Workbook>");
+
+    }; 
+	sprintf(Anzahl,"%d",nPartCount+1);
+
+	system(ULP_PATH+"/XMLimport.exe \"" + PROJEKT_PFAD + "BOM.xml\" \"" + VORLAGE_PFAD + "\" " + Anzahl);
+	if (fileerror()) {
         dlgMessageBox("Ein Dateifehler ist aufgetreten!");
-    } 
-    
-    exit(0);
+	}
+	
+	exit(0);
     return records;
+	
 }
-void readLib6() {
-    string a[];
-    fileglob(a, LIB6_PATH+"/*.lbr"); 
-    AllLib6 = strjoin(a,',');
-}
-    
-int AppDialog(){
-    int rtn = dlgDialog("BOM-Excellisten Generator - Version: " + strVersion){
+
+int AppDialog()
+{
+    int rtn = dlgDialog("BOM-Excellisten Generator - Version: " + strVersion)
+    {
         // Set the default view width
-        dlgHBoxLayout dlgSpacing(1200);
-        
-        dlgHBoxLayout{
-            string Ueberschrifft = "Stücklistenausgabe";
-            //dlgStretch(1); 
-            
-            if(config_nicht_vorhanden){
-                Ueberschrifft +="<center><font color=\"#FF0000\">" + fileName + " nicht vorhanden, bitte Daten nachtragen oder Configfile anlegen</font></center>";
-            }
-            dlgLabel(Ueberschrifft);
-        }
-        dlgHBoxLayout{
+        dlgHBoxLayout dlgSpacing(1000);
+                   
+       
+		dlgHBoxLayout  {
+			string Ueberschrifft = "Stücklistenausgabe";
+			//dlgLabel("Stücklistenausgabe");
+			//dlgStretch(1); 
+					 
+			if(config_nicht_vorhanden) {
+				Ueberschrifft +="<center><font color=\"#FF0000\">"+fileName+" nicht vorhanden, bitte Daten nachtragen oder Configfile anlegen</font></center>";
+			}
+			dlgLabel(Ueberschrifft);
+		}
+        dlgHBoxLayout
+        {
             // Set the default list view height
             dlgVBoxLayout dlgSpacing(500);
-            dlgListView("", Lines, Selected); 
+            dlgListView("", Lines, Selected); //EditPart();
         }
-        
-        dlgHBoxLayout{
-            dlgHBoxLayout{
-                dlgGroup("Listen-Typ"){
-                    dlgRadioButton("&Bauteilliste", ListType) GeneratePartList ();
-                    dlgRadioButton("&Mengenliste", ListType) GenerateValueList ();
-                }                       
+            
+        dlgHBoxLayout
+        {
+            dlgHBoxLayout 
+            {
+               
+                // dlgLabel("List by:");
+                // string comboView[] = { "Parts", "Values" };
+                // dlgComboBox(comboView, ListType) OnListTypeChange();
+
+                //dlgLabel("Format:");
+                //string comboFmt[] = { "Text", "Tabbed Text", "CSV", "HTML" };
+                //dlgComboBox(comboFmt, OutputFormat);
+                dlgGroup("Listen-Typ")
+				 {
+					dlgRadioButton("&Bauteilliste", ListType) GeneratePartList ();
+					dlgRadioButton("&Mengenliste", ListType) GenerateValueList ();
+				 }                       
+                     
             }
+
+            dlgStretch(10);
             
-            dlgStretch(1);
-            
-            dlgHBoxLayout{
-                dlgHBoxLayout{
+            dlgHBoxLayout 
+            {
+                dlgHBoxLayout
+                {
                     dlgPushButton("&Vorschau") ViewList();                
-                    dlgPushButton("+&Einzelstueckliste") ExportOrderbaseXML();
-                    dlgPushButton("-&Abbruch") dlgAccept();
-                    dlgStretch(1);
+                    dlgPushButton("Einzelstueckliste") ExportOrderbaseXML();
+					dlgPushButton("-&Abbruch") dlgAccept();
                 }
-            }
+                
+                
+             }
         }
     };
     
     return rtn;
 }
-    
-if (!schematic){
+
+if (!schematic)
+{
     dlgMessageBox("!" + usage + "<hr><b>FEHLER: Kein Schaltplan!</b><p>\n Dieses Programm läuft nur im Schematic Editor.");
     exit(1);
-} else {
-    iniFilelesen();
-    readLib6();
+}
+else
+{
+    //dlgMessageBox("1");
+	iniFilelesen();
+	//dlgMessageBox("2");
     CollectPartData();
+	//dlgMessageBox("3");
     GeneratePartList();
+	//dlgMessageBox("4");
     int rtn = AppDialog();
 }

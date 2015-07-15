@@ -35,20 +35,27 @@ string LIB6_PATH = "//win.desy.de/group/sze/public/Eagle_6+/lbr";
  *  @return DeviceName
  */
 string buildDeviceName(string DSName,string Tech, string Pac) {
-					
-		if(strxstr(DSName,"\\*") > 0) {
+				
+		if(strxstr(DSName,"\\*") >= 0) {
 			DSName = str_replace(DSName,"\\*",Tech,0,0);
 			Tech = "";
 		}
-		if(strxstr(DSName,"\\?") > 0) {
+		if(strxstr(DSName,"\\?") >= 0) {
 			DSName = str_replace(DSName,"\\?",Pac,0,0);
 			Pac = "";
 		}
-
+	
 	return DSName + Tech + Pac;
 }
 
-
+/**
+ *  @brief Alle lbr Dateien werden nacheinander geöffnet und die einzelnen Datensätze
+ *  der Bauteile werden mit den von Eagle zur verfügung gestellten xml funktionen aus
+ *  den Dateien erschlossen. Nachdem alle Dateien durchsucht wurden, werden die Daten-
+ *  sätze in zwei Dateien Abgelegt eine ist alphabetisch nach Packages sortiert die 
+ *  andere ist nach der Bezeichnung der Bauteile sortiert.
+ *  
+ */
 void main(){
 	AnzahlLibs = fileglob(LIBS,LIB6_PATH+"/*.lbr");
 	for(k; k < AnzahlLibs; k++) {
@@ -57,8 +64,8 @@ void main(){
 		int n = xmlelements(temp,out,"eagle/drawing/library/devicesets/deviceset");
 
 		for(int h = 0; h < n ; h++) {
-			Datenblatt1[h] = CutSubstring(xmlelement(temp[h],"deviceset/description"),"&lt;a\\shref\\s=\\s\"file:\\\\[^\\n]*\\.pdf\">[^\\n]*&lt;/a>",0);
-			Datenblatt1[h] = str_replace(Datenblatt1[h],"&lt;","<",START,REPEAT);
+			Datenblatt1[h] = CutSubstring(xmlelement(temp[h],"deviceset/description"),"file:\\\\[^\\n\"]*\\.[pP][dD][fF]",0);
+			//Datenblatt1[h] = str_replace(Datenblatt1[h],"&lt;","<",START,REPEAT);
 			strsplit(temp1,xmlelement(temp[h],"deviceset/description"),'\n');
 			int l = xmlelements(temp2,temp[h],"deviceset/devices/device");
 			for(int g = 0; g < l; g++) {
@@ -89,14 +96,19 @@ void main(){
 						Prefix[bts] 						= xmlattribute(temp[h],"deviceset","prefix"); 
 						Datenblatt2[bts]				= HtmlCharactersTauschen(Datenblatt1[h]);
 						
-						rest = DeviceName[bts] + ";" + OrderbaseNummer[bts]  + ";" 
-								 + Hersteller[bts] + ";" + HerstellerNummer[bts] + ";" 
-								 + Vorzug[bts] 		 + ";" + Beschreibung[bts] 		 + ";" 
-								 + Prefix[bts] 		 + ";" + Datenblatt2[bts]      + ";"
-								 + LIBS[k] 				 + ";" + int2str(Gates);
+						rest =   DeviceName[bts]       + ";" 
+									 + OrderbaseNummer[bts]  + ";" 
+									 + Hersteller[bts] 			 + ";" 
+									 + HerstellerNummer[bts] + ";" 
+									 + Vorzug[bts] 		 			 + ";" 
+									 + Beschreibung[bts]		 + ";" 
+									 + Prefix[bts] 					 + ";" 
+									 + Datenblatt2[bts] 		 + ";"
+									 + LIBS[k] 						   + ";" 
+									 + int2str(Gates);
 						
-						Pac_Sort[bts]	= Package[bts]+ ";" +	Val[bts] + ";" + rest;
-						Val_Sort[bts]	= Val[bts]    + ";" + Package[bts]+ ";" + rest;
+						Pac_Sort[bts]	= Package[bts] + ";" + Val[bts]     + ";" + rest;
+						Val_Sort[bts]	= Val[bts]     + ";" + Package[bts] + ";" + rest;
 						bts++;
 					}
 				}
@@ -105,14 +117,14 @@ void main(){
 	}
 	sort(bts,Pac_Sort);
 	sort(bts,Val_Sort);
-	output("N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Package_sortiert.csv","wt"){
+	output("N:/public/Eagle_6+/ulp/Bauteile_nach_Package_sortiert.csv","wt"){
 		for(i = 0; i < bts; i++) 
 			printf("%s\n",Pac_Sort[i]); 
 	}
-	output("N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Val_sortiert.csv","wt"){
+	output("N:/public/Eagle_6+/ulp/Bauteile_nach_Val_sortiert.csv","wt"){
 		for(i = 0; i < bts; i++) 
 			printf("%s\n",Val_Sort[i]); 
 	}
-	//exit("QUIT;");
+	exit("QUIT;");
 }
 

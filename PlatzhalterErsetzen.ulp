@@ -17,52 +17,74 @@ string Pac_Sort_Arr[], Val_Sort_Arr[], Pac_Sort, Val_Sort;
 string HerstellerNummer[], Val[], Beschreibung[], Package[], Hersteller[], Vorzug[],OrderbaseNummer[],DeviceName[],Prefix[];
 int Bauteile;								///< Anzahl Bauteile
 
+int ORDERBASE_NUMMER = 0;   ///< indize für Bauteil-Attribut im Datensatz 
+int PART_NAME = 1;				  ///< indize für Bauteil-Attribut im Datensatz 
+int PACKAGE = 2;            ///< indize für Bauteil-Attribut im Datensatz 
+int VALUE = 3;              ///< indize für Bauteil-Attribut im Datensatz 
+int VALU = 4;								///< indize für Bauteil-Attribut im Datensatz 
+int HERSTELLER = 5;         ///< indize für Bauteil-Attribut im Datensatz 
+int VORZUG = 6;             ///< indize für Bauteil-Attribut im Datensatz 
+int BESCHREIBUNG = 7;       ///< indize für Bauteil-Attribut im Datensatz 
+int PREFIX = 8;             ///< indize für Bauteil-Attribut im Datensatz 
+int LIBRARY = 9;            ///< indize für Bauteil-Attribut im Datensatz 
+int HERSTELLERNR = 10;       ///< indize für Bauteil-Attribut im Datensatz 
+int DATENBLATT = 11;        ///< indize für Bauteil-Attribut im Datensatz 
+int DEVICE_NAME = 12;       ///< indize für Bauteil-Attribut im Datensatz 
+int PINS = 13;						  ///< indize für Bauteil-Attribut im Datensatz 
+int CHANGE_MODE = 14;       ///< indize für Bauteil-Attribut im Datensatz 
+int ORIENTATION = 15;				///< indize für Bauteil-Attribut im Datensatz 
+int MIRRORED = 16;							  ///< indize für Bauteil-Attribut im Datensatz 
+int SHEET = 17;							  ///< indize für Bauteil-Attribut im Datensatz 
+int ID = 18;							  ///< indize für Bauteil-Attribut im Datensatz 
+
+int NONE				= 0;		 		///<  Konstante für bessere Lesbarkeit
+int COMPLETE 	  = 1;     		///<  Konstante für bessere Lesbarkeit
+int ATTR_SYM 	  = 2;     		///<  Konstante für bessere Lesbarkeit
+int PACK_ONLY 	= 3;     		///<  Konstante für bessere Lesbarkeit
+int ATTR_ONLY 	= 4;     		///<  Konstante für bessere Lesbarkeit
+int RECOVER     = 5;				///<  Konstante für bessere Lesbarkeit
 
 int VAL = 0; 								///< Sortier-Modus 
 int PAC = 1;								///< Sortier-Modus 
 int VALPAC = 2;							///< Sortier-Modus 
 
-string PartDataValueNames[] = {	"P.name", 
-																"P.device.name", 
+int PartAttribOrder[] = {	ORDERBASE_NUMMER, ///< 
+													HERSTELLER,
+													HERSTELLERNR,
+													VALU,
+													VORZUG};
+													
+string att[]={"DATENBANKOB-NR", ///< Bauteil-Attribute hinterlegt für jedes neue Bauteil
+							"HERSTELLER_NAME",
+							"HERSTELLER_NR",
+							"VAL",
+							"ZE-VORZUG"};
+
+string PartDataValueNames[] = {	"OrderbaseNummer",
+																"P.name", 
 																"P.device.package.name",
 																"P.value",
-																"P.device.prefix",
-																"P.device.library",
+																"Val",
 																"Hersteller",
-																"HerstellerNummer",
 																"Vorzug",
 																"Beschreibung",
+																"P.device.prefix",
+																"P.device.library",
+																"HerstellerNummer",
 																"Datenblatt",
-																"OrderbaseNummer",
-																"ChangeMode"};
-																
-int PART_NAME = 0;				  ///< indize für Bauteil-Attribut im Datensatz 
-int DEVICE_NAME = 1;        ///< indize für Bauteil-Attribut im Datensatz 
-int PACKAGE = 2;            ///< indize für Bauteil-Attribut im Datensatz 
-int VALUE = 3;              ///< indize für Bauteil-Attribut im Datensatz 
-int PREFIX = 4;             ///< indize für Bauteil-Attribut im Datensatz 
-int LIBRARY = 5;            ///< indize für Bauteil-Attribut im Datensatz 
-int HERSTELLER = 6;         ///< indize für Bauteil-Attribut im Datensatz 
-int HERSTELLERNR = 7;       ///< indize für Bauteil-Attribut im Datensatz 
-int VORZUG = 8;             ///< indize für Bauteil-Attribut im Datensatz 
-int BESCHREIBUNG = 9;       ///< indize für Bauteil-Attribut im Datensatz 
-int DATENBLATT = 10;        ///< indize für Bauteil-Attribut im Datensatz 
-int ORDERBASE_NUMMER = 11;  ///< indize für Bauteil-Attribut im Datensatz 
-int CHANGE_MODE = 12;       ///< indize für Bauteil-Attribut im Datensatz 
-
-
-
-int NONE				= 0;		 		///<  Konstanten für bessere Lesbarkeit
-int COMPLETE 	  = 1;     		///<  Konstanten für bessere Lesbarkeit
-int ATTR_SYM 	  = 2;     		///<  Konstanten für bessere Lesbarkeit
-int PACK_ONLY 	= 3;     		///<  Konstanten für bessere Lesbarkeit
-int ATTR_ONLY 	= 4;     		///<  Konstanten für bessere Lesbarkeit
-
+																"P.device.name",
+																"Pins",
+																"ChangeMode",
+																"Orientation",
+																"mirrored",
+																"Sheet",
+																"Id"};
 
 string PartData[];          ///< Bauteil-Datensätzen aus Schaltplan
 string PartDataRecovery[];  ///< Bauteil-Datensätzen aus Schaltplan
+string PlaceholderOnly[];		///< Bauteil-Datensätzen aus Schaltplan
 int NoOfParts;              ///< Bauteil-Datensätzen aus Schaltplan
-
+int NoOfPlaceholders;				///< Bauteil-Datensätzen aus Schaltplan
 
 int evalChangeMode(string cMode) {
 	if(cMode == int2str(NONE)) 				return	NONE;			
@@ -71,7 +93,159 @@ int evalChangeMode(string cMode) {
 	if(cMode == int2str(PACK_ONLY))   return  PACK_ONLY;
 	if(cMode == int2str(ATTR_ONLY))   return  ATTR_ONLY;
 	return 0;
-}                     
+} 
+
+
+string getPartVal(string FullPartString, int pos) {
+	string tempoarray[];
+	strsplit(tempoarray,FullPartString,'\t');
+	return tempoarray[pos];
+}
+
+string setPartVal(string FullPartString, int pos, string newVal) {
+	string tempoarray[], newFullPartString;
+	int n = strsplit(tempoarray,FullPartString,'\t');
+	for(int i = 0; i <= n; i++) {	
+		newFullPartString += (i == pos) ? newVal : tempoarray[i];
+		newFullPartString += (i < n) ? "\t" : "";
+	}
+	return newFullPartString;
+}
+      
+
+int partCmp(string part1, string part2) {	
+	for(int i = PACKAGE; i <= PINS; i++) {
+		if(getPartVal(part1,i) != getPartVal(part2,i)) {
+			//Debug(getPartVal(part1,i) +"\n!=\n"+ getPartVal(part2,i));
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
+
+string exchangePart(string old_Part, string new_Part, int mode) {
+	string returnval;
+	switch(mode) {
+		case 0 /* NONE */: {
+							break;
+						}
+		case 1 /* COMPLETE */:	{
+							returnval = setPartVal(	new_Part,
+																			PART_NAME,
+																			getPartVal(old_Part,PART_NAME));
+							returnval = setPartVal(	returnval,
+																			ORIENTATION,
+																			getPartVal(old_Part,ORIENTATION));
+							returnval = setPartVal(	returnval,
+																			MIRRORED,
+																			getPartVal(old_Part,MIRRORED));
+							returnval = setPartVal(	returnval,
+																			SHEET,
+																			getPartVal(old_Part,SHEET));
+							returnval = setPartVal(	returnval,
+																			ID,
+																			getPartVal(old_Part,ID));
+							returnval = setPartVal(	returnval,
+																			CHANGE_MODE,
+																			int2str(COMPLETE));
+							break;
+						}	
+		case 2 /* ATTR_SYM */:	{
+								returnval = getPartVal(old_Part,PART_NAME) + "\t" +
+								getPartVal(new_Part,DEVICE_NAME) + "\t" +
+								getPartVal(old_Part,PACKAGE) + "\t" +
+								getPartVal(new_Part,VALUE) + "\t" +
+								getPartVal(new_Part,PREFIX) + "\t" +
+								getPartVal(old_Part,LIBRARY) + "\t" +
+								getPartVal(old_Part,HERSTELLER) + "\t" +
+								getPartVal(old_Part,HERSTELLERNR) + "\t" +
+								getPartVal(old_Part,VORZUG) + "\t" +
+								getPartVal(old_Part,BESCHREIBUNG) + "\t" +
+								getPartVal(old_Part,DATENBLATT) + "\t" +
+								getPartVal(old_Part,ORDERBASE_NUMMER) + "\t" +
+								int2str(ATTR_SYM) + "\t";
+							break;
+						}	
+		case 3 /* PACK_ONLY */:	{
+							returnval = getPartVal(old_Part,PART_NAME) + "\t" +
+							getPartVal(new_Part,DEVICE_NAME) + "\t" +
+							getPartVal(old_Part,PACKAGE) + "\t" +
+							getPartVal(new_Part,VALUE) + "\t" +
+							getPartVal(new_Part,PREFIX) + "\t" +
+							getPartVal(old_Part,LIBRARY) + "\t" +
+							getPartVal(old_Part,HERSTELLER) + "\t" +
+							getPartVal(old_Part,HERSTELLERNR) + "\t" +
+							getPartVal(old_Part,VORZUG) + "\t" +
+							getPartVal(old_Part,BESCHREIBUNG) + "\t" +
+							getPartVal(old_Part,DATENBLATT) + "\t" +
+							getPartVal(old_Part,ORDERBASE_NUMMER) + "\t" +
+							int2str(PACK_ONLY) + "\t";
+							break;
+						}	
+		case 4 /* ATTR_ONLY */:	{
+							returnval = setPartVal(	new_Part,
+																			PART_NAME,
+																			getPartVal(old_Part,PART_NAME));
+							returnval = setPartVal(	returnval,
+																			ORIENTATION,
+																			getPartVal(old_Part,ORIENTATION));
+							returnval = setPartVal(	returnval,
+																			MIRRORED,
+																			getPartVal(old_Part,MIRRORED));
+							returnval = setPartVal(	returnval,
+																			SHEET,
+																			getPartVal(old_Part,SHEET));
+							returnval = setPartVal(	returnval,
+																			ID,
+																			getPartVal(old_Part,ID));
+							returnval = setPartVal(	returnval,
+																			CHANGE_MODE,
+																			int2str(ATTR_ONLY));
+							break;
+						}	
+		case 5 /* RECOVER */: {
+							returnval = setPartVal(	new_Part,
+																			PART_NAME,
+																			getPartVal(old_Part,PART_NAME));
+							returnval = setPartVal(	returnval,
+																			ORIENTATION,
+																			getPartVal(old_Part,ORIENTATION));
+							returnval = setPartVal(	returnval,
+																			MIRRORED,
+																			getPartVal(old_Part,MIRRORED));
+							returnval = setPartVal(	returnval,
+																			SHEET,
+																			getPartVal(old_Part,SHEET));
+							returnval = setPartVal(	returnval,
+																			ID,
+																			getPartVal(old_Part,ID));
+							returnval = setPartVal(	returnval,
+																			CHANGE_MODE,
+																			int2str(NONE));
+							break;
+						}
+		default : {
+							returnval = old_Part;
+							break;
+						}
+	}
+	
+	return returnval;
+}
+
+
+void changeAllidenticalParts(string template, string newPart, int mode) {
+	for(int i = 0; i < NoOfParts; i++) {
+		if(partCmp(template,PartData[i])) {
+			PartData[i] = exchangePart(PartData[i],newPart,mode);
+		}
+	}
+	for(int k = 0; k < NoOfPlaceholders; k++) {
+		if(partCmp(template,PlaceholderOnly[k])) 
+			PlaceholderOnly[k] = exchangePart(PlaceholderOnly[k],newPart,mode);
+	}
+}              
+
 
 /**
  *  @brief Die vorsortierten 
@@ -92,9 +266,9 @@ int BTSearch(string searchString, int SORTING) {
 	
 	if(strxstr(searchString,"\\*") > -1) 
 		searchString = strsub(searchString,0,strlen(searchString)-1);
-		
+			
 	length = strlen(searchString);
-
+	if(length <= 0) return -1;
 
 	while(index != lastindex ) {
 		iteration++;
@@ -139,103 +313,54 @@ string refinedSearch(string searchString, string Subject) {
 		return returnval;
 }
 
-
-string getPartVal(string FullPartString, int pos) {
-	string tempoarray[];
-	strsplit(tempoarray,FullPartString,'\t');
-	return tempoarray[pos];
-}
-
-string setPartVal(string FullPartString, int pos, string newVal) {
-	string tempoarray[], newFullPartString;
-	strsplit(tempoarray,FullPartString,'\t');
-	for(int i = 0; i <= 12; i++) {	
-		newFullPartString += (i == pos) ? newVal : tempoarray[i];
-		newFullPartString += (i < 12) ? "\t" : "";
+/**
+ *  @brief Die Funktion evaluiert ob zwei Bauteile die gleiche Pinanzahl habe, falls dies
+ *  nicht der Fall ist wird der User gefragt ob trotzdem die beiden Bauteile getauscht 
+ *  werden sollen
+ *  
+ *  @param [in] part1 erstes zu vergleichendes Bauteil
+ *  @param [in] part2 zweites zu vergleichendes Bauteil
+ *  @return 0 -> Bauteile nicht tauschen 1 -> Bauteile tauschen
+ */
+int pinCheck(string part1, string part2) {
+	if(getPartVal(part1, PINS) == getPartVal(part2, PINS)) {
+		return TRUE;
+	} else {
+		if(ErrorMsg("Die Bauteile haben unterschiedlich viele Pins sind Sie \n"
+									"sicher das die Teile getauscht werden sollen? 	   			 ",
+									"Ja","Abbrechen",
+									2)) {
+			return TRUE;					
+		} else {
+			return FALSE;
+		}
 	}
-	return newFullPartString;
+	return FALSE;
 }
 
-string exchangePart(string Schematics_Part, string Bibliothek_Part, int mode) {
-	string returnval;
-	switch(mode) {
-		case 1 /* COMPLETE */:	{
-							returnval = setPartVal(	Bibliothek_Part,
-																			PART_NAME,
-																			getPartVal(Schematics_Part,PART_NAME));
-							returnval = setPartVal(	returnval,
-																			CHANGE_MODE,
-																			int2str(COMPLETE));
-							break;
-						}	
-		case 2 /* ATTR_SYM */:	{
-								returnval = getPartVal(Schematics_Part,PART_NAME) + "\t" +
-								getPartVal(Bibliothek_Part,DEVICE_NAME) + "\t" +
-								getPartVal(Schematics_Part,PACKAGE) + "\t" +
-								getPartVal(Bibliothek_Part,VALUE) + "\t" +
-								getPartVal(Bibliothek_Part,PREFIX) + "\t" +
-								getPartVal(Schematics_Part,LIBRARY) + "\t" +
-								getPartVal(Schematics_Part,HERSTELLER) + "\t" +
-								getPartVal(Schematics_Part,HERSTELLERNR) + "\t" +
-								getPartVal(Schematics_Part,VORZUG) + "\t" +
-								getPartVal(Schematics_Part,BESCHREIBUNG) + "\t" +
-								getPartVal(Schematics_Part,DATENBLATT) + "\t" +
-								getPartVal(Schematics_Part,ORDERBASE_NUMMER) + "\t" +
-								int2str(ATTR_SYM) + "\t";
-							break;
-						}	
-		case 3 /* PACK_ONLY */:	{
-							returnval = getPartVal(Schematics_Part,PART_NAME) + "\t" +
-							getPartVal(Bibliothek_Part,DEVICE_NAME) + "\t" +
-							getPartVal(Schematics_Part,PACKAGE) + "\t" +
-							getPartVal(Bibliothek_Part,VALUE) + "\t" +
-							getPartVal(Bibliothek_Part,PREFIX) + "\t" +
-							getPartVal(Schematics_Part,LIBRARY) + "\t" +
-							getPartVal(Schematics_Part,HERSTELLER) + "\t" +
-							getPartVal(Schematics_Part,HERSTELLERNR) + "\t" +
-							getPartVal(Schematics_Part,VORZUG) + "\t" +
-							getPartVal(Schematics_Part,BESCHREIBUNG) + "\t" +
-							getPartVal(Schematics_Part,DATENBLATT) + "\t" +
-							getPartVal(Schematics_Part,ORDERBASE_NUMMER) + "\t" +
-							int2str(PACK_ONLY) + "\t";
-							break;
-						}	
-		case 4 /* ATTR_ONLY */:	{
-							returnval = getPartVal(Schematics_Part,PART_NAME) + "\t" +
-							getPartVal(Bibliothek_Part,DEVICE_NAME) + "\t" +
-							getPartVal(Schematics_Part,PACKAGE) + "\t" +
-							getPartVal(Bibliothek_Part,VALUE) + "\t" +
-							getPartVal(Bibliothek_Part,PREFIX) + "\t" +
-							getPartVal(Schematics_Part,LIBRARY) + "\t" +
-							getPartVal(Schematics_Part,HERSTELLER) + "\t" +
-							getPartVal(Schematics_Part,HERSTELLERNR) + "\t" +
-							getPartVal(Schematics_Part,VORZUG) + "\t" +
-							getPartVal(Schematics_Part,BESCHREIBUNG) + "\t" +
-							getPartVal(Schematics_Part,DATENBLATT) + "\t" +
-							getPartVal(Schematics_Part,ORDERBASE_NUMMER) + "\t" +
-							int2str(ATTR_ONLY) + "\t";
-							break;
-						}	
-		default : {
-							returnval = Schematics_Part;
-							break;
-						}
-	}
-	
-	return returnval;
-}
-
+/**
+ *  @brief Mit Hilfe dieser Funktion werden die Datensätze der Bauteile aus dem Schaltplan
+ *  angelegt
+ *  
+ */
 void getPartData(){
 status("getPartData()");
-	string att[]={"DATENBANKOB-NR",
-								"HERSTELLER_NAME",
-								"HERSTELLER_NR",
-								"VAL",
-								"ZE-VORZUG"};
+
 			
 	if(schematic){
 		schematic(S){
 			S.parts(P) {
+				if(strxstr(P.device.library,"(Spannungs_?[Vv]ersorgung)|[Vv]orlage") >= 0)
+						continue; //In diesem fall handelt es sich um kein Bauteil
+				string orientation;
+				string seite;
+				int mirrored;
+				P.instances(I) {
+					orientation = real2str(I.angle,0);
+					mirrored = I.mirror;
+					seite = int2str(I.sheet);
+				}
+				int pins = 0;
 				string attVal[];	
 				P.attributes(A) {
 					for(int i = 0; i < 5; i++)
@@ -243,22 +368,33 @@ status("getPartData()");
 				}
 				string PackageName = "";
 				if(P.device.package)  PackageName = P.device.package.name;
-				PartData[NoOfParts] = P.name + "\t"
-															+ P.device.name + "\t"
+				P.device.gates(G) {
+					G.symbol.pins(I){
+						pins++;
+					}
+				}
+				PartData[NoOfParts] =   attVal[0] + "\t"
+															+ P.name + "\t"
 															+ PackageName + "\t"
 															+ P.value + "\t"
-															+ P.device.prefix + "\t"
-															+ P.device.library + "\t"
+															+ attVal[3] + "\t"
 															+ attVal[1] + "\t"
-															+ attVal[2] + "\t"
 															+ attVal[4] + "\t"
 															+ TrimWhiteSpace(str_replace(CutSubstring(P.device.description,"[^\\n]{9,}\\n",0),"((&lt;)|<)/?[^\\n;<>]*((&gt;)|>)","",0,1)) + "\t"		//Beschreibung
-															+ CutSubstring(P.device.description,"((&lt;)|<)a\\shref\\s=\\s\"file:\\\\[^\\n]*\\.pdf\">[^\\n]*((&lt;)|<)/a>",0) + "\t"		//Datenblatt
-															+ attVal[0] + "\t" + int2str(NONE);
+															+ P.device.prefix + "\t"
+															+ P.device.library + "\t"
+															+ attVal[2] + "\t"
+															+ CutSubstring(P.device.description,"file:\\\\[^\\n\"]*\\.[pP][dD][fF]",0) + "\t"		//Datenblatt
+															+ P.device.name + "\t"
+															+ int2str(pins) + "\t"
+															+ int2str(NONE) + "\t" 
+															+ orientation + "\t"
+															+ (mirrored ? "true" : "false" )+ "\t"
+															+ seite + "\t"
+															+ int2str(NoOfParts);
 				PartDataRecovery[NoOfParts] = PartData[NoOfParts];
-				/* Debug(PartDataRecovery[NoOfParts] + "\n" +
-							PartData[NoOfParts]  + "\n" +
-							int2str(NoOfParts)); */
+				if(strxstr(P.device.library,"Platzhalter") >= 0) 
+					PlaceholderOnly[NoOfPlaceholders++] = PartData[NoOfParts];
 				NoOfParts++;
 			}
 		}
@@ -305,11 +441,23 @@ string createTable(string Bezeichnung, string Package, int PartNr) {
 			strsplit(t,SEARCH ? Pac_Sort_Arr[position++] : Val_Sort_Arr[position++],';');
 			//Debug("wert:"+strsub(temp[0],0,strlen(sb)) + " ?? sb:" + sb+"\ntempstr:"+tempstr+"\n");
 			if((SEARCH == VALPAC) && (strxstr(t[1],Bezeichnung) < 0)) {
-			} else {
-			string pacOrval = SEARCH ? t[0] + "\t" + t[1] : t[1] + "\t" + t[0];
-			liste += "\t" + t[2] + "\t" + pacOrval + "\t" +
-							t[8] + "\t" + t[10] + "\t" + t[4] + "\t" + t[5]  + "\t" + t[6] + "\t" + 
-							t[7] + "\t" + t[9] + "\t" + t[3] + "\n";
+			} else {		
+				string device_name = t[2];    
+				string prefix = t[8];           
+				string libra = t[10];          
+				string hersteller = t[4];       
+				string herstellernr = t[5];     
+				string vorzug = t[6];           
+				string beschreibung = t[7];     
+				string datenblatt = t[9];      
+				string orderbase_nummer = t[3];
+				string pins = t[11];
+				string val = SEARCH ? t[1] : t[0];
+				string pacOrval = SEARCH ? t[0] + "\t" + t[1] : t[1] + "\t" + t[0];
+				liste += orderbase_nummer + "\t"+t[0]+"\t" + pacOrval + "\t" + val + "\t" + hersteller
+								 + "\t" + vorzug + "\t" + beschreibung + "\t" + prefix + "\t" + libra  
+								 + "\t" + herstellernr + "\t" + datenblatt + "\t" + device_name 
+								 + "\t" + pins + "\n";
 			}
 			
 		}
@@ -319,35 +467,70 @@ string createTable(string Bezeichnung, string Package, int PartNr) {
 	return liste;
 }
 
-string buildPartDateSet(int PartNr) {
-	string PartDat[];
-	string newValues[];
-	for(int i = PART_NAME; i <= ORDERBASE_NUMMER; i++)  {
-		if(getPartVal(PartData[PartNr],CHANGE_MODE) != int2str(NONE)) {
-			newValues[i] = getPartVal(PartData[PartNr],i);
-		} else {
-			newValues[i] = "";
+string newDataset(int PartNr) {
+	string temp[];
+	string Dataset[], newDataset;
+	strsplit(Dataset,PartData[PartNr],'\t');
+	dlgDialog("neuer Datensatz") {
+		dlgGridLayout {
+			dlgCell(0, 0) {
+				dlgVBoxLayout{
+					for(int i = 0; i < 5; i++) {
+						dlgLabel(PartDataValueNames[PartAttribOrder[i]]);
+					}
+				}
+			}
+			dlgCell(0, 1) {
+				dlgVBoxLayout{
+					dlgHBoxLayout{ 
+						dlgSpacing(320);
+					}
+					for(int i = 0; i < 5; i++) {
+						dlgStringEdit(Dataset[PartAttribOrder[i]]);
+					}
+				}
+			}
 		}
-		PartDat[i] = 	PartDataValueNames[i] + "\t"
-									+ getPartVal(PartDataRecovery[PartNr],i) + "\t"
-									+ newValues[i];
-	}
-	return strjoin(PartDat,'\n');
+		dlgPushButton("&Nur dieses Bauteil verändern") {
+			newDataset = strjoin(Dataset,'\t');
+			PartData[PartNr] = exchangePart(PartData[PartNr],newDataset,ATTR_ONLY);
+			dlgAccept();
+		}
+		dlgPushButton("&Alle identischen Bauteile verändern") {
+			newDataset = strjoin(Dataset,'\t');
+			changeAllidenticalParts(PartData[PartNr],newDataset, ATTR_ONLY);
+			dlgAccept();
+		}
+		dlgPushButton("-&Cancel") dlgReject();
+	};
+	
+	return strjoin(Dataset,'\t');
 }
+
 		
-void Vorschlaege(int PartNr) {
+void Vorschlaege(int PartNr, int POnly) {
 status("Vorschlaege()");
+	int initial_PartNr = PartNr;
+	int returnval = 0;
 	string Suchbegriff_Package,Suchbegriff_Bezeichnung; 
 	string liste[];
 	string PartAttributes[];
 	string Bauteil_attribute;
-	string temp[];
-	int Auswahl;
-	int PartListAuswahl;
-	string PartDataSet[];
-	strsplit(PartDataSet,buildPartDateSet(PartNr),'\n');
+	string temp[],altesBauteil[],neu[],PartDat[];
+	int Auswahl,i = 0;
+	int PartListAuswahl,altAuswahl,neuAuswahl;
+	if(POnly)
+		PartNr = str2int(getPartVal(PlaceholderOnly[PartNr],ID)); 
+		//am Ende des Datensatzes steht der Index des Bauteils im Kompletten Datensatz
+
 	if(strlen(getPartVal(PartData[PartNr],PACKAGE)) > 0) { //gibt es ein Package für das Device ? (gilt nicht für Versorgungsspannung)
-	
+		int n = strsplit(altesBauteil,PartDataRecovery[PartNr],'\t');
+		for(i = 0; i < n; i++) {
+			PartDat[i] += PartDataValueNames[i] + "\t" + altesBauteil[i] + "\t";
+			if(getPartVal(PartData[PartNr],CHANGE_MODE) != int2str(NONE)) {
+				PartDat[i] += getPartVal(PartData[PartNr],i);
+			}
+		}
 		if(getPartVal(PartData[PartNr],PREFIX) == "R") {
 			Suchbegriff_Package = "RES*";
 		} else if(getPartVal(PartData[PartNr],PREFIX) == "C") {
@@ -361,10 +544,26 @@ status("Vorschlaege()");
 			dlgVBoxLayout{
 					dlgHBoxLayout{dlgSpacing(1400);}
 				dlgHBoxLayout{
-					dlgVBoxLayout{dlgSpacing(230);}
-					
-					dlgListView("Attribut\talt\tneu",PartDataSet,PartListAuswahl);
-				
+					dlgVBoxLayout{dlgSpacing(300);}
+					dlgListView("Attribut\taltes Bauteil\t neues Bauteil",PartDat,PartListAuswahl);
+					if(getPartVal(PartData[PartNr],CHANGE_MODE) != int2str(NONE)) {
+						dlgPushButton("Bauteil wiederherstellen"){
+							dlgDialog("Frage") {
+								dlgLabel("Sollen alle Bauteile dieser Art wiederhergestellt werden?");
+								dlgPushButton("Ja") {
+									changeAllidenticalParts(PartData[PartNr],PartDataRecovery[PartNr],RECOVER);
+									dlgAccept();
+								}
+								dlgPushButton("Nein nur dieses") {
+									PartData[PartNr] = PartDataRecovery[PartNr];
+									dlgAccept();
+								}	
+								dlgPushButton("Abbrechen") {
+									dlgAccept();
+								}		
+							};
+						}
+					}
 					dlgVBoxLayout{
 						dlgHBoxLayout{
 							dlgLabel("Package");
@@ -374,7 +573,7 @@ status("Vorschlaege()");
 							dlgLabel("Bezeichnung");
 							dlgStringEdit(Suchbegriff_Bezeichnung);
 						}
-						dlgPushButton("&suchen")  {
+						dlgPushButton("+&suchen")  {
 							strsplit(liste,createTable(Suchbegriff_Bezeichnung,Suchbegriff_Package,PartNr),'\n');
 							dlgRedisplay();
 						}
@@ -382,34 +581,26 @@ status("Vorschlaege()");
 				}
 			
 			
-				dlgListView("PART_NAME"
-										"\tDEVICE_NAME"
-										"\tPACKAGE"
-										"\tVALUE"
-										"\tPREFIX"
-										"\tLIBRARY"
-										"\tHERSTELLER"
-										"\tHERSTELLERNR"
-										"\tVORZUG"
-										"\tBESCHREIBUNG"
-										"\tDATENBLATT"
-										"\tORDERBASE_NUMMER"
+				dlgListView(strjoin(PartDataValueNames,'\t')
 										,liste
 										,Auswahl) {
 					dlgDialog(""){
 						dlgLabel(getPartVal(liste[Auswahl],HERSTELLER) + " - " + getPartVal(liste[Auswahl],HERSTELLERNR));
 						dlgPushButton("Datenblatt einsehen") 
-							system("cmd /c \"//"+str_replace(CutSubstring(getPartVal(liste[Auswahl],9),"elma[^\"]*",0),"\\\\","/",START,REPEAT)+"\"");
-						dlgPushButton("+&Bauteil gegen neues austauschen") {
-							PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl],COMPLETE);
-							Bauteil_attribute = PartData[PartNr] ;
+							system("cmd /c \""+str_replace(getPartVal(liste[Auswahl],DATENBLATT)+"\"","file:","",START,ONCE));
+						dlgPushButton("&Bauteil gegen neues austauschen") {
+							if(pinCheck(PartData[PartNr],liste[Auswahl])) {
+								PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl],COMPLETE);
+								if(POnly) 
+									PlaceholderOnly[initial_PartNr] = exchangePart(PlaceholderOnly[initial_PartNr],liste[Auswahl],COMPLETE);
+								Bauteil_attribute = PartData[PartNr] ;
+							}
 							dlgAccept();
 						}
-						dlgPushButton("+&alle identischen Bauteile gegen dieses tauschen") {
-							for(int i = 0; i < Bauteile; i++) {
-								if(setPartVal(PartData[PartNr],PART_NAME,"") == setPartVal(PartData[i],PART_NAME,""))
-									PartData[i] = exchangePart(PartData[i],liste[Auswahl],COMPLETE);
-							}
+						
+						dlgPushButton("&alle identischen Bauteile gegen dieses tauschen") {
+							if(pinCheck(PartData[PartNr],liste[Auswahl])) 
+								changeAllidenticalParts(PartData[PartNr],liste[Auswahl],COMPLETE);
 							dlgAccept();
 						}
 					/* 	dlgPushButton("+&Attribute und Symbol austauschen, Package erhalten") {
@@ -421,29 +612,45 @@ status("Vorschlaege()");
 							PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl]);
 							dlgAccept();
 						} */
-						dlgPushButton("+&Attribute austauschen (Platzhalter erhalten)") {
-							PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl],ATTR_ONLY);
+						dlgPushButton("&Attribute austauschen (Platzhalter erhalten)") {
+							if(pinCheck(PartData[PartNr],liste[Auswahl])) {
+								PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl],ATTR_ONLY);
+								if(POnly) 
+									PlaceholderOnly[initial_PartNr] = exchangePart(PlaceholderOnly[initial_PartNr],liste[Auswahl],ATTR_ONLY);
+								}
+							dlgAccept();
+						}
+						dlgPushButton("Attribute für alle identischen Bauteile austauschen (Platzhalter erhalten)") {
+							if(pinCheck(PartData[PartNr],liste[Auswahl])) 
+								changeAllidenticalParts(PartData[PartNr],liste[Auswahl],ATTR_ONLY);
 							dlgAccept();
 						}
 						dlgPushButton("-&Abbrechen") dlgReject();
 					};
-					dlgRedisplay();
-						
+					
+					dlgAccept();
 				}
 			}
 			dlgHBoxLayout{
-				dlgPushButton("&Redisplay") dlgRedisplay();
-				dlgPushButton("+&OK") dlgAccept();
-				dlgPushButton("-&Cancel") exit(0);
+				dlgPushButton("eigenen Datensatz anlegen") {
+					newDataset(PartNr);
+				}
+				dlgStretch(1);
+				dlgPushButton("&OK") {
+					dlgAccept();
+				}
+				dlgPushButton("-&Cancel") {
+					dlgReject();
+				}
 			}
 		};		
 		
 	} else {
-		Debug("Das Bauteil hat kein Package..");
+		dlgMessageBox("Das Bauteil hat kein Package..");
 	}
 }
 /**
- *  @brief 	Das auszuführende Script mit dem Bauteile ersetzt werden wird
+ *  @brief 	Das auszuführende Script mit dem Bauteile ersetzt werden, wird
  *  				mit dieser Funktion erstellt
  *  
  *  @return das Script
@@ -452,12 +659,18 @@ string buildScript() {
 	string cmd;
 	string temp_arr[];
 	string lib;
+	string currentpage;
 	int val;
 		
 	for(int i = 0; i < Bauteile; i++){
 		val = evalChangeMode(getPartVal(PartData[i],CHANGE_MODE));
 		int n = strsplit(temp_arr,getPartVal(PartData[i],LIBRARY),'/');
-		lib = str_replace(filesetext(temp_arr[n-1],""),"\\s","\\s",0,1);
+		lib = filesetext(temp_arr[n-1],"");
+		string value;
+		string mirrored = "";
+		string orientation = getPartVal(PartData[i],ORIENTATION);
+		if(getPartVal(PartData[i],MIRRORED) == "true") 
+			mirrored = "M";
 			//Debug("i:"+int2str(i)+"\n" +
 	//					"val:"+int2str(val)+"\n" +
 //						"cmd:"+cmd);
@@ -465,72 +678,163 @@ string buildScript() {
 			case 0: break; //NONE
 			case 1: {		//COMPLETE
 									//Replace Befehl -> replace C6 'BC817'@'ZE SMD Vorzugsliste'
-										cmd += 	"replace " 
-														+ getPartVal(PartData[i],PART_NAME) + " '"
-														+ getPartVal(PartData[i],DEVICE_NAME) + "'@'"
-														+ lib + "';\n";
-										break;
+								cmd += 	"REPLACE " 
+												+ getPartVal(PartData[i],PART_NAME) + " '"
+												+ getPartVal(PartData[i],DEVICE_NAME) + "@"
+												+ lib + "';\n";
+								/* if(orientation != "0" || mirrored == "M") {
+										if(currentpage != getPartVal(PartData[i],SHEET)) {
+											cmd += "EDIT .s"+getPartVal(PartData[i],SHEET)+";\n";
+											currentpage = getPartVal(PartData[i],SHEET);
 										}
+										//cmd += "ROTATE =R0 '"+getPartVal(PartData[i],PART_NAME)+"';\n";
+										//cmd += "ROTATE ="+mirrored+"R"+orientation+" '"+getPartVal(PartData[i],PART_NAME)+"';\n";
+										} */
+								break;
+								}
 			case 2: break; //ATTR_SYM
 			case 3: break; //PACK_ONLY
-			case 4: break; //ATTR_ONLY
+			case 4: {	//ATTR_ONLY
+								//Debug(PartData[i]);
+								//Debug("currentpage: "+currentpage+"\ngetPartVal(PartData["+int2str(i)+"],SHEET):"+getPartVal(PartData[i],SHEET));
+								if(currentpage != getPartVal(PartData[i],SHEET)) {
+									cmd += "EDIT .s"+getPartVal(PartData[i],SHEET)+";\n";
+									currentpage = getPartVal(PartData[i],SHEET);
+								}
+								for(int k = 0; k < 5; k++) {
+									if(getPartVal(PartData[i],PartAttribOrder[k]) == "") value = " ";
+									else value = getPartVal(PartData[i],PartAttribOrder[k]);
+										if(getPartVal(PartDataRecovery[i],PartAttribOrder[k]) != "")
+											cmd += 	"ATTRIBUTE "
+															+ getPartVal(PartData[i],PART_NAME) + " "
+															+ att[k] + " DELETE;\n";
+										cmd += 	"ATTRIBUTE " 
+														+ getPartVal(PartData[i],PART_NAME) + " "
+														+ att[k] + " '"
+														+ value + "' "
+														+ "R0 (0 0);\n";
+									
+								}
+								if(getPartVal(PartData[i],VALU) != "")
+								cmd +=  "VALUE "
+													+ getPartVal(PartData[i],PART_NAME) + " '"
+													+ getPartVal(PartData[i],VALU) + "';\n";
+								break;
+							}
 			default: break;
 		
-			}
+		}
 	}
 
 	return cmd;
 }
 
-void MainMenu() {
+
+
+int MainMenu(int Darstellung) {
 status("MainMenu()");
+	int Ansicht = (Darstellung & 0x02) ? 1 : 0;
 	int MainAuswahl;
-	dlgDialog("Liste der verwendeten Bauteile") {
-		dlgVBoxLayout{
-			dlgHBoxLayout{
-				dlgVBoxLayout{dlgSpacing(800);}
-				dlgVBoxLayout{
-					dlgListView("PART_NAME"
-												"\tDEVICE_NAME"
-												"\tPACKAGE"
-												"\tVALUE"
-												"\tPREFIX"
-												"\tLIBRARY"
-												"\tHERSTELLER"
-												"\tHERSTELLERNR"
-												"\tVORZUG"
-												"\tBESCHREIBUNG"
-												"\tDATENBLATT"
-												"\tORDERBASE_NUMMER"
-												,PartData
+	int Platzhalter = (Darstellung & 0x04) ? 1 : 0;
+	string Headline;
+	if(Darstellung & 0x02) {
+		Headline =	strjoin(PartDataValueNames,'\t');
+	} else {
+		for(int i = 0;i < 7; i++)
+			if(Headline == "") {
+				Headline += PartDataValueNames[i];
+			} else {
+				Headline += "\t" +PartDataValueNames[i];
+			}
+	}
+	if(Darstellung & 0x04) {
+		dlgDialog("Liste der verwendeten Bauteile") {
+			dlgVBoxLayout{
+				dlgHBoxLayout{
+					dlgVBoxLayout{dlgSpacing(800);}
+					dlgVBoxLayout{
+						dlgListView(Headline
+												,PlaceholderOnly
 												,MainAuswahl)
-						Vorschlaege(MainAuswahl);
-					dlgHBoxLayout{
-						dlgPushButton("&OK") dlgAccept();
-						dlgPushButton("&Cancel") exit(0);
+						Vorschlaege(MainAuswahl, 1);
+						dlgHBoxLayout{
+							dlgCheckBox("&detaillierte Ansich", Ansicht) {
+								Darstellung ^= 0x02;
+								dlgAccept();
+							}
+							dlgCheckBox("&nur Platzhalter anzeigen", Platzhalter) {
+								Darstellung ^= 0x04;
+								dlgAccept();
+							}
+							dlgPushButton("&OK") {
+								Darstellung = 0;
+								dlgAccept();
+							}
+							dlgPushButton("-&Cancel") {
+								Darstellung = 0;
+								exit(0);
+							}
+						}
 					}
 				}
-			}
-		}	
-	};
-
+			}	
+		};
+	} else {
+		dlgDialog("Liste der verwendeten Bauteile") {
+			dlgVBoxLayout{
+				dlgHBoxLayout{
+					dlgVBoxLayout{dlgSpacing(800);}
+					dlgVBoxLayout{
+						dlgListView(Headline
+												,PartData
+												,MainAuswahl)
+						Vorschlaege(MainAuswahl, 0);
+						dlgHBoxLayout{
+							dlgCheckBox("&detaillierte Ansich", Ansicht) {
+								Darstellung ^= 0x02;
+								dlgAccept();
+							}
+							dlgCheckBox("&nur Platzhalter anzeigen", Platzhalter) {
+								Darstellung ^= 0x04;
+								dlgAccept();
+							}
+							dlgPushButton("&OK") {
+								Darstellung = 0;
+								dlgAccept();
+							}
+							dlgPushButton("-&Cancel") {
+								Darstellung = 0;
+								exit(0);
+							}
+						}
+					}
+				}
+			}	
+		};
+	}
+	return Darstellung;
 }
 
 void main() {
 	if(schematic) {
-		
+		string temp[];
+		int returnvalOfMainMenu = 1;
 		string cmd;
 		
 		fileglob(tempStrArr1,"N:/public/Eagle_6+/lbr/*.lbr");
 		LibList = strjoin(tempStrArr1,'\n');
-		fileread(Pac_Sort,"N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Package_sortiert.csv");
+		fileread(Pac_Sort,"N:/public/Eagle_6+/ulp/Bauteile_nach_Package_sortiert.csv");
 		Bauteile = strsplit(Pac_Sort_Arr, Pac_Sort,'\n');
-		fileread(Val_Sort,"N:/public/Eagle_6+/ulp/Ulp-Service/Bauteile_nach_Val_sortiert.csv");
+		fileread(Val_Sort,"N:/public/Eagle_6+/ulp/Bauteile_nach_Val_sortiert.csv");
 		strsplit(Val_Sort_Arr, Val_Sort,'\n');
 		getPartData();
-		MainMenu();
+		while((returnvalOfMainMenu = MainMenu(returnvalOfMainMenu)));
 		cmd = buildScript();
-		Debug(cmd);
+		//Debug(cmd);
+		if(fileglob(temp,"C:/Users/Scholzj/Desktop/")) 
+			output("C:/Users/Scholzj/Desktop/debug.txt", "wt") { 
+			printf("%s",cmd); 
+		}
 		exit(cmd);
 	} else {
 		exit(0);

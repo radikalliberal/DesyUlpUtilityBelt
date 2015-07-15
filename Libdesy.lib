@@ -3,10 +3,10 @@ int FALSE = 0;
 
 
 /**
- *  @brief tauscht einen Integer in einen String um
+ *  \brief tauscht einen Integer in einen String um
  *  
- *  @param [in] number integer-Wert
- *  @return Repräsentation als String
+ *  \param [in] number integer-Wert
+ *  \return Repräsentation als String
  */
 string int2str(int number) {
     status("int2str()");
@@ -15,26 +15,45 @@ string int2str(int number) {
     return temp;
 }
 
+int str2int(string number) {
+	int i;
+	int num;
+	for(i = 0; i < strlen(number);i++) {
+		int exponent = strlen(number)-i-1;
+		if(strsub(number,i,1) == "1") num += 1 * int(pow(real(10),real(exponent)));
+		if(strsub(number,i,1) == "2") num += 2 * int(pow(real(10),real(exponent)));
+		if(strsub(number,i,1) == "3") num += 3 * int(pow(real(10),real(exponent)));
+		if(strsub(number,i,1) == "4") num += 4 * int(pow(real(10),real(exponent)));
+		if(strsub(number,i,1) == "5") num += 5 * int(pow(real(10),real(exponent)));
+		if(strsub(number,i,1) == "6") num += 6 * int(pow(real(10),real(exponent)));
+		if(strsub(number,i,1) == "7") num += 7 * int(pow(real(10),real(exponent)));
+		if(strsub(number,i,1) == "8") num += 8 * int(pow(real(10),real(exponent)));
+		if(strsub(number,i,1) == "9") num += 9 * int(pow(real(10),real(exponent)));
+		if(strsub(number,i,1) == "0") num += 0 * int(pow(real(10),real(exponent)));
+	}
+	return num;
+}
+
 /**
- *  @brief tauscht einen real-Wert in einen String
+ *  \brief tauscht einen real-Wert in einen String
  *  
- *  @param [in] value real-Wert
- *  @return Repräsentation als String
+ *  \param [in] value real-Wert
+ *  \return Repräsentation als String
  */
-string real2str(real value) {
+string real2str(real value, int decimalplaces) {
 	status("real2str()");
 	string returnval;
-	sprintf(returnval,"%f",value);
+	sprintf(returnval,"%."+int2str(decimalplaces)+"f",value);
 	return returnval;
 }
 
 /**
- *  @brief tauscht einen Buchstaben eines Strings gegen einen anderen
+ *  \brief tauscht einen Buchstaben eines Strings gegen einen anderen
  *  
- *  @param [in] DerString siehe name
- *  @param [in] old       zu tauschender Buchstabe
- *  @param [in] new       neuer Buchstabe
- *  @return geänderter String
+ *  \param [in] DerString siehe name
+ *  \param [in] old       zu tauschender Buchstabe
+ *  \param [in] new       neuer Buchstabe
+ *  \return geänderter String
  */
 string changeChar(string DerString, char old, char new) {
 	status("changeChar()");
@@ -45,15 +64,15 @@ string changeChar(string DerString, char old, char new) {
 }
 
 /**
- *  @brief ein mittels regulärem Ausdruck gefundener
+ *  \brief ein mittels regulärem Ausdruck gefundener
  *  
- *  @param [in] longString Parameter_Description
- *  @param [in] regex      Parameter_Description
- *  @param [in] offset     Parameter_Description
- *  @return Return_Description
- *  @note
- *  @warning
- *  @details Details
+ *  \param [in] longString Parameter_Description
+ *  \param [in] regex      Parameter_Description
+ *  \param [in] offset     Parameter_Description
+ *  \return Return_Description
+ *  \note
+ *  \warning
+ *  \details Details
  */
 string CutSubstring(string longString,string regex,int offset ) {
     status("CutSubstring()");
@@ -75,10 +94,10 @@ string TrimWhiteSpace(string s) {
 }
 
 /**
- *  @brief Ein Dialog wird geöffnet mit gewünschtem Inhalt um Variablen zu checken, 
+ *  \brief Ein Dialog wird geöffnet mit gewünschtem Inhalt um Variablen zu checken, 
  *  wenn auf cancel gedrückt wird kann das Programm an diesem Punkt abgebrochen werden
  *  
- *  @param [in] msg Nachricht oder gewünschte Variable
+ *  \param [in] msg Nachricht oder gewünschte Variable
  */
 void Debug(string msg) {
     status("Debug()");
@@ -119,14 +138,14 @@ real log2(int number){
 	return inverse ? (exponent ? -(1/exponent): 0) : exponent ; 
 }
 /**
- *  @brief vergleicht zwei Strings,
+ *  \brief vergleicht zwei Strings,
  *  
- *  @param [in] a string
- *  @param [in] b string
- *  @return 1 == a>b, 0 == a==b, -1 == a<b
- *  @note
- *  @warning
- *  @details Details
+ *  \param [in] a string
+ *  \param [in] b string
+ *  \return 1 == a>b, 0 == a==b, -1 == a<b
+ *  \note
+ *  \warning
+ *  \details Details
  */
 int cmpstr(string a, string b) {
 	if(a>b)  return  1;
@@ -140,16 +159,17 @@ int cmpstr(string a, string b) {
 int START = 0;
 int REPEAT = 1;
 int ONCE = 0;
+
 /**
- *  @brief ersetzt einen mittels regulärem Ausdrucks ermittelten Substring. Ersetzt auf
+ *  \brief ersetzt einen mittels regulärem Ausdrucks ermittelten Substring. Ersetzt auf
  *  Wunsch nur ein Auftreten des Ausdrucks oder alle.
  *  
- *  @param [in] subject        String der bearbeitet werden soll
- *  @param [in] regex          regulärer Ausdruck
- *  @param [in] replace        Ersatz für den gefundenen Ausdruck
- *  @param [in] initialOffset  siehe name
- *  @param [in] Wiederholungen 0 für einmal tauschen, 1 für bis zum Ende des Stringsw
- *  @return neuer String mit getauschten substrings
+ *  \param [in] subject        String der bearbeitet werden soll
+ *  \param [in] regex          regulärer Ausdruck
+ *  \param [in] replace        Ersatz für den gefundenen Ausdruck
+ *  \param [in] initialOffset  siehe name
+ *  \param [in] Wiederholungen 0 für einmal tauschen, 1 für bis zum Ende des Stringsw
+ *  \return neuer String mit getauschten substrings
  */
 string str_replace(string subject, string regex, string replace, int initialOffset, int Wiederholungen) {
     status("str_replace()");
@@ -170,12 +190,12 @@ string str_replace(string subject, string regex, string replace, int initialOffs
 
 
 /**
- *  @brief wenn ein String als regulärer Ausdruck genutz werden soll müssen einige
+ *  \brief wenn ein String als regulärer Ausdruck genutz werden soll müssen einige
  *  Buchstaben mit Escape-Sequenz versehen werden damit keine Fehler auftreten. Diese
  *  Funktion setzt Escape-Sequenzen wo sie notwendig sind damit kein ungewolltes Verhalten
  *  entsteht
- *  @param [in] subject zu bearbeitender String
- *  @return bearbeiteter String
+ *  \param [in] subject zu bearbeitender String
+ *  \return bearbeiteter String
  */
 string regex_from_string(string subject) { 
 
@@ -198,15 +218,15 @@ string regex_from_string(string subject) {
 
 
 /**
- *  @brief Dialog mit Stringeigabefeld 
+ *  \brief Dialog mit Stringeigabefeld 
  *  
- *  @param [in] Ueberschrifft siehe Name
- *  @param [in] Frage         siehe Name
- *  @param [in] Subject       Eingabe-String
- *  @return Eingabe-String von User
- *  @note
- *  @warning
- *  @details Details
+ *  \param [in] Ueberschrifft siehe Name
+ *  \param [in] Frage         siehe Name
+ *  \param [in] Subject       Eingabe-String
+ *  \return Eingabe-String von User
+ *  \note
+ *  \warning
+ *  \details Details
  */
 string dlgStrEd(string Ueberschrifft, string Frage, string Subject) {
     status("dlgStrEd()");
@@ -221,13 +241,13 @@ string dlgStrEd(string Ueberschrifft, string Frage, string Subject) {
 
 
 /**
- *  @brief Fehlermeldung, zum Fehlerhandling, mit Nutzereingabe
+ *  \brief Fehlermeldung, zum Fehlerhandling, mit Nutzereingabe
  *  
- *  @param [in] msg  Nachricht an den User
- *  @param [in] opt1 Auswahl 1
- *  @param [in] opt2 Auswahl 2
- *  @param [in] btns Anzahl der Möglichkeiten (1-2)
- *  @return gewählte Möglichkeit ist Rückgabewert im Format int
+ *  \param [in] msg  Nachricht an den User
+ *  \param [in] opt1 Auswahl 1
+ *  \param [in] opt2 Auswahl 2
+ *  \param [in] btns Anzahl der Möglichkeiten (1-2)
+ *  \return gewählte Möglichkeit ist Rückgabewert im Format int
  */
 int ErrorMsg(string msg,string opt1,string opt2,int btns) {
     status("ErrorMsg()");
@@ -239,10 +259,10 @@ int ErrorMsg(string msg,string opt1,string opt2,int btns) {
 }
 
 /**
- *  @brief HTML-Tags aus Beschreibung entfernen
+ *  \brief HTML-Tags aus Beschreibung entfernen
  *  
- *  @param [in] s string der verändert werden soll
- *  @return bearbeiteter String ohne HTML-Tags
+ *  \param [in] s string der verändert werden soll
+ *  \return bearbeiteter String ohne HTML-Tags
  */
 string HtmlTagsentfernen(string s) {	
 	int Anfang,Ende,Laenge,dump;
@@ -282,14 +302,15 @@ string HtmlTagsentfernen(string s) {
 	s = TrimWhiteSpace(s);
 	return s;
 }
-
+/**
+ *  \brief Alle Sonderzeichen mit Html-Notation werden mit Hilfe dieser Funktion in die 
+ *  richtigen Zeichen
+ *  
+ *  \param [in] s der zu untersuchende String
+ *  \return der bearbeitete String
+ */
 string HtmlCharactersTauschen(string s) {
 	string chars[] = {"&lsquo;","‘","&rsquo;","’","&sbquo;","‚","&ldquo;","“","&rdquo;","”","&bdquo;","„","&dagger;","†","&Dagger;","‡","&permil;","‰","&lsaquo;","‹","&rsaquo;","›","&spades;","♠","&clubs;","♣","&hearts;","♥","&diams;","♦","&oline;","‾","&larr;","←","&uarr;","↑","&rarr;","→","&darr;","↓","&trade;","™","&quot;","\"","&amp;","&","&frasl;","/","&lt;","<","&gt;",">","&hellip;","…","&ndash;","–","&mdash;","—","&nbsp;","","&iexcl;","¡","&cent;","¢","&pound;","£","&curren;","¤","&yen;","¥","&brkbar;","¦","&sect;","§","&die;","¨","&copy;","©","&ordf;","ª","&laquo;","«","&not;","¬","&shy;","­","&reg;","®","&hibar;","¯","&deg;","°","&plusmn;","±","&sup2;","²","&sup3;","³","&acute;","´","&micro;","µ","&para;","¶","&middot;","·","&cedil;","¸","&sup1;","¹","&ordm;","º","&raquo;","»","&frac14;","¼","&frac12;","½","&frac34;","¾","&iquest;","¿","&Agrave;","À","&Aacute;","Á","&Acirc;","Â","&Atilde;","Ã","&Auml;","Ä","&Aring;","Å","&AElig;","Æ","&Ccedil;","Ç","&Egrave;","È","&Eacute;","É","&Ecirc;","Ê","&Euml;","Ë","&Igrave;","Ì","&Iacute;","Í","&Icirc;","Î","&Iuml;","Ï","&ETH;","Ð","&Ntilde;","Ñ","&Ograve;","Ò","&Oacute;","Ó","&Ocirc;","Ô","&Otilde;","Õ","&Ouml;","Ö","&times;","×","&Oslash;","Ø","&Ugrave;","Ù","&Uacute;","Ú","&Ucirc;","Û","&Uuml;","Ü","&Yacute;","Ý","&THORN;","Þ","&szlig;","ß","&agrave;","à","&aacute;","á","&acirc;","â","&atilde;","ã","&auml;","ä","&aring;","å","&aelig;","æ","&ccedil;","ç","&egrave;","è","&eacute;","é","&ecirc;","ê","&euml;","ë","&igrave;","ì","&iacute;","í","&icirc;","î","&iuml;","ï","&eth;","ð","&ntilde;","ñ","&ograve;","ò","&oacute;","ó","&ocirc;","ô","&otilde;","õ","&ouml;","ö","&divide;","÷","&oslash;","ø","&ugrave;","ù","&uacute;","ú","&ucirc;","û","&uuml;","ü","&yacute;","ý","&thorn;","þ","&yuml;","ÿ","&Alpha;","Α","&alpha;","α","&Beta;","Β","&beta;","β","&Gamma;","Γ","&gamma;","γ","&Delta;","Δ","&delta;","δ","&Epsilon;","Ε","&epsilon;","ε","&Zeta;","Ζ","&zeta;","ζ","&Eta;","Η","&eta;","η","&Theta;","Θ","&theta;","θ","&Iota;","Ι","&iota;","ι","&Kappa;","Κ","&kappa;","κ","&Lambda;","Λ","&lambda;","λ","&Mu;","Μ","&mu;","μ","&Nu;","Ν","&nu;","ν","&Xi;","Ξ","&xi;","ξ","&Omicron;","Ο","&omicron;","ο","&Pi;","Π","&pi;","π","&Rho;","Ρ","&rho;","ρ","&Sigma;","Σ","&sigma;","σ","&Tau;","Τ","&tau;","τ","&Upsilon;","Υ","&upsilon;","υ","&Phi;","Φ","&phi;","φ","&Chi;","Χ","&chi;","χ","&Psi;","Ψ","&psi;","ψ","&Omega;","Ω","&omega;","ω"};
-	
-	if(strxstr(s,"&\\w{1,10};") == -1) {
-		//Debug("nichts gefunden in \n"+s);
-		return s;
-	}
 	
 	int i = 0;
 	while(chars[2*i] != "") {

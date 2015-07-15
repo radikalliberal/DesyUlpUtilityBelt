@@ -1,0 +1,13 @@
+#include "Libdesy.lib"
+
+schematic(SCH) {
+  SCH.parts(P) {
+		int pins;
+		P.device.gates(G) {
+				G.symbol.pins(I){
+					pins++;
+				}
+			}
+			//Debug(P.device.name + ": Anzahl Pins = "+ int2str(pins));
+		}
+  }
