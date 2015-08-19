@@ -1,0 +1,36 @@
+#include "Libdesy.lib"
+
+string array[] = {"abcdefghijk.pdf\tDatenblatt I","abcdefghdfghdgjhrtjetjet.pdf\tDatenblatt II"};
+int select;
+string Dname,Bezeichnung;
+dlgDialog("Fenster"){
+	dlgListView("Pfad\tBezeichnung", array,select) {	
+	
+	string temp[];
+	strsplit(temp,array[select],'\t');
+	Dname = temp[0];
+	Bezeichnung = temp[1];
+		dlgDialog("Die Pdf"){
+			dlgVBoxLayout{
+				dlgHBoxLayout{
+				dlgLabel("Dateiname:");
+				dlgStringEdit(Dname);
+				}
+				dlgHBoxLayout{
+				dlgLabel("Bezeichnung:");
+				dlgStringEdit(Bezeichnung);
+				}
+			}
+		
+			dlgPushButton("Ok") {
+				array[select] = Dname + "\t" + Bezeichnung;
+				dlgAccept();
+			}
+			
+		};
+	}
+	dlgPushButton("Datei Hinzufügen") {
+		array[2]=dlgFileOpen("afaf")+"\t";
+		
+	}
+};

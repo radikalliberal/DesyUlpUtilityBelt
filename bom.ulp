@@ -74,6 +74,7 @@ string Anforderer;
 string Gruppe;
 string WA_Nummer;
 string description1;
+string BaugruppenNr;
 
 void Debug(string msg) {
 	status("Debug()");
@@ -221,6 +222,7 @@ void iniFilelesen() {
 	int nLines;
 	string lines[];
 	schematic(S) {
+			BaugruppenNr = filename(filesetext(S.name,""));
   		S.sheets(SCH)
     	fileName = filesetext(S.name, "_config.ini");
 		int i=0;
@@ -232,12 +234,12 @@ void iniFilelesen() {
     	nLines = fileread(lines, fileName);
 
      	engineer       	                = lines[3];
-  	  	geprueft       	                = lines[4];
+  	  geprueft       	                = lines[4];
      	freigegeben    	                = lines[5];
 	    Anforderer     	                = lines[6];
-  	    Gruppe         	                = lines[7];
-     	WA_Nummer                         = lines[8];
-		description1   	                = lines[9];
+  	  Gruppe         	                = lines[7];
+     	WA_Nummer                       = lines[8];
+		  description1   	                = lines[9];
 
   	} else {
 		config_nicht_vorhanden = 1;
@@ -249,29 +251,23 @@ void iniFilelesen() {
 void CollectPartData(void)
 {
 	int isbot[],pack[];
-	int count, issmd;
+	int count;
 	string name[];
 	count = 0;
     nPartCount = 0;
-	project.board(B){
-		BoardName = filename(B.name);
-		B.elements(E) {
-		
-			issmd = 0;
-			E.package.contacts(C) {
-				if(C.smd) { 
-					//Debug(E.name + " " + int2str(count));
-					issmd = 1;
-					break;
-				}
+  if(project.board) {
+		project.board(B){
+			B.elements(E) {
+
+				name[count] = E.name;
+				isbot[count] = E.mirror;
+				count++;
+				//Debug(int2str(E.mirror)+"  "+E.name);
+			
 			}
-			name[count] = E.name;
-			isbot[count] = E.mirror;
-			pack[count] = issmd;
-			count++;
-			//Debug(int2str(E.mirror)+"  "+E.name);
-		
 		}
+	} else {
+		dlgMessageBox("Es ist kein Board vorhanden oder Forward-/Backward-Annotation ist nicht aktiv");
 	}
 	
     schematic(SCH)
@@ -283,104 +279,118 @@ void CollectPartData(void)
 			
 				//Debug(P.name);
 				// dlgMessageBox(P.name);
-                if ((P.device.package) || IsKnownDevice(P.device.name))  {
-					
-					if(strxstr(P.device.package.name,"REF-SMD-")>=0) {
-						continue;
-					}
+            if ((P.device.package) || IsKnownDevice(P.device.name))  {
+								
+								int issmd = 0;
+								
+								if(strxstr(P.device.package.name,"REF-SMD-")>=0) {
+									continue;
+								}
+								
+								P.device.package.contacts(C) {
+									
+									if(C.smd) { 
+										issmd = 1;
+										break;
+									}
+								}
+								int exclude = 0;
+								int dnp = 0;
+
+								// PART NUMBER CANNOT BE EMPTY FOR LIST BY VALUE SORT!
+								string partnum = nullKey;
+								string val     = P.value;
+								string attrs   = "";
+								string desc    = "";
+								string description = "";
+								int qty        = 0;
+								int Lib6dev	 = 0;
+								
+								description = P.deviceset.description;
+								desc = HtmlTagsentfernen(description); 
+								
+								DBNR = "";
+								HS = "";		
+								HSNR = "";
+								val = "";
+								ZEV = "";	
+								
+								P.attributes(A)
+								{	
 				
-                    int exclude = 0;
-                    int dnp = 0;
-
-                    // PART NUMBER CANNOT BE EMPTY FOR LIST BY VALUE SORT!
-                    string partnum = nullKey;
-                    string val     = P.value;
-                    string attrs   = "";
-                    string desc    = "";
-					string description = "";
-                    int qty        = 0;
-					int Lib6dev	 = 0;
-					
-					description = P.deviceset.description;
-					desc = HtmlTagsentfernen(description); 
-					
-					DBNR = "";
-					HS = "";		
-					HSNR = "";
-					val = "";
-					ZEV = "";	
-					
-                    P.attributes(A)
-                    {	
-						
-						if (A.name=="DATENBANKOB-NR")
-						{
-							DBNR = A.value;
-							Lib6dev = 1;
-						}
-						
-						if (A.name=="HERSTELLER_NAME")
-						{
-							HS = A.value;
-						}
-						
-						if (A.name=="HERSTELLER_NR")
-						{
-							HSNR = A.value;
-						}
-						
-						if (A.name=="ZE-VORZUG")
-						{
-							ZEV = A.value;
-						}
-						
-						if (A.name == "VAL")
-						{
-							val = A.value;
-						} 
-						
-						if (IsKnownAttribute(A.name))
-						{
-							if (strlen(attrs))
-								attrs += "/";
-							attrs += A.value;
-						}
-					
-                    }
-					// We have to check to make sure the part has not already been added
-					// since it's possible a multi-gate part can appear on multiple sheets.
-					
-					// In this case we only need to update the attributes on the first
-					// instance encountered for the attributes update process.
-
-					if (lookup(PartName, P.name, 0))
-						continue;
-					for(int c = 0; c < count; c++) {
-						if(P.name == name[c]) break;
-					}
-					
-					PartSheet[nPartCount]   = S.number;
-					PartName[nPartCount]    = P.name;
-					PartSide[nPartCount]	= isbot[c] ? "B" : "T";
-					PartPack[nPartCount] 	= pack[c]	? "SMD" : "THT";
-					PartVal[nPartCount]     = (Lib6dev) ? val : P.value ;
-					PartDBNR[nPartCount] 	= DBNR;
-					PartHS[nPartCount] 		= HS;
-					PartHSNR[nPartCount]    = HSNR;
-					PartZEVORZUG[nPartCount]= ZEV; 
-					PartAttr[nPartCount]    = attrs;
-					PartNum[nPartCount]     = partnum;
-					PartDev[nPartCount]     = P.device.name;
-					PartPkg[nPartCount]     = (P.device.package) ? P.device.package.name : "*";
-					PartDesc[nPartCount]    = (desc != "") ? desc : P.deviceset.headline;
-					PartDescription[nPartCount] = description;
-					PartHeadline[nPartCount]  = P.device.headline;
-					PartHeadlineEx[nPartCount] = (Lib6dev) ? P.device.headline + " :   " + val : P.device.headline + " :       " + P.value;
+									if (A.name=="DATENBANKOB-NR")
+									{
+										DBNR = A.value;
+										Lib6dev = 1;
+									}
+									
+									if (A.name=="HERSTELLER_NAME")
+									{
+										HS = A.value;
+									}
+									
+									if (A.name=="HERSTELLER_NR")
+									{
+										HSNR = A.value;
+									}
+									
+									if (A.name=="ZE-VORZUG")
+									{
+										ZEV = A.value;
+									}
+									
+									if (A.name == "VAL")
+									{
+										val = A.value;
+									} 
+									
+									if (IsKnownAttribute(A.name))
+									{
+										if (strlen(attrs))
+											attrs += "/";
+										attrs += A.value;
+									}
+								
+								}
+								// We have to check to make sure the part has not already been added
+								// since it's possible a multi-gate part can appear on multiple sheets.
+								
+								// In this case we only need to update the attributes on the first
+								// instance encountered for the attributes update process.
+							
+									
+								if (lookup(PartName, P.name, 0))
+									continue;
+								for(int c = 0; c < count; c++) {
+									if(P.name == name[c]) {
+										break;
+										Debug("break");
+										}
+								}
+								/* 	if(P.name) {
+								Debug(int2str(S.number)+"\n"+ P.name+"\n"+ (project.board ? (isbot[c] ? "B" : "T") : "unbekannt")+"\n"+        (issmd ? "SMD" : "THT")+"\n"+ (Lib6dev ? val : P.value) +"\n"+ DBNR+"\n"+ HS+"\n"+ HSNR+"\n"+ ZEV+"\n"+ attrs+"\n"+partnum+"\n"+P.device.name+"\n"+(P.device.package ? P.device.package.name : "*")+"\n"+        ((desc != "") ? desc : P.deviceset.headline)+"\n"+description+"\n"+P.device.headline+"\n"+        (Lib6dev ? P.device.headline + " : " + val : P.device.headline));
+								} */
+								PartSheet[nPartCount]       = S.number;
+								PartName[nPartCount]        = P.name;
+								PartSide[nPartCount]	      = project.board ? (isbot[c] ? "B" : "T") : "unbekannt";
+								PartPack[nPartCount] 	      = issmd	? "SMD" : "THT";
+								PartVal[nPartCount]         = (Lib6dev) ? val : P.value ;
+								PartDBNR[nPartCount] 	      = DBNR;
+								PartHS[nPartCount] 		      = HS;
+								PartHSNR[nPartCount]        = HSNR;
+								PartZEVORZUG[nPartCount]    = ZEV; 
+								PartAttr[nPartCount]        = attrs;
+								PartNum[nPartCount]         = partnum;
+								PartDev[nPartCount]         = P.device.name;
+								PartPkg[nPartCount]         = (P.device.package) ? P.device.package.name : "*";
+								PartDesc[nPartCount]        = (desc != "") ? desc : P.deviceset.headline;
+								PartDescription[nPartCount] = description;
+								PartHeadline[nPartCount]    = P.device.headline;
+								PartHeadlineEx[nPartCount]  = (Lib6dev) ? P.device.headline + " :   " + val : P.device.headline + " :       " + P.value;
 
 
-					nPartCount++;
-					// dlgMessageBox("geschafft");
-                }
+								nPartCount++;
+              }
             }
         }
     }
@@ -500,7 +510,7 @@ void GeneratePartList(void)
 {
     int NumLines = 0;
     //XXX column sequence?
-    Lines[NumLines++] = "Position\tBauteil\tOrt\tBauform\tBezeichnung\tDatenbankNr\tHersteller\tHersteller-Nr\tPackage\tZE-Vorzug\tDescription" ;
+    Lines[NumLines++] = "Position\tBauteil\tTop/Bottom\tBauform\tBezeichnung\tDatenbankNr\tHersteller\tHersteller-Nr\tPackage\tZE-Vorzug\tDescription" ;
 
     for (int i=0; i < nPartCount; i++)
     {
@@ -603,10 +613,10 @@ int ExportOrderbaseXML()
 
 		
 		printf("   <Row ss:AutoFitHeight=\"\x30\">\n");
-		printf("    <Cell ss:StyleID=\"s65\"><Data ss:Type=\"Number\"></Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s65\"><Data ss:Type=\"String\">" + BaugruppenNr + (project.board ? "" : " / Vorläufige Stückliste") + "</Data></Cell>\n");
 		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">" + engineer + "</Data></Cell>\n");
 		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">" + WA_Nummer + "</Data></Cell>\n");
-		printf("    <Cell ss:MergeAcross=\"2\" ss:StyleID=\"s66\"><Data ss:Type=\"String\">"  "</Data></Cell>\n");
+		printf("    <Cell ss:MergeAcross=\"2\" ss:StyleID=\"s66\"><Data ss:Type=\"String\">" "</Data></Cell>\n");
 		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">" + description1 + "</Data></Cell>\n");
 		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">"+ Datum +"</Data></Cell>\n");
 		printf("   </Row>\n");
@@ -616,8 +626,8 @@ int ExportOrderbaseXML()
 		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">LP1</Data></Cell>\n");
 		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">LP</Data></Cell>\n");
 		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\"></Data></Cell>\n");
-		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">"+filesetext(BoardName,"")+"</Data></Cell>\n");
-		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">Leiterplatte: " + description1 +  "</Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">"+BaugruppenNr+ "</Data></Cell>\n");
+		printf("    <Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">Leiterplatte: "+BaugruppenNr+ " / " + description1 +  "</Data></Cell>\n");
 		printf("   </Row>\n");
 		
         for (int n=0; n < nPartCount; n++)
@@ -670,13 +680,15 @@ int AppDialog()
                    
        
 		dlgHBoxLayout  {
-			string Ueberschrifft = "Stücklistenausgabe";
+			string Ueberschrifft = "<h2>Stücklistenausgabe</h2>";
 			//dlgLabel("Stücklistenausgabe");
 			//dlgStretch(1); 
 					 
 			if(config_nicht_vorhanden) {
-				Ueberschrifft +="<center><font color=\"#FF0000\">"+fileName+" nicht vorhanden, bitte Daten nachtragen oder Configfile anlegen</font></center>";
+				Ueberschrifft +="<h1><center><font color=\"#FF0000\">"+fileName+" nicht vorhanden, bitte Daten nachtragen oder Configfile anlegen</font></center></h1>";
 			}
+			if(!project.board)
+				Ueberschrifft +="\n\n<h1><center><font color=\"#FF00FF\">Da keine Board-Datei vorhanden ist, wird nur eine vorläufige Stückliste ausgegeben</font></center></h1>";
 			dlgLabel(Ueberschrifft);
 		}
         dlgHBoxLayout

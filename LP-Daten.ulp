@@ -1,30 +1,30 @@
 /**
  *  \file LP-Daten.ulp
  *  \author cadsoft.de , weiter bearbeitet von Jan Scholz
- *  \brief 	Dies ist eine Abwandelung der BOM.ulp von Cadsoft, Leiterplatten-
+ *  \brief 	Dies ist eine Abwandelung einer ulp von Cadsoft, Leiterplatten-
  *  				Spezifikationen werden in eine PDF-Vorlage eingetragen.
  *  
  */
 
 #usage "en: <b>LP-Daten</b\n>"
            "<p>"
-           "This is a modification of the bom.ulp of Cadsoft ,<br>"
+           "This is a modification of the ulp of Cadsoft ,<br>"
 					 "PCB specifications are entered in a PDF template .",
        "de: <b>LP-Daten</b>\n"
            "<p>"
-           "Dies ist eine Abwandelung der BOM.ulp von Cadsoft, Leiterplatten-"
+           "Dies ist eine Abwandelung einer ulp von Cadsoft, Leiterplatten-"
     			 "Spezifikationen werden in eine PDF-Vorlage eingetragen..<p>"
            "<author>Autor: jan_scholz@gmx.net</author><p>"
 
 // THIS PROGRAM IS PROVIDED AS IS AND WITHOUT WARRANTY OF ANY KIND, EXPRESSED OR IMPLIED
 
-#require 5.1000
-int Version = 1;  // Refer to versioning system. Needed because ULP version independent from EAGLE version
+#require 6.000
 
+string Version_Nr = " DESY -ZE- Ver 1.2";
 enum { false = 0, true = 1 };
 
 // Debug stuff
-int    Dbg = 1;
+int    Dbg = 0;
 string DbgFile;
 string DbgMsg;
 string debugkram;
@@ -52,12 +52,14 @@ int CopperThicknessInside = INT_MAX;
 int MaterialThickness;
 int MinTraceWidth = INT_MAX;
 int MinHoleSize = INT_MAX;
+string SMDSides;
 string SolderSides;
 string SilkScreenSides;
 int NrBlindBuriedTypes;
 int NrburiedVia;
 int NrblindVia;
 int MinPitch = INT_MAX;
+int MinWireWire;
 int NrSmdPadsTop;
 int NrSmdPadsBottom;
 int Bohrungen;
@@ -86,6 +88,10 @@ string Description1;
 
 string fileName;
 string PROJEKT_PFAD;
+
+string LageLageBuried;
+string LageLageBlind;
+
 int config_nicht_vorhanden;
 
 // For computing width and height
@@ -218,9 +224,6 @@ string Unknown = tr("undefined");
 
 //- Auxiliary functions -------------------------------------------------------
 
-string GetTargetURL() {
-   return "http://www.element14.com/community/community/knode/pcb_services";
-}
 
 // String handling
 string I2Str(int i)   { string str; sprintf(str, "%d", i); return str; }
@@ -308,14 +311,15 @@ void UpdateBBox(int layer, int el_origin) {
 string prozent="%";
 
 void outputFile() {
-
+		// --- "//win.desy.de/group/sze/public/Eagle_6+/ulp" 
+		// -- "/F (N:\\\\public\\\\Eagle_6+\\\\ulp\\\\kurzbeschreibung.pdf) \n"
     output( PROJEKT_PFAD+"LP-Daten_"+filesetext(BoardName,"")+".fdf" , "wt")  {
   string file = "%FDF-1.4 \n"
                 "%âãÏÓ \n"
                 "1 0 obj \n"
                 "<<\n"
                 "/FDF << \n"
-                "/F (N:\\\\public\\\\Eagle_6+\\\\ulp\\\\kurzbeschreibung.pdf) \n"
+					 "/F (\\\\\\\\win.desy.de\\\\group\\\\sze\\\\public\\\\Eagle_6+\\\\ulp\\\\kurzbeschreibung.pdf) \n"
                 "/Type /Catalog \n"
                 "/Fields [<< \n"
                 "/T (LP-Nr) \n"
@@ -358,16 +362,28 @@ void outputFile() {
                 "/V ("+SilkScreenSides+")\n"
 								">> <<\n"
                 "/T (SMD)\n"
-                "/V ("+SilkScreenSides+")\n"
+                "/V ("+SMDSides+")\n"
                 ">> <<\n"
                 "/T (AnzahlSMD)\n"
                 "/V ("+I2Str(NrSmdPadsTop+NrSmdPadsBottom)+")\n"
+                ">> <<\n"
+								"/T (klAbstand)\n"
+                "/V ("+U2MmStr(MinWireWire*1000)+")\n"
                 ">> <<\n"
                 "/T (BuriedVias)\n"
                 "/V ("+I2Str(NrburiedVia)+")\n"
                 ">> <<\n"
                 "/T (BlindVias)\n"
                 "/V ("+I2Str(NrblindVia)+")\n"
+                ">> <<\n"
+								"/T (BlindLayers)\n"
+                "/V ("+LageLageBlind+")\n"
+                ">> <<\n"
+								"/T (BuriedLayers)\n"
+                "/V ("+LageLageBuried+")\n"
+								">> <<\n"
+								"/T (EPruefung)\n"
+                "/V ("+ (NrLayers > 2 ? "Ja" : "Nein") +")\n"
                 ">> <<\n"
                 "/T (Bohrungen)\n"
                 "/V ("+I2Str(Bohrungen)+")\n"
@@ -451,6 +467,8 @@ void GetDruParams() {
       }
       else if (keyword == "mdSmdSmd")
          MinPitch = Str2U(words[2]);
+			else if (keyword == "mdWireWire")
+         MinWireWire = Str2U(words[2]);
    }
 }
 void iniFilelesen() {
@@ -534,6 +552,8 @@ void CheckHoles() {
             ++k;
             ++NrburiedVia;
          } else if ( (V.start == 1  && V.end != 16) || (V.start != 1  && V.end == 16)) {
+						start[k] = V.start;
+            end[k] = V.end;
             ++k;
             ++NrblindVia;
          }
@@ -558,6 +578,10 @@ void CheckHoles() {
          ++NrBlindBuriedTypes;
          cur_s = start[idx[l]];
          cur_e = end[idx[l]];
+				 if((start[idx[l]] > 1) && (end[idx[l]] < 16)) // Buried ...
+					LageLageBuried += (LageLageBuried == "" ? "" : ",") + I2Str(start[idx[l]]) +"/"+I2Str(end[idx[l]]);
+				 else //Blind
+					LageLageBlind += (LageLageBlind == "" ? "" : ",") + I2Str(start[idx[l]]) +"/"+I2Str(end[idx[l]]);
       }
 
      //Debug("Verschiedene Bohrdurchmesser\n" + debugkram);
@@ -565,7 +589,7 @@ void CheckHoles() {
 
 void GetPCBParams() {
    // Check out layers:
-   int smask_top, smask_bottom, silk_top, silk_bottom;
+   int smask_top, smask_bottom, silk_top, silk_bottom, smd_top ,smd_bottom;
    int nr_used_layers;
    board(B) {
       BoardName = filename(B.name);
@@ -574,13 +598,18 @@ void GetPCBParams() {
          if (L.number <= 16) ++nr_used_layers;
          else if (L.number == LAYER_TSTOP) smask_top = 1;
          else if (L.number == LAYER_BSTOP) smask_bottom = 1;
+				 else if (L.number == LAYER_TCREAM) smd_top = 1;
+         else if (L.number == LAYER_BCREAM) smd_bottom = 1;
          else if (L.number == LAYER_TPLACE) silk_top = 1;    // Could also take TNAMES/TVALUES. Leave the criterium less strict
          else if (L.number == LAYER_BPLACE) silk_bottom = 1; // Could also take BNAMES/BVALUES. Leave the criterium less strict
+				 
    }
-   SolderSides = smask_top ? (smask_bottom ? "Beidseitig" : "Oberseite") :
-                             (smask_bottom ? "Unterseite" : "Nein");
-   SilkScreenSides = (silk_top) ? (silk_bottom ? "Beidseitig" : "Oberseite") :
-                                  (silk_bottom ? "Unterseite" : "Nein");
+	 SMDSides = smd_top ? (smd_bottom ? "Beidseitig" : "Einseitig Top") :
+                             (smd_bottom ? "Einseitig Bottom" : "Nein");
+   SolderSides = smask_top ? (smask_bottom ? "Beidseitig" : "Einseitig Top") :
+                             (smask_bottom ? "Einseitig Bottom" : "Nein");
+   SilkScreenSides = (silk_top) ? (silk_bottom ? "Beidseitig" : "Einseitig") :
+                                  (silk_bottom ? "Einseitig" : "Nein");
    if (nr_used_layers == 0) {
       Warnings += LItem(tr("None of the signal layers are used."));
       Useless = 1;
@@ -608,7 +637,6 @@ void GetPCBParams() {
                         tr("Minimum trace width could not be determined."));
    GetDruParams();
    CheckHoles();
-
    iniFilelesen();
    int air_wires = 0;
    {  // Check if there are still airwires:
@@ -728,7 +756,7 @@ string MakeParamSendString() {
                  "&numThruHoles=" + I2Str(NrThruHoles) +
                  "&hasSMDBothSides=" + B2Str(HasSMDBothSides);
 
-   if (Dbg) output(DbgFile, "wba") printf("%s\n%s\n", GetTargetURL(), send);
+   // if (Dbg) output(DbgFile, "wba") printf("%s\n%s\n", send);
    return send;
 }
 
@@ -742,13 +770,11 @@ void Hinweis() {
 
 int Dialog() {
 		Hinweis();
-    string strNoCfg;
-     strNoCfg = "<font color=\"#FF0000\"> Es existier noch kein Config-Datei für das Board!";
 
-   return dlgDialog(tr("DESY LP-Daten (Version " + I2Str(Version) + ")")) {
+   return dlgDialog(tr("DESY LP-Daten (Version " + Version_Nr + ")")) {
       dlgHBoxLayout dlgSpacing(470);
 				if(config_nicht_vorhanden) 
-				 dlgLabel("<font color=\"#FF0000\">Es existier noch keine Config-Datei für das Board!");
+				 dlgLabel("<h2><font color=\"#FF0000\">Es existiert noch keine Config-Datei für das Board!");
         dlgLabel("WA-Nr: "+WA_Nummer+"\nErsteller: "+engineer+"\n");
       if (Warnings)
          dlgHBoxLayout
@@ -816,8 +842,10 @@ for (int i = 1; i <= argc; ++i) {
 }
 
 if (board) {
-   string dir = filedir(argv[0]);
-   board(B) DruFile = dir + "dl-" + filename(filesetext(B.name, ".dru"));
+	board(B) {
+		string dir = filedir(B.name);
+		DruFile = dir + "dl-" + filename(filesetext(B.name, ".dru"));
+	}
    if (Export)
       exit("DRC SAVE '" + DruFile + "';\nRUN '" + argv[0] + "' -noexp;");
    if (Dbg) board(B) {
@@ -837,6 +865,7 @@ if (board) {
       PrefUnit = (grU == GRID_UNIT_MM || grU == GRID_UNIT_MIC) ? GRID_UNIT_MM : GRID_UNIT_INCH;
    }
    while (Dialog() == 1);
+	 output(DruFile, "wD");
    exit(EXIT_SUCCESS);
 }
 else

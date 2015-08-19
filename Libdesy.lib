@@ -216,6 +216,29 @@ string regex_from_string(string subject) {
 	return subject;
 }
 
+/**
+*	\brief Aus einem String wird ein regulärer Ausdruck gemacht der auch leicht abweichende 
+*  Strings finden kann
+*/
+string FuzzySearchRegex(string Suchbegriff) {
+	status("FuzzySearchRegex()");
+	string ReturnVal = Suchbegriff;
+	if(strlen(Suchbegriff)>0) {
+		ReturnVal = "["+tolower(Suchbegriff[0])+toupper(Suchbegriff[0])+"]";
+		if(strlen(Suchbegriff)>2) {
+		ReturnVal += "[";
+		for(int i=1;i<strlen(Suchbegriff)-1;i++) {
+			ReturnVal += strupr(strsub(Suchbegriff,i,1))+strlwr(strsub(Suchbegriff,i,1));
+		}
+		ReturnVal += "]{"+int2str(strlen(Suchbegriff)-3)+","+int2str(strlen(Suchbegriff)-2)+"}";
+		} 
+		if(strlen(Suchbegriff)>1)
+		ReturnVal += "["+tolower(Suchbegriff[strlen(Suchbegriff)-1])+toupper(Suchbegriff[strlen(Suchbegriff)-1])+"]";
+	}
+	return ReturnVal;
+}
+
+
 
 /**
  *  \brief Dialog mit Stringeigabefeld 

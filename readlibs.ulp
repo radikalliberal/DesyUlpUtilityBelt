@@ -19,8 +19,8 @@ int AnzahlLibs;
 string out,LIBS[],rest;
 string Pac_Sort[],Val_Sort[];
 string tempstr;
-string outAttArr[],outElemArr[],temp[],temp1[],temp2[],temp3[],temp4[],temp5[];
-string HerstellerNummer[], Val[], Beschreibung[], Package[], Hersteller[], Vorzug[],OrderbaseNummer[],DeviceName[],Prefix[],Datenblatt1[],Datenblatt2[];
+string outAttArr[],outElemArr[],temp[],temp1[],temp2[],temp3[],temp4[],temp5[],temp6[];
+string HerstellerNummer[], Val[], Beschreibung[], Package[], Hersteller[], Vorzug[],OrderbaseNummer[],DeviceName[],Prefix[],Datenblatt1[],Datenblatt2[],uservalues[];
 string LIB6_PATH = "//win.desy.de/group/sze/public/Eagle_6+/lbr"; 
 
 /**
@@ -62,11 +62,20 @@ void main(){
 		fileread(out,LIBS[k]);
 		if(strxstr(out,"eagle.*drawing.*library.*devicesets.*deviceset.*attribute.*value") < 0) continue;
 		int n = xmlelements(temp,out,"eagle/drawing/library/devicesets/deviceset");
-
+	
 		for(int h = 0; h < n ; h++) {
+			string Symbols;
 			Datenblatt1[h] = CutSubstring(xmlelement(temp[h],"deviceset/description"),"file:\\\\[^\\n\"]*\\.[pP][dD][fF]",0);
 			//Datenblatt1[h] = str_replace(Datenblatt1[h],"&lt;","<",START,REPEAT);
+			
 			strsplit(temp1,xmlelement(temp[h],"deviceset/description"),'\n');
+			int p = xmlelements(temp6,temp[h],"deviceset/gates/gate");
+			p--;
+			for(int q; q <= p; q++)  {
+				string attrib = xmlattribute(temp6[q],"gate","symbol"); 
+				if(strxstr(Symbols,attrib) < 0)
+					Symbols += (strlen(Symbols) > 1 ? "," : "") + attrib;
+			}
 			int l = xmlelements(temp2,temp[h],"deviceset/devices/device");
 			for(int g = 0; g < l; g++) {
 				int m = xmlelements(temp3,temp2[g],"device/technologies/technology");
@@ -92,7 +101,13 @@ void main(){
 																				xmlattribute(temp[h],"deviceset","name"),
 																				xmlattribute(temp3[j],"technology","name"),
 																				xmlattribute(temp2[g],"device"   ,"name")); 
+						string s[];
+						string uval = "Off";
+						int attribs = xmlattributes(s,temp[h],"deviceset");
+						for(int f = 0; f < attribs; f++) 
+							if(s[f] == "uservalue") uval = "On";
 						
+						uservalues[bts]					=	uval;
 						Prefix[bts] 						= xmlattribute(temp[h],"deviceset","prefix"); 
 						Datenblatt2[bts]				= HtmlCharactersTauschen(Datenblatt1[h]);
 						
@@ -105,7 +120,9 @@ void main(){
 									 + Prefix[bts] 					 + ";" 
 									 + Datenblatt2[bts] 		 + ";"
 									 + LIBS[k] 						   + ";" 
-									 + int2str(Gates);
+									 + int2str(Gates)				 + ";"
+									 + Symbols							 + ";"
+									 + uservalues[bts];
 						
 						Pac_Sort[bts]	= Package[bts] + ";" + Val[bts]     + ";" + rest;
 						Val_Sort[bts]	= Val[bts]     + ";" + Package[bts] + ";" + rest;
