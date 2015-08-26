@@ -764,6 +764,7 @@ void Hinweis() {
 	dlgDialog("Achtung!") {
 		dlgLabel("<font size =\"40\" color=\"#123456\">Es ist unbedingt ein erfolgreicher Designrule Check vor Übermittlung der Daten zu tätigen.");
 		dlgPushButton("Ok") dlgAccept();
+		dlgPushButton("DRC jetzt starten") exit("DRC");
 	};
 }	
 

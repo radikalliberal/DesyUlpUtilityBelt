@@ -1,0 +1,221 @@
+#include "Libdesy.lib"
+string Herstellernummern[], Hersteller;
+int AnzahlNummern, AnzahlVorschlaege;
+string ULP_PATH = "//win.desy.de/group/sze/public/Eagle_6+/ulp/Ulp-Service";
+enum {strict, loose, fuzzy};
+string Vorschlaege[], Bauteile[], AnzahlTreffer[], besterTreffer[];
+string getHersteller() {
+	library(L){
+		L.devices(D) {
+			string t[];
+			int n = strsplit(t, D.technologies, ' ');
+     
+			for (int i = 0; i < n; i++) {
+				D.attributes(A, t[i]) {
+					if(A.name == "HERSTELLER_NAME")
+						return A.value;
+				}
+			}
+		}
+	}
+	return "";
+}
+
+string createExpression(string inputString, int degree) {
+	string returnval;
+	
+	switch (degree) {
+	
+		case strict:	{
+										returnval = inputString;
+										break;
+									}
+									
+		case loose: 	{
+										returnval = strsub(inputString,0,5);
+										returnval += "%";
+										break;
+									}
+									
+		case fuzzy: 	{
+										returnval = strsub(inputString,0,1);
+										for(int i = 1;i < strlen(inputString)*0.6; i++) {
+													returnval += "[ -/\\()+,;.:" + strsub(inputString,1) + "]";
+										}
+										returnval += "%";
+										break;
+									}
+	}
+	
+		return returnval;
+}
+
+string degree2str(int deg) {
+	
+	switch(deg) {
+		
+		case 0: return "strict";
+		case 1: return "loose";
+		case 2: return "fuzzy";
+		default: return "error";
+	
+	}
+	return "error";
+}
+
+
+
+real stringSimilarity(string a, string b){
+	status("stringSimilarity("+a+","+b+")");
+	string shorter_string, longer_string;
+	int longestStreak;
+	real Streak_ratio,sameChar_ratio,length_ratio;
+	
+	
+	if(strlen(a) > strlen(b)) {shorter_string = b; longer_string = a;}
+	else {shorter_string = a; longer_string = b;}
+	if(strlen(shorter_string) == 0 ) length_ratio = 0;
+	else {
+		length_ratio =  strlen(shorter_string);
+		length_ratio =  length_ratio / strlen(longer_string);
+	}
+	if(cmpstr(a,b) == 0) longestStreak = strlen(a);
+	else
+		for(int start = 0; start < strlen(a); start++) {
+			int len = 1;
+			while(strxstr(longer_string,strsub(shorter_string,start,len)) > -1) {
+				if(len > longestStreak) longestStreak = len;
+				if(strlen(longer_string)-start-len == 0) break;
+				len++;
+			}
+			if( (strlen(a)-start) < longestStreak ) break;
+		}
+	if(longestStreak > 0 && strlen(shorter_string) > 0) {
+		Streak_ratio = longestStreak;
+		Streak_ratio = Streak_ratio/strlen(shorter_string);
+		}
+	else Streak_ratio = 0;
+	
+	int similarChar;
+	for(int idx = 0; idx < strlen(shorter_string); idx++) {
+		if(strrchr(longer_string,shorter_string[idx]) > -1) similarChar++;
+	}
+	for(idx = 0; idx < strlen(longer_string); idx++) {
+		if(strxstr(shorter_string,strsub(longer_string,idx,1)) > -1) similarChar++;
+	}
+	if(length_ratio == 0) sameChar_ratio = 0;
+	else  {
+		sameChar_ratio = similarChar;
+		sameChar_ratio = sameChar_ratio / (strlen(longer_string) + strlen(shorter_string));
+	}
+	
+	Debug("b = " + b +"\na = " + a +"\nlen(shorter_string):"+int2str(strlen(shorter_string))+"\nlen(longer_string):"+int2str(strlen(longer_string))+"\nlongestStreak:"+real2str(longestStreak,2)+"\nStreak_ratio:"+real2str(Streak_ratio,3)+"\nlength_ratio:"+real2str(length_ratio,3)+"\nsameChar_ratio:"+real2str(sameChar_ratio,3)+"\nsimilarChar:"+int2str(similarChar)+"\nSimilarity:"+real2str(Streak_ratio * 20 + length_ratio * 40 + sameChar_ratio * 40,2));
+	
+	return Streak_ratio * 30 + length_ratio * 40 + sameChar_ratio * 30 ;
+
+}
+
+if (library) {
+	library(L){
+		L.devices(D) {
+			string t[];
+			string value;
+			int n = strsplit(t, D.technologies, ' ');
+			int hasObNr = FALSE;
+			for (int i = 0; i < n; i++) {
+				D.attributes(A, t[i]) {
+					if(A.name == "DATENBANKOB-NR" && (strxstr(A.value,"Z\\d{5}") > -1))
+						hasObNr = TRUE;
+					if(A.name == "HERSTELLER_NR")
+						value = A.value;
+				}
+				if(hasObNr == FALSE)
+					Herstellernummern[AnzahlNummern++] = value;
+			}
+		}
+	}
+	
+	Hersteller = getHersteller();
+	//Debug(Hersteller);
+	int Zeilen;
+	for(int i = 0; i < AnzahlNummern; i++) {
+		//Debug(Herstellernummern[i]);
+		
+		string temp[];
+		for(int k = strict; k <= fuzzy; k++) {
+			
+			int error = system("cmd.exe /c sqlcmd -S zitleitsql3 -d orderbase_ze -Q "
+					"\"select nr, name, hersteller_artikelnr, beschreibung "
+					"from artikel_unarchiviert where name like '"
+					+ changeChar(Hersteller,'*','%') +"%' and hersteller_artikelnr like '"
+					+ createExpression(Herstellernummern[i], k) + "';\"  -s\"$\" > "+ULP_PATH+"/orderbase.txt");
+					
+			string oboutput;
+			fileread(oboutput,ULP_PATH+"/orderbase.txt");
+			//Debug(oboutput);
+			oboutput = changeChar(oboutput,'$','\t');		
+			status("152");
+			
+			Zeilen = strsplit(temp,oboutput,'\n');
+			status("155");
+			if(Zeilen > 4 ) break;
+		}
+		if(Zeilen > 4 ) {
+			status("159");
+			real max_Similarity = 0;
+			for(int g = 0;g < Zeilen-4;g++) {
+					string Temp[];
+					status("162");
+					strsplit(Temp,temp[g+2],'\t');
+					real real_Similarity = stringSimilarity(Herstellernummern[i],TrimWhiteSpace(Temp[2]));
+					string str_Similarity = real2str(real_Similarity,2);
+					Vorschlaege[AnzahlVorschlaege] += temp[g+2] + "\t"+ str_Similarity + "\n";
+					if( real_Similarity > max_Similarity) max_Similarity = real_Similarity;
+			}
+			status("166");
+			Bauteile[AnzahlVorschlaege] = 	Herstellernummern[i] + "\t" + 
+																			degree2str(k) + "\t" + 
+																			int2str(Zeilen-4) + "\t" + 
+																			real2str(max_Similarity,2);
+			AnzahlVorschlaege++;
+		
+		/* dlgDialog("") {
+			dlgLabel("Ergebnisse für:" + Herstellernummern[i]);
+			dlgListView("OrderbaseNr\t"
+			"Herstellername\t"
+			"Herstellerartikelnr\t"
+			"Beschreibung",
+			table,
+			tableselect,tablesort);
+			dlgPushButton("Ok") dlgAccept();
+			dlgPushButton("Abbrechen") exit(0);
+		}; */
+		}
+	}
+	dlgDialog("") {
+		dlgMessageBox(Bauteile[0]);
+		string table[];
+		int tableselect, tablesort;
+		dlgLabel("Bauteile mit Treffern");
+		dlgListView("Herstellernummer\tbester Treffer\tAnzahl Treffer\tbest Sim",Bauteile,tableselect,tablesort)	{
+			strsplit(table,Vorschlaege[tableselect],'\n');
+			dlgDialog("") {
+				dlgLabel("Ergebnisse für:" + Bauteile[tableselect]);
+				dlgListView("OrderbaseNr\t"
+				"Herstellername\t"
+				"Herstellerartikelnr\t"
+				"Beschreibung\t"
+				"Gleicheit",
+				table,				
+				tableselect,tablesort);
+				dlgPushButton("Ok") dlgAccept();
+				dlgPushButton("Abbrechen") exit(0);
+			}; 
+		}
+	};
+	
+	
+} else {
+	dlgMessageBox("Diese Ulp muss in einer Bibliothek ausgeführt werden");
+	exit(0);
+}

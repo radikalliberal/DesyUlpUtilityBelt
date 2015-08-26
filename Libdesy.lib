@@ -48,6 +48,22 @@ string real2str(real value, int decimalplaces) {
 }
 
 /**
+ *  \brief Ein Dialog wird geöffnet mit gewünschtem Inhalt um Variablen zu checken, 
+ *  wenn auf cancel gedrückt wird kann das Programm an diesem Punkt abgebrochen werden
+ *  
+ *  \param [in] msg Nachricht oder gewünschte Variable
+ */
+void Debug(string msg) {
+    status("Debug()");
+    dlgDialog("Debug") {
+        dlgHBoxLayout { dlgTextEdit(msg); }
+        dlgPushButton("+&ok") { dlgAccept();}
+        dlgPushButton("-&cancel") { dlgReject(); exit (0);}
+    };
+}
+
+
+/**
  *  \brief tauscht einen Buchstaben eines Strings gegen einen anderen
  *  
  *  \param [in] DerString siehe name
@@ -58,6 +74,7 @@ string real2str(real value, int decimalplaces) {
 string changeChar(string DerString, char old, char new) {
 	status("changeChar()");
 	while((strrchr(DerString,old))!=-1) {
+		//Debug(DerString);
 		DerString[(strrchr(DerString,old))]=new;
 	}
 	return DerString;
@@ -85,28 +102,17 @@ string CutSubstring(string longString,string regex,int offset ) {
 }
 
 string TrimWhiteSpace(string s) {
-    status("TrimWhiteSpace()");
-    while (s && isspace(s[0]))
+    status("TrimWhiteSpace("+s+")");
+    while (s && isspace(s[0])) {
     s = strsub(s, 1);
-    while (s && isspace(s[strlen(s) - 1]))
+		}
+    while (s && isspace(s[strlen(s) - 1])) {
     s = strsub(s, 0, strlen(s) - 1);
+		}
     return s;
 }
 
-/**
- *  \brief Ein Dialog wird geöffnet mit gewünschtem Inhalt um Variablen zu checken, 
- *  wenn auf cancel gedrückt wird kann das Programm an diesem Punkt abgebrochen werden
- *  
- *  \param [in] msg Nachricht oder gewünschte Variable
- */
-void Debug(string msg) {
-    status("Debug()");
-    dlgDialog("Debug") {
-        dlgHBoxLayout { dlgTextEdit(msg); }
-        dlgPushButton("+&ok") { dlgAccept();}
-        dlgPushButton("-&cancel") { dlgReject(); exit (0);}
-    };
-}
+
 
 /**
  *  \brief Logarithmus zur Basis 2 auf 3 Nachkommastellen genau

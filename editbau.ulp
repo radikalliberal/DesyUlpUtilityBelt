@@ -24,11 +24,7 @@ string Version = "1.6";
 
 // Pfad der aktuellen Eagle Bibliotheken
 string LIB6_PATH = "//win.desy.de/group/sze/public/Eagle_6+/lbr"; 
-//"D:/Dropbox/DesyBib/lbr_6";
-//"/home/jan/Dropbox/DesyBib/lbr_6"; //	
 string ULP_PATH = "//win.desy.de/group/sze/public/Eagle_6+/ulp/Ulp-Service";
-//"/home/jan/Dropbox/DesyBib/Ulp-Service";
-//"D:/Dropbox/DesyBib/Ulp-Service"; 
 
 //int's
 
@@ -461,11 +457,11 @@ string ExtractPdf(string Description) {
 	
 	while(1) {
 		start = strxstr(Description,
-									  "[A-Za-z0-9\\s_.,+-]{1,50}\\.[pP][dD][fF]",
+									  "[A-Za-z0-9\\s_.,+\\-\\*]{1,50}\\.[pP][dD][fF]",
 										start+2*len+2,
 										len);
 		start2 = strxstr(Description,
-									  ">[A-Za-z0-9\\s_.,+-]{1,50}</a>",
+									  ">[A-Za-z0-9\\s_.,+\\-\\*]{1,50}</a>",
 										start+len,
 										len2);
 		if(start<0) break;
@@ -502,8 +498,7 @@ string ExtractPdf(string Description) {
 		}
 		return returnval;
 	} else{
-		Pdfs[0] = ".pdf";
-		return ".pdf";
+		return "";
 	}
 }
 
@@ -1472,12 +1467,12 @@ int OrderbaseTab() {
 				for(k=0;k<Anzahl_Varianten;k++) {
 					if(temp[0] == Var[k]) {
 						tmptable[eintraege] = changeChar(table[zeile],'\t',' ');
-						OBNummern[k] += "\n"+temp[1];
+						OBNummern[k] += "\n"+TrimWhiteSpace(temp[1]);
 						Vorzug[k] += "\n"+"nein";
-						Herstellernummern[k] += "\n"+temp[3];	
+						Herstellernummern[k] += "\n"+TrimWhiteSpace(temp[3]);	
 						eintraege++;
 						technologien[k] += "\n"+int2str(eintraege);
-						Values[k] += "\n"+temp[3];
+						Values[k] += "\n"+TrimWhiteSpace(temp[3]);
 					}
 				}
 			}	
@@ -1528,238 +1523,236 @@ void main() {
 	
 	sprintf(Datum,"%d.%d.%d",t2day(time()),t2month(time())+1,t2year(time()));
 	
-	if (library) {
-		library(L){
-			//Debug_file("Debug Log vom "+Datum+"\n");
-			int laenge;
-			
-			string att[]={"DATENBANKOB-NR",
-										"HERSTELLER_NAME",
-										"HERSTELLER_NR",
-										"VAL",
-										"ZE-VORZUG"};
-			string value;
-			string Vari;
-			string tech;
-			
-			deviceset(DS) {
+	if (library && deviceset) {
+			library(L){
+			//if(L.deviceset.activedevice.library != "") {
+				//Debug_file("Debug Log vom "+Datum+"\n");
+				int laenge;
+				
+				string att[]={"DATENBANKOB-NR",
+											"HERSTELLER_NAME",
+											"HERSTELLER_NR",
+											"VAL",
+											"ZE-VORZUG"};
+				string value;
+				string Vari;
+				string tech;
+				
+				deviceset(DS) {
 
-				initVariablesAndPaths();
-			
-				readAttributes();
+					initVariablesAndPaths();
 				
-				evaluateRevisionHistory();
-				
-				readBearbeiter();
-				
-				updatePdfPathsAndNames();
+					readAttributes();
+					
+					evaluateRevisionHistory();
+					
+					readBearbeiter();
+					
+					updatePdfPathsAndNames();
 
-				if(DS.prefix=="IC") cmd +="PREFIX U;";
-				
-				DS.gates(G) {
-					if(G.name == "G$1") cmd +="NAME G$1 G;";
-				}
-				
-				Des = cleanDescription(Des);
-
-				if(!menue()) exit(0);
-				
-				Des = cleanDescription(Des);
-				
-				libs[0] = "";
-				
-				int zeilen = strsplit(temp,Des,'\n'); 
-				
-				for(int l = 0; l < zeilen;l++) {
-					if(l==0) {
-						Des = "<b>" + temp[l] + "</b><p>\\n";
-					} else {
-						Des += temp[l]+"<br>\\n";
+					if(DS.prefix=="IC") cmd +="PREFIX U;";
+					
+					DS.gates(G) {
+						if(G.name == "G$1") cmd +="NAME G$1 G;";
 					}
-				}
-				
-				cmd += "Prefix "+Prefix+";";
-				
-				
-				if(vorheriges_Device_beibehalten) {
-					if(DS.name!=Devname) {
-						cmd += "WRITE;";
-						cmd += "OPEN '"+curLibPath+"';";
-						cmd += "COPY '"+DS.name+".dev@"+L.name+"' '"+Devname+"';"; 
-						cmd += "EDIT '"+Devname+".dev';"; 
-					} else {
-						if(L.name != curLibPath) {
+					
+					Des = cleanDescription(Des);
+
+					if(!menue()) exit(0);
+					
+					Des = cleanDescription(Des);
+					
+					libs[0] = "";
+					
+					int zeilen = strsplit(temp,Des,'\n'); 
+					
+					for(int l = 0; l < zeilen;l++) {
+						if(l==0) {
+							Des = "<b>" + temp[l] + "</b><p>\\n";
+						} else {
+							Des += temp[l]+"<br>\\n";
+						}
+					}
+					
+					cmd += "Prefix "+Prefix+";";
+					
+					
+					if(vorheriges_Device_beibehalten) {
+						if(DS.name!=Devname) {
 							cmd += "WRITE;";
 							cmd += "OPEN '"+curLibPath+"';";
 							cmd += "COPY '"+DS.name+".dev@"+L.name+"' '"+Devname+"';"; 
-							cmd += "EDIT '"+Devname+".dev';"; 	
+							cmd += "EDIT '"+Devname+".dev';"; 
 						} else {
-							Devname = dlgStrEd("Achtung","Das Device benötigt einen anderen Namen",Devname);
-							cmd += "WRITE;";
-							cmd += "COPY '"+DS.name+".dev@"+L.name+"' '"+Devname+"';"; 
-							cmd += "EDIT '"+Devname+".dev';"; 	
+							if(L.name != curLibPath) {
+								cmd += "WRITE;";
+								cmd += "OPEN '"+curLibPath+"';";
+								cmd += "COPY '"+DS.name+".dev@"+L.name+"' '"+Devname+"';"; 
+								cmd += "EDIT '"+Devname+".dev';"; 	
+							} else {
+								Devname = dlgStrEd("Achtung","Das Device benötigt einen anderen Namen",Devname);
+								cmd += "WRITE;";
+								cmd += "COPY '"+DS.name+".dev@"+L.name+"' '"+Devname+"';"; 
+								cmd += "EDIT '"+Devname+".dev';"; 	
+							}
 						}
+					} else { 
+						if(curLibPath != L.name) {
+							cmd += "WRITE;";
+							cmd += "OPEN '"+curLibPath+"';";
+							cmd += "COPY '"+DS.name+".dev@"+L.name+"';";
+							cmd += "WRITE;";
+							cmd += "OPEN '"+L.name+"';";
+							cmd += "REMOVE '"+DS.name+".dev';";
+							cmd += "WRITE;";
+							cmd += "OPEN '"+curLibPath+"';";
+							cmd += "EDIT '"+DS.name+".dev';"; 
+						} 
+						if(initial_Devname != Devname) {
+							cmd += "rename '"+ DS.name + "' '" + Devname + "';";
+						}
+						
 					}
-				} else { 
-					if(curLibPath != L.name) {
-						cmd += "WRITE;";
-						cmd += "OPEN '"+curLibPath+"';";
-						cmd += "COPY '"+DS.name+".dev@"+L.name+"';";
-						cmd += "WRITE;";
-						cmd += "OPEN '"+L.name+"';";
-						cmd += "REMOVE '"+DS.name+".dev';";
-						cmd += "WRITE;";
-						cmd += "OPEN '"+curLibPath+"';";
-						cmd += "EDIT '"+DS.name+".dev';"; 
-					} 
-					if(initial_Devname != Devname) {
-						cmd += "rename '"+ DS.name + "' '" + Devname + "';";
-					}
+
+					string  o[]; 
+					string vz[];
+					string  t[];
+					string  h[];
+					string  v[];
 					
-				}
+					DS.devices(D) {
 
-				string  o[]; 
-				string vz[];
-				string  t[];
-				string  h[];
-				string  v[];
-				
-				DS.devices(D) {
+				/**
+				*	Vergleich der Ursprünglichen Attribute mit den aktuellen.
+				*	Wenn Veränderungen statt gefunden haben oder die Attribute
+				*  automatisch angelegt werden sollen wird das notwendige 
+				*  Script erstellt.
+				*/
+						for(int g = 0; g < Anzahl_Varianten; g++) {
+							if( (cmpstr(vz_compare[g],            Vorzug[g]) != 0) ||	
+									(cmpstr( o_compare[g],         OBNummern[g]) != 0) ||
+									(cmpstr( t_compare[g],      technologien[g]) != 0) ||
+									(cmpstr( h_compare[g], Herstellernummern[g]) != 0) ||
+									(cmpstr( v_compare[g],            Values[g]) != 0) ||
+									Attrib_automatisch_anlegen == 1){
+								
+								strsplit(vz,           		 Vorzug[g], '\n');
+								strsplit( h, 	  Herstellernummern[g], '\n');
+								strsplit( v,               Values[g], '\n');
+								strsplit( o,            OBNummern[g], '\n');
+								
+								int AnzahlTechnologien = strsplit(t,   technologien[g], '\n');
+								
+								if(Var[g]=="''") Vari="";
+								else Vari = Var[g];
 
-			/**
-			*	Vergleich der Ursprünglichen Attribute mit den aktuellen.
-			*	Wenn Veränderungen statt gefunden haben oder die Attribute
-			*  automatisch angelegt werden sollen wird das notwendige 
-			*  Script erstellt.
-			*/
-					for(int g = 0; g < Anzahl_Varianten; g++) {
-						if( (cmpstr(vz_compare[g],            Vorzug[g]) != 0) ||	
-								(cmpstr( o_compare[g],         OBNummern[g]) != 0) ||
-								(cmpstr( t_compare[g],      technologien[g]) != 0) ||
-								(cmpstr( h_compare[g], Herstellernummern[g]) != 0) ||
-								(cmpstr( v_compare[g],            Values[g]) != 0) ||
-								Attrib_automatisch_anlegen == 1){
-							
-							strsplit(vz,           		 Vorzug[g], '\n');
-							strsplit( h, 	  Herstellernummern[g], '\n');
-							strsplit( v,               Values[g], '\n');
-							strsplit( o,            OBNummern[g], '\n');
-							
-							int AnzahlTechnologien = strsplit(t,   technologien[g], '\n');
-							
-							if(Var[g]=="''") Vari="";
-							else Vari = Var[g];
-
-							cmd +="Package '"+ Vari + "';";	
-							cmd += "TECHNOLOGY -*;";
-							
-							for (int k = 0; k < 5; k++) {
-								for (int i = 0; i < AnzahlTechnologien; i++) {
-									if(strxstr(t[i],"'")<0) tech = t[i];
-									else tech = "";
-									switch(k) {
-									case 0: switch (Attrib_automatisch_anlegen) {
-										case 0:	value=o[i]; break;  //Orderbase-Nr
-										default:	value=""; break;
-										} break;
-									case 1:	value=Hs; break;	//Hersteller
-									case 2: switch (Attrib_automatisch_anlegen) {	 //HerstellerNr					
-										case 0:	if(h[i]=="" || h[i]== " ") {
-												value=formatDeviceName(HsBez,"",Vari);
+								cmd +="Package '"+ Vari + "';";	
+								cmd += "TECHNOLOGY -*;";
+								
+								for (int k = 0; k < 5; k++) {
+									for (int i = 0; i < AnzahlTechnologien; i++) {
+										if(strxstr(t[i],"'")<0) tech = t[i];
+										else tech = "";
+										switch(k) {
+										case 0: switch (Attrib_automatisch_anlegen) {
+											case 0:	value=o[i]; break;  //Orderbase-Nr
+											default:	value=""; break;
+											} break;
+										case 1:	value=Hs; break;	//Hersteller
+										case 2: switch (Attrib_automatisch_anlegen) {	 //HerstellerNr					
+											case 0:	if(h[i]=="" || h[i]== " ") {
+													value=formatDeviceName(HsBez,"",Vari);
+												} else {
+													value=h[i]; 
+												}
+												break;
+											case 1:	value=formatDeviceName(HsBez,tech,Vari);	break;
+											} break;
+										case 3:	switch (Attrib_automatisch_anlegen) { //VAL
+											case 0:	if(v[i]=="" || v[i]== " ") {
+													value=formatDeviceName(HsBez,tech,Vari);
+												} else {
+													value=v[i]; 
+												}
+												break;
+											case 1:	value=formatDeviceName(HsBez,tech,Vari);	break;	
+											} break;
+										case 4: if(ZE_Vorzug)  {  // ZE-Vorzug
+												value="ja";
 											} else {
-												value=h[i]; 
-											}
-											break;
-										case 1:	value=formatDeviceName(HsBez,tech,Vari);	break;
-										} break;
-									case 3:	switch (Attrib_automatisch_anlegen) { //VAL
-										case 0:	if(v[i]=="" || v[i]== " ") {
-												value=formatDeviceName(HsBez,tech,Vari);
-											} else {
-												value=v[i]; 
-											}
-											break;
-										case 1:	value=formatDeviceName(HsBez,tech,Vari);	break;	
-										} break;
-									case 4: if(ZE_Vorzug)  {  // ZE-Vorzug
-											value="ja";
-										} else {
-											if(vz[i]=="") value = "nein";
-											else value=vz[i]; 
-										} break;
-									}	
-									if(t[i]=="'") cmd+="TECHNOLOGY ''";	
-									else if(t[i]=="''") cmd+="TECHNOLOGY ''";	
-									else if(t[i]=="") cmd+="TECHNOLOGY ''";
-									else cmd +="TECHNOLOGY '"+t[i]+"'";
-									cmd +=";  ATTRIBUTE "+att[k]+" '"+value+"' constant;\n";
+												if(vz[i]=="") value = "nein";
+												else value=vz[i]; 
+											} break;
+										}	
+										if(t[i]=="'") cmd+="TECHNOLOGY ''";	
+										else if(t[i]=="''") cmd+="TECHNOLOGY ''";	
+										else if(t[i]=="") cmd+="TECHNOLOGY ''";
+										else cmd +="TECHNOLOGY '"+t[i]+"'";
+										cmd +=";  ATTRIBUTE "+att[k]+" '"+value+"' constant;\n";
+									}
 								}
 							}
 						}
 					}
-				}
-				
-				cmd += "DESCRIPTION '<html> \\n" + Des +
-				"</p> \\n"
-				"<qt> \\n"
-				"<table border=2> \\n"
-				"<tr> \\n"
-				"<td width=100> \\n"
-				"&nbsp; Hersteller:  <br>  \\n"
-				"&nbsp; Herstellerbez:  <br>  \\n"
-				"&nbsp; Datenblatt : \\n"
-				"</td>  \\n"
-				"\\n"
-				"<td width=250>\\n"
-				"&nbsp; "+Hs+"<br>  \\n"
-				"&nbsp; " +HsBez+ " <br>  \\n";
-				
-				for(int lauf=0;lauf < PdfNumber;lauf++) {
-					if(Pdfs[lauf]!="") {
-						//Debug(PDF_PATHS[lauf]);
-						string path_name[];
-						strsplit(path_name,Pdfs[lauf],'\t');
-						cmd+= "&nbsp; <a href = \"file:"
-									+ PDF_PATHS[lauf] + "\">"
-									+ PDF_NAMES[lauf] +"</a>\\n";
+					
+					cmd += "DESCRIPTION '<html> \\n" + Des +
+					"</p> \\n"
+					"<qt> \\n"
+					"<table border=2> \\n"
+					"<tr> \\n"
+					"<td width=100> \\n"
+					"&nbsp; Hersteller:  <br>  \\n"
+					"&nbsp; Herstellerbez:  <br>  \\n"
+					"&nbsp; Datenblatt : \\n"
+					"</td>  \\n"
+					"\\n"
+					"<td width=250>\\n"
+					"&nbsp; "+Hs+"<br>  \\n"
+					"&nbsp; " +HsBez+ " <br>  \\n";
+					
+					for(int lauf=0;lauf <= PdfNumber;lauf++) {
+						if(Pdfs[lauf]!="") {
+							//Debug(PDF_PATHS[lauf]);
+							string path_name[];
+							strsplit(path_name,Pdfs[lauf],'\t');
+							cmd+= "&nbsp; <a href = \"file:"
+										+ PDF_PATHS[lauf] + "\">"
+										+ PDF_NAMES[lauf] +"</a>\\n";
+						}
 					}
-				}
-				string vorheriger_Bearbeiter;
-				cmd += "</td>\\n</tr>\\n</table>\\n";
-				Bearbeiter[counter]= Author_name;
-				Datierung[counter]= Datum;
-				Kommentar[counter]=neuer_Kommentar;
-				if(counter>0)
-				if(Datum == Datierung[counter-1]) Kommentar[counter-1]=neuer_Kommentar;
+					string vorheriger_Bearbeiter;
+					cmd += "</td>\\n</tr>\\n</table>\\n";
+					Bearbeiter[counter]= Author_name;
+					Datierung[counter]= Datum;
+					Kommentar[counter]=neuer_Kommentar;
+					if(counter>0)
+					if(Datum == Datierung[counter-1]) Kommentar[counter-1]=neuer_Kommentar;
 
-				for(int k=0;k<=counter;k++) {
-					if(!k) cmd += "<!--- Erstellt ";
-					else cmd += "<!--- Geändert ";
-					cmd += "durch: "+Bearbeiter[k]+" --->\\n<!---\t\t\t\tam: "+Datierung[k]+" --->\\n";
-					if(Kommentar[k]!="") cmd += "<!---\t// "+Kommentar[k]+" // --->\\n";
-					if(Bearbeiter[k]!="" && k) vorheriger_Bearbeiter = Bearbeiter[k];
-					if(Datierung[k]==Datum) break;
+					for(int k=0;k<=counter;k++) {
+						if(!k) cmd += "<!--- Erstellt ";
+						else cmd += "<!--- Geändert ";
+						cmd += "durch: "+Bearbeiter[k]+" --->\\n<!---\t\t\t\tam: "+Datierung[k]+" --->\\n";
+						if(Kommentar[k]!="") cmd += "<!---\t// "+Kommentar[k]+" // --->\\n";
+						if(Bearbeiter[k]!="" && k) vorheriger_Bearbeiter = Bearbeiter[k];
+						if(Datierung[k]==Datum) break;
+					}
+					cmd += "</qt>\\n</html>\\n<tags:"+changeChar(tags,'\n',',')+">\\n';";
 				}
-				cmd += "</qt>\\n</html>\\n<tags:"+changeChar(tags,'\n',',')+">\\n';";
+				
 			}
 			
-		}
+			if(fileglob(temp,"C:/Users/Scholzj/Desktop/")) output("C:/Users/Scholzj/Desktop/debug.txt", "wt") { 
+				printf("%s",cmd); 
+			}
+			if(fileglob(temp,ULP_PATH+"/PdfPfade.ini")) output(ULP_PATH+"/PdfPfade.ini","wt") {
+				temp_str = strjoin(HS_PDF_PATH_ELMADATA,'\n');
+				printf("%s",strsub(temp_str,0,strlen(temp_str)-1));
+			}
+			exit(cmd);
 		
-		if(fileglob(temp,"D:/Desktop/")) output("D:/Desktop/debug.txt", "wt") { 
-			printf("%s",cmd); 
-		}
 		
-		if(fileglob(temp,"C:/Users/Scholzj/Desktop/")) output("C:/Users/Scholzj/Desktop/debug.txt", "wt") { 
-			printf("%s",Pdfhref);
-			printf("%s",cmd); 
-		}
-		if(fileglob(temp,ULP_PATH+"/PdfPfade.ini")) output(ULP_PATH+"/PdfPfade.ini","wt") {
-			temp_str = strjoin(HS_PDF_PATH_ELMADATA,'\n');
-			printf("%s",strsub(temp_str,0,strlen(temp_str)-1));
-		}
-		exit(cmd);
 	} else {
-		dlgMessageBox("\\n*** Start this ULP in a Library ***\\n");
-		exit (0);
+		dlgMessageBox(":Diese Ulp muss in einer Bibliothek gestartet werden, mit einem geöffneten Device ");
 	}
+	exit (0);
 }
