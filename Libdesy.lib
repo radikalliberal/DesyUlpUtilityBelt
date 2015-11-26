@@ -1,6 +1,8 @@
 int TRUE  = 1;
 int FALSE = 0;
 
+string GREP_PATH = "\\\\win.desy.de\\group\\sze\\public\\Eagle_6+\\ulp\\grep";
+
 
 /**
  *  \brief tauscht einen Integer in einen String um

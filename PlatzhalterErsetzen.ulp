@@ -499,38 +499,34 @@ string createTable(
 		int PartNr) {
 		
  status("createTable()");
- string sb;
- int SEARCH;
  string searchableFile = "\\\\win.desy.de\\group\\sze\\public\\Eagle_6+\\ulp\\Bauteile_nach_Package_sortiert.csv";
  string Ergebnisse[];
  string liste;
  int Zeile = 0;
- string t[],temp[],tempstr;
- string SuchBegriffe[] = {Package, Bezeichnung, OB_Nummer, Hersteller, vz ? "ja" : ""};
- int AttributSpalten[] = {0,1,3,4,6};
+ string t[];
 
 	if(Package == "" && Bezeichnung == "" && Hersteller == "" && OB_Nummer == ""){
 		dlgMessageBox(":Bitte geben Sie mindestens einen Suchbegriff für "
 									"Hersteller, Bezeichnung, Package oder Orderbase-Nummer an");
 		return "";
 	}	
+
 	
-	for(int i = 0; i < 5; i++) {
-	
-		if(	SuchBegriffe[i] == "") continue;
-		
-		system("cmd.exe /c \\\\win.desy.de\\group\\sze\\public\\Eagle_6+\\ulp\\grep.exe "
-						+ (ignore_case ? "-i " : "") 
-						+ " \"^\\([^;]*;\\)\\{" + int2str(AttributSpalten[i]) + "\\}"
-						+ SuchBegriffe[i] + "\" "
-						+ searchableFile + " >\"" + EAGLE_HOME + "/out" + int2str(i%4) + ".txt\"");
+	system("cmd.exe /c " + GREP_PATH + (ignore_case ? " -i " : " ") 
+						+ "\"^[^;\\n]*" + Package + "[^;\\n]*;\""
+						+ " \"" + searchableFile + "\" "
+						+ " | " + GREP_PATH + (ignore_case ? " -i " : " ")
+						+ "\"^\\([^;\\n]*;\\)\\{1\\}" + Bezeichnung + "\""
+						+ " | " + GREP_PATH + (ignore_case ? " -i " : " ")
+						+ "\"^\\([^;\\n]*;\\)\\{3\\}" + OB_Nummer + "\""
+						+ " | " + GREP_PATH + (ignore_case ? " -i " : " ")
+						+ "\"^\\([^;\\n]*;\\)\\{4\\}" + Hersteller + "\""
+						+ " >\"" + EAGLE_HOME + "/out.txt\"");
 						
-		searchableFile = "" + EAGLE_HOME + "/out" + int2str(i%4) + ".txt";
-	}
+
+	fileread(Ergebnisse,EAGLE_HOME + "/out.txt");
 	
-	fileread(Ergebnisse,searchableFile);
-	
-	system("cmd.exe /c del \"H:\\My Documents\\out*.txt\"");
+	system("cmd.exe /c del \"H:\\My Documents\\out.txt\"");
 
 	
 	while(Ergebnisse[Zeile] != "") {
@@ -555,9 +551,7 @@ string createTable(
 								 + "\t" + vorzug + "\t" + beschreibung + "\t" + prefix + "\t" + libra  
 								 + "\t" + herstellernr + "\t" + datenblatt + "\t" + device_name 
 								 + "\t" + inout + "\t" + symbols + "\t" + valonoff + "\n";
-		
-		
-		
+
 		Zeile++;
 	}
 	
@@ -657,20 +651,13 @@ status("Vorschlaege()");
 							dlgCell(2,1)		dlgStringEdit(Suchbegriff_Hersteller);
 							dlgCell(3,0)		dlgLabel("Orderbase-Nummer");
 							dlgCell(3,1)		dlgStringEdit(Orderbase_Nummer);
+							dlgCell(4,0)		dlgLabel("ignore Case");
+							dlgCell(4,1)		dlgCheckBox("",ignore_Case);
 						}
 						dlgSpacing(30);
 						dlgPushButton("+&suchen")  {
 							strsplit(liste,createTable(Suchbegriff_Bezeichnung,Suchbegriff_Package,Suchbegriff_Hersteller,Orderbase_Nummer,ist_vorzug,ignore_Case,PartNr),'\n');
 							dlgRedisplay();
-						}
-						dlgSpacing(30);
-						dlgGroup("Suche weiter eingrenzen") {
-							dlgGridLayout{
-								dlgCell(0,0)		dlgLabel("ignore Case");
-								dlgCell(0,1)		dlgCheckBox("",ignore_Case);
-								dlgCell(1,0)		dlgLabel("nur Vorzug");
-								dlgCell(1,1)		dlgCheckBox("",ist_vorzug);
-							}
 						}
 						dlgStretch(1);
 						if(getPartVal(PartData[PartNr],CHANGE_MODE) != int2str(NONE)) {
