@@ -1,0 +1,4 @@
+system("cmd.exe /c \\\\win.desy.de\\group\\sze\\public\\Eagle_6+\\ulp\\grep.exe  \"^\\([^;]*;\\)\\{4\\}Tyco[ ]Elec\" \\\\win.desy.de\\group\\sze\\public\\Eagle_6+\\ulp\\Bauteile_nach_Package_sortiert.csv >\"%APPDATA%\\out.txt\"");
+system("cmd.exe /c del C:\\Users\\Scholzj\\Desktop\\out.txt");
+dlgMessageBox("cmd.exe /c C:/Users/Scholzj/Desktop/grep  \"^\\\\([^;]*;\\\\)\\\\{4\\\\}Tyco[ ]Elec\" C:/Users/Scholzj/Desktop/Bauteile_nach_Package_sortiert.csv >out.txt");
+dlgMessageBox(EAGLE_HOME);

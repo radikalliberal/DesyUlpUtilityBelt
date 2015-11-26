@@ -764,6 +764,7 @@ string einzelnePdfBearbeiten(string name_and_path) {
 	Dname = tempi[0];
 	Bezeichnung_ = tempi[1];
 	dlgDialog("Die Pdf"){
+		dlgHBoxLayout dlgSpacing(250);
 		dlgGridLayout{
 			dlgCell(0, 0)
 				dlgLabel("Dateiname:");
@@ -815,9 +816,11 @@ void PdfsBearbeiten() {
 	}
 	
 	dlgDialog("Datenblätter bearbeiten"){
-		dlgListView("Pfad\tBezeichnung", newPdfs,select) {	
+			  
+		dlgListView("Datei\tBezeichnung", newPdfs,select) {	
 			newPdfs[select] = einzelnePdfBearbeiten(newPdfs[select]);
 		}
+		dlgHBoxLayout dlgSpacing(300);
 		dlgHBoxLayout{
 			dlgPushButton("Eintrag hinzufügen"){
 				for(int k = 0; k < 100; k++) {
@@ -866,7 +869,7 @@ void PdfsBearbeiten() {
 
 int untereButtonLeiste() {
 	dlgHBoxLayout {
-		
+		 
 		dlgPushButton("&OK") {
 			Check();
 			if(!backtoMenu) {
@@ -923,8 +926,6 @@ void initVariablesAndPaths() {
 		
 	}
 
-	
-	
 	Anzahl_Eintraege_Pdfordner = fileread(HS_PDF_PATH_ELMADATA,ULP_PATH+"/editbauData/PdfPfade.ini");
 	for(i = 0;i<Anzahl_Eintraege_Pdfordner;i++) {
 		strsplit(Eintraege,HS_PDF_PATH_ELMADATA[i],';');
@@ -932,7 +933,6 @@ void initVariablesAndPaths() {
 	}
 	if(HS_PDF_PATH == "" && Hs != "") nach_PdfOrdner_fragen = 1;
 	else nach_PdfOrdner_fragen = 0;
-	
 	
 	deviceset(DS) {
 		Pdf = ExtractPdf(DS.description);
@@ -958,7 +958,6 @@ void initVariablesAndPaths() {
 	}
 }
 
-
 void readDatenblattSuche() {
 	Anzahl_Eintraege_DatenblattSuche = fileread(DatenblattSuche,ULP_PATH+"/editbauData/DatenblattSuche.ini");
 }
@@ -978,7 +977,6 @@ string Hersteller_Suchlink(string Herstellername) {
 	}
 	return "";
 }
-
 
 /*
 *	\brief Die Beschreibung wird vor und nach dem bearbeiten von falschen
@@ -1151,7 +1149,7 @@ int UebersichtTab() {
 							dlgCheckBox("neues Bauteil aus Vorlage erstellen", vorheriges_Device_beibehalten);
 
 							dlgHBoxLayout{
-								dlgPushButton("Pdf's bearbeiten") {
+								dlgPushButton(" Pdf's bearbeiten ") {
 									PdfsBearbeiten();
 								}
 							dlgStretch(1);
@@ -1192,7 +1190,7 @@ int UebersichtTab() {
 				}
 				
 				dlgDialog("Version") {
-					dlgLabel("DESY Bauteil-Editor\n\nVersion "+Version);
+					dlgLabel(" DESY Bauteil-Editor\n\n Version "+Version);
 					dlgPushButton("+&ok") dlgAccept();
 				};
 				
@@ -1499,7 +1497,7 @@ int menue() {
 	readDatenblattSuche();
 	Pdfsuchen = Hersteller_Suchlink(Hs);
 	
-	dlgDialog("Desy Bauteil Editor \t\t Version "+Version) {
+	dlgDialog("DESY Bauteil Editor \t\t Version "+Version) {
 		dlgTabWidget {
 			
 			UebersichtTab();
@@ -1710,14 +1708,16 @@ void main() {
 					"&nbsp; "+Hs+"<br>  \\n"
 					"&nbsp; " +HsBez+ " <br>  \\n";
 					
-					for(int lauf=0;lauf <= PdfNumber;lauf++) {
-						if(Pdfs[lauf]!="") {
-							//Debug(PDF_PATHS[lauf]);
+					for(int idx = 0;idx <= PdfNumber;idx++) {
+						if(Pdfs[idx] != "") {
+							//Debug(PDF_PATHS[idx]);
 							string path_name[];
-							strsplit(path_name,Pdfs[lauf],'\t');
+							strsplit(path_name,Pdfs[idx],'\t');
 							cmd+= "&nbsp; <a href = \"file:"
-										+ PDF_PATHS[lauf] + "\">"
-										+ PDF_NAMES[lauf] +"</a>\\n";
+										+ PDF_PATHS[idx] + "\">"
+										+ PDF_NAMES[idx] +"</a>";	
+							if(idx > 0)	cmd += "<br>";
+							cmd += "\\n";
 						}
 					}
 					string vorheriger_Bearbeiter;

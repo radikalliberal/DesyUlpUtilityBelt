@@ -476,78 +476,90 @@ status("getPartData()");
 	}
 }
 
-
-string createTable(string Bezeichnung, string Package, string Hersteller,int vz, int PartNr) {
+/**
+ *  \brief Brief
+ *  
+ *  \param [in] Bezeichnung Suchparameter für Bezeichnung des Bauteils
+ *  \param [in] Package     Suchparameter für Package des Bauteils
+ *  \param [in] Hersteller  Suchparameter für Hersteller des Bauteils
+ *  \param [in] OB_Nummer		Suchparameter für Orderbase-Nummer des Bauteils
+ *  \param [in] vz          Sollen nur Vorzugsbauteile gezeigt werden ?
+ *  \param [in] ignore_case Soll Groß- und Kleinschreibung berücksichtigt werden ?
+ *  \param [in] PartNr      Das Bauteil welches getauscht werden soll (intern vergebene Nummer)
+ *  \return Tabelle der Bauteile die die Suchkriterien erfüllen 
+ *  				mit Tabulator separierte Attribute
+ */
+string createTable(
+		string Bezeichnung, 
+		string Package, 
+		string Hersteller,
+		string OB_Nummer,
+		int vz, 
+		int ignore_case, 
+		int PartNr) {
+		
  status("createTable()");
  string sb;
  int SEARCH;
+ string searchableFile = "\\\\win.desy.de\\group\\sze\\public\\Eagle_6+\\ulp\\Bauteile_nach_Package_sortiert.csv";
+ string Ergebnisse[];
  string liste;
- string Zeile;
+ int Zeile = 0;
  string t[],temp[],tempstr;
+ string SuchBegriffe[] = {Package, Bezeichnung, OB_Nummer, Hersteller, vz ? "ja" : ""};
+ int AttributSpalten[] = {0,1,3,4,6};
 
-	if(Package == "" && Bezeichnung == ""){
-		dlgMessageBox("Für Package oder Bezeichnung muss ein Begriff eingtragen werden!!");
+	if(Package == "" && Bezeichnung == "" && Hersteller == "" && OB_Nummer == ""){
+		dlgMessageBox(":Bitte geben Sie mindestens einen Suchbegriff für "
+									"Hersteller, Bezeichnung, Package oder Orderbase-Nummer an");
 		return "";
-	}
-	if(Package == "" && Bezeichnung != "") {
-		sb = Bezeichnung;
-		SEARCH = VAL;
-	}
-	if(Package != "" && Bezeichnung == "")	{
-		sb = strupr(Package);
-		SEARCH = PAC;
-	}
-	if(Package != "" && Bezeichnung != "")	{
-		sb = strupr(Package);
-		SEARCH = VALPAC;
+	}	
+	
+	for(int i = 0; i < 5; i++) {
+	
+		if(	SuchBegriffe[i] == "") continue;
+		
+		system("cmd.exe /c \\\\win.desy.de\\group\\sze\\public\\Eagle_6+\\ulp\\grep.exe "
+						+ (ignore_case ? "-i " : "") 
+						+ " \"^\\([^;]*;\\)\\{" + int2str(AttributSpalten[i]) + "\\}"
+						+ SuchBegriffe[i] + "\" "
+						+ searchableFile + " >\"" + EAGLE_HOME + "/out" + int2str(i%4) + ".txt\"");
+						
+		searchableFile = "" + EAGLE_HOME + "/out" + int2str(i%4) + ".txt";
 	}
 	
+	fileread(Ergebnisse,searchableFile);
 	
+	system("cmd.exe /c del \"H:\\My Documents\\out*.txt\"");
 
-	//Debug(FuzzySearchRegex(Hersteller));
-	position = BTSearch(sb,SEARCH);
-	//Debug(int2str(position));
-	if(position < 0) {
-		//Debug("Kein Fund für "+getPartVal(PartData[PartNr],DEVICE_NAME)+";"+getPartVal(PartData[PartNr],PACKAGE));
-	} else {
-		if(strxstr(sb,"\\*") > -1) sb = strsub(sb,0,strlen(sb)-1);
-		int Auswahl,Zeilen;
-		SEARCH ? strsplit(t,Pac_Sort_Arr[position],';') : strsplit(t,Val_Sort_Arr[position],';');
-		//Debug(strsub(temp[0],0,strlen(sb)));
-		while(strsub(t[0],0,strlen(sb)) == sb) {
-			//Debug(strsub(t[0],0,strlen(sb)) + "\n == \n" +sb + "\n" +int2str(position));
-			//Debug("wert:"+strsub(temp[0],0,strlen(sb)) + " ?? sb:" + sb+"\ntempstr:"+tempstr+"\n");
-			if((SEARCH == VALPAC) && (strxstr(t[1],Bezeichnung) < 0) ||
-					(strxstr(t[4],FuzzySearchRegex(Hersteller)) < 0) ||
-					(strxstr(t[6],(vz ? "ja":"(nein)|(ja)"))) < 0){
-			} else {		
-			
-				string device_name = 			t[2];    
-				string prefix = 					t[8];           
-				string libra = 						t[10];          
-				string hersteller = 			t[4];       
-				string herstellernr = 		t[5];     
-				string vorzug = 					t[6];           
-				string beschreibung = 		t[7];     
-				string datenblatt = 			t[9];      
-				string orderbase_nummer = t[3];
-				string inout = 						t[11];
-				string symbols = 					t[12];
-				string valonoff= 				  t[13];
-				string val = 			SEARCH ? t[1] : t[0];
-				string pacOrval = SEARCH ? t[0] + "\t" + t[1] : t[1] + "\t" + t[0];
-				liste += orderbase_nummer + "\t - \t" + pacOrval + "\t" + val + "\t" + hersteller
+	
+	while(Ergebnisse[Zeile] != "") {
+	
+		strsplit(t,Ergebnisse[Zeile],';');
+		
+		string device_name = 			t[2];    
+		string prefix = 					t[8];           
+		string libra = 						t[10];          
+		string hersteller = 			t[4];       
+		string herstellernr = 		t[5];     
+		string vorzug = 					t[6];           
+		string beschreibung = 		t[7];     
+		string datenblatt = 			t[9];      
+		string orderbase_nummer = t[3];
+		string inout = 						t[11];
+		string symbols = 					t[12];
+		string valonoff= 				  t[13];
+		string val =							t[1];
+		string pac = 							t[0];
+		liste += orderbase_nummer + "\t - \t" + pac + "\t" + val + "\t" + val + "\t" + hersteller
 								 + "\t" + vorzug + "\t" + beschreibung + "\t" + prefix + "\t" + libra  
 								 + "\t" + herstellernr + "\t" + datenblatt + "\t" + device_name 
 								 + "\t" + inout + "\t" + symbols + "\t" + valonoff + "\n";
-				//Debug(liste);
-			}
-			
-			position++;
-			strsplit(t,SEARCH ? Pac_Sort_Arr[position] : Val_Sort_Arr[position],';');
-		}
+		
+		
+		
+		Zeile++;
 	}
-	//Debug(liste);
 	
 	return liste;
 }
@@ -597,8 +609,9 @@ void Vorschlaege(int PartNr, int POnly) {
 status("Vorschlaege()");
 	int initial_PartNr = PartNr;
 	int returnval = 0;
-	string Suchbegriff_Package,Suchbegriff_Bezeichnung,Suchbegriff_Hersteller; 
-	int ist_vorzug;
+	string Suchbegriff_Package,Suchbegriff_Bezeichnung,Suchbegriff_Hersteller,Orderbase_Nummer; 
+	int ist_vorzug = 0;
+	int ignore_Case = 1;
 	string liste[];
 	string PartAttributes[];
 	string Bauteil_attribute;
@@ -640,17 +653,21 @@ status("Vorschlaege()");
 							dlgCell(0,1)		dlgStringEdit(Suchbegriff_Package);
 							dlgCell(1,0)		dlgLabel("Bezeichnung");
 							dlgCell(1,1)		dlgStringEdit(Suchbegriff_Bezeichnung);
+							dlgCell(2,0)		dlgLabel("Hersteller");
+							dlgCell(2,1)		dlgStringEdit(Suchbegriff_Hersteller);
+							dlgCell(3,0)		dlgLabel("Orderbase-Nummer");
+							dlgCell(3,1)		dlgStringEdit(Orderbase_Nummer);
 						}
 						dlgSpacing(30);
 						dlgPushButton("+&suchen")  {
-							strsplit(liste,createTable(Suchbegriff_Bezeichnung,Suchbegriff_Package,Suchbegriff_Hersteller,ist_vorzug,PartNr),'\n');
+							strsplit(liste,createTable(Suchbegriff_Bezeichnung,Suchbegriff_Package,Suchbegriff_Hersteller,Orderbase_Nummer,ist_vorzug,ignore_Case,PartNr),'\n');
 							dlgRedisplay();
 						}
 						dlgSpacing(30);
 						dlgGroup("Suche weiter eingrenzen") {
 							dlgGridLayout{
-								dlgCell(0,0)		dlgLabel("Hersteller");
-								dlgCell(0,1)		dlgStringEdit(Suchbegriff_Hersteller);
+								dlgCell(0,0)		dlgLabel("ignore Case");
+								dlgCell(0,1)		dlgCheckBox("",ignore_Case);
 								dlgCell(1,0)		dlgLabel("nur Vorzug");
 								dlgCell(1,1)		dlgCheckBox("",ist_vorzug);
 							}
