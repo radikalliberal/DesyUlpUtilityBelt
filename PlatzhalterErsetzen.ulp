@@ -506,13 +506,31 @@ string createTable(
  string liste;
  int Zeile = 0;
  string t[];
-
+	
 	if(Package == "" && Bezeichnung == "" && Hersteller == "" && OB_Nummer == ""){
 		dlgMessageBox(":Bitte geben Sie mindestens einen Suchbegriff für "
 									"Hersteller, Bezeichnung, Package oder Orderbase-Nummer an");
 		return "";
 	}	
-
+	Package = str_replace(Package,"\\*","[^;\\n]*",0,1);
+	Package = str_replace(Package,"\\?","[^;\\n]",0,1);
+	Bezeichnung = str_replace(Bezeichnung,"\\*","[^;\\n]*",0,1);
+	Bezeichnung = str_replace(Bezeichnung,"\\?","[^;\\n]",0,1);
+	Hersteller = str_replace(Hersteller,"\\*","[^;\\n]*",0,1);
+	Hersteller = str_replace(Hersteller,"\\?","[^;\\n]",0,1);
+	OB_Nummer = str_replace(OB_Nummer,"\\*","[^;\\n]*",0,1);
+	OB_Nummer = str_replace(OB_Nummer,"\\?","[^;\\n]",0,1);
+	
+	Debug("cmd.exe /c " + GREP_PATH + (ignore_case ? " -i " : " ") 
+						+ "\"^[^;\\n]*" + Package + "[^;\\n]*;\""
+						+ " \"" + searchableFile + "\" "
+						+ " | " + GREP_PATH + (ignore_case ? " -i " : " ")
+						+ "\"^\\([^;\\n]*;\\)\\{1\\}" + Bezeichnung + "\""
+						+ " | " + GREP_PATH + (ignore_case ? " -i " : " ")
+						+ "\"^\\([^;\\n]*;\\)\\{3\\}" + OB_Nummer + "\""
+						+ " | " + GREP_PATH + (ignore_case ? " -i " : " ")
+						+ "\"^\\([^;\\n]*;\\)\\{4\\}" + Hersteller + "\""
+						+ " >\"" + EAGLE_HOME + "/out.txt\"");
 	
 	system("cmd.exe /c " + GREP_PATH + (ignore_case ? " -i " : " ") 
 						+ "\"^[^;\\n]*" + Package + "[^;\\n]*;\""
