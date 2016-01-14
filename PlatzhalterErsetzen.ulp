@@ -9,6 +9,7 @@
  
 
 string tempStrArr1[],tempStrArr2[],tempStr1,tempstr2,LibList;
+int AenderungenGeschehen = FALSE;
 int Counter;	
 int index[]; /**< Some documentation for first. */
 int position;
@@ -79,7 +80,7 @@ string PartDataValueNames[] = {	"OrderbaseNummer",
 																"HerstellerNummer",
 																"Datenblatt",
 																"P.device.name",
-																"Eingänge/Ausgänge",
+																"EingAenge/AusgAenge",
 																"Symbols",
 																"VALUE ON/OFF",
 																"Orientation",
@@ -88,11 +89,11 @@ string PartDataValueNames[] = {	"OrderbaseNummer",
 																"Id",
 																"ChangeMode"};
 
-string PartData[];          ///< Bauteil-Datensätzen aus Schaltplan
-string PartDataRecovery[];  ///< Bauteil-Datensätzen aus Schaltplan
-string PlaceholderOnly[];		///< Bauteil-Datensätzen aus Schaltplan
-int NoOfParts;              ///< Bauteil-Datensätzen aus Schaltplan
-int NoOfPlaceholders;				///< Bauteil-Datensätzen aus Schaltplan
+string PartData[];          ///< Bauteil-DatensAetzen aus Schaltplan
+string PartDataRecovery[];  ///< Bauteil-DatensAetzen aus Schaltplan
+string PlaceholderOnly[];		///< Bauteil-DatensAetzen aus Schaltplan
+int NoOfParts;              ///< Bauteil-DatensAetzen aus Schaltplan
+int NoOfPlaceholders;				///< Bauteil-DatensAetzen aus Schaltplan
 
 int evalChangeMode(string cMode) {
 	if(cMode == int2str(NONE)) 				return	NONE;			
@@ -132,6 +133,7 @@ int partCmp(string part1, string part2) {
 }
 
 string exchangePart(string old_Part, string new_Part, int mode) {
+	AenderungenGeschehen = TRUE;
 	string returnval;
 	switch(mode) {
 		case 0 /* NONE */: {
@@ -256,7 +258,7 @@ void changeAllidenticalParts(string template, string newPart, int mode) {
 
 
 /**
- *  @brief Die vorsortierten Datensätze werden mittels binärer Suche nach dem Suchbegriff
+ *  @brief Die vorsortierten DatensAetze werden mittels binAerer Suche nach dem Suchbegriff
  *  durchsucht
  *  
  *  @param [in] searchString Suchbegriff
@@ -306,8 +308,8 @@ int BTSearch(string searchString, int SORTING) {
 /**
  *  @brief 	Ein Suchergebnis wird noch einem zweiten Suchkriterium (Val) durchsucht
  *  @param [in] searchString Suchbegriff
- *  @param [in] Subject      Zu durchsuchender String (Liste von Bauteil-Datensätzen)
- *  @return Liste von Bauteil-Datensätzen die dem Suchkriterium genügen
+ *  @param [in] Subject      Zu durchsuchender String (Liste von Bauteil-DatensAetzen)
+ *  @return Liste von Bauteil-DatensAetzen die dem Suchkriterium genügen
  */
 string refinedSearch(string searchString, string Subject) {
 	string temp_arr1[], temp_arr2[], returnval;
@@ -379,7 +381,7 @@ int Check(string part1, string part2) {
 				dlgCell(0,1) 			dlgLabel("altes Bauteil");
 				dlgCell(0,2) 			dlgLabel("neues Bauteil");
 				if(!pin) {
-					dlgCell(i,0) 		dlgLabel("Anzahl Eingänge/Ausgänge");
+					dlgCell(i,0) 		dlgLabel("Anzahl EingAenge/AusgAenge");
 					dlgCell(i,1)		dlgTextView(getPartVal(part1, PINS));
 					dlgCell(i++,2)	dlgTextView(getPartVal(part2, PINS));
 				}
@@ -409,7 +411,7 @@ int Check(string part1, string part2) {
 
 
 /**
- *  @brief Mit Hilfe dieser Funktion werden die Datensätze der Bauteile aus dem Schaltplan
+ *  @brief Mit Hilfe dieser Funktion werden die DatensAetze der Bauteile aus dem Schaltplan
  *  angelegt
  *  
  */
@@ -526,7 +528,7 @@ string createTable(
 
 	fileread(Ergebnisse,EAGLE_HOME + "/out.txt");
 	
-	system("cmd.exe /c del \"H:\\My Documents\\out.txt\"");
+	system("cmd.exe /c del \"" + EAGLE_HOME + "\\out.txt\"");
 
 	
 	while(Ergebnisse[Zeile] != "") {
@@ -582,12 +584,12 @@ string newDataset(int PartNr) {
 				}
 			}
 		}
-		dlgPushButton("&Nur dieses Bauteil verändern") {
+		dlgPushButton("&Nur dieses Bauteil verAendern") {
 			newDataset = strjoin(Dataset,'\t');
 			PartData[PartNr] = exchangePart(PartData[PartNr],newDataset,ATTR_ONLY);
 			dlgAccept();
 		}
-		dlgPushButton("&Alle identischen Bauteile verändern") {
+		dlgPushButton("&Alle identischen Bauteile verAendern") {
 			newDataset = strjoin(Dataset,'\t');
 			changeAllidenticalParts(PartData[PartNr],newDataset, ATTR_ONLY);
 			dlgAccept();
@@ -655,7 +657,7 @@ status("Vorschlaege()");
 							dlgCell(4,1)		dlgCheckBox("",ignore_Case);
 						}
 						dlgSpacing(30);
-						dlgPushButton("+&suchen")  {
+						dlgPushButton("+&\nsuchen\n")  {
 							strsplit(liste,createTable(Suchbegriff_Bezeichnung,Suchbegriff_Package,Suchbegriff_Hersteller,Orderbase_Nummer,ist_vorzug,ignore_Case,PartNr),'\n');
 							dlgRedisplay();
 						}
@@ -663,7 +665,7 @@ status("Vorschlaege()");
 						if(getPartVal(PartData[PartNr],CHANGE_MODE) != int2str(NONE)) {
 						dlgPushButton("Bauteil wiederherstellen"){
 							dlgDialog("Frage") {
-								dlgLabel("Sollen alle Bauteile dieser Art wiederhergestellt werden?");
+								dlgLabel("Sollen alle Bauteile dieser\nArt wiederhergestellt werden?");
 								dlgPushButton("Ja") {
 									changeAllidenticalParts(PartData[PartNr],PartDataRecovery[PartNr],RECOVER);
 									dlgAccept();
@@ -692,60 +694,90 @@ status("Vorschlaege()");
 										,liste
 										,Auswahl) {
 					int SUCCESS = dlgDialog(""){
-						dlgLabel(getPartVal(liste[Auswahl],HERSTELLER) + " - " + getPartVal(liste[Auswahl],HERSTELLERNR));
-						dlgPushButton("Datenblatt einsehen") 
-							system("cmd /c \""+str_replace(getPartVal(liste[Auswahl],DATENBLATT)+"\"","file:","",START,ONCE));
-						dlgPushButton("&Bauteil gegen neues austauschen") {
-							if(Check(PartData[PartNr],liste[Auswahl]) == TRUE) {
-								PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl],COMPLETE);
-								if(POnly) 
-									PlaceholderOnly[initial_PartNr] = exchangePart(PlaceholderOnly[initial_PartNr],liste[Auswahl],COMPLETE);
-								Bauteil_attribute = PartData[PartNr] ;
-								dlgAccept();
-							}else{
-								dlgReject();
-							}
-							
+						string PartDat2[];
+						for(i = 0; i < n; i++) {
+							PartDat2[i] += PartDataValueNames[i] + "\t" + altesBauteil[i] + "\t";
+							PartDat2[i] += getPartVal(liste[Auswahl],i);
 						}
-						
-						dlgPushButton("&alle identischen Bauteile gegen dieses tauschen") {
-							if(Check(PartData[PartNr],liste[Auswahl]) == TRUE) {
-								changeAllidenticalParts(PartData[PartNr],liste[Auswahl],COMPLETE);
-								dlgAccept();
-							}else{
-								dlgReject();
+						dlgLabel("<h1> " + getPartVal(liste[Auswahl],HERSTELLER) + " - " + getPartVal(liste[Auswahl],HERSTELLERNR));
+						dlgHBoxLayout{
+							dlgListView("Attribut\taltes Bauteil\t neues Bauteil",PartDat2,PartListAuswahl);
+							dlgVBoxLayout{
+								dlgSpacing(400);
 							}
 						}
-					/* 	dlgPushButton("+&Attribute und Symbol austauschen, Package erhalten") {
-							PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl]);
-							dlgAccept();
-						} */
-				/* 		dlgPushButton("+&Footprint austauschen") {
-						//Package Befehl -> package C6 
-							PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl]);
-							dlgAccept();
-						} */
-						dlgPushButton("&Attribute austauschen (Platzhalter erhalten)") {
-							if(Check(PartData[PartNr],liste[Auswahl]) == TRUE) {
-								PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl],ATTR_ONLY);
-								if(POnly) 
-									PlaceholderOnly[initial_PartNr] = exchangePart(PlaceholderOnly[initial_PartNr],liste[Auswahl],ATTR_ONLY);
-								dlgAccept();	
-							}else{
-								dlgReject();
+						dlgHBoxLayout{
+							dlgStretch(0);
+							dlgGridLayout{
+								dlgCell(0,0){
+									dlgPushButton("Datenblatt aktuelles Bauteil\n") 
+									system("cmd /c \""+str_replace(altesBauteil[11]+"\"","file:","",START,ONCE));
+								}
+								dlgCell(0,1){
+									dlgPushButton("Datenblatt neues Bauteil\n") 
+									system("cmd /c \""+str_replace(getPartVal(liste[Auswahl],DATENBLATT)+"\"","file:","",START,ONCE));
+								}
+								dlgCell(1,0){
+									dlgPushButton("&Austauschen\n") {
+										if(Check(PartData[PartNr],liste[Auswahl]) == TRUE) {
+											PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl],COMPLETE);
+											if(POnly) 
+												PlaceholderOnly[initial_PartNr] = exchangePart(PlaceholderOnly[initial_PartNr],liste[Auswahl],COMPLETE);
+											Bauteil_attribute = PartData[PartNr] ;
+											dlgAccept();
+										}else{
+											dlgReject();
+										}
+									}
+								}
+								dlgCell(1,1){
+									dlgPushButton("&Alle identischen tauschen\n") {
+										if(Check(PartData[PartNr],liste[Auswahl]) == TRUE) {
+											changeAllidenticalParts(PartData[PartNr],liste[Auswahl],COMPLETE);
+											dlgAccept();
+										}else{
+											dlgReject();
+										}
+									}
+								}
+									
+								/* 	dlgPushButton("+&Attribute und Symbol austauschen, Package erhalten") {
+										PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl]);
+										dlgAccept();
+									} */
+							/* 		dlgPushButton("+&Footprint austauschen") {
+									//Package Befehl -> package C6 
+										PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl]);
+										dlgAccept();
+									} */
+								dlgCell(2,0){
+									dlgPushButton("&Attribute austauschen\n(Platzhalter erhalten)") {
+										if(Check(PartData[PartNr],liste[Auswahl]) == TRUE) {
+											PartData[PartNr] = exchangePart(PartData[PartNr],liste[Auswahl],ATTR_ONLY);
+											if(POnly) 
+												PlaceholderOnly[initial_PartNr] = exchangePart(PlaceholderOnly[initial_PartNr],liste[Auswahl],ATTR_ONLY);
+											dlgAccept();	
+										}else{
+											dlgReject();
+										}
+									}
+								}
+								dlgCell(2,1){
+									dlgPushButton("Attribute für alle identischen\nBauteile austauschen (Platzhalter erhalten)") {
+										if(Check(PartData[PartNr],liste[Auswahl]) == TRUE) {
+											changeAllidenticalParts(PartData[PartNr],liste[Auswahl],ATTR_ONLY);
+											dlgAccept();
+										}else{
+											dlgReject();
+										}
+									}
+								}
+								dlgCell(3,1) {
+									dlgPushButton("-&\nAbbrechen\n") dlgReject();
+								}
 							}
 						}
-						dlgPushButton("Attribute für alle identischen Bauteile austauschen (Platzhalter erhalten)") {
-							if(Check(PartData[PartNr],liste[Auswahl]) == TRUE) {
-								changeAllidenticalParts(PartData[PartNr],liste[Auswahl],ATTR_ONLY);
-								dlgAccept();
-							}else{
-								dlgReject();
-							}
-						}
-						dlgPushButton("-&Abbrechen") dlgReject();
 					};
-					
 					if(SUCCESS)	dlgAccept();
 				}
 			}
@@ -789,9 +821,6 @@ string buildScript() {
 		string orientation = getPartVal(PartData[i],ORIENTATION);
 		if(getPartVal(PartData[i],MIRRORED) == "true") 
 			mirrored = "M";
-			//Debug("i:"+int2str(i)+"\n" +
-	//					"val:"+int2str(val)+"\n" +
-//						"cmd:"+cmd);
 		switch(val){
 			case 0: break; //NONE
 			case 1: {		//COMPLETE
@@ -800,21 +829,11 @@ string buildScript() {
 												+ getPartVal(PartData[i],PART_NAME) + " '"
 												+ getPartVal(PartData[i],DEVICE_NAME) + "@"
 												+ lib + "';\n";
-								/* if(orientation != "0" || mirrored == "M") {
-										if(currentpage != getPartVal(PartData[i],SHEET)) {
-											cmd += "EDIT .s"+getPartVal(PartData[i],SHEET)+";\n";
-											currentpage = getPartVal(PartData[i],SHEET);
-										}
-										//cmd += "ROTATE =R0 '"+getPartVal(PartData[i],PART_NAME)+"';\n";
-										//cmd += "ROTATE ="+mirrored+"R"+orientation+" '"+getPartVal(PartData[i],PART_NAME)+"';\n";
-										} */
 								break;
 								}
 			case 2: break; //ATTR_SYM
 			case 3: break; //PACK_ONLY
 			case 4: {	//ATTR_ONLY
-								//Debug(PartData[i]);
-								//Debug("currentpage: "+currentpage+"\ngetPartVal(PartData["+int2str(i)+"],SHEET):"+getPartVal(PartData[i],SHEET));
 								if(currentpage != getPartVal(PartData[i],SHEET)) {
 									cmd += "EDIT .s"+getPartVal(PartData[i],SHEET)+";\n";
 									currentpage = getPartVal(PartData[i],SHEET);
@@ -879,10 +898,10 @@ status("MainMenu()");
 				dlgHBoxLayout{
 					dlgVBoxLayout{dlgSpacing(800);}
 					dlgVBoxLayout{
-						dlgListView(Headline
-												,PlaceholderOnly
-												,MainAuswahl)
-						Vorschlaege(MainAuswahl, 1);
+						dlgListView(Headline, PlaceholderOnly, MainAuswahl) {
+							Vorschlaege(MainAuswahl, 1);
+							dlgAccept();
+						}
 						dlgHBoxLayout{
 							dlgCheckBox("&detaillierte Ansich", Ansicht) {
 								Darstellung ^= 0x02;
@@ -892,13 +911,18 @@ status("MainMenu()");
 								Darstellung ^= 0x04;
 								dlgAccept();
 							}
-							dlgPushButton("&OK") {
-								Darstellung = 0;
-								dlgAccept();
+							if(AenderungenGeschehen) {
+								dlgPushButton("&Aenderungen festschreiben") {
+									Darstellung = 0;
+									dlgAccept();
+								}
 							}
 							dlgPushButton("-&Cancel") {
 								Darstellung = 0;
 								exit(0);
+							}
+							dlgPushButton("Hilfe") {
+								system("cmd.exe /c \""+ ULP_PATH + "/Platzhalterersetzen_Beschreibung.pdf\"");
 							}
 						}
 					}
@@ -911,10 +935,10 @@ status("MainMenu()");
 				dlgHBoxLayout{
 					dlgVBoxLayout{dlgSpacing(800);}
 					dlgVBoxLayout{
-						dlgListView(Headline
-												,PartData
-												,MainAuswahl)
-						Vorschlaege(MainAuswahl, 0);
+						dlgListView(Headline, PartData, MainAuswahl) {
+							Vorschlaege(MainAuswahl, 0);
+							dlgAccept();
+						}
 						dlgHBoxLayout{
 							dlgCheckBox("&detaillierte Ansich", Ansicht) {
 								Darstellung ^= 0x02;
@@ -924,9 +948,11 @@ status("MainMenu()");
 								Darstellung ^= 0x04;
 								dlgAccept();
 							}
-							dlgPushButton("&OK") {
-								Darstellung = 0;
-								dlgAccept();
+							if(AenderungenGeschehen) {
+								dlgPushButton("&Aenderungen festschreiben") {
+									Darstellung = 0;
+									dlgAccept();
+								}
 							}
 							dlgPushButton("-&Cancel") {
 								Darstellung = 0;
