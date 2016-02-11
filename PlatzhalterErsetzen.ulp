@@ -521,7 +521,7 @@ string createTable(
 	OB_Nummer = str_replace(OB_Nummer,"\\*","[^;\\n]*",0,1);
 	OB_Nummer = str_replace(OB_Nummer,"\\?","[^;\\n]",0,1);
 	
-	Debug("cmd.exe /c " + GREP_PATH + (ignore_case ? " -i " : " ") 
+	/*Debug("cmd.exe /c " + GREP_PATH + (ignore_case ? " -i " : " ") 
 						+ "\"^[^;\\n]*" + Package + "[^;\\n]*;\""
 						+ " \"" + searchableFile + "\" "
 						+ " | " + GREP_PATH + (ignore_case ? " -i " : " ")
@@ -530,7 +530,7 @@ string createTable(
 						+ "\"^\\([^;\\n]*;\\)\\{3\\}" + OB_Nummer + "\""
 						+ " | " + GREP_PATH + (ignore_case ? " -i " : " ")
 						+ "\"^\\([^;\\n]*;\\)\\{4\\}" + Hersteller + "\""
-						+ " >\"" + EAGLE_HOME + "/out.txt\"");
+						+ " >\"" + EAGLE_HOME + "/out.txt\""); */
 	
 	system("cmd.exe /c " + GREP_PATH + (ignore_case ? " -i " : " ") 
 						+ "\"^[^;\\n]*" + Package + "[^;\\n]*;\""
@@ -543,7 +543,6 @@ string createTable(
 						+ "\"^\\([^;\\n]*;\\)\\{4\\}" + Hersteller + "\""
 						+ " >\"" + EAGLE_HOME + "/out.txt\"");
 						
-
 	fileread(Ergebnisse,EAGLE_HOME + "/out.txt");
 	
 	system("cmd.exe /c del \"" + EAGLE_HOME + "\\out.txt\"");
@@ -671,7 +670,7 @@ status("Vorschlaege()");
 							dlgCell(2,1)		dlgStringEdit(Suchbegriff_Hersteller);
 							dlgCell(3,0)		dlgLabel("Orderbase-Nummer");
 							dlgCell(3,1)		dlgStringEdit(Orderbase_Nummer);
-							dlgCell(4,0)		dlgLabel("ignore Case");
+							dlgCell(4,0)		dlgLabel("Groß-Kleinschreibung\nignorieren");
 							dlgCell(4,1)		dlgCheckBox("",ignore_Case);
 						}
 						dlgSpacing(30);

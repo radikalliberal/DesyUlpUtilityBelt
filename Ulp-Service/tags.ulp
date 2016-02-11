@@ -1,0 +1,113 @@
+/**
+ *  \file tags.ulp
+ *  \author Jan Scholz
+ *  \brief 	die Schalgwörter(tags) unter denen ein neues Bauteil gefunden werden kann
+ *  				werden ausgelesen und können editiert werden.
+ */
+
+string tags;
+string desc;
+
+void Debug(string msg) {
+	status("Debug()");
+	dlgDialog("Debug") {
+		dlgHBoxLayout { dlgLabel(msg); }
+		dlgPushButton("+&ok") { dlgAccept();}
+		dlgPushButton("-&cancel") { dlgReject(); exit (0);}
+	};
+}
+
+string str_insert(string subject, string regex, string insert, int initialOffset, int Wiederholungen) {
+    status("str_insert()");
+	int lastpos = initialOffset;
+	int length = 0;
+    while(strxstr(subject, regex, lastpos) >= 0) {
+        int pos = strxstr(subject, regex, lastpos, length);
+        string before = strsub(subject, 0, pos + length);
+        string after = strsub(subject, pos + length + strlen(insert) - 2);
+		
+        subject = before + insert + after;
+		//Debug(subject);
+        lastpos = pos + strlen(insert);
+		
+		if(!Wiederholungen) break;
+    }
+    return subject;
+}
+
+
+
+string int2str(int number) {
+	status("int2str()");
+	string temp;
+	sprintf(temp,"%d",number);
+	return temp;
+}
+
+string changeChar(string DerString, char old, char new) {
+	status("changeChar()");
+			while((strrchr(DerString,old))!=-1) {
+				DerString[(strrchr(DerString,old))]=new;
+			}
+			return DerString;
+}
+
+string getTags(string description) {
+	int Anfang,Laenge;
+	string return_string;
+	
+	Anfang = strxstr(description,"<tags:[^>]{0,300}",0,Laenge);
+		//Debug(description);
+		/*Debug("Anfang:"+int2str(Anfang)+"\n" +
+		"Laenge:"+int2str(Laenge)+"\n");*/
+	if(Anfang < 0) { 
+		desc = description;
+		return "";
+	}
+	desc = strsub(description,0,Anfang);
+	Anfang += 6;
+	Laenge -= 6;
+
+	sprintf(return_string,"%s",strsub(description,Anfang,Laenge));
+	
+	
+	
+	return return_string;
+}
+
+
+if (library) {
+	deviceset(DS) {
+		tags = changeChar(getTags(DS.description),',','\n');
+		desc = str_insert(desc,"\n","\\n",0,1);
+	}
+	dlgDialog("Tags setzen") {
+		dlgTextEdit(tags);
+		dlgHBoxLayout {
+			dlgPushButton("&OK") { 
+				dlgAccept();
+			}
+			dlgPushButton("-&Cancel") { 
+				dlgReject(); 
+				exit (0);
+			}
+		}
+	};
+	/*dlgDialog("Beschreibung") {
+		dlgTextEdit(desc);
+		dlgHBoxLayout {
+			dlgPushButton("&OK") { 
+				dlgAccept();
+			}
+			dlgPushButton("-&Cancel") { 
+				dlgReject(); 
+				exit (0);
+			}
+		}
+	};*/
+	//dlgMessageBox(desc);
+	exit("DESCRIPTION '"+desc+"\\n<tags:"+changeChar(tags,'\n',',')+">'; run editnext-dev-sym-pac.ulp; run tags.ulp;");
+} else {
+	dlgMessageBox("Diese ULP muss in einer Bibliothek geöffnet werden");
+	exit(0);
+}
