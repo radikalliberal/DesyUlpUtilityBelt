@@ -8,6 +8,6 @@ schematic(SCH) {
 					pins++;
 				}
 			}
-			//Debug(P.device.name + ": Anzahl Pins = "+ int2str(pins));
+			//debug(P.device.name + ": Anzahl Pins = "+ int2str(pins));
 		}
   }

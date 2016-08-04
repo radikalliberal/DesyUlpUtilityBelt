@@ -12,7 +12,7 @@
 "<p>Bauelemente bearbeiten und anlegen für die Bauteilbibliothek von Eagle 6"
 "</p>"
 "<author>Author:Jan Scholz (jan_scholz@gmx.net)</author>"
-string Version = "1.6";
+string Version = "1.6b";
 // V 1.0  14.11.2014
 // V 1.1  21.11.2014
 // V 1.2	28.11.2014
@@ -20,6 +20,8 @@ string Version = "1.6";
 // V 1.4	24.01.2015
 // V 1.5  27.02.2015
 // V 1.6	19.08.2015
+// V 1.6a	17.03.2016
+// V 1.6b	04.08.2016
 //globale Variablen
 
 // Pfad der aktuellen Eagle Bibliotheken
@@ -45,6 +47,8 @@ int DevAktualisieren;
 int importOB;
 int backtoMenu;
 int error;
+int hightprovided;
+int emptytech;
 
 //Zähler
 int PdfNumber ;
@@ -77,12 +81,14 @@ string OBNummern[];
 string Herstellernummern[];
 string Values[];
 string Vorzug[];
+string Hoehe[];
 
 string vz_compare[];
 string  o_compare[];
 string  t_compare[];
 string  h_compare[];
 string  v_compare[];
+string hi_compare[];
 
 
 string Pdfs[];
@@ -176,28 +182,30 @@ string cmd;
 
 //Initialisierung
 
-firstRun=1;
-Hsselect=0;
-nLib=1;
-nDev=1;
-newBib=0;
-newDev=0;
-DevAktualisieren=0;
+firstRun = 1;
+Hsselect = 0;
+nLib = 1;
+nDev = 1;
+newBib = 0;
+newDev = 0;
+DevAktualisieren = 0;
+hightprovided = 0;
+emptytech = 0;
 
 
 //Funktionen
 
-void Debug_file(string msg) {
-	status("Debug_file()");
+void debug_file(string msg) {
+	status("debug_file()");
 	/*if(argv[1]=="-debug" && fileglob(temp,"H:/")) {
-				output("H:/Debug.log","at") {   
+				output("H:/debug.log","at") {   
 				printf("%s",msg);
 				}
 		}*/
 }
 
 string Device_func(string tech,string vari) {
-	return str_replace(str_replace(Devname,"\\*",tech,0,0),"\\?",vari,0,0);
+	return strrep(strrep(Devname,"\\*",tech,0,0),"\\?",vari,0,0);
 }
 
 /**
@@ -207,8 +215,8 @@ void readBearbeiter(){
 	system("cmd.exe /c echo %USERPROFILE% > " + ULP_PATH + "/editbauData/user.ini");
 	fileread(temp_str,ULP_PATH + "/editbauData/user.ini");
 	int last = strsplit(userConfig,temp_str,'\\');
-	if(last) Author_name = TrimWhiteSpace(userConfig[last-1]);
-	else Debug("Username konnte nicht ausgelesen werden");
+	if(last) Author_name = trimws(userConfig[last-1]);
+	else debug("Username konnte nicht ausgelesen werden");
 }
 
 /**
@@ -242,6 +250,14 @@ void updatePdfPathsAndNames() {
 	}
 }
 
+string extractDimension(string description) {
+	string z;
+	if(strxstr(description,"<dimensions>") >= 0) {
+		string xml = strsub(description,strxstr(description,"<dimensions>"));
+		z = xmlattribute(xml, "dimensions/z","val");
+	}
+	return z;
+}
 
 
 int libExsists(string path) {
@@ -263,11 +279,11 @@ void Check() {
 	int pfad_waehlen;
 	backtoMenu = 0;
 	if(HsBez=="" | HsBez==" ") {
-		backtoMenu = ErrorMsg("Bitte geben Sie eine Herstellerbezeichnung an","Ok","",1);
+		backtoMenu = errormsg("Bitte geben Sie eine Herstellerbezeichnung an","Ok","",1);
 	}
 	for(int g = 0; g < Anzahl_Varianten; g++)
 		if(strrchr(technologien[g],' ') > -1) { //wenn ein Leerzeichen vorhand ist..
-			backtoMenu = ErrorMsg("Bei den Technologien hat sich ein Leerzeichen "
+			backtoMenu = errormsg("Bei den Technologien hat sich ein Leerzeichen "
 														"eingeschlichen, bitte passen Sie die Formatierung "
 														"an"
 													 ,"Ok"
@@ -275,13 +291,13 @@ void Check() {
 													 ,1);
 		}
 	if(strrchr(Devname,' ') > -1 || strrchr(Devname,';') > -1) {
-		backtoMenu = ErrorMsg("Es darf kein Leerzeichen und kein Semikolon im Namen"
+		backtoMenu = errormsg("Es darf kein Leerzeichen und kein Semikolon im Namen"
 													"des Devices verwendet werden.\n"
 													"Bitte verwenden Sie einen anderen Namen","Ok","",1);
 	}
 	if(!backtoMenu) {
 		if(!libExsists(curLibPath)){
-			if(ErrorMsg("Es exsistier noch keine Bibliothek für diesen Hersteller \n"
+			if(errormsg("Es exsistier noch keine Bibliothek für diesen Hersteller \n"
 									"unter dem aktuellen Pfad in der 6er Bibliothek. \n"
 									"Soll eine Bibliothek angelegt oder verknüpft werden?"
 									,"Ja"
@@ -294,7 +310,7 @@ void Check() {
 					else
 					curLibPath = dlgFileSave("Neue Bibliothek anlegen",curLibPath);
 					if(curLibPath == "") {
-						pfad_waehlen = ErrorMsg("Es ist keine Bibliothek ausgewählt worden\n"
+						pfad_waehlen = errormsg("Es ist keine Bibliothek ausgewählt worden\n"
 																		"Bibliothek erneut auswählen?"
 																		,"Ok"
 																		,"Abbrechen"
@@ -313,10 +329,10 @@ void Check() {
 	if(!backtoMenu) {
 		if(Anzahl_Varianten) {
 			if(Herstellernummern[Anzahl_Varianten-1] && Attrib_automatisch_anlegen) {
-				backtoMenu = !ErrorMsg("Sollen die Herstellernummern überschrieben werden ?","Ok","Abbrechen",2); 
+				backtoMenu = !errormsg("Sollen die Herstellernummern überschrieben werden ?","Ok","Abbrechen",2); 
 			}
 		} else  {
-		Debug("Es wurden keine Variaten für das Device gefunden, Attribute können nicht angelegt werden.");
+		debug("Es wurden keine Variaten für das Device gefunden, Attribute können nicht angelegt werden.");
 		}
 	}
 	if(!backtoMenu) {
@@ -324,7 +340,7 @@ void Check() {
 			if(!Attrib_automatisch_anlegen &&
 					strsplit(temp, technologien[x], '\n') <
 					strsplit(temp, Herstellernummern[x], '\n') ) {
-				if(!ErrorMsg("Es gibt mehr Herstellernummern als Technologien\n"
+				if(!errormsg("Es gibt mehr Herstellernummern als Technologien\n"
 							"Daten gehen verloren, weiter machen?",
 							"Ja",
 							"Nein",
@@ -376,7 +392,7 @@ string ExtractHs(string Description) {
 		}
 	}
 	if(start1!=-1 && strsub(Description,start2 , len )!="br") 
-		return str_replace(strsub(Description,start2 , len ),"&nbsp","",START,REPEAT);
+		return strrep(strsub(Description,start2 , len ),"&nbsp","",START,REPEAT);
 	else	
 		return "";
 }
@@ -423,7 +439,7 @@ string ExtractHsBez(string Description) {
 		len+start,
 		len);
 	if(start>0)
-		return TrimWhiteSpace(strsub(Description,start, len ));
+		return trimws(strsub(Description,start, len ));
 	
 	ListOfHERSTELLER_NR = strjoin(Herstellernummern,';');
 	
@@ -435,8 +451,8 @@ string ExtractHsBez(string Description) {
 	returnval = strsub(Values[0],0,maxSimilarString(ListOfVal));
 	else
 	returnval = strsub(Herstellernummern[0],0,maxSimilarString(ListOfHERSTELLER_NR));
-	if( (maxSimilarString(ListOfVal) != strlen(CutSubstring(ListOfHERSTELLER_NR,"[^\\n]*",0))) ||  
-			(maxSimilarString(ListOfHERSTELLER_NR) != strlen(CutSubstring(ListOfHERSTELLER_NR,"[^\\n]*",0)))) {
+	if( (maxSimilarString(ListOfVal) != strlen(cutsubstring(ListOfHERSTELLER_NR,"[^\\n]*",0))) ||  
+			(maxSimilarString(ListOfHERSTELLER_NR) != strlen(cutsubstring(ListOfHERSTELLER_NR,"[^\\n]*",0)))) {
 		returnval += "*"; 
 	} 
 	//dlgMessageBox(ListOfVal);
@@ -470,30 +486,23 @@ string ExtractPdf(string Description) {
 	if(returnval) {
 		PdfNumber = strsplit(Pdfs, returnval, ';');
 		if(!PdfNumber) Pdfs[0] = Pdf;
-		
 		if(nach_PdfOrdner_fragen) {
 			string tempstr1,tempstr2;
 			dlgMessageBox("Es wurde kein Pfad gefunden für die Datenblätter des Herstellers. Bitte geben Sie einen an.");
 			HS_PDF_PATH = dlgDirectory("Hersteller Pdf-Ordner","\\\\elmadata.desy.de\\desy_WN\\Elektronik\\Artikel\\");
 			if(HS_PDF_PATH) {
-				strsplit(temp,HS_PDF_PATH,'\\');
+				strsplit(temp,HS_PDF_PATH,'/');
 				HS_PDF_PATH = temp[6];
-				for(int f=0;f<Anzahl_Eintraege_Pdfordner;++f) {
-					if(HS_PDF_PATH_ELMADATA[f]>HS_PDF_PATH) {
-						if(f == 0) break;
-						f--;
-						tempstr1 = HS_PDF_PATH_ELMADATA[f];
-						HS_PDF_PATH_ELMADATA[f]=Hs+";"+HS_PDF_PATH;
+				for(int f=0;f<Anzahl_Eintraege_Pdfordner;f++)
+					if(HS_PDF_PATH_ELMADATA[f]>HS_PDF_PATH)
 						break;
-					}
-				}
-				for( f ;f<Anzahl_Eintraege_Pdfordner+1;f++) {
-					tempstr2 = HS_PDF_PATH_ELMADATA[f];
-					HS_PDF_PATH_ELMADATA[f]=tempstr1;
-					tempstr1=tempstr2;
-				}
+				for(int g = Anzahl_Eintraege_Pdfordner - 1; g >= f; g--)
+					HS_PDF_PATH_ELMADATA[g+1] = HS_PDF_PATH_ELMADATA[g];
+				HS_PDF_PATH_ELMADATA[f] = Hs+";"+HS_PDF_PATH;
+
+				debug(strjoin(HS_PDF_PATH_ELMADATA,'\n'));
 			} else {
-				Debug("Die Pdf-Datei/en konnten nicht verlinkt werden ohne vollstaendigen Pfad");
+				debug("Die Pdf-Datei/en konnten nicht verlinkt werden ohne vollstaendigen Pfad");
 			}
 		}
 		return returnval;
@@ -576,14 +585,14 @@ string ExtractDescription(string DerString) {
 	int emergencyExit=0;
 	int l,i;
 	if(QuantityOfSubstring("<",DerString)!=QuantityOfSubstring(">",DerString)) {
-		if(!ErrorMsg("Die Beschreibung ist nicht htmlkonform!\n"
+		if(!errormsg("Die Beschreibung ist nicht htmlkonform!\n"
 					"Weiter machen?",
 					"Ja",
 					"Nein",
 					2)) {
 			exit(0);
 		}
-		Debug_file("Die Beschreibung ist nicht htmlkonform!\n");
+		debug_file("Die Beschreibung ist nicht htmlkonform!\n");
 	} else {	
 		deviceset(DS) {    
 			Anfang = strrstr(DS.description,"<b>");
@@ -598,9 +607,9 @@ string ExtractDescription(string DerString) {
 			temp_str += strsub(DerString,Ende+1);
 			DerString = temp_str;
 			emergencyExit++;
-			Debug_file("EmergecyExit:"+int2str(emergencyExit)+
+			debug_file("EmergecyExit:"+int2str(emergencyExit)+
 			"\nAnfang:"+int2str(Anfang)+"\nEnde:"+int2str(Ende)+"\n");
-			Debug_file(DerString+"\n");
+			debug_file(DerString+"\n");
 			if(emergencyExit == 100) break;
 			
 		}
@@ -613,7 +622,7 @@ string ExtractDescription(string DerString) {
 				Des += temp[i]+"<br>\\n";
 			}
 		}
-		Debug_file("ExtractDescription beendet\n");
+		debug_file("ExtractDescription beendet\n");
 	}
 	DerString = changeChar(DerString,'\'','"');
 	return DerString;
@@ -660,22 +669,22 @@ void  evaluateRevisionHistory(){
 
 			if(aktBearbeiter>=0 && aktBearbeiter < aktDatum ) {
 				lastpos = strxstr(DS.description,"\\sdurch:[^>]*(?=\\s---)",lastpos,len);
-				Bearbeiter[counter] = TrimWhiteSpace(strsub(CutSubstring(DS.description,"\\sdurch:[^>]*(?=\\s---)",lastpos),8));
+				Bearbeiter[counter] = trimws(strsub(cutsubstring(DS.description,"\\sdurch:[^>]*(?=\\s---)",lastpos),8));
 				lastpos = strxstr(DS.description,"[ia]m:[^>]*(?=\\s---)",lastpos,len);
-				Datierung[counter] = TrimWhiteSpace(strsub(CutSubstring(DS.description,"[ia]m:[^>]*(?=\\s---)",lastpos),3));
+				Datierung[counter] = trimws(strsub(cutsubstring(DS.description,"[ia]m:[^>]*(?=\\s---)",lastpos),3));
 
-				if(  aktKommentar >= 0 &&
+				if( aktKommentar >= 0 &&
 						( aktKommentar < nextBearbeiter || nextBearbeiter < 0 ) &&
 						( aktKommentar < nextDatum || nextDatum < 0) ) {
 					lastpos = strxstr(DS.description,"//[^>]*(?=//\\s---)",lastpos,len);
-					Kommentar[counter] = TrimWhiteSpace(strsub(CutSubstring(DS.description,"//[^>]*(?=//\\s---)",lastpos),2));
+					Kommentar[counter] = trimws(strsub(cutsubstring(DS.description,"//[^>]*(?=//\\s---)",lastpos),2));
 				}
 			} else {
 				lastpos = strxstr(DS.description,"[ia]m:[^>]*(?=\\s---)",lastpos,len);
-				Datierung[counter] = TrimWhiteSpace(strsub(CutSubstring(DS.description,"[ia]m:[^>]*(?=\\s---)",lastpos),3));	
+				Datierung[counter] = trimws(strsub(cutsubstring(DS.description,"[ia]m:[^>]*(?=\\s---)",lastpos),3));	
 				if(strxstr(DS.description,"//[^>]*(?=//\\s---)",lastpos,len)>=0) {
 					lastpos = strxstr(DS.description,"//[^>]*(?=//\\s---)",lastpos,len);
-					Kommentar[counter] = TrimWhiteSpace(strsub(CutSubstring(DS.description,"//.*(?=//\\s---)",lastpos),2));
+					Kommentar[counter] = trimws(strsub(cutsubstring(DS.description,"//.*(?=//\\s---)",lastpos),2));
 				}
 			}
 			counter++;
@@ -929,7 +938,10 @@ void initVariablesAndPaths() {
 	Anzahl_Eintraege_Pdfordner = fileread(HS_PDF_PATH_ELMADATA,ULP_PATH+"/editbauData/PdfPfade.ini");
 	for(i = 0;i<Anzahl_Eintraege_Pdfordner;i++) {
 		strsplit(Eintraege,HS_PDF_PATH_ELMADATA[i],';');
-		if(Eintraege[0] == Hs) HS_PDF_PATH = Eintraege[1];
+		if(Eintraege[0] == Hs) {
+			HS_PDF_PATH = Eintraege[1];
+			break;
+		}
 	}
 	if(HS_PDF_PATH == "" && Hs != "") nach_PdfOrdner_fragen = 1;
 	else nach_PdfOrdner_fragen = 0;
@@ -945,7 +957,7 @@ void initVariablesAndPaths() {
 		initial_Devname = Devname;        
 		SuchText = DS.name;
 		initial_HsBez = DS.name;
-		Des = str_replace(HtmlTagsentfernen(DS.description),"Ohm","Ω",0,1);
+		Des = strrep(cuthtmltags(DS.description),"Ohm","Ω",0,1);
 		tablesort = 3;
 		if(!strlen(HsBez)) HsBez = DS.name;
 		regex1 = Device_func("[\\w\\d-,\\./\\\\]{0,20}",
@@ -972,7 +984,7 @@ string Hersteller_Suchlink(string Herstellername) {
 	string temp_line[];
 	for(int i = 0; i < Anzahl_Eintraege_DatenblattSuche;i++) {
 		strsplit(temp_line,DatenblattSuche[i],'\t');
-		if(strxstr(Herstellername,FuzzySearchRegex(temp_line[0])) > -1)
+		if(strxstr(Herstellername,fuzzysearchrex(temp_line[0])) > -1)
 			return "<a href = \"" + temp_line[1] + HsBez + temp_line[2] + "\">" + temp_line[0] + "</a>";
 	}
 	return "";
@@ -1025,7 +1037,15 @@ void readAttributes(){
 						Vorzug[k] += A.value;
 						if(i<Anzahl_Technologien_Device-1) Vorzug[k] += "\n";
 					}
+					if(A.name == "HEIGHT") {
+						if(A.value != "")
+							hi_compare[k] += A.value;
+							hightprovided = 1;
+					}
 				}
+				// Die Höhe wird direkt vom hinterlegten Package ausgelesen
+				Hoehe[k] += extractDimension(D.package.description);
+				if(i<Anzahl_Technologien_Device-1) Hoehe[k] += "\n";
 			}
 			if((strsplit(temp,Herstellernummern[k],'\n') <= Anzahl_Technologien_Device) && 
 				(strsplit(temp,Values[k],'\n') <= Anzahl_Technologien_Device) && 
@@ -1033,7 +1053,7 @@ void readAttributes(){
 					// Wenn ann ist alles gut
 			} else {
 				if(!(technologien[0] == "''") || (Anzahl_Technologien_Device > 0)) {
-					if(!ErrorMsg("Es sind nicht für jede Technologie alle notwendigen Attribute vorhanden \n"
+					if(!errormsg("Es sind nicht für jede Technologie alle notwendigen Attribute vorhanden \n"
 											 " Möglich wäre auch das in den Datenfeldern ungleichmäßig Zeilenumbrüche \n"
 											 "    vorhanden sind. Soll der Vorgang trotzdem weitergeführt werden ?    \n"
 											 "                  (Daten könnten so verloren gehen)						     			  ",
@@ -1056,9 +1076,10 @@ void readAttributes(){
 		t_compare[g]  =      technologien[g];
 		h_compare[g]  = Herstellernummern[g];
 		v_compare[g]  =            Values[g];
+		//hi_compare[g] =             Hoehe[g];
 		
 	}
-	Debug_file("Herstellernummern & Namen ausgelesen\n");
+	debug_file("Herstellernummern & Namen ausgelesen\n");
 }
 
 /**
@@ -1178,7 +1199,7 @@ int UebersichtTab() {
 								dlgLabel(Pdfsuchen,1);
 								dlgLabel("<a href = \"https://www.google.de/search?q="
 								+ HsBez + "+"
-								+ CutSubstring(Hs,"[^\\s]+(\\s[^\\s]{4,20})?",0)+"+filetype:pdf\">Google</a>");
+								+ cutsubstring(Hs,"[^\\s]+(\\s[^\\s]{4,20})?",0)+"+filetype:pdf\">Google</a>");
 								dlgLabel("<a href = \"http://de.rs-online.com/web/c/?searchTerm="
 								+ HsBez + "\">RS</a>",1);
 								dlgLabel("<a href = \"http://de.farnell.com/jsp/search/browse.jsp;"
@@ -1326,6 +1347,14 @@ int DatenTabs() {
 				}
 				dlgVBoxLayout{
 					for(x2=0; x2 < 3 & x2 < Anzahl_Varianten-x1*3;x2++) {
+						if(!x2%2)dlgLabel("<html><b><font size=3 color=#0B0B61 >Hoehe");
+						dlgTextEdit(Hoehe[x1*3+x2]); 
+						//dlgLabel(int2str(strsplit(temp,Vorzug[x1*3+x2],'\n'))+" Eintraege");
+					}
+					
+				}
+				dlgVBoxLayout{
+					for(x2=0; x2 < 3 & x2 < Anzahl_Varianten-x1*3;x2++) {
 						if(!x2%2)dlgLabel("<html><b><font size=3 color=#0B0B61 >Ze-Vorzug");
 						dlgTextEdit(Vorzug[x1*3+x2]); 
 						//dlgLabel(int2str(strsplit(temp,Vorzug[x1*3+x2],'\n'))+" Eintraege");
@@ -1366,7 +1395,7 @@ int ToolsTab(){
 				}
 				dlgCell(2,1) dlgHBoxLayout {
 					dlgPushButton("&ersetzen") {
-						RegexFeldErgebnis = str_replace(RegexFeld,regex1,ersetzen,0,1);
+						RegexFeldErgebnis = strrep(RegexFeld,regex1,ersetzen,0,1);
 						dlgRedisplay();
 					} 
 				}
@@ -1419,18 +1448,18 @@ int OrderbaseTab() {
 				+ changeChar(Suche_Hersteller,'*','%') +"%' and hersteller_artikelnr like '"
 				+ changeChar(SuchText,'*','%')+"%';\"  -s\"$\" > "+ULP_PATH+"/orderbase.txt");
 				if(error) 
-					if(ErrorMsg("SQL-Abfragen können nur getätigt werden wenn Microsoft® SQL Server® 2014 installiert ist\nSoll die Software installiert werden?","Ja","Nein",2)) {
+					if(errormsg("SQL-Abfragen können nur getätigt werden wenn Microsoft® SQL Server® 2014 installiert ist\nSoll die Software installiert werden?","Ja","Nein",2)) {
 						error = system("cmd.exe /c " + ULP_PATH + "/SQLEXPR_x86_ENU/setup.exe");
-						if(error) ErrorMsg("Es ist ein Fehler bei der Installation aufgetreten","Ok","",1);
+						if(error) errormsg("Es ist ein Fehler bei der Installation aufgetreten","Ok","",1);
 					}
 				fileread(oboutput,ULP_PATH+"/orderbase.txt");
-				//str_replace(oboutput,"\\s{,20}",";",0,1);
+				//strrep(oboutput,"\\s{,20}",";",0,1);
 				oboutput = changeChar(oboutput,'$','\t');
 				for(int f;f < Zeilen-4;f++) {
 					table[f] = "";
 				}
 				Zeilen = strsplit(temp,oboutput,'\n');
-				//Debug(int2str(Zeilen));
+				//debug(int2str(Zeilen));
 				zeile = 0;
 				for(zeile;zeile < Zeilen-4;zeile++) {
 					table[zeile] = " \t"+temp[zeile+2];
@@ -1465,12 +1494,12 @@ int OrderbaseTab() {
 				for(k=0;k<Anzahl_Varianten;k++) {
 					if(temp[0] == Var[k]) {
 						tmptable[eintraege] = changeChar(table[zeile],'\t',' ');
-						OBNummern[k] += "\n"+TrimWhiteSpace(temp[1]);
+						OBNummern[k] += "\n"+trimws(temp[1]);
 						Vorzug[k] += "\n"+"nein";
-						Herstellernummern[k] += "\n"+TrimWhiteSpace(temp[3]);	
+						Herstellernummern[k] += "\n"+trimws(temp[3]);	
 						eintraege++;
 						technologien[k] += "\n"+int2str(eintraege);
-						Values[k] += "\n"+TrimWhiteSpace(temp[3]);
+						Values[k] += "\n"+trimws(temp[3]);
 					}
 				}
 			}	
@@ -1524,14 +1553,15 @@ void main() {
 	if (library && deviceset) {
 			library(L){
 			//if(L.deviceset.activedevice.library != "") {
-				//Debug_file("Debug Log vom "+Datum+"\n");
+				//debug_file("debug Log vom "+Datum+"\n");
 				int laenge;
 				
 				string att[]={"DATENBANKOB-NR",
 											"HERSTELLER_NAME",
 											"HERSTELLER_NR",
 											"VAL",
-											"ZE-VORZUG"};
+											"ZE-VORZUG",
+											"HEIGHT"};
 				string value;
 				string Vari;
 				string tech;
@@ -1617,27 +1647,31 @@ void main() {
 					string  t[];
 					string  h[];
 					string  v[];
+					string hi[];
 					
 					DS.devices(D) {
-
 				/**
 				*	Vergleich der Ursprünglichen Attribute mit den aktuellen.
 				*	Wenn Veränderungen statt gefunden haben oder die Attribute
-				*  automatisch angelegt werden sollen wird das notwendige 
-				*  Script erstellt.
+				* automatisch angelegt werden sollen wird das notwendige 
+				* Script erstellt.
 				*/
 						for(int g = 0; g < Anzahl_Varianten; g++) {
 							if( (cmpstr(vz_compare[g],            Vorzug[g]) != 0) ||	
 									(cmpstr( o_compare[g],         OBNummern[g]) != 0) ||
 									(cmpstr( t_compare[g],      technologien[g]) != 0) ||
 									(cmpstr( h_compare[g], Herstellernummern[g]) != 0) ||
+									(cmpstr( hi_compare[g],            Hoehe[g]) != 0) ||
 									(cmpstr( v_compare[g],            Values[g]) != 0) ||
-									Attrib_automatisch_anlegen == 1){
+									(Attrib_automatisch_anlegen == 1) ||
+									!hightprovided)
+									{
 								
 								strsplit(vz,           		 Vorzug[g], '\n');
 								strsplit( h, 	  Herstellernummern[g], '\n');
 								strsplit( v,               Values[g], '\n');
 								strsplit( o,            OBNummern[g], '\n');
+								strsplit(hi,            Hoehe[g], '\n');
 								
 								int AnzahlTechnologien = strsplit(t,   technologien[g], '\n');
 								
@@ -1647,7 +1681,7 @@ void main() {
 								cmd +="Package '"+ Vari + "';";	
 								cmd += "TECHNOLOGY -*;";
 								
-								for (int k = 0; k < 5; k++) {
+								for (int k = 0; k <= 5; k++) {
 									for (int i = 0; i < AnzahlTechnologien; i++) {
 										if(strxstr(t[i],"'")<0) tech = t[i];
 										else tech = "";
@@ -1681,15 +1715,24 @@ void main() {
 												if(vz[i]=="") value = "nein";
 												else value=vz[i]; 
 											} break;
+										case 5: switch (Attrib_automatisch_anlegen) {
+											case 0:	value = hi[i]; break;  //Hoehe
+											default:	value="1.0"; break;
+											} break;
 										}	
-										if(t[i]=="'") cmd+="TECHNOLOGY ''";	
-										else if(t[i]=="''") cmd+="TECHNOLOGY ''";	
-										else if(t[i]=="") cmd+="TECHNOLOGY ''";
-										else cmd +="TECHNOLOGY '"+t[i]+"'";
+										
+										if( t[i] == "'"  ||
+											  t[i] == "''" ||
+											  t[i] == ""   ) {
+												cmd += "TECHNOLOGY ''";	
+												emptytech = 1;
+										} else cmd += "TECHNOLOGY '"+t[i]+"'";
+
 										cmd +=";  ATTRIBUTE "+att[k]+" '"+value+"' constant;\n";
 									}
 								}
 							}
+							if(!emptytech) cmd += "TECHNOLOGY -'';\n";
 						}
 					}
 					
@@ -1707,16 +1750,15 @@ void main() {
 					"<td width=250>\\n"
 					"&nbsp; "+Hs+"<br>  \\n"
 					"&nbsp; " +HsBez+ " <br>  \\n";
-					
-					for(int idx = 0;idx <= PdfNumber;idx++) {
+					for(int idx = PdfNumber; idx >= 0; idx--) {
 						if(Pdfs[idx] != "") {
-							//Debug(PDF_PATHS[idx]);
+							//debug(PDF_PATHS[idx]);
 							string path_name[];
 							strsplit(path_name,Pdfs[idx],'\t');
 							cmd+= "&nbsp; <a href = \"file:"
 										+ PDF_PATHS[idx] + "\">"
 										+ PDF_NAMES[idx] +"</a>";	
-							if(idx > 0)	cmd += "<br>";
+							if(idx > 0) cmd += "<br>";
 							cmd += "\\n";
 						}
 					}
@@ -1740,13 +1782,20 @@ void main() {
 				}
 				
 			}
-			
 			if(fileglob(temp,"C:/Users/Scholzj/Desktop/")) output("C:/Users/Scholzj/Desktop/debug.txt", "wt") { 
 				printf("%s",cmd); 
 			}
-			if(fileglob(temp,ULP_PATH+"/PdfPfade.ini")) output(ULP_PATH+"/PdfPfade.ini","wt") {
-				temp_str = strjoin(HS_PDF_PATH_ELMADATA,'\n');
-				printf("%s",strsub(temp_str,0,strlen(temp_str)-1));
+			if(fileglob(temp,ULP_PATH+"/editbauData/PdfPfade.ini")) {
+				output(ULP_PATH+"/editbauData/PdfPfade.ini","wt") {
+					temp_str = strjoin(HS_PDF_PATH_ELMADATA,'\n');
+					printf("%s",strsub(temp_str,0,strlen(temp_str)-1));
+				}
+			} else {
+				debug(ULP_PATH+"/editbauData/PdfPfade.ini nicht gefunden und wird neu angelegt");
+				output(ULP_PATH+"/editbauData/PdfPfade.ini","wt") {
+					temp_str = strjoin(HS_PDF_PATH_ELMADATA,'\n');
+					printf("%s",strsub(temp_str,0,strlen(temp_str)-1));
+				}
 			}
 			exit(cmd);
 		

@@ -1,0 +1,83 @@
+#include "Libdesy.lib"
+
+string desc;
+string x;
+string y;
+string z;
+string x_in;
+string y_in;
+string z_in;
+
+string extractDimensions(string description) {
+	if(strxstr(description,"<dimensions>") >= 0) {
+		string xml = strsub(description,strxstr(description,"<dimensions>"));
+		x = xmlattribute(xml, "dimensions/x","val");
+		if(x != "") x_in = real2str(str2real(x)/25.4,3);
+		y = xmlattribute(xml, "dimensions/y","val");
+		if(y != "") y_in = real2str(str2real(y)/25.4,3);
+		z = xmlattribute(xml, "dimensions/z","val");
+		if(z != "") z_in = real2str(str2real(z)/25.4,3);
+	}
+	return strsub(description,0,strxstr(description,"\n?<dimensions>"));
+}
+
+string cleanDescription(string description) {
+	description = changeChar(description,'\'','"');
+	description = extractDimensions(description);
+	description = strrep(description,"\n","\\n",0,1);
+	if(strlen(description)==0) return description;
+	while(description[strlen(description)-1] == '\n') {
+		dlgMessageBox(""+description[strlen(description)-1]);
+		description = strsub(description,0,strlen(description)-1);
+	}
+	return description;
+}
+
+
+
+if (package)
+   package(P) {
+   		dlgDialog("Beschreibung") {
+    	//printf("Package: %s\n", PAC.description);
+    	desc = cleanDescription(P.description);
+    	dlgTextEdit(desc);
+    	dlgGridLayout{
+	    	dlgCell(0,0) { dlgLabel("Dimension"); }
+	    	dlgCell(0,1) { dlgLabel("mm"); }
+	    	dlgCell(0,2) { dlgLabel("inch"); }
+	    	dlgCell(1,0) { dlgLabel("x"); }
+	    	dlgCell(1,1) { dlgStringEdit(x);}
+	    	dlgCell(1,2) { dlgStringEdit(x_in);}
+	    	dlgCell(2,0) { dlgLabel("y"); }
+	    	dlgCell(2,1) { dlgStringEdit(y);}
+	    	dlgCell(2,2) { dlgStringEdit(y_in);}
+	    	dlgCell(3,0) { dlgLabel("z"); }
+			dlgCell(3,1) { dlgStringEdit(z);}
+			dlgCell(3,2) { dlgStringEdit(z_in);}
+			dlgCell(4,1) {
+				dlgPushButton("take mm's") {
+	    		dlgAccept();
+	    		}
+	    	}
+	    	dlgCell(4,2) {
+				dlgPushButton("take inches") {
+					x = real2str(str2real(x_in) * 25.4,3);
+					y = real2str(str2real(y_in) * 25.4,3);
+					z = real2str(str2real(z_in) * 25.4,3);
+	    		dlgAccept();
+	    		}
+	    	}
+		}
+
+	    	
+	    };
+
+    	exit("DESCRIPTION '" + desc + "\\n" +
+    		"<dimensions>\\n" +
+			"  <x val=\""+x+"\"/>\\n" +
+			"  <y val=\""+y+"\"/>\\n" +
+			"  <z val=\""+z+"\"/>\\n" +
+			"</dimensions>';");
+	}
+
+	

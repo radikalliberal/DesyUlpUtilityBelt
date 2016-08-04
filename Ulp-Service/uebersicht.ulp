@@ -22,19 +22,17 @@ void formatDeviceName(string Device) {
 }
 
 string EntferneHtml(string DerString) {
- int emergencyExit=0;
 	while(strstr(DerString,"<")!=-1) {
 				Anfang = strstr(DerString,"<");
 				Ende = strstr(DerString,">");
 				tempString = strsub(DerString,0,Anfang);
 				tempString += strsub(DerString,Ende+1);
 				DerString = tempString;
-				if(emergencyExit == 911) break;
 			}
 	return DerString;
 }		
 
-string CutSubstring(string longString,string regex,int offset ) {
+string cutsubstring(string longString,string regex,int offset ) {
 	int laenge;
 	return strsub(longString,strxstr(longString,regex,offset,laenge),laenge);
 }
@@ -76,8 +74,8 @@ int foundObBt(string btname) {
 		
 	Anzahl_Eintraege_CsvDatei = strsplit(CsvDatei_in_Zeilen,HerstellerDaten_Orderbase,'\n');
 	for(int i=0;i<strlen(btname);i++)  {
-		if(CutSubstring(btname,".",i) == "*") Char = "[\\w\\d_\.\\s]{,7}";
-		else Char = CutSubstring(btname,".",i);
+		if(cutsubstring(btname,".",i) == "*") Char = "[\\w\\d_\.\\s]{,7}";
+		else Char = cutsubstring(btname,".",i);
 		Fund_Kategorie2 += Char + "[_-\\s/\\\.\*]?";
 		Fund_Kategorie3 +=  Char  + "[_-\\s/\\\.\*]?";
 		if(i==1000) {
@@ -86,7 +84,7 @@ int foundObBt(string btname) {
 		}
 	}
 	for(i=0;i<=(strlen(btname)/2)+1;i++)  {
-		Fund_Kategorie4 += CutSubstring(btname,".",i)+ "[_-\\s/\\\.\*]?";
+		Fund_Kategorie4 += cutsubstring(btname,".",i)+ "[_-\\s/\\\.\*]?";
 	}
 	for(int k=0;k<Anzahl_Eintraege_CsvDatei;k++) {
 		strsplit(Eintraege,CsvDatei_in_Zeilen[k],';');
@@ -168,7 +166,7 @@ library(L){
 		strsplit(tempArrayString,DSs.description,'\n');
 		if(strxstr(tempArrayString[0],"<html>")>=0) descString = tempArrayString[1];
 		else descString = tempArrayString[0];	
-		Libraries[x]+="\t"+DSs.name+"\t"+CutSubstring(EntferneHtml(descString),"[^\\s].*",0)+"\t"+varianten[x]+"\t"+int2str(foundObBt(DSs.name));
+		Libraries[x]+="\t"+DSs.name+"\t"+cutsubstring(EntferneHtml(descString),"[^\\s].*",0)+"\t"+varianten[x]+"\t"+int2str(foundObBt(DSs.name));
 		x++;
 		
 	}

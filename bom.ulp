@@ -76,9 +76,9 @@ string WA_Nummer;
 string description1;
 string BaugruppenNr;
 
-void Debug(string msg) {
-	status("Debug()");
-	dlgDialog("Debug") {
+void debug(string msg) {
+	status("debug()");
+	dlgDialog("debug") {
 		dlgHBoxLayout { dlgLabel(msg); }
 		dlgPushButton("+&ok") { dlgAccept();}
 		dlgPushButton("-&cancel") { dlgReject(); exit (0);}
@@ -90,8 +90,8 @@ string int2str(int number) {
 	return temp;
 }
 
-string str_replace(string subject, string regex, string replace, int initialOffset, int Wiederholungen) {
-    status("str_replace()");
+string strrep(string subject, string regex, string replace, int initialOffset, int Wiederholungen) {
+    status("strrep()");
 	int lastpos = initialOffset;
 	int length = 0;
     while(strxstr(subject, regex, lastpos) >= 0) {
@@ -107,7 +107,7 @@ string str_replace(string subject, string regex, string replace, int initialOffs
 
 
 		
-string HtmlTagsentfernen(string s) {	
+string cuthtmltags(string s) {	
 	int Anfang,Ende,Laenge,dump;
 	string temps1;
 
@@ -124,7 +124,7 @@ string HtmlTagsentfernen(string s) {
 	}
 	
 	//Zeilenumbrüche einsetzen für <br> & <p>
-	s = str_replace(s,"(<br>)|(<p>)","\n",0,1);
+	s = strrep(s,"(<br>)|(<p>)","\n",0,1);
 
 	
 	string htmltags = 	"(html|body|h1|h2|h3|p|center|blockquote|ul|ol"
@@ -161,7 +161,7 @@ string pdf(string description) {
 	return hyperlink;
 }
 // Trim leading and trailing white space characters
-string TrimWhiteSpace(string s)
+string trimws(string s)
 {
     while (s && isspace(s[0]))
         s = strsub(s, 1);
@@ -262,7 +262,7 @@ void CollectPartData(void)
 				name[count] = E.name;
 				isbot[count] = E.mirror;
 				count++;
-				//Debug(int2str(E.mirror)+"  "+E.name);
+				//debug(int2str(E.mirror)+"  "+E.name);
 			
 			}
 		}
@@ -277,7 +277,7 @@ void CollectPartData(void)
             S.parts(P)
             {
 			
-				//Debug(P.name);
+				//debug(P.name);
 				// dlgMessageBox(P.name);
             if ((P.device.package) || IsKnownDevice(P.device.name))  {
 								
@@ -307,7 +307,7 @@ void CollectPartData(void)
 								int Lib6dev	 = 0;
 								
 								description = P.deviceset.description;
-								desc = HtmlTagsentfernen(description); 
+								desc = cuthtmltags(description); 
 								
 								DBNR = "";
 								HS = "";		
@@ -364,11 +364,11 @@ void CollectPartData(void)
 								for(int c = 0; c < count; c++) {
 									if(P.name == name[c]) {
 										break;
-										Debug("break");
+										debug("break");
 										}
 								}
 								/* 	if(P.name) {
-								Debug(int2str(S.number)+"\n"+ P.name+"\n"+ (project.board ? (isbot[c] ? "B" : "T") : "unbekannt")+"\n"+        (issmd ? "SMD" : "THT")+"\n"+ (Lib6dev ? val : P.value) +"\n"+ DBNR+"\n"+ HS+"\n"+ HSNR+"\n"+ ZEV+"\n"+ attrs+"\n"+partnum+"\n"+P.device.name+"\n"+(P.device.package ? P.device.package.name : "*")+"\n"+        ((desc != "") ? desc : P.deviceset.headline)+"\n"+description+"\n"+P.device.headline+"\n"+        (Lib6dev ? P.device.headline + " : " + val : P.device.headline));
+								debug(int2str(S.number)+"\n"+ P.name+"\n"+ (project.board ? (isbot[c] ? "B" : "T") : "unbekannt")+"\n"+        (issmd ? "SMD" : "THT")+"\n"+ (Lib6dev ? val : P.value) +"\n"+ DBNR+"\n"+ HS+"\n"+ HSNR+"\n"+ ZEV+"\n"+ attrs+"\n"+partnum+"\n"+P.device.name+"\n"+(P.device.package ? P.device.package.name : "*")+"\n"+        ((desc != "") ? desc : P.deviceset.headline)+"\n"+description+"\n"+P.device.headline+"\n"+        (Lib6dev ? P.device.headline + " : " + val : P.device.headline));
 								} */
 								PartSheet[nPartCount]       = S.number;
 								PartName[nPartCount]        = P.name;
@@ -649,7 +649,7 @@ int ExportOrderbaseXML()
 					case 6:	Value=PartHSNR[n]; break;
 				}
 				
-				Value = str_replace(Value,"%","%%",0,1);
+				Value = strrep(Value,"%","%%",0,1);
 				
 				printf("    <Cell" + Ext + "><Data ss:Type=\"String\">" + Value + "</Data></Cell>\n");
 			}

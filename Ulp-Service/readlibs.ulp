@@ -37,11 +37,11 @@ string LIB6_PATH = "//win.desy.de/group/sze/public/Eagle_6+/lbr";
 string buildDeviceName(string DSName,string Tech, string Pac) {
 				
 		if(strxstr(DSName,"\\*") >= 0) {
-			DSName = str_replace(DSName,"\\*",Tech,0,0);
+			DSName = strrep(DSName,"\\*",Tech,0,0);
 			Tech = "";
 		}
 		if(strxstr(DSName,"\\?") >= 0) {
-			DSName = str_replace(DSName,"\\?",Pac,0,0);
+			DSName = strrep(DSName,"\\?",Pac,0,0);
 			Pac = "";
 		}
 	
@@ -65,8 +65,8 @@ void main(){
 	
 		for(int h = 0; h < n ; h++) {
 			string Symbols;
-			Datenblatt1[h] = CutSubstring(xmlelement(temp[h],"deviceset/description"),"file:\\\\[^\\n\"]*\\.[pP][dD][fF]",0);
-			//Datenblatt1[h] = str_replace(Datenblatt1[h],"&lt;","<",START,REPEAT);
+			Datenblatt1[h] = cutsubstring(xmlelement(temp[h],"deviceset/description"),"file:\\\\[^\\n\"]*\\.[pP][dD][fF]",0);
+			//Datenblatt1[h] = strrep(Datenblatt1[h],"&lt;","<",START,REPEAT);
 			
 			strsplit(temp1,xmlelement(temp[h],"deviceset/description"),'\n');
 			int p = xmlelements(temp6,temp[h],"deviceset/gates/gate");
@@ -96,7 +96,7 @@ void main(){
 							Vorzug[bts]             = xmlattribute(temp4[4],"attribute","value"); 
 							
 						Package[bts]            = xmlattribute(temp2[g],"device"   ,"package"); 
-						Beschreibung[bts]       = HtmlCharactersTauschen(str_replace(TrimWhiteSpace(str_replace(temp1[1],"((&lt;)|<)/?[^\\n;<>]*((&gt;)|>)","",0,1)),";","",0,1));
+						Beschreibung[bts]       = exhtmlchars(strrep(trimws(strrep(temp1[1],"((&lt;)|<)/?[^\\n;<>]*((&gt;)|>)","",0,1)),";","",0,1));
 						DeviceName[bts]					= buildDeviceName(
 																				xmlattribute(temp[h],"deviceset","name"),
 																				xmlattribute(temp3[j],"technology","name"),
@@ -109,7 +109,7 @@ void main(){
 						
 						uservalues[bts]					=	uval;
 						Prefix[bts] 						= xmlattribute(temp[h],"deviceset","prefix"); 
-						Datenblatt2[bts]				= HtmlCharactersTauschen(Datenblatt1[h]);
+						Datenblatt2[bts]				= exhtmlchars(Datenblatt1[h]);
 						
 						rest =   DeviceName[bts]       + ";" 
 									 + OrderbaseNummer[bts]  + ";" 

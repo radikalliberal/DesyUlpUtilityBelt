@@ -23,7 +23,7 @@
 string Version_Nr = " DESY -ZE- Ver 1.2";
 enum { false = 0, true = 1 };
 
-// Debug stuff
+// debug stuff
 int    Dbg = 0;
 string DbgFile;
 string DbgMsg;
@@ -509,9 +509,9 @@ void CalcMinTraceWidth() {
    }
 }
 
-void Debug(string msg) {
-    status("Debug()");
-    dlgDialog("Debug") {
+void debug(string msg) {
+    status("debug()");
+    dlgDialog("debug") {
         dlgHBoxLayout { dlgLabel(msg); }
         dlgPushButton("+&ok") { dlgAccept();}
         dlgPushButton("-&cancel") { dlgReject(); exit (0);}
@@ -529,7 +529,7 @@ void AnzahlBohrduchmesser(real durchmesser) {
         drillDiameters[i] = durchmesser;
         Bohrdurchmesser++;
         debugkram += U2MmStr(durchmesser) + "\n";
-        //Debug(U2MmStr(durchmesser));
+        //debug(U2MmStr(durchmesser));
     }
     Bohrungen++;
 }
@@ -560,12 +560,12 @@ void CheckHoles() {
       }
       B.elements(E) {
          E.package.contacts(C) if (C.pad) {
-            //Debug(U2MmStr(C.pad.drill));
+            //debug(U2MmStr(C.pad.drill));
             MinHoleSize = min(MinHoleSize, C.pad.drill);
             AnzahlBohrduchmesser(C.pad.drill);
         }
          E.package.holes(H) {
-            //Debug(U2MmStr(H.drill));
+            //debug(U2MmStr(H.drill));
             MinHoleSize = min(MinHoleSize, H.drill);
             AnzahlBohrduchmesser(H.drill);
         }
@@ -584,7 +584,7 @@ void CheckHoles() {
 					LageLageBlind += (LageLageBlind == "" ? "" : ",") + I2Str(start[idx[l]]) +"/"+I2Str(end[idx[l]]);
       }
 
-     //Debug("Verschiedene Bohrdurchmesser\n" + debugkram);
+     //debug("Verschiedene Bohrdurchmesser\n" + debugkram);
 }
 
 void GetPCBParams() {

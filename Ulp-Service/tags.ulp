@@ -8,14 +8,16 @@
 string tags;
 string desc;
 
-void Debug(string msg) {
-	status("Debug()");
-	dlgDialog("Debug") {
+void debug(string msg) {
+	status("debug()");
+	dlgDialog("debug") {
 		dlgHBoxLayout { dlgLabel(msg); }
 		dlgPushButton("+&ok") { dlgAccept();}
 		dlgPushButton("-&cancel") { dlgReject(); exit (0);}
 	};
 }
+
+
 
 string str_insert(string subject, string regex, string insert, int initialOffset, int Wiederholungen) {
     status("str_insert()");
@@ -27,7 +29,7 @@ string str_insert(string subject, string regex, string insert, int initialOffset
         string after = strsub(subject, pos + length + strlen(insert) - 2);
 		
         subject = before + insert + after;
-		//Debug(subject);
+		//debug(subject);
         lastpos = pos + strlen(insert);
 		
 		if(!Wiederholungen) break;
@@ -57,8 +59,8 @@ string getTags(string description) {
 	string return_string;
 	
 	Anfang = strxstr(description,"<tags:[^>]{0,300}",0,Laenge);
-		//Debug(description);
-		/*Debug("Anfang:"+int2str(Anfang)+"\n" +
+		//debug(description);
+		/*debug("Anfang:"+int2str(Anfang)+"\n" +
 		"Laenge:"+int2str(Laenge)+"\n");*/
 	if(Anfang < 0) { 
 		desc = description;

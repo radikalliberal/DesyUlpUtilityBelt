@@ -15,13 +15,54 @@ $EagleFileDate = (ls $EagleSource).LastWriteTime
 #echo "$EagleSource :$EagleFileDate"
 
 	if ($LocalFileDate -lt $EagleFileDate) {
-		Copy-Item  $EagleSource -Destination $LocalSource -force
-		echo "Local file$LocalSource was older and has been replaces with $EagleSource"
+		echo "Local file $LocalSource is older, the external File has to be reviewed before overwriting"
+		$ok = 0
+		while ( $ok -eq 0 ) {
+		$option = Read-Host "diff: d, replace:r, ignore:i`nchoose option"
+		$ok = 1
+		switch ($option) 
+		    { 
+		        'd' {	"diff"
+						Start-Process -FilePath "C:\Program Files\Sublime Text 3\sublime_text.exe" -ArgumentList "$LocalSource $EagleSource"
+				} 
+		        'r' {	"replace"
+						Copy-Item  $EagleSource -Destination $LocalSource -force
+						echo "Local file $LocalSource has been replaced with $EagleSource"
+				} 
+		        'i' {"ignore"}
+		        default {"Please use one of the three options"
+						 $ok = 0
+				}
+		    }
+	    }
 	}
 	if ($LocalFileDate -gt $EagleFileDate) {
-		Copy-Item  $LocalSource -Destination $EagleSource -force
-		echo "External file $EagleSource was older and has been replaces with $LocalSource"
+		$ok = 0
+		echo "$LocalSource is newer than $EagleSource"
+		while ( $ok -eq 0 ) {
+			$option = Read-Host "diff: d, replace:r, ignore:i`nchoose option"
+			$ok = 1
+			switch ($option) 
+			    { 
+			        'd' {	"diff"
+							Start-Process -FilePath "C:\Program Files\Sublime Text 3\sublime_text.exe" -ArgumentList "$LocalSource $EagleSource"
+					} 
+			        'r' {	"replace"
+							Copy-Item  $LocalSource -Destination $EagleSource -force
+							echo "External file $EagleSource has been replaced with $LocalSource"
+					} 
+			        'i' {"ignore"}
+			        default {"Please use one of the three options"
+							 $ok = 0
+					}
+			    }
+	    }
+		
+		
 	}
+    if ($LocalFileDate -eq $EagleFileDate) {
+		echo "File $EagleSource is up-to-date"
+    }
 }
 
 

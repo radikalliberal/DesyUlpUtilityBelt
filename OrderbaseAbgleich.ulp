@@ -109,7 +109,7 @@ real stringSimilarity(string a, string b){
 		sameChar_ratio = sameChar_ratio / (strlen(longer_string) + strlen(shorter_string));
 	}
 	
-	Debug("b = " + b +"\na = " + a +"\nlen(shorter_string):"+int2str(strlen(shorter_string))+"\nlen(longer_string):"+int2str(strlen(longer_string))+"\nlongestStreak:"+real2str(longestStreak,2)+"\nStreak_ratio:"+real2str(Streak_ratio,3)+"\nlength_ratio:"+real2str(length_ratio,3)+"\nsameChar_ratio:"+real2str(sameChar_ratio,3)+"\nsimilarChar:"+int2str(similarChar)+"\nSimilarity:"+real2str(Streak_ratio * 20 + length_ratio * 40 + sameChar_ratio * 40,2));
+	debug("b = " + b +"\na = " + a +"\nlen(shorter_string):"+int2str(strlen(shorter_string))+"\nlen(longer_string):"+int2str(strlen(longer_string))+"\nlongestStreak:"+real2str(longestStreak,2)+"\nStreak_ratio:"+real2str(Streak_ratio,3)+"\nlength_ratio:"+real2str(length_ratio,3)+"\nsameChar_ratio:"+real2str(sameChar_ratio,3)+"\nsimilarChar:"+int2str(similarChar)+"\nSimilarity:"+real2str(Streak_ratio * 20 + length_ratio * 40 + sameChar_ratio * 40,2));
 	
 	return Streak_ratio * 30 + length_ratio * 40 + sameChar_ratio * 30 ;
 
@@ -136,10 +136,10 @@ if (library) {
 	}
 	
 	Hersteller = getHersteller();
-	//Debug(Hersteller);
+	//debug(Hersteller);
 	int Zeilen;
 	for(int i = 0; i < AnzahlNummern; i++) {
-		//Debug(Herstellernummern[i]);
+		//debug(Herstellernummern[i]);
 		
 		string temp[];
 		for(int k = strict; k <= fuzzy; k++) {
@@ -152,7 +152,7 @@ if (library) {
 					
 			string oboutput;
 			fileread(oboutput,ULP_PATH+"/orderbase.txt");
-			//Debug(oboutput);
+			//debug(oboutput);
 			oboutput = changeChar(oboutput,'$','\t');		
 			status("152");
 			
@@ -167,7 +167,7 @@ if (library) {
 					string Temp[];
 					status("162");
 					strsplit(Temp,temp[g+2],'\t');
-					real real_Similarity = stringSimilarity(Herstellernummern[i],TrimWhiteSpace(Temp[2]));
+					real real_Similarity = stringSimilarity(Herstellernummern[i],trimws(Temp[2]));
 					string str_Similarity = real2str(real_Similarity,2);
 					Vorschlaege[AnzahlVorschlaege] += temp[g+2] + "\t"+ str_Similarity + "\n";
 					if( real_Similarity > max_Similarity) max_Similarity = real_Similarity;

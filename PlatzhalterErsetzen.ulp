@@ -19,8 +19,6 @@ string Pac_Sort_Arr[], Val_Sort_Arr[], Pac_Sort, Val_Sort;
 string HerstellerNummer[], Val[], Beschreibung[], Package[], Hersteller[], Vorzug[],OrderbaseNummer[],DeviceName[],Prefix[];
 int Bauteile;								///< Anzahl Bauteile
 
- 
-
 enum {	ORDERBASE_NUMMER 	= 0,    ///< indize für Bauteil-Attribut im Datensatz
 				PART_NAME 				= 1,		///< indize für Bauteil-Attribut im Datensatz
 				PACKAGE 					= 2,    ///< indize für Bauteil-Attribut im Datensatz
@@ -125,7 +123,7 @@ string setPartVal(string FullPartString, int pos, string newVal) {
 int partCmp(string part1, string part2) {	
 	for(int i = PACKAGE; i <= PINS; i++) {
 		if(getPartVal(part1,i) != getPartVal(part2,i)) {
-			//Debug(getPartVal(part1,i) +"\n!=\n"+ getPartVal(part2,i));
+			//debug(getPartVal(part1,i) +"\n!=\n"+ getPartVal(part2,i));
 			return FALSE;
 		}
 	}
@@ -282,9 +280,9 @@ int BTSearch(string searchString, int SORTING) {
 		iteration++;
 		SORTING ? strsplit(temp,Pac_Sort_Arr[index],';') : strsplit(temp,Val_Sort_Arr[index],';'); 
 		lastindex = index;
-		//Debug("searchString:" + searchString +"\nVergleichsstring: " + temp[0]+ "\niteration: " + int2str(iteration)+ "\nindex : " + int2str(index)+"\nCompare :" + int2str(cmpstr(searchString,temp[0])));
+		//debug("searchString:" + searchString +"\nVergleichsstring: " + temp[0]+ "\niteration: " + int2str(iteration)+ "\nindex : " + int2str(index)+"\nCompare :" + int2str(cmpstr(searchString,temp[0])));
 		db_entry = strsub(temp[0],START,length);
-		//Debug(db_entry + "\n" + searchString);
+		//debug(db_entry + "\n" + searchString);
 		switch (cmpstr(db_entry,searchString)) {
 			case  1:  index -= int(Bauteile / (2 * pow(2,iteration)))+1;
 								break;
@@ -293,15 +291,15 @@ int BTSearch(string searchString, int SORTING) {
 									SORTING ? strsplit(temp,Pac_Sort_Arr[--upper],';') : 
 														strsplit(temp,Val_Sort_Arr[--upper],';'); 
 									db_entry = strsub(temp[0],START,length);
-									//Debug("db_entry:"+db_entry+"\nindex:"+int2str(index)+"\n"+"lastindex:"+int2str(lastindex)+"\n");
-								}	//Debug("Pac_Sort_Arr[upper--]:"+Pac_Sort_Arr[upper--]+"Pac_Sort_Arr[index]:"+Pac_Sort_Arr[index]+"\nupper--");
+									//debug("db_entry:"+db_entry+"\nindex:"+int2str(index)+"\n"+"lastindex:"+int2str(lastindex)+"\n");
+								}	//debug("Pac_Sort_Arr[upper--]:"+Pac_Sort_Arr[upper--]+"Pac_Sort_Arr[index]:"+Pac_Sort_Arr[index]+"\nupper--");
 								return upper+1;
 								break;
 			case -1:	index += int(Bauteile / (2 * pow(2,iteration)))+1;
 								break;
 		}
 		if((iteration - 2) > log2(Bauteile)) return -1;
-		//Debug("db_entry:"+db_entry+"\nindex:"+int2str(index)+"\n"+"lastindex:"+int2str(lastindex)+"\n");
+		//debug("db_entry:"+db_entry+"\nindex:"+int2str(index)+"\n"+"lastindex:"+int2str(lastindex)+"\n");
 	}
 	return -1;
 }
@@ -340,7 +338,7 @@ int symCmp(string Symbols1, string Symbols2) {
 	for(int i = 0; i < syms; i++) {
 		int Fund = FALSE;
 		for(int k = 0; k < syms; k++) {
-		/*Debug("i="+int2str(i)+
+		/*debug("i="+int2str(i)+
 						"\nk="+int2str(k)+
 						"\nSym1arr[i]"+Sym1arr[i]+
 						"\nSym2arr[k]"+Sym2arr[k]);*/
@@ -418,6 +416,7 @@ int Check(string part1, string part2) {
 void getPartData(){
 status("getPartData()");
 
+
 			
 	if(schematic){
 		schematic(S){
@@ -455,11 +454,11 @@ status("getPartData()");
 															+ attVal[3] + "\t"
 															+ attVal[1] + "\t"
 															+ attVal[4] + "\t"
-															+ TrimWhiteSpace(str_replace(CutSubstring(P.device.description,"[^\\n]{9,}\\n",0),"((&lt;)|<)/?[^\\n;<>]*((&gt;)|>)","",0,1)) + "\t"		//Beschreibung
+															+ trimws(strrep(cutsubstring(P.device.description,"[^\\n]{9,}\\n",0),"((&lt;)|<)/?[^\\n;<>]*((&gt;)|>)","",0,1)) + "\t"		//Beschreibung
 															+ P.device.prefix + "\t"
 															+ P.device.library + "\t"
 															+ attVal[2] + "\t"
-															+ CutSubstring(P.device.description,"file:\\\\[^\\n\"]*\\.[pP][dD][fF]",0) + "\t"		//Datenblatt
+															+ cutsubstring(P.device.description,"file:\\\\[^\\n\"]*\\.[pP][dD][fF]",0) + "\t"		//Datenblatt
 															+ P.device.name + "\t"
 															+ int2str(inout_int) + "\t"
 															+ symbols + "\t"
@@ -512,16 +511,16 @@ string createTable(
 									"Hersteller, Bezeichnung, Package oder Orderbase-Nummer an");
 		return "";
 	}	
-	Package = str_replace(Package,"\\*","[^;\\n]*",0,1);
-	Package = str_replace(Package,"\\?","[^;\\n]",0,1);
-	Bezeichnung = str_replace(Bezeichnung,"\\*","[^;\\n]*",0,1);
-	Bezeichnung = str_replace(Bezeichnung,"\\?","[^;\\n]",0,1);
-	Hersteller = str_replace(Hersteller,"\\*","[^;\\n]*",0,1);
-	Hersteller = str_replace(Hersteller,"\\?","[^;\\n]",0,1);
-	OB_Nummer = str_replace(OB_Nummer,"\\*","[^;\\n]*",0,1);
-	OB_Nummer = str_replace(OB_Nummer,"\\?","[^;\\n]",0,1);
+	Package = strrep(Package,"\\*","[^;\\n]*",0,1);
+	Package = strrep(Package,"\\?","[^;\\n]",0,1);
+	Bezeichnung = strrep(Bezeichnung,"\\*","[^;\\n]*",0,1);
+	Bezeichnung = strrep(Bezeichnung,"\\?","[^;\\n]",0,1);
+	Hersteller = strrep(Hersteller,"\\*","[^;\\n]*",0,1);
+	Hersteller = strrep(Hersteller,"\\?","[^;\\n]",0,1);
+	OB_Nummer = strrep(OB_Nummer,"\\*","[^;\\n]*",0,1);
+	OB_Nummer = strrep(OB_Nummer,"\\?","[^;\\n]",0,1);
 	
-	/*Debug("cmd.exe /c " + GREP_PATH + (ignore_case ? " -i " : " ") 
+	/*debug("cmd.exe /c " + GREP_PATH + (ignore_case ? " -i " : " ") 
 						+ "\"^[^;\\n]*" + Package + "[^;\\n]*;\""
 						+ " \"" + searchableFile + "\" "
 						+ " | " + GREP_PATH + (ignore_case ? " -i " : " ")
@@ -728,11 +727,11 @@ status("Vorschlaege()");
 							dlgGridLayout{
 								dlgCell(0,0){
 									dlgPushButton("Datenblatt aktuelles Bauteil\n") 
-									system("cmd /c \""+str_replace(altesBauteil[11]+"\"","file:","",START,ONCE));
+									system("cmd /c \""+strrep(altesBauteil[11]+"\"","file:","",START,ONCE));
 								}
 								dlgCell(0,1){
 									dlgPushButton("Datenblatt neues Bauteil\n") 
-									system("cmd /c \""+str_replace(getPartVal(liste[Auswahl],DATENBLATT)+"\"","file:","",START,ONCE));
+									system("cmd /c \""+strrep(getPartVal(liste[Auswahl],DATENBLATT)+"\"","file:","",START,ONCE));
 								}
 								dlgCell(1,0){
 									dlgPushButton("&Austauschen\n") {
@@ -1001,7 +1000,7 @@ void main() {
 		getPartData();
 		while((returnvalOfMainMenu = MainMenu(returnvalOfMainMenu)));
 		cmd = buildScript();
-		//Debug(cmd);
+		//debug(cmd);
 		if(fileglob(temp,"C:/Users/Scholzj/Desktop/")) 
 			output("C:/Users/Scholzj/Desktop/debug.txt", "wt") { 
 			printf("%s",cmd); 
