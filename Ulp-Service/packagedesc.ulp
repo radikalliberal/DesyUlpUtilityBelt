@@ -40,22 +40,22 @@ if (package)
    		dlgDialog("Beschreibung") {
     	//printf("Package: %s\n", PAC.description);
     	desc = cleanDescription(P.description);
-    	dlgTextEdit(desc);
+    	
     	dlgGridLayout{
 	    	dlgCell(0,0) { dlgLabel("Dimension"); }
 	    	dlgCell(0,1) { dlgLabel("mm"); }
 	    	dlgCell(0,2) { dlgLabel("inch"); }
-	    	dlgCell(1,0) { dlgLabel("x"); }
-	    	dlgCell(1,1) { dlgStringEdit(x);}
-	    	dlgCell(1,2) { dlgStringEdit(x_in);}
+	    	dlgCell(1,0) { dlgLabel("z"); }
+	    	dlgCell(1,1) { dlgStringEdit(z);}
+	    	dlgCell(1,2) { dlgStringEdit(z_in);}
 	    	dlgCell(2,0) { dlgLabel("y"); }
 	    	dlgCell(2,1) { dlgStringEdit(y);}
 	    	dlgCell(2,2) { dlgStringEdit(y_in);}
-	    	dlgCell(3,0) { dlgLabel("z"); }
-			dlgCell(3,1) { dlgStringEdit(z);}
-			dlgCell(3,2) { dlgStringEdit(z_in);}
+	    	dlgCell(3,0) { dlgLabel("x"); }
+			dlgCell(3,1) { dlgStringEdit(x);}
+			dlgCell(3,2) { dlgStringEdit(x_in);}
 			dlgCell(4,1) {
-				dlgPushButton("take mm's") {
+				dlgPushButton("+&take mm's") {
 	    		dlgAccept();
 	    		}
 	    	}
@@ -68,6 +68,7 @@ if (package)
 	    		}
 	    	}
 		}
+		dlgTextEdit(desc);
 
 	    	
 	    };
