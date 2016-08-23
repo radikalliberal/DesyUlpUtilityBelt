@@ -1205,8 +1205,8 @@ int UebersichtTab() {
                 dlgLabel("<a href = \"http://de.farnell.com/jsp/search/browse.jsp;"
                 "jsessionid=NWD0MG31BTVE2CQLCIRJKBQ?N=0&Ntk=gensearch&Ntt="
                 + HsBez + "\">Farnell</a>",1);
-                dlgLabel("<a href = \"https://octopart.com/search?q=" + HsBez +
-                "\">Octopart</a>",1);
+                dlgLabel("<a href = \"https://www.rocelec.com/parts/results/all/?s=" + HsBez +
+                "\">Rochester\nElectronics</a>",1);
               }
             }
           } 
@@ -1425,6 +1425,216 @@ int ToolsTab(){
   return 0;
 }
 
+string getResult(string jsonString, int index) {
+  int start_pos = strxstr(jsonString, "\\[\\{");
+  for(int i = 0; i < index; i++) {
+    start_pos = strstr(jsonString,"{",start_pos+3);
+    if(start_pos == -1)
+      return "index out of bounds";
+  }
+  int length = strxstr(jsonString, "\\},") - start_pos;
+  return strsub(jsonString,start_pos+1,length);
+}
+
+string getAttributeValue(string jsonString, string attribute) {
+  int pos, length;
+  int attr_pos,array_pos;
+  do {
+    attr_pos = strstr(jsonString,"\""+attribute+"\":");
+    array_pos = strstr(jsonString,"[");
+    if(array_pos < attr_pos) 
+      jsonString = strrep(jsonString, "\\[[^\\]]*\\]","", array_pos, 0);
+  } while(array_pos < attr_pos && array_pos != -1 && attr_pos != -1);
+    
+
+  pos = strxstr(jsonString,"\"" + attribute + "\":",0,length);
+  //if(attribute == "Descriptions") debug(jsonString);
+  if(pos >= 0) {
+      if(strstr(jsonString,"[") == pos+length) {
+        pos = strxstr(jsonString,"[^\\[\\]]*",pos+length+1,length);
+        string array = strrep(strsub(jsonString, pos, length),"\",\"","\n",0,1);
+        string temp[];
+
+        return int2str(strsplit(temp,array,'\n'));
+      } else {
+        pos = strxstr(jsonString,"[^\"]*",pos+length+1,length);
+        return strrep(strsub(jsonString, pos, length),"\\\\","",0,1);
+      }
+  } else {
+    return "k.A.";
+  }
+}
+
+string getArrayFromAttribute(string jsonString, string attribute) {
+  int pos, length, pos_open, pos_close;
+  string returnval;
+  pos = strstr(jsonString,"\""+attribute+"\":[");
+  if(strstr(jsonString,"\""+attribute+"\":[]") > 0) 
+    return "kein Eintrag";
+  if(pos < 0) {
+    return "Attribut \"" + attribute + "\" ist nicht vorhanden oder kein JSONArray";
+  } else {
+    pos = strstr(jsonString,"[",pos);
+    pos_open = strstr(jsonString,"[",pos);
+    pos_close = strstr(jsonString,"[",pos);
+    do {
+      pos_close = strstr(jsonString,"]",pos_close+1);
+      pos_open = strstr(jsonString,"[",pos_open+1); 
+      //debug("pos_close: " + int2str(pos_close) + "\npos_open: " + int2str(pos_open) + "\n");
+    } while(pos_close > pos_open && pos_open != -1);
+    returnval = strrep(strsub(jsonString,pos+2,pos_close-pos-3),"\",\"","\n",0,1);
+    return strrep(returnval,"\\\\","",0,1);
+  }
+
+}
+
+
+int OctopartTab() {
+
+  string octooutput,nums,partDescription,result;
+  string partInfo[];
+  string attributes[] = {"Hersteller",
+                        "HerstellerNummer",
+                        "lifecycle_status",
+                        "rohs_status",
+                        "pin_count",
+                        "case_package",
+                        "logic_type",
+                        "mounting_style",
+                        "Descriptions", 
+                        "Datasheets", 
+                        "Image",
+                        "supply_current",
+                        "supply_voltage_dc"
+                        };
+
+  dlgTabPage("Octopart-Ergebnisse") {
+    dlgHBoxLayout {   
+      dlgSpacing(50);
+      dlgLabel("<html><font size=4 color=#0404B4 ><b>"
+      + currentLib + "/"
+      + Devname + ".dev&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+      "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+Hs);
+    }
+
+    for(int i = 0; Herstellernummern[i] != ""; i++) {
+      nums += " \"" + strrep(Herstellernummern[i], "\\n", "\" \"",0,1) + "\"";
+    }
+    dlgGridLayout {
+      dlgCell(0, 0) dlgStretch(0);
+      dlgCell(0, 1) dlgPushButton("+&Suche") { 
+        system("cmd.exe /c java -jar " + ULP_PATH + "/octoparthttprequest.jar " + 
+                nums + "> " + ULP_PATH + "/octoparthttprequest.txt");
+        fileread(octooutput,ULP_PATH+"/octoparthttprequest.txt");
+        result = getResult(octooutput,0);
+
+        for(int g = 1; result != "index out of bounds" ;g++) {
+          
+          for(int i = 0, k = 1; i < 13; i++) {
+            if(i>0) partInfo[g-1] += "\t";
+            partInfo[g-1] += getAttributeValue(result,attributes[i]);
+            status("i:"+int2str(i)+"\ng:"+int2str(g)+"\nk:"+int2str(k));
+          }
+          result = getResult(octooutput,g);
+        }
+        dlgRedisplay();
+      }
+
+    }
+    int selected_list, selected_cb;
+    
+    dlgListView(strjoin(attributes,'\t'),partInfo, selected_list) {
+      result = getResult(octooutput,selected_list);
+      //debug(getArrayFromAttribute(result, "Descriptions"));
+      string beschr_array[];
+      string Auswahl_beschr[];
+      string Auswahl_datasheet[];
+      string aktuelle_beschreibung;
+      string datasheet_array[];
+      int sheets,descs;
+
+      
+
+      dlgDialog("Bauteilinfo von Ocotopart.com für " + getAttributeValue(result,"HerstellerNummer")){
+        descs = strsplit(beschr_array,getArrayFromAttribute(result, "Descriptions"),'\n');
+        sheets = strsplit(datasheet_array,getArrayFromAttribute(result, "Datasheets"),'\n');
+        aktuelle_beschreibung = "• "+strrep(beschr_array[selected_cb],"; ","\n• ",0,1);
+        for(int i = 0; i < descs; i++) {
+          Auswahl_beschr[i] = int2str(i+1);
+        }
+        dlgLabel("<b><font size=\"12\"><p align=\"center\" >"+getAttributeValue(result,"HerstellerNummer"));
+        
+        string lifecycle_style;
+        if(strxstr(getAttributeValue(result,"lifecycle_status"),"(O|o)bsolete")>=0)
+          lifecycle_style = "<font color=#FF0000>";
+        if(strxstr(getAttributeValue(result,"lifecycle_status"),"(A|a)ctive")>=0)
+          lifecycle_style = "<font color=#00FF00>";
+
+        dlgHBoxLayout{
+          dlgVBoxLayout{
+            dlgGridLayout{
+              dlgCell(0, 0) dlgLabel("<b>Hersteller:");
+              dlgCell(0, 1) dlgLabel("<b>"+getAttributeValue(result,"Hersteller"));
+              dlgCell(1, 0) dlgLabel("<b>ROHS Status:");
+              dlgCell(1, 1) dlgLabel("<b>"+getAttributeValue(result,"rohs_status"));
+              dlgCell(2, 0) dlgLabel("<b>Lifecycle Status:");
+              dlgCell(2, 1) dlgLabel("<b>"+lifecycle_style+getAttributeValue(result,"lifecycle_status"));
+              dlgCell(3, 0) dlgLabel("<b>Pins:");
+              dlgCell(3, 1) dlgLabel("<b>"+getAttributeValue(result,"pin_count"));
+              dlgCell(4, 0) dlgLabel("<b>Package:");
+              dlgCell(4, 1) dlgLabel("<b>"+getAttributeValue(result,"case_package"));
+              dlgCell(5, 0) dlgLabel("<b>logik:");
+              dlgCell(5, 1) dlgLabel("<b>"+getAttributeValue(result,"logic_type"));
+              dlgCell(6, 0) dlgLabel("<b>Bestückungstyp:");
+              dlgCell(6, 1) dlgLabel("<b>"+getAttributeValue(result,"mounting_style"));
+
+              dlgCell(7, 0) dlgLabel("<b>Beschreibungen:");
+              
+              dlgCell(7, 1) dlgComboBox(Auswahl_beschr,selected_cb) {
+                aktuelle_beschreibung = "• "+strrep(beschr_array[selected_cb],"; ","\n• ",0,1);
+                dlgRedisplay();
+              }
+            }
+            dlgHBoxLayout{
+              dlgSpacing(200);
+            }
+          }
+          dlgVBoxLayout{
+            dlgTextView("<img src=\""+getAttributeValue(result,"Image")+"\" height=\"180\">");
+            //dlgSpacing(180);
+            dlgHBoxLayout{
+              dlgSpacing(370);
+            }
+          }
+          
+        }
+        dlgHBoxLayout{
+          dlgTextView(aktuelle_beschreibung);
+          dlgVBoxLayout{
+              dlgSpacing(400);
+          }
+        } 
+           
+        
+        for(int k = 0; k < sheets; k++) {
+          dlgLabel("<a href = \""+datasheet_array[k]+"\">"+datasheet_array[k]+"</a>");
+        }
+        //dlgComboBox(Auswahl_datasheet,selected_cb){
+        //  system("cmd /c \""+Auswahl_datasheet[selected_cb] + "\"");
+        //  dlgRedisplay();
+        //}
+        
+        dlgPushButton("+&Ok"){dlgAccept();}
+        dlgPushButton("-Abbruch"){dlgReject();}
+      };
+    }
+    
+    if(untereButtonLeiste()) return 1;
+  }
+  return 0;
+}
+
+
 int OrderbaseTab() {
 
   dlgTabPage("Manuelle Orderbase-Suche") {
@@ -1536,6 +1746,8 @@ int menue() {
       DatenTabs();
       
       ToolsTab();
+
+      OctopartTab();
       
       OrderbaseTab();
       
