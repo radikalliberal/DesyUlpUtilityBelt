@@ -5,6 +5,7 @@ int allHightProvided;
 int hightprovided;
 int someprovided;
 int AllpackagesHaveHightToProvide;
+int gotHightAttrb;
 
 string extractDimension(string description) {
   string z;
@@ -13,6 +14,19 @@ string extractDimension(string description) {
     z = xmlattribute(xml, "dimensions/z","val");
   }
   return z;
+}
+
+void msgPrompt(string msg) {
+  dlgDialog("Nachricht"){
+    dlgLabel(msg);
+    dlgPushButton("+&OK") {
+        dlgAccept();
+      }
+    dlgPushButton("-&Abbrechen") {
+        dlgReject();
+        exit(0);
+      }
+  };
 }
 
 void OpenPdf(string Description) {
@@ -29,6 +43,9 @@ void OpenPdf(string Description) {
                   start+2*len+2,
                   len);
   returnval = strsub(Description,start, len );
+  string temp[];
+  if(fileglob(temp,returnval)<1)
+    msgPrompt("hinterlegte Pdf-Datei nicht gefunden!!!");
 
   if(returnval) {
     system("cmd.exe /c \""+ returnval +"\"");
@@ -44,8 +61,14 @@ library(L){
   string description;
   string packageWithoutHight;
   string deviceName;
+
+
   
   deviceset(DS) { // Device
+    if(argv[1] == DS.name) {
+      msgPrompt("Ende der Bibliothek");
+      exit(0);
+    }
     description = DS.description;
     deviceName = DS.name;
     allHightProvided = 1;
@@ -53,10 +76,12 @@ library(L){
     DS.devices(D) { // einzelne Variaten -> Package
       hightprovided = 1;
       someprovided = 1;
+      gotHightAttrb = 0;
       int Anzahl_Technologien_Device = strsplit(t, D.technologies, ' ');
         for(int i = 0; i<Anzahl_Technologien_Device;i++) {
           D.attributes(A, t[i]) { //einzelne Technologie für Variante
             if(A.name == "HEIGHT") {
+              gotHightAttrb = 1;
               if(A.value != "") {
                   someprovided = 1;
                 } else {
@@ -64,9 +89,9 @@ library(L){
                 }
           }
         }
-        if(!hightprovided) {
+        if(!hightprovided || !gotHightAttrb) {
           allHightProvided = 0;
-          if(strxstr(extractDimension(D.package.description),"\\d{1,}(,|\\.)\\d*") < 0) {
+          if(strxstr(extractDimension(D.package.description),"\\d{1,}(,|\\.)?\\d*") < 0) {
             AllpackagesHaveHightToProvide = 0;
             packageWithoutHight = D.package.name;
           }
@@ -76,12 +101,20 @@ library(L){
   }
 
   if(!allHightProvided && AllpackagesHaveHightToProvide){
-    exit("run editbau.ulp -update;run test.ulp;");
+    //dlgMessageBox("!allHightProvided && AllpackagesHaveHightToProvide");
+    exit("run editbau.ulp -update;run editnext-dev-sym-pac;run addhight.ulp "+deviceName+";");
   }
   if(!allHightProvided && !AllpackagesHaveHightToProvide) {
+    //msgPrompt("noch keine Höhe hinterlegt");
     OpenPdf(description);
-    exit("EDIT '"+packageWithoutHight+".pac';run packagedesc;EDIT '"+deviceName+".dev'");
+    exit("EDIT '"+packageWithoutHight+".pac';run packagedesc.ulp "+deviceName+";");
+  }
+  if(allHightProvided) {
+    //msgPrompt("run editnext-dev-sym-pac;run addhight.ulp "+deviceName+";");
+
+    exit("run editnext-dev-sym-pac;run addhight.ulp "+deviceName+";");
   }
 
+  msgPrompt("wie sind wir denn hier her gekommen??");
 
 }

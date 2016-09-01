@@ -1908,8 +1908,16 @@ void main() {
               cmd +="Package '"+ Vari + "';"; 
               cmd += "TECHNOLOGY -*;";
               
-              for (int k = 0; k <= 5; k++) {
-                for (int i = 0; i < AnzahlTechnologien; i++) {
+              for (int i = 0; i < AnzahlTechnologien; i++) {
+
+                if( t[i] == "'"  ||
+                    t[i] == "''" ||
+                    t[i] == ""   ) {
+                    cmd += "TECHNOLOGY '';\n"; 
+                    emptytech = 1;
+                } else cmd += "TECHNOLOGY '"+t[i]+"';\n";
+                
+                for (int k = 0; k <= 5; k++) {
                   if(strxstr(t[i],"'")<0) tech = t[i];
                   else tech = "";
                   switch(k) {
@@ -1944,15 +1952,8 @@ void main() {
                     } break;
                   case 5: value = hi[i]; break;  //Hoehe
                   } 
-                  
-                  if( t[i] == "'"  ||
-                      t[i] == "''" ||
-                      t[i] == ""   ) {
-                      cmd += "TECHNOLOGY ''"; 
-                      emptytech = 1;
-                  } else cmd += "TECHNOLOGY '"+t[i]+"'";
 
-                  cmd +=";  ATTRIBUTE "+att[k]+" '"+value+"' constant;\n";
+                  cmd +="ATTRIBUTE "+att[k]+" '"+value+"' constant;\n";
                 }
               }
             }
