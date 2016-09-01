@@ -12,7 +12,7 @@
 "<p>Bauelemente bearbeiten und anlegen für die Bauteilbibliothek von Eagle 6"
 "</p>"
 "<author>Author:Jan Scholz (jan_scholz@gmx.net)</author>"
-string Version = "1.6b";
+string Version = "1.7";
 // V 1.0  14.11.2014
 // V 1.1  21.11.2014
 // V 1.2  28.11.2014
@@ -22,6 +22,7 @@ string Version = "1.6b";
 // V 1.6  19.08.2015
 // V 1.6a 17.03.2016
 // V 1.6b 04.08.2016
+// V 1.7  23.08.2016
 //globale Variablen
 
 // Pfad der aktuellen Eagle Bibliotheken
@@ -49,6 +50,7 @@ int backtoMenu;
 int error;
 int hightprovided;
 int emptytech;
+int update;
 
 //Zähler
 int PdfNumber ;
@@ -191,9 +193,16 @@ newDev = 0;
 DevAktualisieren = 0;
 hightprovided = 0;
 emptytech = 0;
+update = 0;
 
 
 //Funktionen
+
+void parseArguments() {
+  for (int i = 1; i <= argc; ++i) {
+     if (argv[i] == "-update") update = 1;
+  }
+}
 
 void debug_file(string msg) {
   status("debug_file()");
@@ -1782,6 +1791,8 @@ void main() {
         
         deviceset(DS) {
 
+          parseArguments();
+
           initVariablesAndPaths();
         
           readAttributes();
@@ -1800,7 +1811,10 @@ void main() {
           
           Des = cleanDescription(Des);
 
-          if(!menue()) exit(0);
+          // GUI wird nicht aufgebaut wenn Programmaufruf mit "-update" geschehen ist
+          if(!update) {
+            if(!menue()) exit(0);
+          }
           
           Des = cleanDescription(Des);
           
