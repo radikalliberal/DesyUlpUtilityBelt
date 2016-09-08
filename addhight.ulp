@@ -39,7 +39,7 @@ void OpenPdf(string Description) {
   string returnval;
   
   start = strxstr(Description,
-                  "\\\\\\\\[A-Za-z0-9\\s_.,+\\\\-*]{1,}\\.[pP][dD][fF]",
+                  "\\\\\\\\[A-Za-z0-9\\s_.,\\\\+\\-\\*üäöÜÖÄ]{1,}\\.[pP][dD][fF]",
                   start+2*len+2,
                   len);
   returnval = strsub(Description,start, len );
@@ -48,7 +48,7 @@ void OpenPdf(string Description) {
     msgPrompt("hinterlegte Pdf-Datei nicht gefunden!!!");
 
   if(returnval) {
-    system("cmd.exe /c \""+ returnval +"\"");
+    system("cmd.exe /s /c start \" \" \""+ returnval +"\"\"\nexit");
   }
 }
 

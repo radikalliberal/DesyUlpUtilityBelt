@@ -482,11 +482,11 @@ string ExtractPdf(string Description) {
   
   while(1) {
     start = strxstr(Description,
-                    "[A-Za-z0-9\\s_.,+\\-\\*]{1,}\\.[pP][dD][fF]",
+                    "[A-Za-z0-9\\s_.,+\\-\\*üäöÜÖÄ]{1,}\\.[pP][dD][fF]",
                     start+2*len+2,
                     len);
     start2 = strxstr(Description,
-                    ">[A-Za-z0-9\\s_.,+\\-\\*]{1,}</a>",
+                    ">[A-Za-z0-9\\s_.,+\\-\\*üäöÜÖÄ]{1,}</a>",
                     start+len,
                     len2);
     if(start<0) break;
@@ -906,7 +906,7 @@ int untereButtonLeiste() {
     }
 
     dlgPushButton("&Hilfe") {
-      system("cmd.exe /c \""+ ULP_PATH + "/hilfe.pdf\"");
+      system("cmd.exe /c start \" \" \""+ ULP_PATH + "/hilfe.pdf\"\nexit");
     }
     
   }
@@ -1164,7 +1164,7 @@ int UebersichtTab() {
           dlgStringEdit(HsBez); 
           dlgStringEdit(Devname); 
           dlgStringEdit(Prefix); 
-          dlgComboBox(PDF_NAMES,pdfSelect) system("cmd /c \""+PDF_PATHS[pdfSelect] + "\"");
+          dlgComboBox(PDF_NAMES,pdfSelect) system("cmd /c start  \" \" \""+PDF_PATHS[pdfSelect] + "\"\nexit");
         }
         dlgCell(0, 2) dlgVBoxLayout {
           dlgHBoxLayout dlgSpacing(375);
@@ -1435,13 +1435,15 @@ int ToolsTab(){
 }
 
 string getResult(string jsonString, int index) {
+
   int start_pos = strxstr(jsonString, "\\[\\{");
   for(int i = 0; i < index; i++) {
     start_pos = strstr(jsonString,"{",start_pos+3);
     if(start_pos == -1)
       return "index out of bounds";
   }
-  int length = strxstr(jsonString, "\\},") - start_pos;
+  int length = strxstr(strsub(jsonString,start_pos), "\\},");
+  //debug("Resultat "+int2str(index)+ "mit Länge "+int2str(length)+"\n"+strsub(jsonString,start_pos+1,length));
   return strsub(jsonString,start_pos+1,length);
 }
 
@@ -1466,32 +1468,52 @@ string getAttributeValue(string jsonString, string attribute) {
 
         return int2str(strsplit(temp,array,'\n'));
       } else {
-        pos = strxstr(jsonString,"[^\"]*",pos+length+1,length);
-        return strrep(strsub(jsonString, pos, length),"\\\\","",0,1);
+        if(strstr(strsub(jsonString,pos+length,4),"null") >= 0) {
+          //debug(strsub(jsonString,pos+length,length) + "\"-> keine Angabe zu "+attribute);
+          return "k.A.";
+        } else {
+          pos = strxstr(jsonString,"[^\"]*",pos+length+1,length);
+          //debug(strsub(jsonString,pos+length,length) + "\"-> was gefunden zu "+attribute);
+          return strrep(strsub(jsonString, pos, length),"\\\\","",0,1);
+        }
       }
   } else {
     return "k.A.";
   }
 }
 
+int findEndOfArray(string jsonString ) {
+  //debug("findEndOfArray() mit:\n"+ jsonString);
+  int start = 2, openBrackets = 1;
+  while(openBrackets >= 1) {
+    if((strstr(strsub(jsonString,start),"[") < strstr(strsub(jsonString,start),"]")) &&
+        strstr(strsub(jsonString,start),"[") >= 0) {
+      start = start + strstr(strsub(jsonString,start),"[") + 1;
+      openBrackets++;  
+    } else {
+      start = start + strstr(strsub(jsonString,start),"]") + 1;
+      openBrackets--;
+    }
+    //debug("openBrackets:"+int2str(openBrackets)+"\nstart:"+int2str(start)+"\nstring:\n"+strsub(jsonString,start));
+  } 
+  return start-3;
+}
+
 string getArrayFromAttribute(string jsonString, string attribute) {
-  int pos, length, pos_open, pos_close;
+
+  int pos, length, pos_open, pos_close, att_length = strlen(attribute);
   string returnval;
-  pos = strstr(jsonString,"\""+attribute+"\":[");
-  if(strstr(jsonString,"\""+attribute+"\":[]") > 0) 
+  pos = strxstr(jsonString,"\""+attribute+"\":\\[",0,length);
+  //debug(jsonString + " ->" + int2str(strstr(jsonString,"\""+attribute+"\":[]")));
+  if(strstr(jsonString,"\""+attribute+"\":[]") >= 0) 
     return "kein Eintrag";
   if(pos < 0) {
     return "Attribut \"" + attribute + "\" ist nicht vorhanden oder kein JSONArray";
   } else {
-    pos = strstr(jsonString,"[",pos);
-    pos_open = strstr(jsonString,"[",pos);
-    pos_close = strstr(jsonString,"[",pos);
-    do {
-      pos_close = strstr(jsonString,"]",pos_close+1);
-      pos_open = strstr(jsonString,"[",pos_open+1); 
-      //debug("pos_close: " + int2str(pos_close) + "\npos_open: " + int2str(pos_open) + "\n");
-    } while(pos_close > pos_open && pos_open != -1);
-    returnval = strrep(strsub(jsonString,pos+2,pos_close-pos-3),"\",\"","\n",0,1);
+    //debug("zugeschnittenes Array für Attribut "+attribute+":\n"+strsub(jsonString,pos+length));
+    int endOfArray = findEndOfArray(strsub(jsonString,pos+length));
+    returnval = strrep(strsub(jsonString,pos+length+1,endOfArray),"\",\"","\n",0,1);
+    //debug("Ende des Arrays bei: "+int2str(endOfArray)+"\ndas Array:\n"+strrep(returnval,"\\\\","",0,1));
     return strrep(returnval,"\\\\","",0,1);
   }
 
