@@ -51,6 +51,7 @@ int error;
 int hightprovided;
 int emptytech;
 int update;
+int debugmode;
 
 //Zähler
 int PdfNumber ;
@@ -194,23 +195,31 @@ DevAktualisieren = 0;
 hightprovided = 0;
 emptytech = 0;
 update = 0;
+debugmode = 0;
 
 
 //Funktionen
 
 void parseArguments() {
   for (int i = 1; i <= argc; ++i) {
-     if (argv[i] == "-update") update = 1;
+     if(argv[i] == "-update") update = 1;
+     if(argv[i] == "-debug") debugmode = 1;
   }
 }
 
-void debug_file(string msg) {
-  status("debug_file()");
-  /*if(argv[1]=="-debug" && fileglob(temp,"H:/")) {
-        output("H:/debug.log","at") {   
-        printf("%s",msg);
-        }
-    }*/
+void debuglog(string msg) {
+  status("debuglog()");
+  if(debugmode == 1) {
+    output("H:/debug.log","wt") {   
+      printf("%s\n",msg);
+    }
+    debugmode = 2;
+  }
+  if(debugmode == 2) {
+    output("H:/debug.log","at") {   
+      printf("%s\n",msg);
+    }  
+  }
 }
 
 string Device_func(string tech,string vari) {
@@ -225,7 +234,7 @@ void readBearbeiter(){
   fileread(temp_str,ULP_PATH + "/editbauData/user.ini");
   int last = strsplit(userConfig,temp_str,'\\');
   if(last) Author_name = trimws(userConfig[last-1]);
-  else debug("Username konnte nicht ausgelesen werden");
+  else debuglog("readBearbeiter(): Username konnte nicht ausgelesen werden");
 }
 
 /**
@@ -511,6 +520,7 @@ string ExtractPdf(string Description) {
 
         //debug(strjoin(HS_PDF_PATH_ELMADATA,'\n'));
       } else {
+        debuglog("ExtractPdf(): Die Pdf-Datei/en konnten nicht verlinkt werden ohne vollstaendigen Pfad");
         debug("Die Pdf-Datei/en konnten nicht verlinkt werden ohne vollstaendigen Pfad");
       }
     }
@@ -601,7 +611,7 @@ string ExtractDescription(string DerString) {
           2)) {
       exit(0);
     }
-    debug_file("Die Beschreibung ist nicht htmlkonform!\n");
+    debuglog("Die Beschreibung ist nicht htmlkonform!\n");
   } else {  
     deviceset(DS) {    
       Anfang = strrstr(DS.description,"<b>");
@@ -616,9 +626,9 @@ string ExtractDescription(string DerString) {
       temp_str += strsub(DerString,Ende+1);
       DerString = temp_str;
       emergencyExit++;
-      debug_file("EmergecyExit:"+int2str(emergencyExit)+
+      debuglog("EmergecyExit:"+int2str(emergencyExit)+
       "\nAnfang:"+int2str(Anfang)+"\nEnde:"+int2str(Ende)+"\n");
-      debug_file(DerString+"\n");
+      debuglog(DerString+"\n");
       if(emergencyExit == 100) break;
       
     }
@@ -631,7 +641,6 @@ string ExtractDescription(string DerString) {
         Des += temp[i]+"<br>\\n";
       }
     }
-    debug_file("ExtractDescription beendet\n");
   }
   DerString = changeChar(DerString,'\'','"');
   return DerString;
@@ -1088,7 +1097,6 @@ void readAttributes(){
     //hi_compare[g] =             Hoehe[g];
     
   }
-  debug_file("Herstellernummern & Namen ausgelesen\n");
 }
 
 /**
@@ -1434,47 +1442,114 @@ int ToolsTab(){
   return 0;
 }
 
-string getResult(string jsonString, int index) {
 
-  int start_pos = strxstr(jsonString, "\\[\\{");
-  for(int i = 0; i < index; i++) {
-    start_pos = strstr(jsonString,"{",start_pos+3);
-    if(start_pos == -1)
-      return "index out of bounds";
+int findEndOfArray(string jsonString ) {
+  //debug("findEndOfArray() mit:\n"+ jsonString);
+  int start = strstr(jsonString,"[") + 1, openBrackets = 1;
+  if(start == 0) {
+    debuglog("findEndOfArray(): keine öffnende Klammer '[' gefunden ");
+    return -1;
   }
-  int length = strxstr(strsub(jsonString,start_pos), "\\},");
-  //debug("Resultat "+int2str(index)+ "mit Länge "+int2str(length)+"\n"+strsub(jsonString,start_pos+1,length));
-  return strsub(jsonString,start_pos+1,length);
+  while(openBrackets >= 1) {
+    if((strstr(strsub(jsonString,start),"[") < strstr(strsub(jsonString,start),"]")) &&
+        strstr(strsub(jsonString,start),"[") >= 0) {
+      start = start + strstr(strsub(jsonString,start),"[") + 1;
+      openBrackets++;  
+    } else {
+      if(strstr(strsub(jsonString,start),"]") < 0)
+        return -1;
+      start = start + strstr(strsub(jsonString,start),"]") + 1;
+      openBrackets--;
+    }
+    //debug("openBrackets:"+int2str(openBrackets)+"\nstart:"+int2str(start)+"\nstring:\n"+strsub(jsonString,start));
+  } 
+  //debug("findEndOfArray(): gefundenes Array \n\n"+strsub(jsonString,0,start-3));
+  return start;
+}
+
+int findEndOfElement(string jsonString) {
+  //debug("findEndOfElement() mit:\n"+ jsonString);
+  int start = strstr(jsonString,"{") + 1, openBrackets = 1;
+  debuglog("findEndOfElement():\n länge:"+int2str(strlen(jsonString))+"\nstart:"+int2str(start)+"\n"+jsonString);
+  if(start == 0 || strlen(jsonString)<5) {
+    debuglog("findEndOfElement(): keine öffnende Klammer '{' gefunden == -1");
+    return -1;
+  }
+  while(openBrackets >= 1) {
+    if((strstr(strsub(jsonString,start),"{") < strstr(strsub(jsonString,start),"}")) &&
+        strstr(strsub(jsonString,start),"{") >= 0) {
+      start = start + strstr(strsub(jsonString,start),"{") + 1;
+      openBrackets++;  
+    } else {
+      if(strstr(strsub(jsonString,start),"}") < 0)
+        return -1;
+      start = start + strstr(strsub(jsonString,start),"}") + 1;
+      openBrackets--;
+    }
+    //debug("openBrackets:"+int2str(openBrackets)+"\nstart:"+int2str(start)+"\nstring:\n"+strsub(jsonString,start));
+  } 
+  //debug("returnval:" + int2str(start-3) + "\n" + jsonString);
+  return start;
+}
+
+string getArrayElement(string jsonString, int index) {
+  int posOfBracket = 0;
+  int start_pos = strxstr(jsonString, "\\[\\{") - 1;
+  for(int i = 0; i <= index; i++) {
+    start_pos += posOfBracket + 1;
+    //if(i == 16) debug(strsub(jsonString,start_pos));
+    posOfBracket = findEndOfElement(strsub(jsonString,start_pos));
+    //debug("posOfBracket: "+int2str(posOfBracket)+"\nstart_pos: "+int2str(start_pos)+"\n"+strsub(jsonString,posOfBracket + start_pos + 3));    start_pos = posOfBracket + start_pos + 3;
+    //debug(int2str(start_pos));
+    //debug("index:"+int2str(index)+"\nposOfBracket:"+int2str(posOfBracket));
+    debuglog("getArrayElement(): posOfBracket = "+int2str(posOfBracket));
+    if(posOfBracket == -1) {
+      debuglog("getArrayElement(): Auf den Index "+int2str(index)+" wurde 'index out of bounds' zurückgegeben");
+      return "index out of bounds";
+    }
+    //debug("Index:"+int2str(i)+"\npos:"+int2str(start_pos + posOfBracket));
+    //debug(strsub(jsonString,start_pos));
+    
+    //debug(strsub(jsonString,start_pos));
+  }
+  //debug("getArrayElement(): Auf den Index "+int2str(index)+" wurde ein Eintrag gefunden mit:\n\n"+strsub(jsonString,start_pos+1,findEndOfElement(strsub(jsonString,start_pos))));
+  debuglog("Resultat "+int2str(index)+ "\nposOfBracket:"+int2str(posOfBracket)+"\nstart_pos:"+int2str(start_pos)+"\n"+strsub(jsonString,start_pos+1,findEndOfElement(strsub(jsonString,start_pos))));
+  //debug("start_pos:" + int2str(start_pos) + "\nlength:" + int2str(findEndOfElement(strsub(jsonString,start_pos))) + "\n" + strsub(jsonString,start_pos+1,findEndOfElement(strsub(jsonString,start_pos))+2));
+  return strsub(jsonString,start_pos+1,posOfBracket);
 }
 
 string getAttributeValue(string jsonString, string attribute) {
   int pos, length;
   int attr_pos,array_pos;
+  string jsbefore = jsonString;
   do {
     attr_pos = strstr(jsonString,"\""+attribute+"\":");
     array_pos = strstr(jsonString,"[");
     if(array_pos < attr_pos) 
       jsonString = strrep(jsonString, "\\[[^\\]]*\\]","", array_pos, 0);
   } while(array_pos < attr_pos && array_pos != -1 && attr_pos != -1);
-    
+    //debug(jsbefore + "\n\n\n" + jsonString);
 
   pos = strxstr(jsonString,"\"" + attribute + "\":",0,length);
-  //if(attribute == "Descriptions") debug(jsonString);
+  //debug(strsub(jsonString,pos));
   if(pos >= 0) {
       if(strstr(jsonString,"[") == pos+length) {
         pos = strxstr(jsonString,"[^\\[\\]]*",pos+length+1,length);
         string array = strrep(strsub(jsonString, pos, length),"\",\"","\n",0,1);
         string temp[];
 
-        return int2str(strsplit(temp,array,'\n'));
+        return "["+int2str(strsplit(temp,array,'\n'))+"]";
       } else {
         if(strstr(strsub(jsonString,pos+length,4),"null") >= 0) {
           //debug(strsub(jsonString,pos+length,length) + "\"-> keine Angabe zu "+attribute);
           return "k.A.";
         } else {
-          pos = strxstr(jsonString,"[^\"]*",pos+length+1,length);
-          //debug(strsub(jsonString,pos+length,length) + "\"-> was gefunden zu "+attribute);
-          return strrep(strsub(jsonString, pos, length),"\\\\","",0,1);
+
+          //if(attribute == "mounting_style") debug("gesucht("+attribute+"):\n"+strsub(jsonString,pos+length));
+          pos = strxstr(jsonString,"\"?[^\",]*\"?\\}?,",pos+length,length);
+          //debug("gefunden:\n"+strsub(jsonString,pos,length));
+          //debug(int2str(pos));
+          return strrep(strsub(jsonString, pos, length-1),"\"|\\}","",0,1);
         }
       }
   } else {
@@ -1482,22 +1557,6 @@ string getAttributeValue(string jsonString, string attribute) {
   }
 }
 
-int findEndOfArray(string jsonString ) {
-  //debug("findEndOfArray() mit:\n"+ jsonString);
-  int start = 2, openBrackets = 1;
-  while(openBrackets >= 1) {
-    if((strstr(strsub(jsonString,start),"[") < strstr(strsub(jsonString,start),"]")) &&
-        strstr(strsub(jsonString,start),"[") >= 0) {
-      start = start + strstr(strsub(jsonString,start),"[") + 1;
-      openBrackets++;  
-    } else {
-      start = start + strstr(strsub(jsonString,start),"]") + 1;
-      openBrackets--;
-    }
-    //debug("openBrackets:"+int2str(openBrackets)+"\nstart:"+int2str(start)+"\nstring:\n"+strsub(jsonString,start));
-  } 
-  return start-3;
-}
 
 string getArrayFromAttribute(string jsonString, string attribute) {
 
@@ -1511,19 +1570,50 @@ string getArrayFromAttribute(string jsonString, string attribute) {
     return "Attribut \"" + attribute + "\" ist nicht vorhanden oder kein JSONArray";
   } else {
     //debug("zugeschnittenes Array für Attribut "+attribute+":\n"+strsub(jsonString,pos+length));
-    int endOfArray = findEndOfArray(strsub(jsonString,pos+length));
-    returnval = strrep(strsub(jsonString,pos+length+1,endOfArray),"\",\"","\n",0,1);
-    //debug("Ende des Arrays bei: "+int2str(endOfArray)+"\ndas Array:\n"+strrep(returnval,"\\\\","",0,1));
-    return strrep(returnval,"\\\\","",0,1);
+    int endOfArray = findEndOfArray(strsub(jsonString,pos+length-1));
+    
+    //debug("Ende des Arrays bei: "+int2str(endOfArray)+"\ndas Array ("+attribute+"):\n"+strsub(jsonString,pos+length-1,endOfArray));
+    return strsub(jsonString,pos+length-1,endOfArray);
   }
 
+}
+
+
+string getValuesOfStringArray(string JSONString, string attribute) {
+  string JSONStringArray = getArrayFromAttribute(JSONString, attribute);
+  string returnstring = strrep(JSONStringArray,"\",\"","\n",0,1);
+  returnstring = strrep(returnstring,"\"|\\[|\\]|\\}","",0,1);
+  return returnstring;//strsub(returnstring,,strlen(returnstring)-1);
 }
 
 
 int OctopartTab() {
 
   string octooutput,nums,partDescription,result;
-  string partInfo[];
+  string partInfo[],sellerInfo[];
+  string datasheetlinks;
+  string lifecycle_style;
+  string beschr_array[];
+  string Auswahl_beschr[];
+  string Auswahl_datasheet[];
+  string aktuelle_beschreibung;
+  string datasheet_array[];
+  string sellers;
+  string hs,rs,lcs,pc,cp,lt,ms,img; 
+  int sheets,descs;
+  int selected_list, selected_cb, selected_seller;
+  string sel_attributes[] = { "name",
+                              "is_authorized",
+                              "in_stock_quantity",
+                              "moq",
+                              "prices",
+                              "display_flag"};
+  string sel_attributes_disp[] = { "name",
+                              "auth",
+                              "in stock",
+                              "min Quant",
+                              "prices",
+                              "land"};
   string attributes[] = {"Hersteller",
                         "HerstellerNummer",
                         "lifecycle_status",
@@ -1537,6 +1627,20 @@ int OctopartTab() {
                         "Image",
                         "supply_current",
                         "supply_voltage_dc"
+                        };
+  string attributes_disp[] = {"Herst",
+                        "HerstNum",
+                        "lifecycle",
+                        "rohs",
+                        "pins",
+                        "package",
+                        "logic",
+                        "mounting",
+                        "Descr", 
+                        "Datasheets", 
+                        "Image",
+                        "sup_current",
+                        "sup_volt_dc"
                         };
 
   dlgTabPage("Octopart-Ergebnisse") {
@@ -1554,111 +1658,185 @@ int OctopartTab() {
     dlgGridLayout {
       dlgCell(0, 0) dlgStretch(0);
       dlgCell(0, 1) dlgPushButton("+&Suche") { 
-        system("cmd.exe /c java -jar " + ULP_PATH + "/octoparthttprequest.jar " + 
-                nums + "> " + ULP_PATH + "/octoparthttprequest.txt");
-        fileread(octooutput,ULP_PATH+"/octoparthttprequest.txt");
-        result = getResult(octooutput,0);
+        system("cmd.exe /c java -jar " + ULP_PATH + "/editbauData/octoparthttprequest.jar " + 
+                nums + "> " + ULP_PATH + "/editbauData/octoparthttprequest.txt");
+        fileread(octooutput,ULP_PATH+"/editbauData/octoparthttprequest.txt");
 
-        for(int g = 1; result != "index out of bounds" ;g++) {
-          
-          for(int i = 0, k = 1; i < 13; i++) {
-            if(i>0) partInfo[g-1] += "\t";
-            partInfo[g-1] += getAttributeValue(result,attributes[i]);
-            status("i:"+int2str(i)+"\ng:"+int2str(g)+"\nk:"+int2str(k));
-          }
-          result = getResult(octooutput,g);
-        }
-        dlgRedisplay();
-      }
-
-    }
-    int selected_list, selected_cb;
-    
-    dlgListView(strjoin(attributes,'\t'),partInfo, selected_list) {
-      result = getResult(octooutput,selected_list);
-      //debug(getArrayFromAttribute(result, "Descriptions"));
-      string beschr_array[];
-      string Auswahl_beschr[];
-      string Auswahl_datasheet[];
-      string aktuelle_beschreibung;
-      string datasheet_array[];
-      int sheets,descs;
-
-      
-
-      dlgDialog("Bauteilinfo von Ocotopart.com für " + getAttributeValue(result,"HerstellerNummer")){
-        descs = strsplit(beschr_array,getArrayFromAttribute(result, "Descriptions"),'\n');
-        sheets = strsplit(datasheet_array,getArrayFromAttribute(result, "Datasheets"),'\n');
-        aktuelle_beschreibung = "• "+strrep(beschr_array[selected_cb],"; ","\n• ",0,1);
+        result = getArrayElement(strrep(octooutput,"\\\\","",0,1),0);
+        //debug(result);
+        descs = strsplit(beschr_array,getValuesOfStringArray(result, "Descriptions"),'\n');
+        sheets = strsplit(datasheet_array,getValuesOfStringArray(result, "Datasheets"),'\n');
+        aktuelle_beschreibung = "• "+strrep(beschr_array[0],"; ","\n• ",0,1);
         for(int i = 0; i < descs; i++) {
           Auswahl_beschr[i] = int2str(i+1);
         }
-        dlgLabel("<b><font size=\"12\"><p align=\"center\" >"+getAttributeValue(result,"HerstellerNummer"));
+
+        //debug(getArrayFromAttribute(result, "Descriptions"));
+        //debug(getArrayFromAttribute(result, "Datasheets"));
+
+        datasheetlinks = "";
         
-        string lifecycle_style;
+        for(int k = 0; k < sheets; k++) {
+          datasheetlinks +="<a href = \""+datasheet_array[k]+"\">"+datasheet_array[k]+"</a><br>";
+        }
         if(strxstr(getAttributeValue(result,"lifecycle_status"),"(O|o)bsolete")>=0)
           lifecycle_style = "<font color=#FF0000>";
         if(strxstr(getAttributeValue(result,"lifecycle_status"),"(A|a)ctive")>=0)
           lifecycle_style = "<font color=#00FF00>";
 
-        dlgHBoxLayout{
-          dlgVBoxLayout{
-            dlgGridLayout{
-              dlgCell(0, 0) dlgLabel("<b>Hersteller:");
-              dlgCell(0, 1) dlgLabel("<b>"+getAttributeValue(result,"Hersteller"));
-              dlgCell(1, 0) dlgLabel("<b>ROHS Status:");
-              dlgCell(1, 1) dlgLabel("<b>"+getAttributeValue(result,"rohs_status"));
-              dlgCell(2, 0) dlgLabel("<b>Lifecycle Status:");
-              dlgCell(2, 1) dlgLabel("<b>"+lifecycle_style+getAttributeValue(result,"lifecycle_status"));
-              dlgCell(3, 0) dlgLabel("<b>Pins:");
-              dlgCell(3, 1) dlgLabel("<b>"+getAttributeValue(result,"pin_count"));
-              dlgCell(4, 0) dlgLabel("<b>Package:");
-              dlgCell(4, 1) dlgLabel("<b>"+getAttributeValue(result,"case_package"));
-              dlgCell(5, 0) dlgLabel("<b>logik:");
-              dlgCell(5, 1) dlgLabel("<b>"+getAttributeValue(result,"logic_type"));
-              dlgCell(6, 0) dlgLabel("<b>Bestückungstyp:");
-              dlgCell(6, 1) dlgLabel("<b>"+getAttributeValue(result,"mounting_style"));
+        hs  = "<b>"+getAttributeValue(result,"Hersteller");
+        rs  = "<b>"+getAttributeValue(result,"rohs_status");
+        lcs = "<b>"+lifecycle_style+getAttributeValue(result,"lifecycle_status");
+        pc  = "<b>"+getAttributeValue(result,"pin_count");
+        cp  = "<b>"+getAttributeValue(result,"case_package");
+        lt  = "<b>"+getAttributeValue(result,"logic_type");
+        ms  = "<b>"+getAttributeValue(result,"mounting_style");
+        img = "<img src=\""+getAttributeValue(result,"Image")+"\" height=\"180\">";
 
-              dlgCell(7, 0) dlgLabel("<b>Beschreibungen:");
-              
-              dlgCell(7, 1) dlgComboBox(Auswahl_beschr,selected_cb) {
-                aktuelle_beschreibung = "• "+strrep(beschr_array[selected_cb],"; ","\n• ",0,1);
-                dlgRedisplay();
-              }
-            }
-            dlgHBoxLayout{
-              dlgSpacing(200);
+
+        string Angebote = getArrayFromAttribute(result,"Angebot");
+        //debug(Angebote);
+        string Angebot = getArrayElement(Angebote,0);
+        //debug(Angebot);
+        for(int h = 1; Angebot != "index out of bounds" ;h++) {
+          for(int i = 0; i < strsplit(temp,strjoin(sel_attributes,'\n'),'\n'); i++) {
+            if(i>0) sellerInfo[h-1] += "\t";
+            if(sel_attributes[i] == "prices") {
+              //string prices = getArrayFromAttribute(Angebot,"prices");
+              //string price[] = getArrayElement(prices,0)
+              //for(int f = 0; )
+              //sellerInfo[g-1] += getArrayElement(Angebot,sel_attributes[i]);
+            } else {
+              sellerInfo[h-1] += getAttributeValue(Angebot,sel_attributes[i]);
             }
           }
-          dlgVBoxLayout{
-            dlgTextView("<img src=\""+getAttributeValue(result,"Image")+"\" height=\"180\">");
-            //dlgSpacing(180);
-            dlgHBoxLayout{
-              dlgSpacing(370);
-            }
+          Angebot = getArrayElement(Angebote,h);
+        }
+        
+
+        for(int g = 1; result != "index out of bounds" ;g++) {
+          for(int i = 0, k = 1; i < strsplit(temp,strjoin(attributes,'\n'),'\n'); i++) {
+            if(i>0) partInfo[g-1] += "\t";
+            partInfo[g-1] += getAttributeValue(result,attributes[i]);
           }
+          result = getArrayElement(octooutput,g);
+          debuglog("partInfo["+int2str(g-1)+"] = " + partInfo[g-1]);
+        }
+        dlgRedisplay();
+      }
+
+    }
+    
+    
+    dlgListView(strjoin(attributes_disp,'\t'),partInfo, selected_list) {
+      result = getArrayElement(octooutput,selected_list);
+
+
+      descs = strsplit(beschr_array,getValuesOfStringArray(result, "Descriptions"),'\n');
+      sheets = strsplit(datasheet_array,getValuesOfStringArray(result, "Datasheets"),'\n');
+      aktuelle_beschreibung = "• "+strrep(beschr_array[selected_cb],"; ","\n• ",0,1);
+      for(int i = 0; i < descs; i++) {
+        Auswahl_beschr[i] = int2str(i+1);
+      }
+      datasheetlinks = "";
+      
+      for(int k = 0; k < sheets; k++) {
+        datasheetlinks +="<a href = \""+datasheet_array[k]+"\">"+datasheet_array[k]+"</a><br>";
+      }
+      if(strxstr(getAttributeValue(result,"lifecycle_status"),"(O|o)bsolete")>=0)
+        lifecycle_style = "<font color=#FF0000>";
+      if(strxstr(getAttributeValue(result,"lifecycle_status"),"(A|a)ctive")>=0)
+        lifecycle_style = "<font color=#00FF00>";
+
+      hs  = "<b>"+getAttributeValue(result,"Hersteller");
+      rs  = "<b>"+getAttributeValue(result,"rohs_status");
+      lcs = "<b>"+lifecycle_style+getAttributeValue(result,"lifecycle_status");
+      pc  = "<b>"+getAttributeValue(result,"pin_count");
+      cp  = "<b>"+getAttributeValue(result,"case_package");
+      lt  = "<b>"+getAttributeValue(result,"logic_type");
+      ms  = "<b>"+getAttributeValue(result,"mounting_style");
+      img = "<img src=\""+getAttributeValue(result,"Image")+"\" height=\"180\">";
+
+      string Angebote = getArrayFromAttribute(result,"Angebot");
+      //debug(Angebote);
+      string Angebot = getArrayElement(Angebote,0);
+      //debug(Angebote);
+      for(int f = 0; f < 40;f++) sellerInfo[f] = "";
+      for(int h = 1; Angebot != "index out of bounds" ;h++) {
+        for(int i = 0; i < strsplit(temp,strjoin(sel_attributes,'\n'),'\n'); i++) {
+          if(i>0) sellerInfo[h-1] += "\t";
           
+          if(sel_attributes[i] == "prices") {
+            //string prices = getArrayFromAttribute(Angebot,"prices");
+            //string price[] = getArrayElement(prices,0)
+            //for(int f = 0; )
+            //sellerInfo[g-1] += getArrayElement(Angebot,sel_attributes[i]);
+          } else {
+            sellerInfo[h-1] += getAttributeValue(Angebot,sel_attributes[i]);
+          }
+        }
+        Angebot = getArrayElement(Angebote,h);
+      }
+
+      dlgRedisplay();
+      
+    }    
+        //dlgLabel("<b><font size=\"12\"><p align=\"center\" >"+getAttributeValue(result,"HerstellerNummer"));
+   
+
+    dlgHBoxLayout{
+      dlgVBoxLayout{
+        dlgGridLayout{
+          dlgCell(0, 0) dlgLabel("<b>Hersteller:",1);
+          dlgCell(0, 1) dlgLabel(hs,1);
+          dlgCell(1, 0) dlgLabel("<b>ROHS Status:");
+          dlgCell(1, 1) dlgLabel(rs,1);
+          dlgCell(2, 0) dlgLabel("<b>Lifecycle Status:");
+          dlgCell(2, 1) dlgLabel(lcs,1);
+          dlgCell(3, 0) dlgLabel("<b>Pins:");
+          dlgCell(3, 1) dlgLabel(pc,1);
+          dlgCell(4, 0) dlgLabel("<b>Package:");
+          dlgCell(4, 1) dlgLabel(cp,1);
+          dlgCell(5, 0) dlgLabel("<b>logik:");
+          dlgCell(5, 1) dlgLabel(lt,1);
+          dlgCell(6, 0) dlgLabel("<b>Bestückungstyp:");
+          dlgCell(6, 1) dlgLabel(ms,1);
+
+          dlgCell(7, 0) dlgLabel("<b>Beschreibungen:",1);
+          
+          dlgCell(7, 1) dlgComboBox(Auswahl_beschr,selected_cb) {
+            aktuelle_beschreibung = "• "+strrep(beschr_array[selected_cb],"; ","\n• ",0,1);
+            dlgRedisplay();
+          }
         }
         dlgHBoxLayout{
-          dlgTextView(aktuelle_beschreibung);
-          dlgVBoxLayout{
-              dlgSpacing(400);
-          }
-        } 
-           
-        
-        for(int k = 0; k < sheets; k++) {
-          dlgLabel("<a href = \""+datasheet_array[k]+"\">"+datasheet_array[k]+"</a>");
+          dlgSpacing(200);
         }
+      }
+      dlgVBoxLayout{
+        dlgTextView(img);
+        //dlgSpacing(180);
+        dlgHBoxLayout{
+          dlgSpacing(370);
+        }
+      }
+      
+    }
+    dlgHBoxLayout {
+      dlgTextView(aktuelle_beschreibung);
+      dlgListView(strjoin(sel_attributes_disp,'\t'),sellerInfo, selected_seller) {};
+
+    }
+
+    
+    
+    dlgLabel(datasheetlinks,1);
         //dlgComboBox(Auswahl_datasheet,selected_cb){
         //  system("cmd /c \""+Auswahl_datasheet[selected_cb] + "\"");
         //  dlgRedisplay();
         //}
         
-        dlgPushButton("+&Ok"){dlgAccept();}
-        dlgPushButton("-Abbruch"){dlgReject();}
-      };
-    }
+    
     
     if(untereButtonLeiste()) return 1;
   }
@@ -1798,7 +1976,7 @@ void main() {
   if (library && deviceset) {
       library(L){
       //if(L.deviceset.activedevice.library != "") {
-        //debug_file("debug Log vom "+Datum+"\n");
+        //debuglog("debug Log vom "+Datum+"\n");
         int laenge;
         
         string att[]={"DATENBANKOB-NR",
