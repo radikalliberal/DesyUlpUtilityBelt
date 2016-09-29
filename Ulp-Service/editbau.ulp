@@ -1600,18 +1600,21 @@ int OctopartTab() {
   string datasheet_array[];
   string sellers;
   string hs,rs,lcs,pc,cp,lt,ms,img; 
+  string sellerUrls[];
   int sheets,descs;
   int selected_list, selected_cb, selected_seller;
   string sel_attributes[] = { "name",
                               "is_authorized",
                               "in_stock_quantity",
                               "moq",
+                              "sku",
                               "prices",
                               "display_flag"};
   string sel_attributes_disp[] = { "name",
                               "auth",
                               "in stock",
                               "min Quant",
+                              "Suppl.#",
                               "prices",
                               "land"};
   string attributes[] = {"Hersteller",
@@ -1710,9 +1713,11 @@ int OctopartTab() {
               sellerInfo[h-1] += getAttributeValue(Angebot,sel_attributes[i]);
             }
           }
+          sellerUrls[h-1] = getAttributeValue(Angebot,"product_url");
           Angebot = getArrayElement(Angebote,h);
         }
-        
+          
+      
 
         for(int g = 1; result != "index out of bounds" ;g++) {
           for(int i = 0, k = 1; i < strsplit(temp,strjoin(attributes,'\n'),'\n'); i++) {
@@ -1775,6 +1780,8 @@ int OctopartTab() {
             sellerInfo[h-1] += getAttributeValue(Angebot,sel_attributes[i]);
           }
         }
+        sellerUrls[h-1] = getAttributeValue(Angebot,"product_url");
+
         Angebot = getArrayElement(Angebote,h);
       }
 
@@ -1824,7 +1831,9 @@ int OctopartTab() {
     }
     dlgHBoxLayout {
       dlgTextView(aktuelle_beschreibung);
-      dlgListView(strjoin(sel_attributes_disp,'\t'),sellerInfo, selected_seller) {};
+      dlgListView(strjoin(sel_attributes_disp,'\t'),sellerInfo, selected_seller) {
+        system("cmd.exe /c start \"\" \"" + sellerUrls[selected_seller] + "\"");
+      };
 
     }
 
