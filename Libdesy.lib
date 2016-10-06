@@ -177,7 +177,6 @@ int cmpstr(string a, string b) {
 
 
 
-
 int START = 0;
 int REPEAT = 1;
 int ONCE = 0;
@@ -261,7 +260,6 @@ string fuzzysearchrex(string Suchbegriff) {
 }
 
 
-
 /**
  *  \brief Dialog mit Stringeigabefeld 
  *  
@@ -283,6 +281,42 @@ string dlgStrEd(string Ueberschrifft, string Frage, string Subject) {
     };
     return Subject;
 }
+
+
+/**
+*	\brief Hilfsfunktion für similarityScore(), gibt den niedrigsten Wert für 3 gegebene
+*		   Werte an.
+*/
+
+int min3(int a,int b,int c) {
+  return ((a) < (b) ? ((a) < (c) ? (a) : (c)) : ((b) < (c) ? (b) : (c)));
+}
+
+
+/**
+*   \brief Damerau–Levenshtein distance Algorithmus für die Ähnlichkeit von Strings.
+*          Der Score ist die Anzahl der Operationen die notwendig sind um s1 in s2
+*          umzuwandeln.
+*/
+int similarityScore(string s1, string s2) {
+
+    int s1len, s2len, x, y, lastdiag, olddiag;
+    s1len = strlen(s1);
+    s2len = strlen(s2);
+    int column[];
+    for (y = 1; y <= s1len; y++)
+        column[y] = y;
+    for (x = 1; x <= s2len; x++) {
+        column[0] = x;
+        for (y = 1, lastdiag = x-1; y <= s1len; y++) {
+            olddiag = column[y];
+            column[y] = min3(column[y] + 1, column[y-1] + 1, lastdiag + (s1[y-1] == s2[x-1] ? 0 : 1));
+            lastdiag = olddiag;
+        }
+    }
+    return(column[s1len]);
+}
+
 
 
 /**
